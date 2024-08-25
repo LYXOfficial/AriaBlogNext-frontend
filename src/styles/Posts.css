@@ -1,0 +1,94 @@
+#posts-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+.post-card{
+    height: 18em;
+    position: relative;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+}
+.post-card:hover{
+    scale: 1.005;
+    transform: perspective(1px);
+}
+.post-banner-img{
+    height:18em;
+    max-width:300px;
+    border-radius: 12px 0 0 12px;
+    -webkit-border-radius: 12px 0 0 12px;
+    -moz-border-radius: 12px 0 0 12px;
+    -ms-border-radius: 12px 0 0 12px;
+    -o-border-radius: 12px 0 0 12px;
+    object-fit: cover;
+}
+.post-card{
+    display: flex; 
+}
+.post-info{
+    margin: auto 40px;
+}
+.post-title{
+    text-decoration: none;
+    color:var(--aria-highlight);
+    font-size: 1.72em;
+    line-height: 1.4;
+    -webkit-line-clamp: 2;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+.post-title:hover{
+    color:var(--aria-theme);
+}
+.post-content{
+    color:var(--aria-fontcolor)
+}
+.post-metas{
+    margin-top:10px;
+    color:var(--aria-light-fontcolor);
+    font-size:15px;
+    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+}
+.post-metas .post-category{
+    position: absolute;
+    top:15px;
+    right:20px;
+    background-color:rgba(0, 0, 0, 0.629);
+    color:white;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
+    padding:5px 10px;
+}
+.post-tags>.post-meta-context{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.post-tags>.post-meta-context a{
+    color:var(--aria-light-fontcolor);
+}
+.post-tags>.post-meta-context a:hover{
+    color:var(--aria-theme);
+    text-decoration: underline;
+}
+.post-tags{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.post-tags *{
+    margin:auto 1px;
+}
+.post-meta{
+    margin-right:3px;
+}
