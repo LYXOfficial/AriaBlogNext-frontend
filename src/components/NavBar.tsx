@@ -121,16 +121,16 @@ export default function NavBar() {
                                     <span>{" "+item.name}</span>
                                 </a>
                                 {item.childs.length?
-                                    <ul className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
+                                    <div className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
                                         {item.childs.map((child)=>{
                                             return (
-                                                <li key={child.name} className="site-page-child">
+                                                <a href={child.link} key={child.name} className="site-page-child">
                                                     <FaIcon icon={child.icon} size={18}/>
                                                     <a href={child.link}>{child.name}</a>
-                                                </li>
+                                                </a>
                                             );
                                         })}
-                                    </ul>
+                                    </div>
                                 :""
                                 }
                         </div>

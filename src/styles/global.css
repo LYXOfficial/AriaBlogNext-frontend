@@ -100,7 +100,7 @@ a.normal-a:hover{
 }
 .card-widget:hover{
     border: 1px solid var(--aria-theme);
-    box-shadow: 0 0 3px 1px var(--aria-theme);
+    box-shadow: 0 0 3px var(--aria-theme);
 }
 @supports not (selector(::-webkit-scrollbar)) {
     * {
@@ -124,10 +124,10 @@ a.normal-a:hover{
     color: var(--aria-white);
 }
 #main-container{
-    margin: 20px 10px;
+    margin: 20px 20px;
     max-width: 1200px;
 }
-@media screen and (min-width:1200px){
+@media screen and (min-width:1240px){
     #main-container{
         margin: 20px auto;
     }
