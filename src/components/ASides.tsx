@@ -104,7 +104,7 @@ export default function ASides() {
                 tagCount={tagCount}
                 socialLinks={socialLinkList}
             />
-            <CardAnnouncement content="欢迎光临AriaのNext.js新博客QwQ~"/>
+            <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
             <div className="aside-sticky-container">
                 <CardLatestComments comments={latestComments}/>
                 <CardArchives items={archivesInfo}/>

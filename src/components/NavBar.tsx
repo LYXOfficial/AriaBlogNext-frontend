@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react";
+import {EventHandler, MouseEventHandler, useState} from "react";
 import "../styles/NavBar.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
@@ -87,21 +87,21 @@ const MENU_BUTONS=[
     {
         name: "搜索",
         icon: <Icon icon="fa6-solid:magnifying-glass"/>,
-        method:(e)=>{
+        method:()=>{
 
         }
     },
     {
         name: "随便逛逛",
         icon: <Icon icon="fa6-solid:paper-plane"/>,
-        method:(e)=>{
+        method:()=>{
 
         }
     },
     {
         name: "开往",
         icon: <Icon icon="fa6-solid:train-subway"/>,
-        method:(e)=>{
+        method:()=>{
 
         }
     }

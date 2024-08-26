@@ -175,26 +175,24 @@ export default async function annogen(){
             }
             let timeChange;
             let date = new Date();
-            if (date.getHours()>= 5 && date.getHours() < 11) timeChange = "<span>上午好</span>，一日之计在于晨";
-            else if (date.getHours()>= 1 && date.getHours() < 13) timeChange = "<span>中午好</span>，该摸鱼吃午饭了";
-            else if (date.getHours() >= 13 && date.getHours() < 15) timeChange = "<span>下午好</span>，懒懒地睡个午觉吧！";
-            else if (date.getHours() >= 15 && date.getHours() < 16) timeChange = "<span>三点几啦</span>，饮茶先啦！";
-            else if (date.getHours() >= 16 && date.getHours() < 19) timeChange = "<span>夕阳无限好！</span>";
-            else if (date.getHours() >= 19 && date.getHours() < 24) timeChange = "<span>晚上好</span>，夜生活嗨起来！";
+            if (date.getHours()>= 5 && date.getHours() < 11) timeChange = <><span>上午好</span>，一日之计在于晨</>;
+            else if (date.getHours()>= 1 && date.getHours() < 13) timeChange = <><span>中午好</span>，该摸鱼吃午饭了</>;
+            else if (date.getHours() >= 13 && date.getHours() < 15) timeChange = <><span>下午好</span>，懒懒地睡个午觉吧！</>;
+            else if (date.getHours() >= 15 && date.getHours() < 16) timeChange = <><span>三点几啦</span>，饮茶先啦！</>;
+            else if (date.getHours() >= 16 && date.getHours() < 19) timeChange = <><span>夕阳无限好！</span></>;
+            else if (date.getHours() >= 19 && date.getHours() < 24) timeChange = <><span>晚上好</span>，夜生活嗨起来！</>;
             else timeChange = "夜深了，早点休息，少熬夜";
-            resolve(`
-                Next.js新博客！
+            resolve(<>Next.js新博客！
                 <br/>
-                欢迎来自<span>${pos}</span>的小伙伴，${timeChange}
+                欢迎来自<span>{pos}</span>的小伙伴，{timeChange}
                 <br/>
-                你距离Ariasaka约有<span>${dist}</span>公里，${posdesc}
+                你距离Ariasaka约有<span>{dist}</span>公里，{posdesc}
                 <br/>
                 本网站的Twikoo评论系统使用
-                <a class="normal-a" href="https://weavatar.com">WeAvatar</a>
-                头像系统，请自行绑定邮箱配置
-            `);
+                <a className="normal-a" href="https://weavatar.com">WeAvatar</a>
+                头像系统，请自行绑定邮箱配置</>);
         },
-        error:(a,b,c)=>resolve("欢迎来到Ariaの新博客喵，基于Next.js和React构建。"+a+b+c)
+        error:()=>resolve("欢迎来到Ariaの新博客喵，基于Next.js和React构建。")
     }));
     return annoText;
 }
