@@ -1,5 +1,5 @@
-import "../../styles/ASide/Archive.css";
-import "../../styles/ASide/global.css";
+import "src/styles/ASide/Archive.css";
+import "src/styles/ASide/global.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
 

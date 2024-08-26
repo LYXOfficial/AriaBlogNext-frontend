@@ -1,7 +1,7 @@
-import CardInfo from "./asides/CardInfo"
-import CardAnnouncement from "./asides/CardAnnouncement"
-import CardLatestComments from "./asides/CardLatestComments"
-import CardArchives from "./asides/CardArchives"
+import CardInfo from "src/components/asides/CardInfo"
+import CardAnnouncement from "src/components/asides/CardAnnouncement"
+import CardLatestComments from "src/components/asides/CardLatestComments"
+import CardArchives from "src/components/asides/CardArchives"
 import { Icon } from '@iconify/react';
 
 const postCount=10;

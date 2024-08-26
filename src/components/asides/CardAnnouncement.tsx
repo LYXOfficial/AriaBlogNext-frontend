@@ -1,12 +1,11 @@
 "use client"
-import "../../styles/ASide/global.css"
+import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import "../../styles/ASide/Announcement.css"
+import "src/styles/ASide/Announcement.css"
 import { useRef,useEffect,useState } from 'react';
-import annogen from "../../utils/annogen"
+import annogen from "src/utils/annogen"
 
 export default function CardInfo({content}:any){
-    const annoRef=useRef(null);
     const [annoContent,setAnnoContent]=useState(content);
     useEffect(()=>{
         (async ()=>{
@@ -20,7 +19,7 @@ export default function CardInfo({content}:any){
                 <span className="card-title">公告</span>
             </div>
             <div className="card-body">
-                <p ref={annoRef}>{annoContent}</p>
+                <p>{annoContent}</p>
             </div>
         </div>
     );

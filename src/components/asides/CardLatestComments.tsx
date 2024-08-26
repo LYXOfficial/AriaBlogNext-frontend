@@ -1,6 +1,6 @@
-import "../../styles/ASide/global.css"
+import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import ASideList from "./ASideList";
+import ASideList from "src/components/asides/ASideList";
 import moment from "moment";
 
 export default function CardLatestComments({comments}:any) {

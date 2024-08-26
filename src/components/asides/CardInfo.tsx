@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import "../../styles/ASide/global.css"
-import "../../styles/ASide/Info.css"
+import "src/styles/ASide/global.css"
+import "src/styles/ASide/Info.css"
 export default function CardInfo({author,avatar,postCount,categoryCount,tagCount,socialLinks}:any){
     return (
         <div className="card-widget card-aside card-info">

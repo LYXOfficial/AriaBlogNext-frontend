@@ -1,7 +1,7 @@
 "use client"
 
 import {EventHandler, MouseEventHandler, useState} from "react";
-import "../styles/NavBar.css";
+import "src/styles/NavBar.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
 

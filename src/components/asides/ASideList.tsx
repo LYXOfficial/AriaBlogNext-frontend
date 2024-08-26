@@ -1,4 +1,4 @@
-import "../../styles/ASide/List.css";
+import "src/styles/ASide/List.css";
 import Link from "next/link";
 
 export default function ASideList({items}:any) {

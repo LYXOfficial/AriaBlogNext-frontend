@@ -1,6 +1,6 @@
 import {Icon} from "@iconify/react"
 import moment from 'moment';
-import "../styles/Posts.css"
+import "src/styles/Posts.css"
 import Link from 'next/link';
 
 const posts=[
