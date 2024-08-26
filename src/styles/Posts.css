@@ -21,11 +21,11 @@
     transform: perspective(1px);
 }
 .post-banner{
+    width: 55%;
     min-width: 250px;
-    max-width: 350px;
     height:18em;
     display: flex;
-    width: 30%;
+    position: relative;
 }
 .post-banner-img{
     width:100%;
@@ -143,7 +143,7 @@
         height: 23em!important;
     }
     .post-card:not(.post-card:first-child) .post-info{
-        margin: 15px 40px;
+        margin: 15px 40px 20px 40px;
     }
     .post-card:not(.post-card:first-child) .post-title{
         font-size:20px;
@@ -173,7 +173,7 @@
         height: 23em!important;
     }
     .post-info {
-        margin: 15px 25px;
+        margin: 15px 25px 20px 25px
     }
     .post-title{
         font-size:20px;

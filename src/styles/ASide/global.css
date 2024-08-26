@@ -1,4 +1,4 @@
-.aside-container{
+#aside-container{
     max-width: 285px;
     min-width: 285px;
     margin-left:15px;
@@ -9,7 +9,7 @@
 .card-headline{
     font-size: 1.2em;
     display: flex;
-    margin-bottom: 6px;
+    margin-bottom: 12px;
 }
 .card-headline>*{
     margin:auto 0;
@@ -18,7 +18,7 @@
     margin-left:5px;
 }
 @media screen and (max-width: 900px){
-    .aside-container{
+    #aside-container{
         display: none;
     }
 }
@@ -41,4 +41,7 @@
         margin-left:10px;
         margin-right:10px;
     }
+}
+.aside-list-item-pic{
+    position: relative;
 }

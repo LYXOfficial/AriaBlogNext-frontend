@@ -1,7 +1,7 @@
 import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import ASideList from "src/components/asides/ASideList";
-import moment from "moment";
+import relativeTime from "src/utils/reltime"
 
 export default function CardLatestComments({comments}:any) {
     return (
@@ -13,20 +13,9 @@ export default function CardLatestComments({comments}:any) {
             <div className="card-body">
                 <ASideList items={
                     comments.map((item:any)=>{
-                        let aftertime,nowtime=Math.floor(Date.now()/1000);
-                        if(nowtime-item.time<60)
-                            aftertime="刚刚";
-                        else if(nowtime-item.time<3600)
-                            aftertime=Math.floor((nowtime-item.time)/60)+"分钟前";
-                        else if(nowtime-item.time<86400)
-                            aftertime=Math.floor((nowtime-item.time)/3600)+"小时前";
-                        else if(nowtime-item.time<604800)
-                            aftertime=Math.floor((nowtime-item.time)/86400)+"天前";
-                        else
-                            aftertime=moment.unix(item.time).format("yyyy-MM-DD");
                         return {
                             title: item.content,
-                            content: item.user+" / "+aftertime,
+                            content: item.user+" / "+relativeTime(item.time),
                             pic: item.avatar,
                             link: item.link
                         };

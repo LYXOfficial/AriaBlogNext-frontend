@@ -81,7 +81,7 @@ export default function Posts() {
                         <div className="post-card card-widget" key={post.title}>
                             <div className="post-banner">
                                 <Link className="post-banner-link" href={post.link} title={post.title}>
-                                    <img className="post-banner-img" src={post.bannerImg} alt={post.title}/>
+                                    <Image fill={true} className="post-banner-img" src={post.bannerImg} alt={post.title}/>
                                 </Link>
                             </div>
                             <div className="post-info">

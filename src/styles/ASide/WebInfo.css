@@ -1,0 +1,9 @@
+.card-webinfo-item{
+    display: flex;
+    line-height: 2;
+    padding:2px 10px 0;
+}
+.card-webinfo-item-right{
+    flex-grow: 1;
+    text-align: right;
+}

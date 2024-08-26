@@ -3,10 +3,18 @@ import CardAnnouncement from "src/components/asides/CardAnnouncement"
 import CardLatestComments from "src/components/asides/CardLatestComments"
 import CardArchives from "src/components/asides/CardArchives"
 import { Icon } from '@iconify/react';
+import CardWebInfo from "src/components/asides/CardWebInfo";
 
-const postCount=10;
+const postCount=6;
 const categoryCount=10;
 const tagCount=10;
+const runDays=114514;
+const wordCount=114514;
+const visitorCount=2473;
+const viewCount=22692;
+const lastUpdateTime=11451419;
+const commentCount=1657;
+
 const socialLinkList=[
     {
         name:"Github",
@@ -95,7 +103,7 @@ const archivesInfo=[
 ]
 export default function ASides() {
     return (
-        <div className="aside-container">
+        <div id="aside-container">
             <CardInfo 
                 author="Ariasaka" 
                 avatar="https://bu.dusays.com/2024/08/25/66caf920c5a28.png"
@@ -108,6 +116,15 @@ export default function ASides() {
             <div className="aside-sticky-container">
                 <CardLatestComments comments={latestComments}/>
                 <CardArchives items={archivesInfo}/>
+                <CardWebInfo
+                    postCount={postCount}
+                    runDays={runDays}
+                    visitorCount={visitorCount}
+                    viewCount={viewCount}
+                    wordCount={wordCount}
+                    lastUpdateTime={lastUpdateTime}
+                    commentCount={commentCount}
+                />
             </div>
         </div>
     );
