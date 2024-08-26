@@ -7,7 +7,7 @@ export default function CardInfo({author,avatar,postCount,categoryCount,tagCount
     return (
         <div className="card-widget card-aside card-info">
             <div className="card-info-avatar">
-                <Image alt="avatar" src={avatar} className="card-info-avatar-img"/>
+                <img alt="avatar" src={avatar} className="card-info-avatar-img"/>
             </div>
             <span className="card-info-name">
                 {author}

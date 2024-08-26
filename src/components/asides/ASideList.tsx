@@ -11,7 +11,7 @@ export default function ASideList({items}:any) {
                         <Link className="aside-list-item" title={item.title} href={item.link} key={item.title}>
                             {item.pic==""?<></>:
                                 <div className="aside-list-item-pic">
-                                    <Image src={item.pic} className="aside-list-item-pic-img" alt=""/>
+                                    <img src={item.pic} className="aside-list-item-pic-img" alt=""/>
                                 </div>
                             }
                             <div className="aside-list-item-content">
