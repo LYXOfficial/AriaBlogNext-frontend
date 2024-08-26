@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import "src/styles/ASide/global.css"
 import "src/styles/ASide/Info.css"
+import Image from "next/image"
+
 export default function CardInfo({author,avatar,postCount,categoryCount,tagCount,socialLinks}:any){
     return (
         <div className="card-widget card-aside card-info">
             <div className="card-info-avatar">
-                <img alt="avatar" src={avatar} className="card-info-avatar-img"></img>
+                <Image alt="avatar" src={avatar} className="card-info-avatar-img"/>
             </div>
             <span className="card-info-name">
                 {author}

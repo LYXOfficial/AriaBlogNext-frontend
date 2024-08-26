@@ -2,6 +2,8 @@ import {Icon} from "@iconify/react"
 import moment from 'moment';
 import "src/styles/Posts.css"
 import Link from 'next/link';
+import Image from "next/image"
+
 
 const posts=[
     {
@@ -79,7 +81,7 @@ export default function Posts() {
                         <div className="post-card card-widget" key={post.title}>
                             <div className="post-banner">
                                 <Link className="post-banner-link" href={post.link} title={post.title}>
-                                    <img className="post-banner-img" src={post.bannerImg} alt={post.title} />
+                                    <Image className="post-banner-img" src={post.bannerImg} alt={post.title} />
                                 </Link>
                             </div>
                             <div className="post-info">
