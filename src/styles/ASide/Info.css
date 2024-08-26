@@ -1,0 +1,104 @@
+.card-info{
+    display: grid;
+    grid-template-columns: 95px calc(100% - 95px);
+    grid-template-rows: 30px 65px calc(100% - 95px);
+    position: relative;
+    background-image:url(https://bu.dusays.com/2024/06/30/66810ebad84f2.webp);
+    z-index:1;
+    image-rendering: pixelated;
+    overflow: hidden;
+}
+.card-info::before{
+    content: "";
+    position: absolute;
+    backdrop-filter:blur(5px);
+    background-color: #fff2;
+    z-index: 2;
+    border:1px solid transparent;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+@media (prefers-color-scheme:dark){
+    .card-info::before{
+        background-color: #0004!important;
+    }
+}
+.card-info *{
+    color: #fffd;
+}
+.card-info>*{
+    z-index:3;
+}
+.card-info-avatar>img{
+    border-radius: 10px;
+    width:100%;
+    height: 100%;
+}
+.card-info-avatar{
+    width: 60px;
+    height: 60px;
+}
+.card-info-avatar{
+    grid-column: 1;
+    grid-row-start: 1;
+    grid-row-end:3;
+}
+.card-info-name{
+    grid-column: 2;
+    grid-row:1;
+    font-weight: 500;
+    font-size: 19px;
+}
+.card-info-datas{
+    grid-column:2;
+    grid-row:2;
+    display: flex;
+    margin-bottom: 5px;
+}
+.card-info-socials{
+    grid-column-start:1;
+    grid-column-end:3;
+    grid-row:3;
+}
+.card-info-social{
+    margin-right:10px;
+}
+.card-info-social svg{
+    width: 1.1em;
+    height: 1.1em;
+}
+.card-info-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    text-align: center;
+    margin:5px;
+    padding:2px 6px;
+    background-color: #0003;
+    border-radius: 6px;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+.card-info-data .card-info-data-title{
+    font-size:14px;
+    white-space: nowrap;
+}
+.card-info-data:hover>*{
+    color:var(--aria-theme)!important;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+}

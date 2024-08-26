@@ -1,0 +1,23 @@
+#footer-wrap{
+    background-color: var(--aria-acrylic2);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 30px;
+}  
+#footer-copyright,#footer-rundays{
+    white-space: nowrap; 
+}
+#footer-framework-info>a{
+    margin-right:4px;
+}
+#footer-rundays{
+    flex-grow: 1;
+    text-align: right;
+}
+#footer-copyright{
+    margin-right:20px;
+    margin-bottom:5px;
+}
+#footer-framework-info{
+    margin-bottom: 5px;
+}

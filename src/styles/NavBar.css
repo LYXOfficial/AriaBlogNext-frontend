@@ -139,12 +139,6 @@
     flex-wrap: nowrap;
     display: flex;
 }
-.site-page-child a{
-    color:var(--aria-fontcolor);
-    text-decoration:none;
-    margin-left:3px;
-    display: flex;
-}
 .site-page-child:hover{
     background-color:var(--aria-theme);
     color:var(--aria-white);
@@ -160,5 +154,13 @@
 }
 .site-page-child *{
     margin-top:auto;
-    margin-bottom: auto;;
+    display: flex;
+    margin-bottom: auto;
+}
+.site-page-child svg{
+    margin-right: 3px;
+}
+.menu-button svg{
+    width:18px;
+    height:18px;
 }

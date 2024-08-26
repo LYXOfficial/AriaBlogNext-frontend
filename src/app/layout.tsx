@@ -4,7 +4,6 @@ import '../styles/global.css'
 export const metadata = {
   title: 'Ariasakaの小窝',
 }
-
 export default function RootLayout({
   children,
 }: {
