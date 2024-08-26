@@ -156,7 +156,7 @@
         width:100%;
     }
 }
-@media screen and (max-width:768px){
+@media screen and (max-width:680px){
     .post-banner-img{
         border-radius: 12px 12px 0 0!important;
         -webkit-border-radius: 12px 12px 0 0!important;
@@ -172,8 +172,8 @@
         width:100%!important;
         height: 23em!important;
     }
-    .post-info{
-        margin: 15px 40px;
+    .post-info {
+        margin: 15px 25px;
     }
     .post-title{
         font-size:20px;
