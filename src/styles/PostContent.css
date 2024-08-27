@@ -2,6 +2,7 @@
     flex-grow: 1;
     height: fit-content;
     padding: 50px 40px;
+    margin-bottom: 0;
 }
 #article-container h1,#article-container h2,#article-container h3,#article-container h4,#article-container h5,#article-container h6{
     transition: transform 0.4s ;
@@ -201,11 +202,17 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border:var(--aria-border);
-    overflow: hidden;
     margin:20px 0;
+    overflow: hidden;
 }
 .hljs-folder summary::marker{
     content:"";
+}
+.hljs-folder pre{
+    overflow-x: scroll;
+}
+.hljs-folder pre::-webkit-scrollbar{
+    height:8px;
 }
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 .hljs-folder summary::after{
@@ -255,6 +262,32 @@ code::selection,pre::selection,code *::selection,pre *::selection{
 .hljs-ln-n{
     text-align: right;
     margin-right: 10px;
+}
+#main-container{
+    max-width: min(-webkit-fill-available,1200px);
+}
+#article-container{
+    max-width: -webkit-fill-available;
+}
+@media screen and (max-width:600px){
+    #article-container{
+        padding: 20px;
+    }
+    #post-banner-info{
+        bottom:50px;
+    }
+    #main-container{
+        margin:0!important;
+    }
+    #article-container{
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border:none;
+        box-shadow: none;
+    }
 }
 @import 'highlight.js/styles/base16/edge-light.css' (prefers-color-scheme:light);
 @import 'highlight.js/styles/base16/darcula.css' (prefers-color-scheme:dark);

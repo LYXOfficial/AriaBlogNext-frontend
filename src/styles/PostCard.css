@@ -200,3 +200,9 @@
 #posts-container #posts-container{
     height: fit-content;
 }
+@media screen and (max-width:600px){
+    #posts-container{
+        margin-left:10px;
+        margin-right: 10px;
+    }
+}
