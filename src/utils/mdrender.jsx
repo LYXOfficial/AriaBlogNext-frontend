@@ -3,8 +3,8 @@ import { marked } from "marked";
 import hljs from "highlight.js";
 
 
-export default async function MDRenderer(mdContent:string):Promise<string>{
-    return cache(async (mdContent:string)=>{
+export default async function MDRenderer(mdContent){
+    return cache(async (mdContent)=>{
         const renderer=new marked.Renderer();
         renderer.link=({href,title,tokens})=>{
             return `<a class="normal-a" href="${href}" title="${title} target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
