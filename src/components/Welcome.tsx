@@ -8,7 +8,7 @@ export default function Welcome() {
     const router=useRouter();
     useEffect(()=>{
         if(sessionStorage.getItem("showedWelcome")!="1"){
-            if(document.referrer==undefined||document.referrer.indexOf("yaria.top")!=-1||document.referrer.indexOf("yisous.xyz")!=-1){
+            if(document.referrer==undefined||document.referrer==""||document.referrer.indexOf("yaria.top")!=-1||document.referrer.indexOf("yisous.xyz")!=-1){
                 Snackbar.show({
                     pos: "top-right",
                     showAction: false,
@@ -16,11 +16,20 @@ export default function Welcome() {
                 });
             }
             else{
-                Snackbar.show({
-                    pos: "top-right",
-                    showAction: false,
-                    text: `欢迎来自${document.referrer.split("://")[1].split("/")[0]}的朋友访问本站！`
-                });
+                try{
+                    Snackbar.show({
+                        pos: "top-right",
+                        showAction: false,
+                        text: `欢迎来自${document.referrer.split("://")[1].split("/")[0]}的朋友访问本站！`
+                    });
+                }
+                catch(e){
+                    Snackbar.show({
+                        pos: "top-right",
+                        showAction: false,
+                        text: '欢迎访问本站！'
+                    });
+                }
             }
             setTimeout(()=>{
                 Snackbar.show({
