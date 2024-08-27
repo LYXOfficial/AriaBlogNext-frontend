@@ -1,6 +1,6 @@
 import {Icon} from "@iconify/react"
 import moment from 'moment';
-import "src/styles/Posts.css"
+import "src/styles/PostCard.css"
 import Link from 'next/link';
 import Image from "next/image"
 import { Post } from "src/interfaces/post"
@@ -91,19 +91,19 @@ export default function Posts() {
                                     <Link className="post-category" href={"/catogories/" + post.category} title={post.category}>{post.category}</Link>
                                     <div className="post-meta post-publishdate">
                                         <Icon icon="fa6-solid:calendar-days"/>
-                                        <span className="post-meta-context">
+                                        <span className="post-meta-content">
                                             {" 发表于 "+moment.unix(post.publishTime).format("YYYY-MM-DD")+" | "}
                                         </span>
                                     </div>
                                     <div className="post-meta post-lastupdatedate">
                                         <Icon icon="fa6-solid:calendar-days"/>
-                                        <span className="post-meta-context">
+                                        <span className="post-meta-content">
                                             {" 更新于 "+moment.unix(post.lastUpdateTime).format("YYYY-MM-DD")+" | "}
                                         </span>
                                     </div>
                                     <div className="post-meta post-tags">
                                         <Icon icon="fa6-solid:tag" />
-                                        <span className="post-meta-context">
+                                        <span className="post-meta-content">
                                             {post.tags.map((tag,index) => {
                                                 return (
                                                     <div key={tag}>
@@ -119,7 +119,7 @@ export default function Posts() {
                                     </div>
                                     <div className="post-meta post-commentcount">
                                         <Icon icon="fa6-solid:comments" />
-                                        <span className="post-meta-context">
+                                        <span className="post-meta-content">
                                             {" "+post.commentCount+" 条评论"}
                                         </span>
                                     </div>

@@ -1,10 +1,10 @@
-import Posts from '../components/Posts';
-import ASides from '../components/ASides';
+import Posts from '../components/PostCard';
+import { HomeASides } from '../components/ASides';
 export default function homePage() {
   return (
-    <>
+    <div id="main-container">
       <Posts/>
-      <ASides/>
-    </>
+      <HomeASides/>
+    </div>
   );
 }

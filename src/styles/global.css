@@ -3,6 +3,11 @@
     font-display: swap;
     src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/HYTangMeiRen55W.woff2') format("woff2");/*/font/HYTangMeiRen55W.woff2*/
 }
+@font-face{
+    font-family: 'Monaco';
+    font-display: swap; 
+    src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/MONACO.TTF') format("truetype");/*/font/HYTangMeiRen55W.ttf*/
+}
 :root{
     --aria-border:1px solid#c9c9c9;
     --aria-blue:#6cf;
@@ -53,6 +58,10 @@
         --aria-shadow-color: #343434;
     }
 }
+.fancybox__container{
+    --fancybox-bg: rgba(24, 24, 27, 0.8)!important;
+    z-index: 191981011!important;
+}
 body{
     margin:0;
     padding:0;
@@ -86,7 +95,6 @@ a.normal-a:hover{
     -o-border-radius: 6px;
 }
 .card-widget{
-    transition: all .3s;
     border-radius:12px;
     -webkit-border-radius:12px;
     -moz-border-radius:12px;
@@ -96,10 +104,10 @@ a.normal-a:hover{
     border:var(--aria-border);
     background-color: var(--aria-acrylic2);
     transition: all .3s ease-in-out;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
 }
 .card-widget:hover{
     border: 1px solid var(--aria-theme);
@@ -149,4 +157,30 @@ p,article{
 }
 .card-title{
     flex-grow: 1;
+}
+.snackbar-container .action{
+    color:var(--aria-theme)!important;
+    background-color: transparent!important;
+    font-family: "HYTMR";
+}
+.snackbar-container{
+    font-family: "HYTMR";
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+@media screen and (max-width:640px){
+    .snackbar-container{
+        border-radius:0px!important;
+        -webkit-border-radius:0px!important;
+        -moz-border-radius:0px!important;
+        -ms-border-radius:0px!important;
+        -o-border-radius:0px!important;
+    }
+}
+.snackbar-container{
+    z-index:1145141919;
+}
+.snackbar-container{
+    border-radius: 12px!important;
+    background-color: #000000aa!important;
 }

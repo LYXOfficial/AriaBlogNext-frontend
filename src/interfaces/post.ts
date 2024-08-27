@@ -7,6 +7,7 @@ export interface Post{
     tags: string[],
     category: string,
     plainContent?: string,
+    mdContent?: string,
     commentCount: number,
     summary?: string,
     wordCount?: number,

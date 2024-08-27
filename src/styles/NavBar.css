@@ -164,3 +164,6 @@
     width:18px;
     height:18px;
 }
+#site-name{
+    white-space: nowrap;
+}

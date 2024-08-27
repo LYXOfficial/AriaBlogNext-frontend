@@ -1,5 +1,6 @@
 .aside-list-item-pic{
     width:68px;
+    min-width: 68px;
     height: 68px;
     overflow: hidden;
     border-radius: 6px;

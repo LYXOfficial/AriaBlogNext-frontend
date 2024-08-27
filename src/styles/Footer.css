@@ -13,6 +13,7 @@
 #footer-rundays{
     flex-grow: 1;
     text-align: right;
+    margin-left:5px;
 }
 #footer-copyright{
     margin-right:20px;
