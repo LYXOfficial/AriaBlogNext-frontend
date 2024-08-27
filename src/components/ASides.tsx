@@ -4,45 +4,23 @@ import CardLatestComments from "src/components/asides/CardLatestComments"
 import CardArchives from "src/components/asides/CardArchives"
 import { Icon } from '@iconify/react';
 import CardWebInfo from "src/components/asides/CardWebInfo";
+import { siteInfos } from "public/config"
+import { webInfo } from "src/interfaces/siteinfo";
+import { latestCommentListItem,archiveListItem } from "src/interfaces/asidelistitem";
 
-const postCount=6;
-const categoryCount=10;
-const tagCount=10;
-const runDays=114514;
-const wordCount=114514;
-const visitorCount=2473;
-const viewCount=22692;
-const lastUpdateTime=11451419;
-const commentCount=1657;
+const webInfos:webInfo={
+    postCount: 6,
+    categoryCount: 10,
+    tagCount: 10,
+    runDays: 114514,
+    wordCount: 114514,
+    visitorCount: 2473,
+    viewCount: 22692,
+    lastUpdateTime: 11451419,
+    commentCount: 1657,
+}
 
-const socialLinkList=[
-    {
-        name:"Github",
-        link:"https://github.com/LYXOfficial",
-        icon:<Icon icon="fa6-brands:github" />
-    },
-    {
-        name:"Email",
-        link:"mailto:lyxx114@yaria.top",
-        icon:<Icon icon="fa6-solid:envelope" />
-    },
-    {
-        name:"QQ",
-        link:"tencent://message/?uin=2192016328&Site=&Menu=yes",
-        icon:<Icon icon="fa6-brands:qq" />
-    },
-    {
-        name:"Bilibili",
-        link:"https://space.bilibili.com/369280472",
-        icon:<Icon icon="fa6-brands:bilibili" />
-    },
-    {
-        name:"RSS",
-        link:"/atom.xml",
-        icon:<Icon icon="fa6-solid:rss" />
-    }
-]
-const latestComments=[
+const latestComments:latestCommentListItem[]=[
     {
         user:"test",
         avatar:"https://weavatar.com/avatar/dkfhdsikshfrief",
@@ -79,25 +57,25 @@ const latestComments=[
         link:"/test"
     }
 ]
-const archivesInfo=[
+const archivesInfo:archiveListItem[]=[
     {
-        date:"七月 2024",
-        link:"/archives/2024/07",
+        month:7,
+        year:2024,
         count:1
     },
     {
-        date:"六月 2024",
-        link:"/archives/2024/06",
+        month:7,
+        year:2024,
         count:1
     },
     {
-        date:"五月 2024",
-        link:"/archives/2024/05",
+        month:5,
+        year:2024,
         count:4
     },
     {
-        date:"三月 2023",
-        link:"/archives/2023/03",
+        month:3,
+        year:2023,
         count:5
     },
 ]
@@ -105,25 +83,15 @@ export default function ASides() {
     return (
         <div id="aside-container">
             <CardInfo 
-                author="Ariasaka" 
-                avatar="https://bu.dusays.com/2024/08/25/66caf920c5a28.png"
-                postCount={postCount}
-                categoryCount={categoryCount}
-                tagCount={tagCount}
-                socialLinks={socialLinkList}
+                webInfos={webInfos}
+                siteInfos={siteInfos}
             />
             <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
             <div className="aside-sticky-container">
                 <CardLatestComments comments={latestComments}/>
                 <CardArchives items={archivesInfo}/>
                 <CardWebInfo
-                    postCount={postCount}
-                    runDays={runDays}
-                    visitorCount={visitorCount}
-                    viewCount={viewCount}
-                    wordCount={wordCount}
-                    lastUpdateTime={lastUpdateTime}
-                    commentCount={commentCount}
+                    webInfos={webInfos}
                 />
             </div>
         </div>

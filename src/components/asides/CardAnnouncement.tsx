@@ -2,10 +2,10 @@
 import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import "src/styles/ASide/Announcement.css"
-import { useRef,useEffect,useState } from 'react';
+import { ReactElement,useEffect,useState } from 'react';
 import annogen from "src/utils/annogen"
 
-export default function CardInfo({content}:any){
+export default function CardInfo({content}:{content:ReactElement}){
     const [annoContent,setAnnoContent]=useState(content);
     useEffect(()=>{
         (async ()=>{

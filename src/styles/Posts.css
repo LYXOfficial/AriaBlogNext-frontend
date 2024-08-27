@@ -196,3 +196,6 @@
 .post-content{
     line-height: 24px;
 }
+#posts-container{
+    height: fit-content;
+}

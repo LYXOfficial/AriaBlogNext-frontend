@@ -8,12 +8,12 @@ export default async function annogen(){
             output: 'jsonp',
         },
         dataType: 'jsonp',
-        success: function (res:any) {
+        success: function (res) {
             var ipLoacation = res;
-            function getDistance(e1:any, n1:any, e2:any, n2:any) {
+            function getDistance(e1, n1, e2, n2) {
                 const R = 6371
                 const { sin, cos, asin, PI, hypot } = Math
-                let getPoint = (e:any, n:any) => {
+                let getPoint = (e, n) => {
                     e *= PI / 180
                     n *= PI / 180
                     return { x: cos(n) * cos(e), y: cos(n) * sin(e), z: sin(n) }

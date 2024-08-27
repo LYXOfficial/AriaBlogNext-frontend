@@ -1,8 +1,10 @@
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import '../styles/global.css'
+import { siteInfos } from "public/config"
+
 export const metadata = {
-  title: 'Ariasakaの小窝',
+  title: siteInfos.title,
 }
 export default function RootLayout({
   children,

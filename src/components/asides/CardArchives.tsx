@@ -2,8 +2,10 @@ import "src/styles/ASide/Archive.css";
 import "src/styles/ASide/global.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
+import { archiveListItem } from "src/interfaces/asidelistitem";
 
-export default function ASideList({items}:any) {
+const monthToHanzi=["","一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
+export default function ASideList({items}:{items:archiveListItem[]}){
     return (
         <div className="card-widget card-aside card-latest-comments">
             <div className="card-headline">
@@ -16,10 +18,10 @@ export default function ASideList({items}:any) {
             <div className="card-body">
                 <div className="archives-list">
                     {
-                        items.map((item:any)=>{
+                        items.map((item:archiveListItem,index:number)=>{
                             return (
-                                <Link className="archives-list-item" href={item.link} key={item.date}>
-                                    <span className="archives-list-item-content-date">{item.date}</span>
+                                <Link className="archives-list-item" href={`/archives/${item.year}/${item.month}`} key={index}>
+                                    <span className="archives-list-item-content-date">{`${monthToHanzi[item.month]} ${item.year}`}</span>
                                     <span className="archives-list-item-content-count">{item.count}</span>
                                 </Link>
                             )

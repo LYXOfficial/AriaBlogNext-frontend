@@ -1,12 +1,13 @@
 import "src/styles/ASide/List.css";
 import Link from "next/link";
 import Image from "next/image"
+import { aSideListItem } from "src/interfaces/asidelistitem";
 
-export default function ASideList({items}:any) {
+export default function ASideList({items}:{items:aSideListItem[]}){
     return (
         <div className="aside-list">
             {
-                items.map((item:any)=>{
+                items.map((item:aSideListItem)=>{
                     return (
                         <Link className="aside-list-item" title={item.title} href={item.link} key={item.title}>
                             {item.pic==""?<></>:

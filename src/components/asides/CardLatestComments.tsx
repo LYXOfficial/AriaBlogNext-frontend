@@ -2,8 +2,9 @@ import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import ASideList from "src/components/asides/ASideList";
 import relativeTime from "src/utils/reltime"
+import { latestCommentListItem } from "src/interfaces/asidelistitem";
 
-export default function CardLatestComments({comments}:any) {
+export default function CardLatestComments({comments}:{comments:latestCommentListItem[]}){
     return (
         <div className="card-widget card-aside card-latest-comments">
             <div className="card-headline">
@@ -12,7 +13,7 @@ export default function CardLatestComments({comments}:any) {
             </div>
             <div className="card-body">
                 <ASideList items={
-                    comments.map((item:any)=>{
+                    comments.map((item:latestCommentListItem)=>{
                         return {
                             title: item.content,
                             content: item.user+" / "+relativeTime(item.time),
