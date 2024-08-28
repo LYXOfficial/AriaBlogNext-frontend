@@ -150,7 +150,7 @@ table:not(code table){
 code,pre{
     font-size:16px;
     font-family: "Monaco",monospace,"HYTMR";
-    line-height: 1.3;
+    line-height: 1.4;
 }
 code::selection,pre::selection,code *::selection,pre *::selection{
     background-color: var(--aria-theme)!important;
