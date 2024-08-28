@@ -184,8 +184,12 @@ p,article{
     z-index:1145141919;
 }
 .snackbar-container{
-    border-radius: 12px!important;
+    border-radius: 12px;
     background-color: #000000aa!important;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
 }
 @media screen and (max-width:600px){
     #main-container{

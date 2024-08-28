@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 };
 export default async function Page(){
     currentPost.mdContent=await new Promise((resolve)=>{
-        fs.readFile(`src/app/posts/[slug]/test.md`,(err,data)=>{
+        fs.readFile(`public/test.md`,(err,data)=>{
             if(err){
                 console.log(err);
                 resolve("");
