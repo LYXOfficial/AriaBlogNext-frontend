@@ -495,15 +495,15 @@ export const metadata: Metadata = {
 };
 export default async function Page(){
     // currentPost.mdContent=await new Promise((resolve)=>{
-    //     fs.readFile(`public/test.md`,(err,data)=>{
-    //         if(err){
-    //             console.log(err);
-    //             resolve("");
-    //         }   
-    //         else{
-    //             resolve(data.toString());
-    //         }
-    //     })
+    //     // fs.readFile(`public/test2.md`,(err,data)=>{
+    //     //     if(err){
+    //     //         console.log(err);
+    //     //         resolve("");
+    //     //     }   
+    //     //     else{
+    //     //         resolve(data.toString());
+    //     //     }
+    //     // })
     // })
     const htmlContent=await MDRender(currentPost.mdContent);
     return (<>
