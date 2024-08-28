@@ -7,11 +7,11 @@
 .toc-child::marker{
     content:'';
 }
-.toc-content>.toc-children,.toc-content>.toc-children>.toc-child>.toc-children{
+.toc-content>.toc-children{
     padding-left:0;
     margin-left:0;
 }
-.toc-content>.toc-children>.toc-child>.toc-children>.toc-child>.toc-children{
+.toc-content>.toc-child>.toc-children{
     border-left: var(--aria-border);
 }
 .toc-link{
@@ -54,5 +54,5 @@
 .toc-content{
     max-height: 500px;
     overflow-y: scroll;
-    overflow-x: visible;
+    overflow-x: hidden;
 }

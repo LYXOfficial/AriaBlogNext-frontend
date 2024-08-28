@@ -10,7 +10,7 @@ import CodeCopier from "src/components/CodeCopier";
 import KaTex from "src/components/KaTex";
 import fs from "fs";
 import MDRender from "src/utils/mdrender";
-import TocUpdater from "src/components/TocUpdater";
+
 import Lazyload from "src/components/Lazyload";
 
 var currentPost:Post = {
@@ -52,7 +52,6 @@ export default async function Page(){
             <HLJSNum/>
             <CodeCopier/>
             <KaTex/>
-            <TocUpdater/>
             <Lazyload/>
         </div>
     </>);

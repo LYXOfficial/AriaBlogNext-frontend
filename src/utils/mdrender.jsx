@@ -51,7 +51,7 @@ export default async function MDRenderer(mdContent){
         };
         renderer.heading=({text,depth})=>{
             let id=stringRandom(8,{numbers: false});
-            return `<h${depth} id="title-${id}">${text}</h${depth}>`;
+            return `<a class="heading-link" onclick=\"javascript:document.documentElement.scroll({top:this.offsetTop-70,behavior:\'smooth\'})\"><h${depth} id="title-${id}">${text}</h${depth}></a>`;
         };
         marked.use({renderer: renderer});
         return await marked.parse(mdContent);

@@ -30,7 +30,10 @@ export default function LicenseTips() {
                 });
             }
         });
-        
+        return ()=>{
+            document.removeEventListener("copy",()=>{});
+            document.removeEventListener("keydown",()=>{});
+        }
     });
     return <></>;
 }

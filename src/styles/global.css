@@ -199,3 +199,6 @@ p,article{
 .normal-img{
     max-width: 100%;
 }
+*{
+    scroll-behavior: smooth;
+}
