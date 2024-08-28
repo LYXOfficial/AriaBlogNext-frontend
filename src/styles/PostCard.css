@@ -54,6 +54,7 @@
     color:var(--aria-highlight);
     font-size: 1.72em;
     line-height: 1.4;
+    line-clamp: 2;
     -webkit-line-clamp: 2;
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
@@ -71,6 +72,7 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 #posts-container .post-metas{
@@ -137,6 +139,7 @@
     }
     #posts-container .post-card:not(.post-card:first-child) .post-content{
         -webkit-line-clamp: 2!important;
+        line-clamp: 2!important;
     }
     #posts-container .post-card:not(.post-card:first-child){
         flex-direction: column;
@@ -167,6 +170,7 @@
     }
     #posts-container .post-content{
         -webkit-line-clamp: 2!important;
+        line-clamp: 2!important;
     }
     #posts-container .post-card{
         flex-direction: column;

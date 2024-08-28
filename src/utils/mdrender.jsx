@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { marked } from "marked";
 import hljs from "highlight.js";
+import stringRandom from "string-random"
 // import rehypeStringify from 'rehype-stringify'
 // import remarkParse from 'remark-parse'
 // import remarkRehype from 'remark-rehype'
@@ -26,7 +27,7 @@ export default async function MDRenderer(mdContent){
             return `<a class="normal-a" href="${href}" title="${title} target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
         }
         renderer.image=({href,title,text})=>{
-            return `<a href="${href}" title="点击查看大图" data-fancybox><img class="normal-img" src="${href}" alt="${text}"/></a>`;
+            return `<a href="${href}" title="点击查看大图" data-fancybox><img class="normal-img lazy-img" data-src="${href}" alt="${text}"/></a>`;
         }
         renderer.codespan=({text})=>{
             return `<code class="normal-inlinecode">${text}</code>`;
@@ -47,7 +48,11 @@ export default async function MDRenderer(mdContent){
         };
         renderer.del=({tokens})=>{
             return `<del class="normal-del" title="你知道的太多了">${tokens[0].text}</del>`;
-        }
+        };
+        renderer.heading=({text,depth})=>{
+            let id=stringRandom(8,{numbers: false});
+            return `<h${depth} id="title-${id}">${text}</h${depth}>`;
+        };
         marked.use({renderer: renderer});
         return await marked.parse(mdContent);
         // return String(await unified()

@@ -1,11 +1,9 @@
 import "src/styles/PostContent.css"
-import MDRender from "src/utils/mdrender";
 
-export default async function PostContent({mdContent}:{mdContent:string}) {
-    const postContent=await MDRender(mdContent);
+export default function PostContent({htmlContent}:{htmlContent:string}) {
     return (
         <article id="article-container" className="card-widget">
-            <div id="post-maincontent" dangerouslySetInnerHTML={{ __html: postContent }}>
+            <div id="post-maincontent" dangerouslySetInnerHTML={{ __html: htmlContent }}>
             </div>
         </article>
     );

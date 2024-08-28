@@ -3,11 +3,13 @@ import CardAnnouncement from "src/components/asides/CardAnnouncement";
 import CardLatestComments from "src/components/asides/CardLatestComments";
 import CardArchives from "src/components/asides/CardArchives";
 import CardWebInfo from "src/components/asides/CardWebInfo";
+import CardNewestPosts from "src/components/asides/CardNewestPosts";
+import CardToc from "src/components/asides/CardToc";
+
 import { siteInfos } from "public/config"
 import { webInfo } from "src/interfaces/siteinfo";
 import { latestCommentListItem,archiveListItem } from "src/interfaces/asidelistitem";
 import { Post } from "src/interfaces/post"
-import CardNewestPosts from "src/components/asides/CardNewestPosts";
 
 const webInfos:webInfo={
     postCount: 6,
@@ -166,7 +168,7 @@ export function HomeASides() {
         </div>
     );
 }
-export function PageASides() {
+export function PageASides({htmlContent}:{htmlContent:string}) {
     return (
         <div id="aside-container">
             <CardInfo 
@@ -175,6 +177,7 @@ export function PageASides() {
             />
             <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
             <div className="aside-sticky-container">
+                <CardToc htmlContent={htmlContent}/>
                 <CardNewestPosts posts={posts}/>
             </div>
         </div>

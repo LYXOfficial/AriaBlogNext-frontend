@@ -9,6 +9,9 @@ import HLJSNum from "src/components/HLJSNum";
 import CodeCopier from "src/components/CodeCopier";
 import KaTex from "src/components/KaTex";
 import fs from "fs";
+import MDRender from "src/utils/mdrender";
+import TocUpdater from "src/components/TocUpdater";
+import Lazyload from "src/components/Lazyload";
 
 var currentPost:Post = {
     title: "你好！！！",
@@ -38,16 +41,19 @@ export default async function Page(){
             }
         })
     })
+    const htmlContent=await MDRender(currentPost.mdContent);
     return (<>
         <style>{`#navbar{position:fixed}`}</style>
         <PostHeader postInfo={currentPost}/>
         <div id="main-container">
-            <PostContent mdContent={currentPost.mdContent as string}/>
-            <PageASides/>
+            <PostContent htmlContent={htmlContent}/>
+            <PageASides htmlContent={htmlContent}/>
             <FancyBox/>
             <HLJSNum/>
             <CodeCopier/>
             <KaTex/>
+            <TocUpdater/>
+            <Lazyload/>
         </div>
     </>);
 }
