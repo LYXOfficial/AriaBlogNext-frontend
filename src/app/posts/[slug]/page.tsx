@@ -76,6 +76,7 @@ function fib(n) {
   var tmp;
   while (--n >= 0) {
     tmp = a;
+    //sjafdjlkfsdalj;k;jklafljl;kjadfs;ljkfadskljfdsakljfdskljfdaks;j;klfadsjklfdsakjlfjkdlsakljfdsakljfsadkljfl;kadjsk;jlfdsa;kljasfdkjl
     a += b;
     b = tmp;
   }

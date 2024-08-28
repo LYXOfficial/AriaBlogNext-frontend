@@ -164,7 +164,7 @@ code::selection,pre::selection,code *::selection,pre *::selection{
 @media (prefers-color-scheme:light){
     .hljs-folder summary{
         color: #848484;
-        background: #f1f1f1;
+        background: #f6f6f6;
         position: relative;
         padding:5px 15px;
         font-size:18px;
@@ -201,7 +201,7 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
-    border:var(--aria-border);
+    box-shadow: var(--aria-shadow);
     margin:20px 0;
     overflow: hidden;
 }
@@ -263,11 +263,25 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     text-align: right;
     margin-right: 10px;
 }
-#main-container{
-    max-width: min(-webkit-fill-available,1200px);
+@media screen and (min-width:1240px){
+    #article-container{
+        max-width: 820px;
+    }
 }
-#article-container{
-    max-width: -webkit-fill-available;
+@media screen and (max-width:1240px){
+    #article-container{
+        max-width: calc(100vw - 430px);
+    }
+}
+@media screen and (max-width:900px){
+    #article-container{
+        max-width: calc(100vw - 130px);
+    }
+}
+@media screen and (max-width:600px){
+    #article-container{
+        max-width: calc(100vw - 45px);
+    }
 }
 @media screen and (max-width:600px){
     #article-container{
@@ -275,9 +289,6 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     }
     #post-banner-info{
         bottom:50px;
-    }
-    #main-container{
-        margin:0!important;
     }
     #article-container{
         border-radius: 0;

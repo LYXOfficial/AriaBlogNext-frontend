@@ -202,7 +202,9 @@
 }
 @media screen and (max-width:600px){
     #posts-container{
+        margin:10px;
+    }
+    #site-name{
         margin-left:10px;
-        margin-right: 10px;
     }
 }

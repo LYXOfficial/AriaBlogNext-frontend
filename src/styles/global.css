@@ -44,8 +44,8 @@
     --aria-acrylic2:var(--aria-white-acrylic2);
     --aria-fontcolor:var(--aria-blackfont);
     --aria-highlight:var(--aria-highlight-black);
-    --aria-shadow:0 0 10px 3px #dadada;
-    --aria-shadow-color: #dadada;
+    --aria-shadow: 0 0 10px 3px #ebebeb;
+    --aria-shadow-color: #ebebeb;
 }
 @media (prefers-color-scheme:dark){
     :root{
@@ -54,8 +54,8 @@
         --aria-acrylic2:var(--aria-black-acrylic2)!important;
         --aria-fontcolor:var(--aria-whitefont);
         --aria-highlight:var(--aria-highlight-white);
-        --aria-shadow:0 0 10px 3px #343434;
-        --aria-shadow-color: #343434;
+        --aria-shadow:0 0 10px 3px #1c1c1c;
+        --aria-shadow-color: #1c1c1c;
     }
 }
 .fancybox__container{
@@ -70,6 +70,7 @@ body{
     color:var(--aria-fontcolor);
     scroll-behavior: smooth;
     overflow-x:hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 a.normal-a{
     border-bottom: 2px solid var(--aria-theme);
@@ -116,6 +117,7 @@ a.normal-a:hover{
 @supports not (selector(::-webkit-scrollbar)) {
     * {
         scrollbar-color: var(--aria-scrollbar);
+        scrollbar-width: thin;
     }
     *:hover{
         scrollbar-color: var(--aria-theme);
@@ -183,4 +185,9 @@ p,article{
 .snackbar-container{
     border-radius: 12px!important;
     background-color: #000000aa!important;
+}
+@media screen and (max-width:600px){
+    #main-container{
+        margin:0!important;
+    }
 }
