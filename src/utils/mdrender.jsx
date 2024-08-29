@@ -19,7 +19,7 @@ function escapeMarkdownInMath(text) {
         return open + escapedContent + close;
     });
 }
-const mdr=cache(async (mdContent)=>{
+const MDRenderer=cache(async (mdContent)=>{
     // mdContent=escapeMarkdownInMath(mdContent);
     const renderer=new marked.Renderer();
     renderer.link=({href,title,tokens})=>{
@@ -50,7 +50,7 @@ const mdr=cache(async (mdContent)=>{
     };
     renderer.heading=({text,depth})=>{
         let id=stringRandom(8,{numbers: false});
-        return `<a class="heading-link" onclick=\"javascript:document.documentElement.scroll({top:this.offsetTop-70,behavior:\'smooth\'})\"><h${depth} id="title-${id}">${text}</h${depth}></a>`;
+        return `<a class="heading-link" onclick=\"document.documentElement.scroll({top:this.offsetTop-70,behavior:\'smooth\'})\"><h${depth} id="title-${id}">${text}</h${depth}></a>`;
     };
     marked.use({renderer: renderer});
     return await marked.parse(mdContent);
@@ -97,7 +97,6 @@ const mdr=cache(async (mdContent)=>{
     //     })
     //     .use(rehypeStringify)
     //     .process(mdContent));
-})
-export default async function MDRenderer(mdContent){
-    return mdr(mdContent);
-}
+});
+
+export default MDRenderer;

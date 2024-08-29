@@ -4,14 +4,9 @@ import { PageASides } from "src/components/ASides";
 import PostContent from "src/components/PostContent";
 import { Metadata } from "next";
 import { siteInfos } from "public/config"
-import FancyBox from "src/components/FancyBox";
-import HLJSNum from "src/components/HLJSNum";
-import CodeCopier from "src/components/CodeCopier";
-import KaTex from "src/components/KaTex";
 import fs from "fs";
 import MDRender from "src/utils/mdrender";
-
-import Lazyload from "src/components/Lazyload";
+import { RightButtonsPages } from 'src/components/RightButtons';
 
 var currentPost:Post = {
     title: "你好！！！",
@@ -512,11 +507,7 @@ export default async function Page(){
         <div id="main-container">
             <PostContent htmlContent={htmlContent}/>
             <PageASides htmlContent={htmlContent}/>
-            <FancyBox/>
-            <HLJSNum/>
-            <CodeCopier/>
-            <KaTex/>
-            <Lazyload/>
+            <RightButtonsPages/>
         </div>
     </>);
 }

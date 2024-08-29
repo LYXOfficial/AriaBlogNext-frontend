@@ -47,7 +47,7 @@ export default function CardToc({ htmlContent }){
         if (!toc || toc.length === 0) return '';
         return toc.map((item) => (
             `<li class="toc-child">
-                ${item.href ? `<a class="toc-link" id="toc-${item.href}" onClick="javascript:document.documentElement.scroll({top:document.querySelector('#${item.href}').offsetTop-70,behavior:'smooth'});">${item.text}</a>` : ''}
+                ${item.href ? `<a class="toc-link" id="toc-${item.href}" onClick="document.documentElement.scroll({top:document.querySelector('#${item.href}').offsetTop-70,behavior:'smooth'});">${item.text}</a>` : ''}
                 ${item.children && item.children.length > 0 ? `<ul class="toc-children">${renderTOC(item.children)}</ul>` : ''}
             </li>`
         )).join('');
@@ -63,6 +63,7 @@ export default function CardToc({ htmlContent }){
             </div>
             <div className="card-body">
                 <div className="toc-content" dangerouslySetInnerHTML={{__html:renderTOC(tocTree)}}></div>
+                <span className="toc-counter">0</span>
             </div>
             <TocUpdater tocTree={tocTree}/>
         </div>

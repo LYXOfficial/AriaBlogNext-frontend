@@ -15,8 +15,20 @@ const flattenTOC = cache((toc) => {
     traverse(toc);
     return flatList;
 });
+const calcProgress=()=>{
+    const postContent = document.getElementById('post-maincontent');
+    const tocCounter = document.querySelector('.toc-counter');
+    if(postContent){
+        const postContentRect = postContent.getBoundingClientRect();
+        const windowHeight = window.innerHeight-60;
+        const scrollPercentage = ((windowHeight - postContentRect.top) / (windowHeight + postContentRect.height)) * 100;
+        const boundedScrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100)
+        tocCounter.innerText=boundedScrollPercentage.toFixed(0);
+    }
+}
 export default function TocUpdater({ tocTree }) {
     useEffect(() => {
+        calcProgress();
         const handleScroll = () => {
             const flatTOCTree=flattenTOC(tocTree);
             const offsets = flatTOCTree.flatMap(item => {
@@ -53,6 +65,7 @@ export default function TocUpdater({ tocTree }) {
                     }
                 })
             }
+            calcProgress();
         };
 
         window.addEventListener('scroll', handleScroll);

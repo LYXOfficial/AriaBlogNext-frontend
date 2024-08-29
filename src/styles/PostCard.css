@@ -212,3 +212,25 @@
         margin-left:10px;
     }
 }
+@keyframes posts-container-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+        -webkit-transform: translateY(50px);
+        -moz-transform: translateY(50px);
+        -ms-transform: translateY(50px);
+        -o-transform: translateY(50px);
+}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+    }
+}
+#posts-container{
+    animation: posts-container-animation .8s;
+    -webkit-animation: posts-container-animation .8s;
+}

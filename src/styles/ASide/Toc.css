@@ -57,3 +57,48 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+.toc-counter{
+    position: absolute;
+    right:30px;
+    top:15px;
+    font-size:30px;
+    font-style: italic;
+    color: #a9a9a9;
+}
+@media screen and (max-width: 900px) {
+    .card-toc{
+        display:block!important;
+        position: fixed;
+        bottom:20px;
+        right:75px;
+        width:250px;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateX(600px);
+        -webkit-transform: translateX(600px);
+        -moz-transform: translateX(600px);
+        -ms-transform: translateX(600px);
+        -o-transform: translateX(600px);
+        transition: .5s;
+        -webkit-transition: .5s;
+        -moz-transition: .5s;
+        -ms-transition: .5s;
+        -o-transition: .5s;
+}
+    .card-toc.mobile-show{
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        opacity: 1;
+}
+    .card-toc .toc-content{
+        max-height: 300px;
+    }
+}
+@media screen and (max-width: 400px){
+    .card-toc.mobile-show{
+        right:50px;
+    }
+}

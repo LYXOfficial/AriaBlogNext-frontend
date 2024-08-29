@@ -284,3 +284,47 @@ code::selection,pre::selection,code *::selection,pre *::selection{
 }
 @import 'highlight.js/styles/base16/edge-light.css' (prefers-color-scheme:light);
 @import 'highlight.js/styles/base16/darcula.css' (prefers-color-scheme:dark);
+@keyframes article-container-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+        -webkit-transform: translateY(50px);
+        -moz-transform: translateY(50px);
+        -ms-transform: translateY(50px);
+        -o-transform: translateY(50px);
+}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+    }
+}
+#article-container{
+    animation: article-container-animation .8s;
+    -webkit-animation: article-container-animation .8s;
+}
+@keyframes post-banner-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+        -webkit-transform: translateY(-50px);
+        -moz-transform: translateY(-50px);
+        -ms-transform: translateY(-50px);
+        -o-transform: translateY(-50px);
+}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+}
+}
+#post-banner{
+    animation: post-banner-animation .8s;
+    -webkit-animation: post-banner-animation .8s;
+}

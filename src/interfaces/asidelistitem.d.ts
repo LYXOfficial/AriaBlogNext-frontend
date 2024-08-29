@@ -1,17 +1,17 @@
-export interface aSideListItem{
+export declare interface aSideListItem{
     link: string,
     title: string,
     content: string,
     pic: string
 }
-export interface latestCommentListItem{
+export declare interface latestCommentListItem{
     link: string,
     content: string,
     user: string,
     time: number,
     avatar: string
 }
-export interface archiveListItem{
+export declare interface archiveListItem{
     year: number,
     month: number,
     count: number

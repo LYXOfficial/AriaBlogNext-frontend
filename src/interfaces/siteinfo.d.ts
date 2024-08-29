@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export interface webInfo{
+export declare interface webInfo{
     postCount: number,
     categoryCount: number,
     tagCount: number,
@@ -11,7 +11,7 @@ export interface webInfo{
     lastUpdateTime: number,
     commentCount: number,
 }
-export interface siteInfo{
+export declare interface siteInfo{
     author: string,
     avatar: string,
     title: string,
@@ -20,7 +20,7 @@ export interface siteInfo{
     createDay: number,
     createMonth: number,
 }
-export interface social{
+export declare interface social{
     name: string,
     url: string,
     icon: ReactElement,

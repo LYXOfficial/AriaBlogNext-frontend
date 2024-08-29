@@ -3,7 +3,7 @@ import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import "src/styles/ASide/Announcement.css"
 import { ReactElement,useEffect,useState } from 'react';
-import annogen from "src/utils/annogen"
+import { annogen } from "src/utils/annogen"
 
 export default function CardInfo({content}:{content:ReactElement}){
     const [annoContent,setAnnoContent]=useState(content);

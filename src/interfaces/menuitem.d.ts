@@ -1,17 +1,17 @@
 import { ReactElement } from "react";
 
-export interface menuItem{
+export declare interface menuItem{
     name: string,
     link: string,
     icon: ReactElement,
     childs: menuItemChild[]
 }
-export interface menuItemChild{
+export declare interface menuItemChild{
     name: string,
     link: string,
     icon: ReactElement,
 }
-export interface menuButton{
+export declare interface menuButton{
     name: string,
     icon: ReactElement,
     method: Function,

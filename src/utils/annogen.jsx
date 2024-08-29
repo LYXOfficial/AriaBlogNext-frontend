@@ -1,5 +1,7 @@
+import { cache } from "react";
+
 const $=require('jquery');
-export default async function annogen(){
+async function agn(){
     let annoText=await new Promise((resolve,reject)=>$.ajax({
         type: 'get',
         url: 'https://apis.map.qq.com/ws/location/v1/ip',
@@ -196,3 +198,4 @@ export default async function annogen(){
     }));
     return annoText;
 }
+export const annogen=cache(agn);
