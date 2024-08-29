@@ -1,9 +1,9 @@
 import { menuItem } from "src/interfaces/menuitem";
-import { siteInfo } from "src/interfaces/siteinfo";
+import { siteConfig } from "src/interfaces/siteinfo";
 import { footerBadge } from "src/interfaces/footerbadge";
 import { Icon } from "@iconify/react";
 
-export const siteInfos:siteInfo={
+export const siteConfigs:siteConfig={
     author: "Ariasaka",
     title: "Ariasakaの小窝",
     siteDomain: "blognext.yaria.top",
@@ -12,6 +12,7 @@ export const siteInfos:siteInfo={
     createYear: 2022,
     createMonth: 6,
     createDay: 4,
+    pageMaxPosts: 15,
     socials: [
         {
             name:"Github",

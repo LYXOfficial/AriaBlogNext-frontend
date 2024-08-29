@@ -3,18 +3,17 @@ import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import ASideList from "src/components/asides/ASideList";
 import { twikooCommentItem,aSideListItem } from "src/interfaces/asidelistitem";
-import { siteInfos } from "public/config";
+import { siteConfigs } from "public/config";
 import { useEffect, useState } from "react";
 
 export default function CardLatestComments(){
     const [comments,setComments]=useState<twikooCommentItem[]>([]);
     useEffect(()=>{(async ()=>{
         var twikoo=require('twikoo/dist/twikoo.min');
-        console.log(siteInfos.twikooEnv);
         let res:twikooCommentItem[]=await new Promise((resolve,reject)=>{
             try{
                 twikoo.getRecentComments({
-                    envId: siteInfos.twikooEnv,
+                    envId: siteConfigs.twikooEnv,
                     region: '',
                     pageSize: 5,
                     includeReply: true

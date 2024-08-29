@@ -3,14 +3,14 @@ import { useState } from "react";
 import "src/styles/NavBar.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
-import { menuItems,siteInfos } from "public/config";
+import { menuItems,siteConfigs } from "public/config";
 
 export default function NavBar() {
     const [hoveringElement,setHoveringElement]=useState("");
     const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
     return (<>
         <nav id="navbar">
-            <Link id="site-name" href="/">{siteInfos.title}</Link>
+            <Link id="site-name" href="/">{siteConfigs.title}</Link>
             <div id="menu-center">
                 <div id="menu-items" className={mobileMenuOpen?"mobile-menu-open":"mobile-menu-close"}>
                     {menuItems.map((item)=>{

@@ -6,12 +6,10 @@ export declare interface webInfo{
     tagCount: number,
     runDays: number,
     wordCount: number,
-    visitorCount: number,
-    viewCount: number,
     lastUpdateTime: number,
     commentCount: number,
 }
-export declare interface siteInfo{
+export declare interface siteConfig{
     author: string,
     avatar: string,
     title: string,
@@ -21,6 +19,7 @@ export declare interface siteInfo{
     createMonth: number,
     twikooEnv: string,
     siteDomain: string,
+    pageMaxPosts: number,
 }
 export declare interface social{
     name: string,

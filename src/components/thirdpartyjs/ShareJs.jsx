@@ -3,7 +3,7 @@ import "social-share.js/dist/css/share.min.css";
 import { useEffect } from "react";
 
 export default function ShareJs({postInfo}) {
-    useEffect(()=>{
+    useEffect(()=>{(async ()=>{
         require('jquery');
         require('social-share.js/dist/js/social-share.min.js');
         window.socialShare("#postend-share", {
@@ -13,6 +13,6 @@ export default function ShareJs({postInfo}) {
             // sites: ['qzone', 'qq', 'weibo','wechat', 'douban'],
             disabled: ['google', 'facebook', 'twitter',"linkedin","tencent","diandian"],
         });
-    })
+    })()},[])
     return <div id="postend-share"></div>;
 }

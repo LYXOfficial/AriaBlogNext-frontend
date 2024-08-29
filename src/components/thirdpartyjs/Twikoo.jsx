@@ -2,7 +2,7 @@
 import { useEffect,useState } from "react";
 import "twikoo/dist/twikoo.css";
 import "src/styles/Twikoo.css";
-import { siteInfos } from "public/config";
+import { siteConfigs } from "public/config";
 import { Icon } from "@iconify/react";
 import "src/styles/owoBig.css"
 
@@ -64,7 +64,7 @@ export default function Twikoo(){
         var twikoo=require('twikoo/dist/twikoo.min');
         try{
             twikoo.init({
-                envId: siteInfos.twikooEnv,
+                envId: siteConfigs.twikooEnv,
                 el: '#post-comment',
             })
             owoBig();

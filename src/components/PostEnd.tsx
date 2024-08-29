@@ -1,8 +1,8 @@
 import { Post } from "src/interfaces/post";
-import { siteInfos } from "public/config";
+import { siteConfigs } from "public/config";
 import moment from "moment";
 import "src/styles/PostCopyright.css";
-import ShareJs from "src/components/ShareJs";
+import ShareJs from "src/components/thirdpartyjs/ShareJs";
 
 export default function PostEnd({ postInfo }: { postInfo: Post }) {
     return <>
@@ -14,8 +14,8 @@ export default function PostEnd({ postInfo }: { postInfo: Post }) {
             </div>
             <div className="post-copyright__type">
                 <span className="post-copyright-info">
-                    <a className="normal-a" href={`https://${siteInfos.siteDomain}/posts/${postInfo.slug}/`}>
-                        {`https://${siteInfos.siteDomain}/posts/${postInfo.slug}/`}
+                    <a className="normal-a" href={`https://${siteConfigs.siteDomain}/posts/${postInfo.slug}/`}>
+                        {`https://${siteConfigs.siteDomain}/posts/${postInfo.slug}/`}
                     </a>
                 </span>
             </div>
@@ -24,7 +24,7 @@ export default function PostEnd({ postInfo }: { postInfo: Post }) {
                 <div className="post-copyright-a" style={{display:"inline-block",width:120}}>
                     作者
                 <div className="post-copyright-cc-info">
-                    {siteInfos.author}
+                    {siteConfigs.author}
                 </div>
             </div>
                 <div className="post-copyright-c" style={{display:"inline-block",width:120}}>

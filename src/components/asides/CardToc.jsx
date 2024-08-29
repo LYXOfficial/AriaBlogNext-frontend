@@ -3,7 +3,7 @@
 import React from 'react';
 import "src/styles/ASide/global.css";
 import "src/styles/ASide/Toc.css";
-import TocUpdater from "src/components/TocUpdater";
+import TocUpdater from "src/components/thirdpartyjs/TocUpdater";
 import { Icon } from '@iconify/react';
 import { JSDOM } from "jsdom";
 import { cache } from "react";

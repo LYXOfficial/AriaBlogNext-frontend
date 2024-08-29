@@ -1,12 +1,12 @@
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 import 'src/styles/global.css';
-import { siteInfos } from "public/config";
-import Welcome from 'src/components/Welcome';
-import LicenseTips from "src/components/LicenseTips";
+import { siteConfigs } from "public/config";
+import Welcome from 'src/components/thirdpartyjs/Welcome';
+import LicenseTips from "src/components/thirdpartyjs/LicenseTips";
 
 export const metadata = {
-  title: siteInfos.title,
+  title: siteConfigs.title,
 }
 export default function RootLayout({
   children,

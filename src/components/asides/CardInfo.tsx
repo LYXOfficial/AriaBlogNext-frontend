@@ -1,16 +1,16 @@
 import Link from 'next/link'
 import "src/styles/ASide/global.css"
 import "src/styles/ASide/Info.css"
-import { webInfo,siteInfo,social } from "src/interfaces/siteinfo"
+import { webInfo,siteConfig,social } from "src/interfaces/siteinfo"
 
-export default function CardInfo({webInfos,siteInfos}:{webInfos:webInfo,siteInfos:siteInfo}){
+export default function CardInfo({webInfos,siteConfigs}:{webInfos:webInfo,siteConfigs:siteConfig}){
     return (
         <div className="card-widget card-aside card-info">
             <div className="card-info-avatar">
-                <img alt="avatar" src={siteInfos.avatar} className="card-info-avatar-img"/>
+                <img alt="avatar" src={siteConfigs.avatar} className="card-info-avatar-img"/>
             </div>
             <span className="card-info-name">
-                {siteInfos.author}
+                {siteConfigs.author}
             </span>
             <div className="card-info-datas">
                 <Link className="card-info-data" href="/archives">
@@ -28,7 +28,7 @@ export default function CardInfo({webInfos,siteInfos}:{webInfos:webInfo,siteInfo
             </div>
             <div className="card-info-socials">
                 {
-                    siteInfos.socials.map((link:social)=>{
+                    siteConfigs.socials.map((link:social)=>{
                         return (
                             <a key={link.name} className="card-info-social" href={link.url}>
                                 {link.icon}

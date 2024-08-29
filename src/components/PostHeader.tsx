@@ -1,8 +1,9 @@
-import "src/styles/PostHeader.css"
-import { Post } from "src/interfaces/post"
-import { Icon } from "@iconify/react"
-import Link from "next/link"
-import moment from "moment"
+import "src/styles/PostHeader.css";
+import { Post } from "src/interfaces/post";
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import moment from "moment";
+import Busuanzi from "src/components/thirdpartyjs/Busuanzi";
 
 export default function PostHeader({postInfo}:{postInfo:Post}) {
     return (
@@ -61,8 +62,9 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-wordcount">
                                 <Icon icon="fa6-regular:eye" />
                                 <span className="post-meta-content">
-                                    {`阅读量: ${postInfo.viewCount as number} | `}
+                                    {`阅读量:`}&nbsp;<span id="busuanzi_value_page_pv"/>&nbsp;{` | `}
                                 </span>
+                                <Busuanzi/>
                             </div>
                             <div className="post-meta post-wordcount">
                                 <Icon icon="fa6-regular:clock" />

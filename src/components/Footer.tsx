@@ -1,7 +1,7 @@
 "use client"
 import "src/styles/Footer.css"
 import { useState } from "react"
-import { footerBadges,siteInfos } from "public/config"
+import { footerBadges,siteConfigs } from "public/config"
 
 export default function Footer(){
     const [footerRunDaysContent,setFooterRunDaysContent]=useState("这个小破站已运行 2 年 85 天 2 时 12 分 19 秒");
@@ -18,7 +18,7 @@ export default function Footer(){
         let todayHour = today.getHours();
         let todayMinute = today.getMinutes();
         let todaySecond = today.getSeconds();
-        let t1 = Date.UTC(siteInfos.createYear,siteInfos.createMonth,siteInfos.createDay,12,0,0);
+        let t1 = Date.UTC(siteConfigs.createYear,siteConfigs.createMonth,siteConfigs.createDay,12,0,0);
         let t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
         let diff = t2-t1;
         let diffYears = Math.floor(diff/years);
@@ -30,7 +30,7 @@ export default function Footer(){
     },1000);
     return (<footer id="footer">
         <div id="footer-wrap">
-            <div id="footer-copyright">©{siteInfos.createYear} - {new Date().getFullYear()} By {siteInfos.author}</div>
+            <div id="footer-copyright">©{siteConfigs.createYear} - {new Date().getFullYear()} By {siteConfigs.author}</div>
             <div id="footer-framework-info">
                 {
                     footerBadges.map((item)=>{

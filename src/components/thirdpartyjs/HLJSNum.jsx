@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 
 export default function HLJSNum(){
-    useEffect(()=>{
+    useEffect(()=>{(async()=>{
         const hljslm=require("src/utils/highlightjs-line-number")
         Array.from(document.querySelectorAll('.hljs code')).map(block=>{
                 if(block.getAttribute("numbered")) return;
@@ -10,6 +10,6 @@ export default function HLJSNum(){
                 hljslm.lineNumbersBlock(block);
             }
         )
-    });
+    })()},[]);
     return <></>;
 }

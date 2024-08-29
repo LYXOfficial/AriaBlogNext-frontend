@@ -1,12 +1,12 @@
-"use client"
 import "src/styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import "src/styles/ASide/WebInfo.css"
-import relativeTime from "src/utils/reltime"
-import { webInfo } from "src/interfaces/siteinfo"
+import "src/styles/ASide/WebInfo.css";
+import relativeTime from "src/utils/reltime";
+import { webInfo } from "src/interfaces/siteinfo";
+import "src/components/thirdpartyjs/Busuanzi";
+import Busuanzi from "src/components/thirdpartyjs/Busuanzi";
 
 export default function CardWebInfo({webInfos}:{webInfos:webInfo}){
-    
     return (
         <div className="card-widget card-aside card-webinfo">
             <div className="card-headline">
@@ -28,11 +28,11 @@ export default function CardWebInfo({webInfos}:{webInfos:webInfo}){
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">总访客数 :</span>
-                    <span className="card-webinfo-item-right">{webInfos.visitorCount}</span>
+                    <span className="card-webinfo-item-right" id="busuanzi_value_site_uv"></span>
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">总浏览量 :</span>
-                    <span className="card-webinfo-item-right">{webInfos.viewCount}</span>
+                    <span className="card-webinfo-item-right" id="busuanzi_value_site_pv"></span>
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">上次更新 :</span>
@@ -43,6 +43,7 @@ export default function CardWebInfo({webInfos}:{webInfos:webInfo}){
                     <span className="card-webinfo-item-right">{webInfos.commentCount}</span>
                 </div>
             </div>
+            <Busuanzi/>
         </div>
     );
 }

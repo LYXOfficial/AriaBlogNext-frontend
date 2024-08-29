@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import 'katex/dist/katex.min.css';
 
 export default function KaTex(){
-    useEffect(()=>{
+    useEffect(()=>{(async ()=>{
         renderMathInText(document.body,{
             delimiters: [
                 {left: '$$', right: '$$', display: true},
@@ -12,6 +12,6 @@ export default function KaTex(){
             ],
             throwOnError : false
         });
-    })
+    })()},[]);
     return <></>
 }

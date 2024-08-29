@@ -11,6 +11,5 @@ export declare interface Post{
     commentCount: number,
     summary?: string,
     wordCount?: number,
-    viewCount?: number,
     bannerImg: string
 }

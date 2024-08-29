@@ -3,7 +3,7 @@ import { Post } from "src/interfaces/post";
 import { PageASides } from "src/components/ASides";
 import PostContent from "src/components/PostContent";
 import { Metadata } from "next";
-import { siteInfos } from "public/config"
+import { siteConfigs } from "public/config"
 import fs from "fs";
 import MDRender from "src/utils/mdrender";
 import { RightButtonsPages } from 'src/components/RightButtons';
@@ -485,10 +485,9 @@ signed main(){
     commentCount: 0,
     bannerImg: "https://npm.elemecdn.com/saiodgm-api@1.0.1/randomimg-my/7.webp",
     wordCount: 1145141,
-    viewCount: 0,
 };
 export const metadata: Metadata = {
-    title: currentPost.title+" | "+siteInfos.title,
+    title: currentPost.title+" | "+siteConfigs.title,
     description: currentPost.description?currentPost.description:currentPost.plainContent?.substring(0,40)
 };
 export default async function Page({params}:{params:any}){
@@ -505,7 +504,7 @@ export default async function Page({params}:{params:any}){
         </>);
     }
     else if(params.slug=="markdowntest"){
-        let mdContent=(await axios.get("https://"+siteInfos.siteDomain+"/test2.md")).data;
+        let mdContent=(await axios.get("https://"+siteConfigs.siteDomain+"/test2.md")).data;
         const htmlContent=await MDRender(mdContent);
         return (<>
             <style>{`#navbar{position:fixed}`}</style>

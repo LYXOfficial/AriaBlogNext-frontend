@@ -1,12 +1,15 @@
 import "src/styles/PostContent.css"
-import Lazyload from "src/components/Lazyload";
-import FancyBox from "src/components/FancyBox";
-import HLJSNum from "src/components/HLJSNum";
-import CodeCopier from "src/components/CodeCopier";
-import KaTex from "src/components/KaTex";
-import Twikoo from "src/components/Twikoo";
+
+import Lazyload from "src/components/thirdpartyjs/Lazyload";
+import FancyBox from "src/components/thirdpartyjs/FancyBox";
+import HLJSNum from "src/components/thirdpartyjs/HLJSNum";
+import CodeCopier from "src/components/thirdpartyjs/CodeCopier";
+import KaTex from "src/components/thirdpartyjs/KaTex";
+import Twikoo from "src/components/thirdpartyjs/Twikoo";
+
 import PostEnd from "src/components/PostEnd";
 import { Post } from "src/interfaces/post";
+
 
 export default function PostContent({htmlContent,postInfo}:{htmlContent:string,postInfo:Post}) {
     return (

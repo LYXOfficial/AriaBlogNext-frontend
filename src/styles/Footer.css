@@ -8,7 +8,7 @@
     white-space: nowrap; 
 }
 #footer-framework-info>a{
-    margin-right:4px;
+    margin-right: 8px;
 }
 #footer-rundays{
     flex-grow: 1;
