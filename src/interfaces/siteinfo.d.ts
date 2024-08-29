@@ -19,6 +19,8 @@ export declare interface siteInfo{
     createYear: number,
     createDay: number,
     createMonth: number,
+    twikooEnv: string,
+    siteDomain: string,
 }
 export declare interface social{
     name: string,

@@ -7,6 +7,8 @@ import { siteInfos } from "public/config"
 import fs from "fs";
 import MDRender from "src/utils/mdrender";
 import { RightButtonsPages } from 'src/components/RightButtons';
+import { notFound } from "next/navigation";
+import axios from "axios";
 
 var currentPost:Post = {
     title: "你好！！！",
@@ -487,27 +489,33 @@ signed main(){
 };
 export const metadata: Metadata = {
     title: currentPost.title+" | "+siteInfos.title,
+    description: currentPost.description?currentPost.description:currentPost.plainContent?.substring(0,40)
 };
-export default async function Page(){
-    // currentPost.mdContent=await new Promise((resolve)=>{
-    //     fs.readFile(`public/test2.md`,(err,data)=>{
-    //         if(err){
-    //             console.log(err);
-    //             resolve("");
-    //         }   
-    //         else{
-    //             resolve(data.toString());
-    //         }
-    //     })
-    // })
-    const htmlContent=await MDRender(currentPost.mdContent);
-    return (<>
-        <style>{`#navbar{position:fixed}`}</style>
-        <PostHeader postInfo={currentPost}/>
-        <div id="main-container">
-            <PostContent htmlContent={htmlContent}/>
-            <PageASides htmlContent={htmlContent}/>
-            <RightButtonsPages/>
-        </div>
-    </>);
+export default async function Page({params}:{params:any}){
+    if(params.slug=="hello-world"){
+        const htmlContent=await MDRender(currentPost.mdContent);
+        return (<>
+            <style>{`#navbar{position:fixed}`}</style>
+            <PostHeader postInfo={currentPost}/>
+            <div id="main-container">
+                <PostContent htmlContent={htmlContent} postInfo={currentPost}/>
+                <PageASides htmlContent={htmlContent}/>
+                <RightButtonsPages/>
+            </div>
+        </>);
+    }
+    else if(params.slug=="markdowntest"){
+        let mdContent=(await axios.get("https://"+siteInfos.siteDomain+"/test2.md")).data;
+        const htmlContent=await MDRender(mdContent);
+        return (<>
+            <style>{`#navbar{position:fixed}`}</style>
+            <PostHeader postInfo={currentPost}/>
+            <div id="main-container">
+                <PostContent htmlContent={htmlContent} postInfo={currentPost}/>
+                <PageASides htmlContent={htmlContent}/>
+                <RightButtonsPages/>
+            </div>
+        </>);
+    }
+    else return notFound();
 }

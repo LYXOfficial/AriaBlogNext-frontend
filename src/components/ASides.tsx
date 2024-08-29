@@ -8,7 +8,7 @@ import CardToc from "src/components/asides/CardToc";
 
 import { siteInfos } from "public/config"
 import { webInfo } from "src/interfaces/siteinfo";
-import { latestCommentListItem,archiveListItem } from "src/interfaces/asidelistitem";
+import { archiveListItem } from "src/interfaces/asidelistitem";
 import { Post } from "src/interfaces/post"
 
 const webInfos:webInfo={
@@ -22,44 +22,6 @@ const webInfos:webInfo={
     lastUpdateTime: 11451419,
     commentCount: 1657,
 }
-
-const latestComments:latestCommentListItem[]=[
-    {
-        user:"test",
-        avatar:"https://weavatar.com/avatar/dkfhdsikshfrief",
-        content:"test",
-        time:0,
-        link:"/test"
-    },
-    {
-        user:"test",
-        avatar:"https://weavatar.com/avatar/dkfhdsikshfrief",
-        content:"test",
-        time:0,
-        link:"/test"
-    },
-    {
-        user:"test",
-        avatar:"https://weavatar.com/avatar/dkfhdsikshfrief",
-        content:"test",
-        time:0,
-        link:"/test"
-    },
-    {
-        user:"test",
-        avatar:"https://weavatar.com/avatar/dkfhdsikshfrief",
-        content:"test",
-        time:0,
-        link:"/test"
-    },
-    {
-        user:"test",
-        avatar:"https://weavatar.com/avatar/dkfhdsikshfrief",
-        content:"test",
-        time:0,
-        link:"/test"
-    }
-]
 const archivesInfo:archiveListItem[]=[
     {
         month:7,
@@ -98,7 +60,7 @@ const posts:Post[]=[
         title:"你好喵 这是测试QwQ",
         bannerImg:"https://npm.elemecdn.com/saiodgm-api@1.0.1/randomimg-my/18.webp",
         plainContent:"豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。",
-        slug:"hello-world",
+        slug:"markdowntest",
         publishTime:1724571806,
         lastUpdateTime:1724561806,
         tags:["生活","代码","测试"],
@@ -159,7 +121,7 @@ export function HomeASides() {
             />
             <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
             <div className="aside-sticky-container">
-                <CardLatestComments comments={latestComments}/>
+                <CardLatestComments/>
                 <CardArchives items={archivesInfo}/>
                 <CardWebInfo
                     webInfos={webInfos}

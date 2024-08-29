@@ -21,7 +21,7 @@ const posts:Post[]=[
         title:"你好喵 这是测试QwQ",
         bannerImg:"https://npm.elemecdn.com/saiodgm-api@1.0.1/randomimg-my/18.webp",
         plainContent:"豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。",
-        slug:"hello-world",
+        slug:"markdowntest",
         publishTime:1724571806,
         lastUpdateTime:1724561806,
         tags:["生活","代码","测试"],
@@ -86,7 +86,7 @@ export default function Posts() {
                             </div>
                             <div className="post-info">
                                 <Link className="post-title" href={"/posts/"+post.slug} title={post.title} >{post.title}</Link>
-                                <div className="post-content">{post.plainContent}</div>
+                                <div className="post-content">{post.description?post.description:post.plainContent}</div>
                                 <div className="post-metas">
                                     <Link className="post-category" href={"/catogories/" + post.category} title={post.category}>{post.category}</Link>
                                     <div className="post-meta post-publishdate">

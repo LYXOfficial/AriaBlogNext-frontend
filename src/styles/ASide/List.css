@@ -58,3 +58,14 @@
 .aside-list-item:hover .aside-list-item-content-text{
     color:var(--aria-white);
 }
+.aside-list-item-content-title{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+.aside-list-item-content{
+    overflow: hidden;
+}

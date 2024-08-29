@@ -6,7 +6,9 @@ import { Icon } from "@iconify/react";
 export const siteInfos:siteInfo={
     author: "Ariasaka",
     title: "Ariasakaの小窝",
+    siteDomain: "blognext.yaria.top",
     avatar: "https://bu.dusays.com/2024/08/25/66caf920c5a28.png",
+    twikooEnv: "https://tkapi.yaria.top",
     createYear: 2022,
     createMonth: 6,
     createDay: 4,
@@ -43,7 +45,7 @@ export const menuItems:menuItem[]=[
     {
         name: "首页",
         link: "/",
-        icon: <Icon icon="fa6-solid:house-chimney"/>,
+        icon: <Icon icon="fa6-solid:house"/>,
         childs: []
     },
     {
@@ -79,9 +81,9 @@ export const menuItems:menuItem[]=[
         icon: <Icon icon="fa6-solid:sitemap"/>,
         childs: [
             {
-                name: "首页",
+                name: "个人主页",
                 link: "https://yaria.top",
-                icon: <Icon icon="fa6-solid:house"/>,
+                icon: <Icon icon="fa6-solid:house-chimney"/>,
             },
             {
                 name: "友链",

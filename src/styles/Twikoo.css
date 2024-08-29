@@ -1,0 +1,84 @@
+#twikoo,#twikoo *{
+    font-family: "HYTMR";
+}
+#post-comment-header{
+    display: flex;
+}
+#post-comment-header h1{
+    margin:0;
+}
+#post-comment-header svg{
+    margin: auto 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+#twikoo .tk-icon.__comments path,.tk-action path{
+    fill:var(--aria-theme);
+}
+.twikoo .el-button--primary.is-disabled, .twikoo .el-button--primary.is-disabled:active, .twikoo .el-button--primary.is-disabled:focus, .twikoo .el-button--primary.is-disabled:hover {
+    background-color: var(--aria-theme) !important;
+    opacity: .5;
+}
+.el-button--primary {
+    background-color: var(--aria-theme) !important;
+    border-color: var(--aria-theme) !important;
+}
+#twikoo a{
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+}
+#twikoo a:hover{
+    color:var(--aria-theme);
+}
+.tk-meta>.tk-nick {
+    color: #0e90d2;
+}
+.tk-meta:has(.tk-tag-green)>.tk-nick {
+    color: #960 !important;
+    line-height: 1.5;
+}
+.tk-tag-green {
+    border-radius: 2px !important;
+    background-color: #960 !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    -ms-border-radius: 2px !important;
+    -o-border-radius: 2px !important;
+    color: #fff !important;
+    border: none !important;
+}
+.tk-main>.tk-content {
+    background-color: var(--aria-whitegray);
+    padding: 5px 20px;
+    border-radius: 12px;
+}
+.twikoo .el-input__inner:focus, .twikoo .el-textarea__inner:focus {
+    border-color: var(--aria-theme) !important;
+}
+.twikoo .el-textarea__inner:focus {
+    box-shadow: 0 0 8px var(--aria-theme) !important;
+}
+.tk-expand {
+    box-shadow: 0 0 3px var(--aria-black-acrylic2);
+    border-radius: 12px;
+    background-color: var(--aria-acrylic1) !important;
+    margin-top: 20px;
+}
+.tk-expand:hover {
+    background-color: var(--aria-theme) !important;
+    color: #fff;
+}
+@media (prefers-color-scheme:dark){
+    .tk-content{
+        background-color: #303030!important;
+    }
+}
+.twikoo .el-button:not(.el-button--primary):not(.el-button--text):active, .twikoo .el-button:not(.el-button--primary):not(.el-button--text):focus, .twikoo .el-button:not(.el-button--primary):not(.el-button--text):hover {
+    color: var(--aria-theme) !important;
+    border-color: var(--aria-theme) !important;
+    background: transparent!important;
+}

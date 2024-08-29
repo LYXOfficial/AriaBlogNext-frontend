@@ -4,15 +4,20 @@ export declare interface aSideListItem{
     content: string,
     pic: string
 }
-export declare interface latestCommentListItem{
-    link: string,
-    content: string,
-    user: string,
-    time: number,
-    avatar: string
-}
 export declare interface archiveListItem{
     year: number,
     month: number,
     count: number
+}
+export declare interface twikooCommentItem{
+    avatar?: string,
+    comment?: string,
+    commentText?: string,
+    created?: number,
+    id?: string,
+    link?: string,
+    mailMd5?: string,
+    nick?: string,
+    relativeTime?: string,
+    url?: string,
 }

@@ -16,6 +16,9 @@ export function RightButtonsPages(){
     function scrollToTop(){
         document.documentElement.scroll({behavior:"smooth",top:0});
     }
+    function scrollToComments(){
+        document.documentElement.scroll({behavior:"smooth",top:document.querySelector("#post-comment-container").offsetTop-80});
+    }
     function setToc(){
         setTocHide(!tocHide);
         if(tocHide) document.querySelector(".card-toc").className="card-widget card-aside card-toc";
@@ -28,7 +31,7 @@ export function RightButtonsPages(){
         <button className="rightbutton rightbutton-toTop" title="回到顶部" onClick={scrollToTop}>
             <Icon icon="fa6-solid:arrow-up" />
         </button>
-        <button className="rightbutton rightbutton-toComment" title="空降评论">
+        <button className="rightbutton rightbutton-toComment" title="空降评论" onClick={scrollToComments}>
             <Icon icon="fa6-solid:comments" />
         </button>
     </div>);

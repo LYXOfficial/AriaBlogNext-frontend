@@ -72,7 +72,7 @@ body{
     overflow-x:hidden;
     -webkit-tap-highlight-color: transparent;
 }
-a.normal-a{
+a.normal-a,.tk-content a{
     border-bottom: 2px solid var(--aria-theme);
     color:var(--aria-fontcolor);
     padding:4px;
@@ -83,7 +83,7 @@ a.normal-a{
     -ms-transition: all .3s;
     -o-transition: all .3s;
 }
-a.normal-a:hover{
+a.normal-a:hover,.tk-content a:hover{
     background-color: var(--aria-theme);
     text-decoration: none!important;
     color:var(--aria-white)!important;
@@ -201,4 +201,10 @@ p,article{
 }
 *{
     scroll-behavior: smooth;
+}
+.tk-expand {
+    box-shadow: 0 0 3px var(--lyx-black-acrylic3);
+    border-radius: 12px;
+    background-color: var(--lyx-white-acrylic1) !important;
+    margin-top: 20px;
 }

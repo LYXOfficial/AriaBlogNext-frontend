@@ -1,52 +1,64 @@
 "use client"
-
-import {EventHandler, MouseEventHandler, useState} from "react";
+import { useState } from "react";
 import "src/styles/NavBar.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
 import { menuItems,siteInfos } from "public/config";
-import { menuButtons } from "public/config_adv";
 
 export default function NavBar() {
     const [hoveringElement,setHoveringElement]=useState("");
-    return (
+    const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
+    return (<>
         <nav id="navbar">
             <Link id="site-name" href="/">{siteInfos.title}</Link>
-            <div id="menu-items">
-                {menuItems.map((item)=>{
-                    return (
-                        <div className="menu-item" key={item.name}
-                            onMouseEnter={()=>setHoveringElement(item.name)} onMouseLeave={()=>setHoveringElement("")}>
-                                <Link className="site-page" href={item.link}>
-                                    {item.icon}
-                                    <span>{" "+item.name}</span>
-                                </Link>
-                                {item.childs.length?
-                                    <div className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
-                                        {item.childs.map((child)=>{
-                                            return (
-                                                <Link href={child.link} key={child.name} className="site-page-child">
-                                                    {child.icon}
-                                                    <div>{child.name}</div>
-                                                </Link>
-                                            );
-                                        })}
-                                    </div>
-                                :""
-                                }
-                        </div>
-                    )
-                })}
+            <div id="menu-center">
+                <div id="menu-items" className={mobileMenuOpen?"mobile-menu-open":"mobile-menu-close"}>
+                    {menuItems.map((item)=>{
+                        return (
+                            <div className="menu-item" key={item.name}
+                                onMouseEnter={()=>setHoveringElement(item.name)} onMouseLeave={()=>setHoveringElement("")}>
+                                    <Link className="site-page" href={item.link}>
+                                        {item.icon}
+                                        <span>{" "+item.name}</span>
+                                    </Link>
+                                    {item.childs.length?
+                                        <div className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
+                                            {item.childs.map((child)=>{
+                                                return (
+                                                    <Link href={child.link} key={child.name} className="site-page-child">
+                                                        {child.icon}
+                                                        <div>{child.name}</div>
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
+                                    :""
+                                    }
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
             <div id="menu-buttons">
-                {menuButtons.map((item)=>{
-                    return (
-                        <button className="menu-button" key={item.name} title={item.name} onClick={item.method}>
-                            {item.icon}
-                        </button>
-                    )
-                })}
+                <button className="menu-button" title="搜索">
+                    <Icon icon="fa6-solid:magnifying-glass"/>
+                </button>
+                <button className="menu-button" title="随便逛逛">
+                    <Icon icon="fa6-solid:paper-plane"/>
+                </button>
+                <button className="menu-button" title="开往" onClick={()=>{
+                    window.location.href="https://travellings.cn/go.html";
+                }}>
+                    <Icon icon="fa6-solid:train-subway"/>
+                </button>
+                <button className="menu-button menu-button-mobmenu" title="展开菜单" onClick={()=>{
+                    setMobileMenuOpen(!mobileMenuOpen);
+                }}>
+                    <Icon icon="fa6-solid:bars"/>
+                </button>
             </div>
         </nav>
+        <div id="sidebar-mask" className={mobileMenuOpen?"active":"disactive"} onClick={()=>{setMobileMenuOpen(false)}}/>
+        </>
     );
 }
