@@ -32,6 +32,7 @@ const cleanMarkdown=cache((text:string)=>{
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{
+        
         fetch(`${siteConfigs.backEndUrl}/get/post/postBySlug?slug=${slug}`)
             .then(async res=>{
                 if(!res.ok) reject();
@@ -49,14 +50,17 @@ export default async function Page({params}:{params:any}){
     catch(e){
         return notFound();
     }
-    const htmlContent=await MDRender(currentPost.mdContent);
+    let htmlContent:string;
+    if(currentPost.cachedHtml)
+        htmlContent=currentPost.cachedHtml;
+    else htmlContent=await MDRender(currentPost.mdContent,currentPost.slug);
     return (<>
         <title>{currentPost.title+" | "+siteConfigs.title}</title>
         <style>{`#navbar{position:fixed}`}</style>
         <PostHeader postInfo={currentPost}/>
         <div id="main-container">
             <PostContent htmlContent={htmlContent} postInfo={currentPost}/>
-            <PageASides htmlContent={htmlContent}/>
+            <PageASides htmlContent={htmlContent} slug={currentPost.slug!}/>
             <RightButtonsPages/>
         </div>
     </>);

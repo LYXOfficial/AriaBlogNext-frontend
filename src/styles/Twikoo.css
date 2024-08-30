@@ -82,3 +82,6 @@
     border-color: var(--aria-theme) !important;
     background: transparent!important;
 }
+.tk-action-count{
+    color: var(--aria-theme)!important;
+}

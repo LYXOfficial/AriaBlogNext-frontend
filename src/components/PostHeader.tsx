@@ -18,13 +18,13 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-publishdate">
                                 <Icon icon="fa6-solid:calendar-days"/>
                                 <span className="post-meta-content">
-                                    {" 发表于 "+moment.unix(postInfo.publishTime).format("YYYY-MM-DD")+" | "}
+                                    {" 发表于 "+moment.unix(postInfo.publishTime!).format("YYYY-MM-DD")+" | "}
                                 </span>
                             </div>
                             <div className="post-meta post-lastupdatedate">
                                 <Icon icon="fa6-solid:calendar-days"/>
                                 <span className="post-meta-content">
-                                    {" 更新于 "+moment.unix(postInfo.lastUpdatedTime).format("YYYY-MM-DD")+" | "}
+                                    {" 更新于 "+moment.unix(postInfo.lastUpdatedTime!).format("YYYY-MM-DD")+" | "}
                                 </span>
                             </div>
                             <div className="post-meta post-category">
@@ -39,7 +39,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-tags">
                                 <Icon icon="fa6-solid:tag" />
                                 <span className="post-meta-content">
-                                    {postInfo.tags.slice(0,5).map((tag,index) => {
+                                    {postInfo.tags!.slice(0,5).map((tag,index) => {
                                         return (
                                             <div key={tag}>
                                                 {index?(<span> · </span>):(<></>)}

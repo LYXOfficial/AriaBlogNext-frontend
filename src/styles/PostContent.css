@@ -266,12 +266,17 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     text-align: right;
     margin-right: 10px;
 }
+@media screen and (max-width:900px){
+    #post-banner-info{
+        bottom:50px!important;
+    }
+    #post-banner-meta .post-meta.post-tags{
+        display: none;
+    }
+}
 @media screen and (max-width:600px){
     #article-container{
         padding: 20px;
-    }
-    #post-banner-info{
-        bottom:50px;
     }
     #article-container{
         border-radius: 0;
@@ -281,6 +286,15 @@ code::selection,pre::selection,code *::selection,pre *::selection{
         -o-border-radius: 0;
         border:none;
         box-shadow: none;
+    }
+    #post-banner-title{
+        font-size:40px;
+    }
+    #post-banner-info{
+        bottom:20px!important;
+    }
+    #post-banner-meta{
+        font-size: 14px;
     }
 }
 @import 'highlight.js/styles/base16/edge-light.css' (prefers-color-scheme:light);

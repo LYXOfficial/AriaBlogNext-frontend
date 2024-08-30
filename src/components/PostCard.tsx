@@ -24,7 +24,7 @@ export default async function Posts({page}:{page:number}){
                             {post.bannerImg?
                                 <div className="post-banner">
                                     <Link className="post-banner-link" href={"/posts/"+post.slug} title={post.title}>
-                                        <Image fill={true} className="post-banner-img" src={post.bannerImg} alt={post.title}/>
+                                        <Image fill={true} className="post-banner-img" src={post.bannerImg} alt={post.title!}/>
                                     </Link>
                                 </div>:<></>}
                             <div className="post-info">
@@ -35,19 +35,19 @@ export default async function Posts({page}:{page:number}){
                                     <div className="post-meta post-publishdate">
                                         <Icon icon="fa6-solid:calendar-days"/>
                                         <span className="post-meta-content">
-                                            {" 发表于 "+moment.unix(post.publishTime).format("YYYY-MM-DD")+" | "}
+                                            {" 发表于 "+moment.unix(post.publishTime!).format("YYYY-MM-DD")+" | "}
                                         </span>
                                     </div>
                                     <div className="post-meta post-lastupdatedate">
                                         <Icon icon="fa6-solid:calendar-days"/>
                                         <span className="post-meta-content">
-                                            {" 更新于 "+moment.unix(post.lastUpdatedTime).format("YYYY-MM-DD")+" | "}
+                                            {" 更新于 "+moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")+" | "}
                                         </span>
                                     </div>
                                     <div className="post-meta post-tags">
                                         <Icon icon="fa6-solid:tag" />
                                         <span className="post-meta-content">
-                                            {post.tags.slice(0,5).map((tag,index) => {
+                                            {post.tags!.slice(0,5).map((tag,index) => {
                                                 return (
                                                     <div key={tag}>
                                                         {index?(<span> · </span>):(<></>)}

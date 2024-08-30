@@ -1,10 +1,20 @@
 import { Post } from "src/interfaces/post";
 import { siteConfigs } from "public/config";
 import moment from "moment";
-import "src/styles/PostCopyright.css";
+import "src/styles/PostEnd.css";
 import ShareJs from "src/components/thirdpartyjs/ShareJs";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
+import Image from "next/image";
 
-export default function PostEnd({ postInfo }: { postInfo: Post }) {
+export default async function PostEnd({ postInfo }: { postInfo: Post }) {
+    var res=await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`);
+    var previousPost:Post={},nextPost:Post={};
+    if(res.ok){
+        var postNavigation=await res.json();
+        previousPost=postNavigation.previous;
+        nextPost=postNavigation.next;
+    }
     return <>
         <div className="post-copyright">
             <div className="post-copyright__title">
@@ -30,13 +40,13 @@ export default function PostEnd({ postInfo }: { postInfo: Post }) {
                 <div className="post-copyright-c" style={{display:"inline-block",width:120}}>
                     发布于
                     <div className="post-copyright-cc-info">
-                        {moment.unix(postInfo.publishTime).format('YYYY-MM-DD')}
+                        {moment.unix(postInfo.publishTime!).format('YYYY-MM-DD')}
                     </div>
                 </div>
                     <div className="post-copyright-u" style={{display:"inline-block",width:120}}>
                         更新于
                         <div className="post-copyright-cc-info">
-                            {moment.unix(postInfo.lastUpdatedTime).format('YYYY-MM-DD')}
+                            {moment.unix(postInfo.lastUpdatedTime!).format('YYYY-MM-DD')}
                         </div>
                     </div>
                     <div className="post-copyright-c" style={{display:"inline-block",width:180}}>
@@ -55,11 +65,47 @@ export default function PostEnd({ postInfo }: { postInfo: Post }) {
         </div>
         <div id="postend-tagbar">
             <div id="postend-tags">{
-                postInfo.tags.map((tag, index) => {
+                postInfo.tags!.map((tag, index) => {
                     return <a className="postend-tag" key={index} href={`/tags/${tag}`} rel="noopener external nofollow noreferrer" target="_blank">{tag}</a>
                 })
             }</div>
             <ShareJs postInfo={postInfo}/>
+        </div>
+        <div id="postend-navigation">
+            {previousPost?
+                <Link className={`postend-navigation-item previous${nextPost?"":" single"}`} href={`/posts/${previousPost.slug}`}>
+                    <Image className="postend-navigation-image" src={previousPost.bannerImg!} alt={previousPost.title!} fill={true}/>
+                    <span className="postend-navigation-headline">
+                        <span className="postend-navigation-intro">
+                            <Icon icon="fa6-solid:angle-left"/>上一篇
+                        </span>
+                        <span className="postend-navigation-date">
+                            <Icon icon="fa6-solid:calendar-days"/>
+                                {moment.unix(previousPost.publishTime!).format('YYYY-MM-DD')}
+                        </span>
+                    </span>
+                    <span className="postend-navigation-title">
+                        {previousPost.title}
+                    </span>
+                </Link>
+            :<></>}
+            {nextPost?
+                <Link className={`postend-navigation-item next${previousPost?"":" single"}`} href={`/posts/${nextPost.slug}`}>
+                    <Image className="postend-navigation-image" src={nextPost.bannerImg!} alt={nextPost.title!} fill={true}/>
+                    <span className="postend-navigation-headline">
+                        <span className="postend-navigation-date">
+                            <Icon icon="fa6-solid:calendar-days"/>
+                                {moment.unix(nextPost.publishTime!).format('YYYY-MM-DD')}
+                        </span>
+                        <span className="postend-navigation-intro">
+                            下一篇<Icon icon="fa6-solid:angle-right"/>
+                        </span>
+                    </span>
+                    <span className="postend-navigation-title">
+                        {nextPost.title}
+                    </span>
+                </Link>
+            :<></>}
         </div>
         <hr/>
     </>

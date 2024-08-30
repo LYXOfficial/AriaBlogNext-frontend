@@ -5,11 +5,7 @@ import CardArchives from "src/components/asides/CardArchives";
 import CardWebInfo from "src/components/asides/CardWebInfo";
 import CardNewestPosts from "src/components/asides/CardNewestPosts";
 import CardToc from "src/components/asides/CardToc";
-
-import { siteConfigs } from "public/config"
-
-import { Post } from "src/interfaces/post"
-
+import CardRelatedPosts from "src/components/asides/CardRelatedPosts";
 
 export function HomeASides() {
     return (
@@ -24,17 +20,15 @@ export function HomeASides() {
         </div>
     );
 }
-export async function PageASides({htmlContent}:{htmlContent:string}) {
-    let posts:Post[]=[];
-    let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`);
-    if(resp.ok) posts=(await resp.json()).data;
+export async function PageASides({htmlContent,slug}:{htmlContent:string,slug:string}) {
     return (
         <div id="aside-container">
             <CardInfo/>
             <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
             <div className="aside-sticky-container">
                 <CardToc htmlContent={htmlContent}/>
-                <CardNewestPosts posts={posts}/>
+                <CardNewestPosts/>
+                <CardRelatedPosts slug={slug}/>
             </div>
         </div>
     );

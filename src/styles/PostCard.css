@@ -49,6 +49,8 @@
 #posts-container .post-info{
     margin: auto 40px;
     width: fit-content;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 #posts-container .post-title{
     text-decoration: none;
@@ -146,7 +148,7 @@
     #posts-container .post-card:not(.post-card.first-page:first-child){
         flex-direction: column;
         width:calc(50% - 10px)!important;
-        height: 23em!important;
+        height: 25em!important;
     }
     #posts-container .post-card:not(.post-card.first-page:first-child) .post-info{
         margin: 15px 40px 20px 40px;
@@ -180,7 +182,8 @@
         height: 23em!important;
     }
     #posts-container .post-info {
-        margin: 15px 25px 20px 25px
+        padding: 15px 25px 20px 25px;
+        margin:0;
     }
     #posts-container .post-title{
         font-size:20px;
@@ -208,7 +211,9 @@
 }
 @media screen and (max-width:600px){
     #posts-container{
-        margin:10px;
+        padding: 10px;
+        box-sizing: border-box;
+        max-width: 100%;
     }
 }
 @keyframes posts-container-animation {

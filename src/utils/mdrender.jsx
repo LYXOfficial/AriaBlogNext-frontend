@@ -2,6 +2,7 @@ import { cache } from "react";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import stringRandom from "string-random"
+import { siteConfigs } from "public/config";
 // import rehypeStringify from 'rehype-stringify'
 // import remarkParse from 'remark-parse'
 // import remarkRehype from 'remark-rehype'
@@ -19,7 +20,7 @@ function escapeMarkdownInMath(text) {
         return open + escapedContent + close;
     });
 }
-const MDRenderer=cache(async (mdContent)=>{
+const MDRenderer=cache(async (mdContent,slug)=>{
     // mdContent=escapeMarkdownInMath(mdContent);
     const renderer=new marked.Renderer();
     renderer.link=({href,title,tokens})=>{
@@ -53,7 +54,18 @@ const MDRenderer=cache(async (mdContent)=>{
         return `<a class="heading-link" onclick=\"document.documentElement.scroll({top:this.offsetTop-70,behavior:\'smooth\'})\"><h${depth} id="title-${id}">${text}</h${depth}></a>`;
     };
     marked.use({renderer: renderer});
-    return await marked.parse(mdContent);
+    const renderedHtml=await marked.parse(mdContent);
+    fetch(`${siteConfigs.backEndUrl}/update/post/pushRenderedHtmlCache`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            slug: slug,
+            html: renderedHtml
+        })
+    });
+    return renderedHtml;
     // return String(await unified()
     //     .use(remarkMath)
     //     .use(remarkGFM)

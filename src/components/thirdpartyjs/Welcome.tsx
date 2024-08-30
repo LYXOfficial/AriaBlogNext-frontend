@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation';
 export default function Welcome() {
     const router=useRouter();
     useEffect(()=>{
-        if(sessionStorage.getItem("showedWelcome")!="1"){
+        window.history.scrollRestoration='manual';
+        if(localStorage.getItem("showedWelcome")!="1"){
             if(document.referrer==undefined||document.referrer==""||document.referrer.indexOf("yaria.top")!=-1||document.referrer.indexOf("yisous.xyz")!=-1){
                 Snackbar.show({
                     pos: "top-right",
@@ -40,7 +41,7 @@ export default function Welcome() {
                         router.push("/license");
                     },
                 });
-                sessionStorage.setItem("showedWelcome","1");
+                localStorage.setItem("showedWelcome","1");
             },3000);
         }
     });

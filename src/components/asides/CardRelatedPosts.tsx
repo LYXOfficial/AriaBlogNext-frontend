@@ -6,15 +6,16 @@ import { Post } from "src/interfaces/post";
 import { aSideListItem } from "src/interfaces/asidelistitem";
 import { siteConfigs } from "public/config"
 
-export default async function CardNewestPosts(){
+export default async function CardRelatedPosts({slug}:{slug:string}){
     let posts:Post[]=[];
-    let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`);
-    if(resp.ok) posts=(await resp.json()).data;
+    let res=await fetch(`${siteConfigs.backEndUrl}/get/post/relatedPosts?slug=${slug}`);
+    if(res.ok) posts=(await res.json()).data;
+    if(posts.length==0) return <></>;
     return (
         <div className="card-widget card-aside card-latest-posts">
             <div className="card-headline">
                 <Icon icon="fa6-solid:clock-rotate-left" />
-                <span className="card-title">最新文章</span>
+                <span className="card-title">相关推荐</span>
             </div>
             <div className="card-body">
                 <ASideList items={
