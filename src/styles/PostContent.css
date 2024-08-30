@@ -24,6 +24,7 @@
 }
 #post-maincontent h1{
     padding-left: 24px;
+    margin:0;
 }
 @keyframes rotate {
     0% {

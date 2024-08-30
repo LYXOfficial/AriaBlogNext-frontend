@@ -9,7 +9,9 @@ export default function CardInfo({content}:{content:ReactElement}){
     const [annoContent,setAnnoContent]=useState(content);
     useEffect(()=>{
         (async ()=>{
-            setAnnoContent(await annogen());
+            try{
+                setAnnoContent(await annogen());
+            }catch(e){}
         })();
     },[]);
     return (

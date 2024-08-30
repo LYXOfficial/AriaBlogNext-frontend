@@ -39,7 +39,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-tags">
                                 <Icon icon="fa6-solid:tag" />
                                 <span className="post-meta-content">
-                                    {postInfo.tags.map((tag,index) => {
+                                    {postInfo.tags.slice(0,5).map((tag,index) => {
                                         return (
                                             <div key={tag}>
                                                 {index?(<span> · </span>):(<></>)}
@@ -56,7 +56,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-wordcount">
                                 <Icon icon="fa6-regular:file-word" />
                                 <span className="post-meta-content">
-                                    {`字数总计: ${(postInfo.wordCount as number)>=1000?(postInfo.wordCount as number)/1000+"k":(postInfo.wordCount as number)} | `}
+                                    {`字数总计: ${(postInfo.wordCount as number)>=1000?((postInfo.wordCount as number)/1000).toFixed(1)+"k":(postInfo.wordCount as number)} | `}
                                 </span>
                             </div>
                             <div className="post-meta post-wordcount">
@@ -75,7 +75,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-commentcount">
                                 <Icon icon="fa6-solid:comments" />
                                 <span className="post-meta-content">
-                                    {" "+postInfo.commentCount+" 条评论"}
+                                    {" 条评论"}
                                 </span>
                             </div>
                         </div>

@@ -7,7 +7,7 @@
     width:100%;
     height: 60px;
     background-color: var(--aria-acrylic1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) saturate(180%);
     border-bottom: var(--aria-border);
 }
 #site-name,.menu-button{
@@ -246,7 +246,7 @@
         background-color: var(--aria-acrylic1);
         padding: 20px;
         justify-content: flex-start;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px) saturate(180%);
         overflow-y:scroll;
         border: 2px solid #c9c9c9;
         border-radius: 10px;
@@ -295,5 +295,11 @@
     #sidebar-mask.active{
         opacity: 1;
         pointer-events: all;
+    }
+}
+@media screen and (max-width:600px){
+    #site-name{
+        margin-left:10px;
+        margin-right: 0;
     }
 }

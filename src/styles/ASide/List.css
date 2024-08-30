@@ -60,7 +60,7 @@
 }
 .aside-list-item-content-title{
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;

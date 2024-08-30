@@ -11,7 +11,7 @@ async function agn(){
         },
         dataType: 'jsonp',
         success: function (res) {
-            var ipLoacation = res;
+            var ipLocation = res;
             function getDistance(e1, n1, e2, n2) {
                 const R = 6371
                 const { sin, cos, asin, PI, hypot } = Math
@@ -26,10 +26,10 @@ async function agn(){
                 let r = asin(c / 2) * 2 * R
                 return Math.round(r);
             }
-            let dist = getDistance(107.38779, 29.70239, ipLoacation.result.location.lng, ipLoacation.result.location.lat);
-            let pos = ipLoacation.result.ad_info.nation;
+            let dist = getDistance(107.38779, 29.70239, ipLocation.result.location.lng, ipLocation.result.location.lat);
+            let pos = ipLocation.result.ad_info.nation;
             let posdesc;
-            switch (ipLoacation.result.ad_info.nation) {
+            switch (ipLocation.result.ad_info.nation) {
                 case "日本":
                     posdesc = "よろしく，一起去看樱花吗";
                     break;
@@ -55,8 +55,8 @@ async function agn(){
                     posdesc = "拾起一片枫叶赠予你";
                     break;
                 case "中国":
-                    pos = ipLoacation.result.ad_info.province + " " + ipLoacation.result.ad_info.city;
-                    switch (ipLoacation.result.ad_info.province) {
+                    pos = ipLocation.result.ad_info.province + " " + ipLocation.result.ad_info.city;
+                    switch (ipLocation.result.ad_info.province) {
                         case "北京市":
                             posdesc = "北——京——欢迎你~~~";
                             break;
@@ -88,7 +88,7 @@ async function agn(){
                             posdesc = "众所周知，中国只有两个城市。";
                             break;
                         case "江苏省":
-                            switch (ipLoacation.result.ad_info.city) {
+                            switch (ipLocation.result.ad_info.city) {
                                 case "南京市":
                                     posdesc = "欢迎来自安徽省南京市的小伙伴。";
                                     break;

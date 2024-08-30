@@ -9,7 +9,10 @@ const nextConfig = {
             pathname: '/**',
         },
         ],
-    }
-,};
+    },
+    experimental: {
+        scrollRestoration: false,
+      },
+};
 
 export default nextConfig;

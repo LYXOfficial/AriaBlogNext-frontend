@@ -28,6 +28,7 @@ const calcProgress=()=>{
 }
 export default function TocUpdater({ tocTree }) {
     useEffect(() => {
+        // window.scrollTo(0, 0);
         calcProgress();
         const handleScroll = () => {
             const flatTOCTree=flattenTOC(tocTree);

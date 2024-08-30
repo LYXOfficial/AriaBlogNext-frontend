@@ -21,7 +21,7 @@
     height: 100%;
     background-color: #0003;
     z-index: 1;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) saturate(180%);
 }
 #post-banner-info{
     z-index:2;
@@ -55,4 +55,7 @@
 #post-banner .post-meta-content a:hover{
     text-decoration: underline;
     color:var(--aria-theme);
+}
+#post-banner-meta .post-tags{
+    white-space: nowrap;
 }

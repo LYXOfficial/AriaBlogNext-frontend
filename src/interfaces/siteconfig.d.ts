@@ -1,14 +1,5 @@
 import { ReactElement } from "react";
 
-export declare interface webInfo{
-    postCount: number,
-    categoryCount: number,
-    tagCount: number,
-    runDays: number,
-    wordCount: number,
-    lastUpdatedTime: number,
-    commentCount: number,
-}
 export declare interface siteConfig{
     author: string,
     avatar: string,
@@ -20,6 +11,7 @@ export declare interface siteConfig{
     twikooEnv: string,
     siteDomain: string,
     pageMaxPosts: number,
+    backEndUrl: string,
 }
 export declare interface social{
     name: string,

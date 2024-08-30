@@ -1,5 +1,5 @@
 import { menuItem } from "src/interfaces/menuitem";
-import { siteConfig } from "src/interfaces/siteinfo";
+import { siteConfig } from "src/interfaces/siteconfig";
 import { footerBadge } from "src/interfaces/footerbadge";
 import { Icon } from "@iconify/react";
 
@@ -13,6 +13,7 @@ export const siteConfigs:siteConfig={
     createMonth: 6,
     createDay: 4,
     pageMaxPosts: 15,
+    backEndUrl: "https://blognext-end.yaria.top",
     socials: [
         {
             name:"Github",

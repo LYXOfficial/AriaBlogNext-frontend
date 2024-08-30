@@ -53,6 +53,8 @@
 }
 .postend-tag{
     margin: auto 0;
+    margin-bottom:10px;
+    white-space: nowrap;
     line-height: 1.2;
     margin-right: 5px;
     padding:5px 10px;
@@ -82,4 +84,6 @@
 }
 #postend-tags{
     display: flex;
+    flex-wrap: wrap;
+    margin-top:10px;
 }
