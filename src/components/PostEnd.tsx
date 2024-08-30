@@ -36,7 +36,7 @@ export default function PostEnd({ postInfo }: { postInfo: Post }) {
                     <div className="post-copyright-u" style={{display:"inline-block",width:120}}>
                         更新于
                         <div className="post-copyright-cc-info">
-                            {moment.unix(postInfo.lastUpdateTime).format('YYYY-MM-DD')}
+                            {moment.unix(postInfo.lastUpdatedTime).format('YYYY-MM-DD')}
                         </div>
                     </div>
                     <div className="post-copyright-c" style={{display:"inline-block",width:180}}>

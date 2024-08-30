@@ -4,6 +4,7 @@ import 'src/styles/global.css';
 import { siteConfigs } from "public/config";
 import Welcome from 'src/components/thirdpartyjs/Welcome';
 import LicenseTips from "src/components/thirdpartyjs/LicenseTips";
+import NextTopLoader from 'nextjs-toploader';
 
 export const metadata = {
   title: siteConfigs.title,
@@ -19,7 +20,8 @@ export default function RootLayout({
         <Welcome/>
         <LicenseTips/>
         <NavBar/>
-          {children}
+        <NextTopLoader color="var(--aria-theme)" height={5}/>
+        {children}
         <Footer/>
       </body>
     </html>

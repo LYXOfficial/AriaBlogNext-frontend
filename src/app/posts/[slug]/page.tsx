@@ -479,7 +479,7 @@ signed main(){
 咕咕咕。。。qwq`,
     slug: "my-first-post",
     publishTime: 0,
-    lastUpdateTime: 0,
+    lastUpdatedTime: 0,
     tags: ["测试","react"],
     category: "hello",
     commentCount: 0,

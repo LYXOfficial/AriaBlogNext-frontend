@@ -34,6 +34,7 @@
     "moment": "^2.30.1",
     "net": "^1.0.2",
     "next": "14.2.6",
+    "nextjs-toploader": "^3.6.15",
     "node-snackbar": "^0.1.16",
     "penndu": "^13.0.0",
     "random-string": "^0.2.0",

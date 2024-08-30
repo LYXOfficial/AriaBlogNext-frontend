@@ -3,7 +3,7 @@ export declare interface Post{
     title: string,
     description?: string,
     publishTime: number,
-    lastUpdateTime: number,
+    lastUpdatedTime: number,
     tags: string[],
     category: string,
     plainContent?: string,

@@ -6,7 +6,7 @@ export declare interface webInfo{
     tagCount: number,
     runDays: number,
     wordCount: number,
-    lastUpdateTime: number,
+    lastUpdatedTime: number,
     commentCount: number,
 }
 export declare interface siteConfig{

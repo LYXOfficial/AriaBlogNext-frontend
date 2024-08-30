@@ -24,7 +24,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-lastupdatedate">
                                 <Icon icon="fa6-solid:calendar-days"/>
                                 <span className="post-meta-content">
-                                    {" 更新于 "+moment.unix(postInfo.lastUpdateTime).format("YYYY-MM-DD")+" | "}
+                                    {" 更新于 "+moment.unix(postInfo.lastUpdatedTime).format("YYYY-MM-DD")+" | "}
                                 </span>
                             </div>
                             <div className="post-meta post-category">

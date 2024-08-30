@@ -208,3 +208,6 @@ p,article{
     background-color: var(--lyx-white-acrylic1) !important;
     margin-top: 20px;
 }
+#nprogress>*{
+    z-index:1145141919810!important;
+}

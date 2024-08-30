@@ -36,7 +36,7 @@ export default function CardWebInfo({webInfos}:{webInfos:webInfo}){
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">上次更新 :</span>
-                    <span className="card-webinfo-item-right">{relativeTime(webInfos.lastUpdateTime)}</span>
+                    <span className="card-webinfo-item-right">{relativeTime(webInfos.lastUpdatedTime)}</span>
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">评论总数 :</span>
