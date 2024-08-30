@@ -62,7 +62,8 @@ const MDRenderer=cache(async (mdContent,slug)=>{
         },
         body: JSON.stringify({
             slug: slug,
-            html: renderedHtml
+            html: renderedHtml,
+            secret: process.env.SECRET
         })
     });
     return renderedHtml;
