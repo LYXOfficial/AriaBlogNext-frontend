@@ -275,7 +275,7 @@
     color:white;
     background-color: var(--aria-theme);
 }
-.post-meta svg{
+.post-card .post-meta svg{
     width: 16px;
     height: 16px;
     transform: translateY(2px);
