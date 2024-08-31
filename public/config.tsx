@@ -8,13 +8,12 @@ export const siteConfigs:siteConfig={
     title: "Ariasakaの小窝",
     siteDomain: "blognext.yaria.top",
     avatar: "https://bu.dusays.com/2024/08/25/66caf920c5a28.png",
-    twikooEnv: "https://tkapi.yaria.top",
+    twikooEnv: "https://twikoo.yaria.top",
     createYear: 2022,
     createMonth: 6,
     createDay: 4,
     pageMaxPosts: 15,
-    // backEndUrl: "https://blognext-end.yaria.top",
-    backEndUrl: "http://localhost:2333",
+    backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
     socials: [
         {
             name:"Github",
