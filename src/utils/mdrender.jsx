@@ -24,7 +24,7 @@ const MDRenderer=cache(async (mdContent,slug)=>{
     // mdContent=escapeMarkdownInMath(mdContent);
     const renderer=new marked.Renderer();
     renderer.link=({href,title,tokens})=>{
-        return `<a class="normal-a" href="${href}" title="${title} target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
+        return `<a class="normal-a" href="${href}" target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
     }
     renderer.image=({href,title,text})=>{
         return `<a href="${href}" title="点击查看大图" data-fancybox><img class="normal-img lazy-img" data-src="${href}" alt="${text}"/></a>`;

@@ -82,6 +82,7 @@ a.normal-a,.tk-content a{
     -moz-transition: all .3s;
     -ms-transition: all .3s;
     -o-transition: all .3s;
+    word-wrap: break-word;
 }
 a.normal-a:hover,.tk-content a:hover{
     background-color: var(--aria-theme);

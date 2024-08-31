@@ -149,6 +149,7 @@ table:not(code table){
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
+    word-wrap: break-word;
 }
 code,pre{
     font-size:16px;
@@ -266,14 +267,6 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     text-align: right;
     margin-right: 10px;
 }
-@media screen and (max-width:900px){
-    #post-banner-info{
-        bottom:50px!important;
-    }
-    #post-banner-meta .post-meta.post-tags{
-        display: none;
-    }
-}
 @media screen and (max-width:600px){
     #article-container{
         padding: 20px;
@@ -286,15 +279,6 @@ code::selection,pre::selection,code *::selection,pre *::selection{
         -o-border-radius: 0;
         border:none;
         box-shadow: none;
-    }
-    #post-banner-title{
-        font-size:40px;
-    }
-    #post-banner-info{
-        bottom:20px!important;
-    }
-    #post-banner-meta{
-        font-size: 14px;
     }
 }
 @import 'highlight.js/styles/base16/edge-light.css' (prefers-color-scheme:light);
@@ -321,28 +305,7 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     animation: article-container-animation .8s;
     -webkit-animation: article-container-animation .8s;
 }
-@keyframes post-banner-animation {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-        -webkit-transform: translateY(-50px);
-        -moz-transform: translateY(-50px);
-        -ms-transform: translateY(-50px);
-        -o-transform: translateY(-50px);
-}
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-}
-}
-#post-banner{
-    animation: post-banner-animation .8s;
-    -webkit-animation: post-banner-animation .8s;
-}
+
 #article-container hr {
     background: url(https://npm.elemecdn.com/hassan-assets/img/Bilibili_Dividing_Line.png) !important;
     height: 80px;

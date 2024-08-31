@@ -5,7 +5,7 @@ import FancyBox from "src/components/thirdpartyjs/FancyBox";
 import HLJSNum from "src/components/thirdpartyjs/HLJSNum";
 import CodeCopier from "src/components/thirdpartyjs/CodeCopier";
 import KaTex from "src/components/thirdpartyjs/KaTex";
-import Twikoo from "src/components/thirdpartyjs/Twikoo";
+import { TwikooPost } from "src/components/thirdpartyjs/Twikoo";
 
 import PostEnd from "src/components/PostEnd";
 import { Post } from "src/interfaces/post";
@@ -22,7 +22,7 @@ export default function PostContent({htmlContent,postInfo}:{htmlContent:string,p
             <KaTex/>
             <Lazyload/>
             <PostEnd postInfo={postInfo}/>
-            <Twikoo/>
+            <TwikooPost/>
         </article>
     );
 }

@@ -6,7 +6,7 @@ import { siteConfigs } from "public/config";
 import { Icon } from "@iconify/react";
 import "src/styles/owoBig.css"
 
-export default function Twikoo(){
+export function TwikooPost(){
     const [tkloadState,setTkloadState]=useState("加载中...");
     useEffect(()=>{
         function owoBig() {
@@ -61,17 +61,25 @@ export default function Twikoo(){
             })
             observer.observe(document.getElementById('twikoo'), { subtree: true, childList: true }) // 监听的 元素 和 配置项
         }
-        var twikoo=require('twikoo/dist/twikoo.min');
+        const tk=require('twikoo/dist/twikoo.min');
         try{
-            twikoo.init({
+            tk.init({
                 envId: siteConfigs.twikooEnv,
                 el: '#post-comment',
             })
             owoBig();
+            tk.getCommentsCount({
+                envId: siteConfigs.twikooEnv,
+                urls: [document.location.pathname,document.location.pathname+"/"],
+                includeReply: true,
+            }).then(res=>{
+                document.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
+            });
         }
         catch(e){
             setTkloadState('加载失败，请检查配置');
         }
+
         return ()=>{
             const tkel=document.querySelector("#twikoo");
             if(tkel){
@@ -80,6 +88,7 @@ export default function Twikoo(){
                 tkel.id="post-comment";
             }
         }
+
     })
     return <div id="post-comment-container">
         <div id="post-comment-header">
@@ -88,4 +97,33 @@ export default function Twikoo(){
         </div>
         <div id="post-comment">{tkloadState}</div>
     </div>;
+}
+export function TwikooHome(){
+    useEffect(()=>{(async ()=>{
+        const tk=require('twikoo/dist/twikoo.min');
+        document.querySelectorAll(".post-info").forEach((el)=>{
+            let hr="/"+el.querySelector(".post-title").href.split("/").slice(3).join("/");
+            tk.getCommentsCount({
+                envId: siteConfigs.twikooEnv,
+                urls: [hr,hr+"/"],
+                includeReply: true
+            }).then(res=>{
+                el.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
+            });
+        });
+        const rest=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`);
+        const pages=["/messageboard","/messageboard/","/speaks","/speaks/","/about","/about/","/links","/links/"];
+        if(rest.ok){
+            const postSlugs=(await rest.json()).data;
+            tk.getCommentsCount({
+                envId: siteConfigs.twikooEnv,
+                urls: postSlugs.map(res=>`/posts/${res}`).concat(postSlugs.map(res=>`/posts/${res}/`)).concat(pages),
+                includeReply: true
+            }).then(res=>{
+                // console.log(res.map(r=>r.count).reduce((a,b)=>a+b));
+                document.querySelector(".card-webinfo-item-right.commentcount").innerText=res.map(r=>r.count).reduce((a,b)=>a+b);
+            });
+        }
+    })()},[]);
+    return <></>;
 }

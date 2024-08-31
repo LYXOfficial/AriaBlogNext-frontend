@@ -1,4 +1,4 @@
-import {Icon} from "@iconify/react"
+import { Icon } from "@iconify/react"
 import moment from 'moment';
 import "src/styles/PostCard.css"
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Post } from "src/interfaces/post"
 import { siteConfigs } from 'public/config';
 import { notFound } from "next/navigation";
+import { TwikooHome } from "src/components/thirdpartyjs/Twikoo";
 
 export default async function Posts({page}:{page:number}){
     let startl=(page-1)*siteConfigs.pageMaxPosts,endl=page*siteConfigs.pageMaxPosts;
@@ -35,13 +36,13 @@ export default async function Posts({page}:{page:number}){
                                     <div className="post-meta post-publishdate">
                                         <Icon icon="fa6-solid:calendar-days"/>
                                         <span className="post-meta-content">
-                                            {" 发表于 "+moment.unix(post.publishTime!).format("YYYY-MM-DD")+" | "}
+                                            {"发表于 "+moment.unix(post.publishTime!).format("YYYY-MM-DD")+" |"}
                                         </span>
                                     </div>
                                     <div className="post-meta post-lastupdatedate">
                                         <Icon icon="fa6-solid:calendar-days"/>
                                         <span className="post-meta-content">
-                                            {" 更新于 "+moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")+" | "}
+                                            {"更新于 "+moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")+" |"}
                                         </span>
                                     </div>
                                     <div className="post-meta post-tags">
@@ -57,13 +58,13 @@ export default async function Posts({page}:{page:number}){
                                                     </div>
                                                 );
                                             })}
-                                            <span> | </span>
+                                            <span> |</span>
                                         </span>
                                     </div>
                                     <div className="post-meta post-commentcount">
                                         <Icon icon="fa6-solid:comments" />
                                         <span className="post-meta-content">
-                                            {" 条评论"}
+                                            {"条评论"}
                                         </span>
                                     </div>
                                 </div>
@@ -81,6 +82,7 @@ export default async function Posts({page}:{page:number}){
                 {page+3<=maxPage?<span className="post-card-spec">...</span>:<></>}
                 {page+2<=maxPage?<Link className="post-card-pgbtn" href={`/page/${maxPage}`}>{maxPage}</Link>:<></>}
             </div>
+            <TwikooHome/>
         </div>
     );
 }

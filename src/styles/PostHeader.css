@@ -5,7 +5,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    background-color: var(--aria-theme);
+    background-color: #bebebe;
     transition: all .5s;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
@@ -38,8 +38,8 @@
     font-weight: 400;
     font-size: 3em;
 }
-#post-banner .post-meta-content,.post-meta{
-    display: inline-flex;
+#post-banner .post-meta-content,#post-banner .post-meta{
+    display: flex;
 }
 #post-banner .post-meta>*{
     margin:auto 0;
@@ -58,4 +58,60 @@
 }
 #post-banner-meta .post-tags{
     white-space: nowrap;
+}
+.post-metas-firstline,.post-metas-secondline{
+    display: flex;
+}
+@media screen and (max-width:1000px){
+    #post-banner-info{
+        bottom:50px!important;
+    }
+    #post-banner-meta .post-meta.post-tags{
+        display: none!important;
+    }
+    #post-banner .post-meta,#post-banner .post-meta-content{
+        display: inline!important;
+    }
+}
+@media screen and (max-width:768px){
+    #post-banner .post-metas,.post-metas-firstline,.post-metas-secondline{
+        display: inline!important;
+    }    
+}
+@media screen and (max-width:600px){
+    #post-banner-title{
+        font-size:32px;
+        margin-bottom: 10px;
+    }
+    #post-banner-info{
+        bottom:20px!important;
+    }
+    #post-banner-meta{
+        font-size: 14px;
+    }
+}
+@keyframes post-banner-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+        -webkit-transform: translateY(-50px);
+        -moz-transform: translateY(-50px);
+        -ms-transform: translateY(-50px);
+        -o-transform: translateY(-50px);
+}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+}
+}
+#post-banner{
+    animation: post-banner-animation .8s;
+    -webkit-animation: post-banner-animation .8s;
+}
+#post-banner .post-meta svg{
+    transform: translateY(2px);
 }

@@ -58,7 +58,7 @@ export default async function CardWebInfo(){
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">评论总数 :</span>
-                    <span className="card-webinfo-item-right"></span>
+                    <span className="card-webinfo-item-right commentcount"></span>
                 </div>
             </div>
             <Busuanzi/>
