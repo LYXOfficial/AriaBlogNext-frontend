@@ -63,6 +63,9 @@
     display: flex;
 }
 @media screen and (max-width:1000px){
+    #post-banner .post-meta svg{
+        transform: translateY(2px);
+    }
     #post-banner-info{
         bottom:50px!important;
     }
@@ -111,7 +114,4 @@
 #post-banner{
     animation: post-banner-animation .8s;
     -webkit-animation: post-banner-animation .8s;
-}
-#post-banner .post-meta svg{
-    transform: translateY(2px);
 }

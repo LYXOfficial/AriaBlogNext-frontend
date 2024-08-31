@@ -8,7 +8,7 @@ export const siteConfigs:siteConfig={
     title: "Ariasakaの小窝",
     siteDomain: "blognext.yaria.top",
     avatar: "https://bu.dusays.com/2024/08/25/66caf920c5a28.png",
-    twikooEnv: "https://twikoo.yaria.top",
+    twikooEnv: "https://tkapi.yaria.top",
     createYear: 2022,
     createMonth: 6,
     createDay: 4,
