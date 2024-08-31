@@ -6,6 +6,8 @@ import Welcome from 'src/components/thirdpartyjs/Welcome';
 import LicenseTips from "src/components/thirdpartyjs/LicenseTips";
 import NextTopLoader from 'nextjs-toploader';
 
+process.env.TZ="Asia/Shanghai";
+
 export const metadata = {
   title: siteConfigs.title,
 }
