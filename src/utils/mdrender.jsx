@@ -20,7 +20,7 @@ function escapeMarkdownInMath(text) {
         return open + escapedContent + close;
     });
 }
-const MDRenderer=cache(async (mdContent,slug=null)=>{
+const MDRenderer=cache(async (mdContent,slug="")=>{
     // mdContent=escapeMarkdownInMath(mdContent);
     const renderer=new marked.Renderer();
     renderer.link=({href,title,tokens})=>{
