@@ -1,5 +1,5 @@
 "use client";
-import "src/styles/RightButtons.css";
+import "styles/RightButtons.css";
 import { Icon } from "@iconify/react";
 import { useEffect,useState } from "react";
 
@@ -7,11 +7,14 @@ export function RightButtonsPages(){
     const [rbHide,setRbHide]=useState(false);
     const [tocHide,setTocHide]=useState(true);
     useEffect(()=>{
-        document.addEventListener("scroll",()=>{
+        const sel=document.addEventListener("scroll",()=>{
             if(document.documentElement.scrollTop>100)
                 setRbHide(false);
             else setRbHide(true);
-        })
+        });
+        return ()=>{
+            document.removeEventListener("scroll",sel);
+        }
     });
     function scrollToTop(){
         document.documentElement.scroll({behavior:"smooth",top:0});
@@ -39,11 +42,14 @@ export function RightButtonsPages(){
 export function RightButtonsHome(){
     const [rbHide,setRbHide]=useState(false);
     useEffect(()=>{
-        document.addEventListener("scroll",()=>{
+        const sel=document.addEventListener("scroll",()=>{
             if(document.documentElement.scrollTop>100)
                 setRbHide(false);
             else setRbHide(true);
         })
+        return ()=>{
+            document.removeEventListener("scroll",sel);
+        }
     });
     function scrollToTop(){
         document.documentElement.scroll({behavior:"smooth",top:0});

@@ -13,6 +13,6 @@ export default function ShareJs({postInfo}) {
             // sites: ['qzone', 'qq', 'weibo','wechat', 'douban'],
             disabled: ['google', 'facebook', 'twitter',"linkedin","tencent","diandian"],
         });
-    })()},[])
+    })()},[postInfo])
     return <div id="postend-share"></div>;
 }

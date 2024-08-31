@@ -16,7 +16,7 @@ const flattenTOC = cache((toc) => {
     return flatList;
 });
 const calcProgress=()=>{
-    const postContent = document.getElementById('post-maincontent');
+    const postContent = document.querySelector('#post-maincontent:not(#article-container.page #post-maincontent)');
     const tocCounter = document.querySelector('.toc-counter');
     if(postContent){
         const postContentRect = postContent.getBoundingClientRect();

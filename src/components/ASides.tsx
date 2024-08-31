@@ -1,11 +1,11 @@
-import CardInfo from "src/components/asides/CardInfo";
-import CardAnnouncement from "src/components/asides/CardAnnouncement";
-import CardLatestComments from "src/components/asides/CardLatestComments";
-import CardArchives from "src/components/asides/CardArchives";
-import CardWebInfo from "src/components/asides/CardWebInfo";
-import CardNewestPosts from "src/components/asides/CardNewestPosts";
-import CardToc from "src/components/asides/CardToc";
-import CardRelatedPosts from "src/components/asides/CardRelatedPosts";
+import CardInfo from "components/asides/CardInfo";
+import CardAnnouncement from "components/asides/CardAnnouncement";
+import CardLatestComments from "components/asides/CardLatestComments";
+import CardArchives from "components/asides/CardArchives";
+import CardWebInfo from "components/asides/CardWebInfo";
+import CardNewestPosts from "components/asides/CardNewestPosts";
+import CardToc from "components/asides/CardToc";
+import CardRelatedPosts from "components/asides/CardRelatedPosts";
 
 export function HomeASides() {
     return (

@@ -1,6 +1,6 @@
-import { menuItem } from "src/interfaces/menuitem";
-import { siteConfig } from "src/interfaces/siteconfig";
-import { footerBadge } from "src/interfaces/footerbadge";
+import { menuItem } from "interfaces/menuitem";
+import { siteConfig } from "interfaces/siteconfig";
+import { footerBadge } from "interfaces/footerbadge";
 import { Icon } from "@iconify/react";
 
 export const siteConfigs:siteConfig={
@@ -13,7 +13,10 @@ export const siteConfigs:siteConfig={
     createMonth: 6,
     createDay: 4,
     pageMaxPosts: 15,
+    falldownAvatar: "https://bu.dusays.com/2024/07/07/668a8ffdacde3.png",
+    falldownImg: "https://bu.dusays.com/2024/08/31/66d30329375a5.webp",
     backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
+    // backEndUrl:"https://blognext-end.yaria.top",
     socials: [
         {
             name:"Github",
@@ -52,12 +55,12 @@ export const menuItems:menuItem[]=[
     },
     {
         name: "文章",
-        link: "#",
+        link: "",
         icon: <Icon icon="fa6-solid:newspaper"/>,
         childs: [
             {
                 name: "随便逛逛",
-                link: "/randomPost",
+                link: "javascript:window.toRandomPost();",
                 icon: <Icon icon="fa6-solid:paper-plane"/>,
             },
             {
@@ -79,7 +82,7 @@ export const menuItems:menuItem[]=[
     },
     {
         name: "本站",
-        link: "#",
+        link: "",
         icon: <Icon icon="fa6-solid:sitemap"/>,
         childs: [
             {

@@ -1,9 +1,9 @@
 //GPT万岁！！！ QwQ
 
 import React from 'react';
-import "src/styles/ASide/global.css";
-import "src/styles/ASide/Toc.css";
-import TocUpdater from "src/components/thirdpartyjs/TocUpdater";
+import "styles/ASide/global.css";
+import "styles/ASide/Toc.css";
+import TocUpdater from "components/thirdpartyjs/TocUpdater";
 import { Icon } from '@iconify/react';
 import { JSDOM } from "jsdom";
 import { cache } from "react";

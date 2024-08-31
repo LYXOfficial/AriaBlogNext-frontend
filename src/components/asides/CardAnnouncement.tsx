@@ -1,9 +1,9 @@
 "use client"
-import "src/styles/ASide/global.css"
+import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import "src/styles/ASide/Announcement.css"
+import "styles/ASide/Announcement.css"
 import { ReactElement,useEffect,useState } from 'react';
-import { annogen } from "src/utils/annogen"
+import { annogen } from "utils/annogen"
 
 export default function CardInfo({content}:{content:ReactElement}){
     const [annoContent,setAnnoContent]=useState(content);

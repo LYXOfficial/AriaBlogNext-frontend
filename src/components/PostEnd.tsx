@@ -1,8 +1,8 @@
-import { Post } from "src/interfaces/post";
-import { siteConfigs } from "public/config";
+import { Post } from "interfaces/post";
+import { siteConfigs } from "config";
 import moment from "moment";
-import "src/styles/PostEnd.css";
-import ShareJs from "src/components/thirdpartyjs/ShareJs";
+import "styles/PostEnd.css";
+import ShareJs from "components/thirdpartyjs/ShareJs";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
@@ -91,7 +91,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             :<></>}
             {nextPost?
                 <Link className={`postend-navigation-item next${previousPost?"":" single"}`} href={`/posts/${nextPost.slug}`}>
-                    <Image className="postend-navigation-image" src={nextPost.bannerImg!} alt={nextPost.title!} fill={true}/>
+                    <Image className="postend-navigation-image" src={nextPost.bannerImg?nextPost.bannerImg:siteConfigs.falldownImg} alt={nextPost.title!} fill={true}/>
                     <span className="postend-navigation-headline">
                         <span className="postend-navigation-date">
                             <Icon icon="fa6-solid:calendar-days"/>

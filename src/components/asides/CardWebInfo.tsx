@@ -1,10 +1,10 @@
-import "src/styles/ASide/global.css"
+import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import "src/styles/ASide/WebInfo.css";
-import relativeTime from "src/utils/reltime";
-import "src/components/thirdpartyjs/Busuanzi";
-import Busuanzi from "src/components/thirdpartyjs/Busuanzi";
-import { siteConfigs } from "public/config";
+import "styles/ASide/WebInfo.css";
+import relativeTime from "utils/reltime";
+import "components/thirdpartyjs/Busuanzi";
+import Busuanzi from "components/thirdpartyjs/Busuanzi";
+import { siteConfigs } from "config";
 import moment from "moment";
 
 export default async function CardWebInfo(){

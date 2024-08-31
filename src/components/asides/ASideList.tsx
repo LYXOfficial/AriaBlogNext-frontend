@@ -1,7 +1,7 @@
-import "src/styles/ASide/List.css";
+import "styles/ASide/List.css";
 import Link from "next/link";
 import Image from "next/image"
-import { aSideListItem } from "src/interfaces/asidelistitem";
+import { aSideListItem } from "interfaces/asidelistitem";
 
 export default function ASideList({items}:{items:aSideListItem[]}){
     return (

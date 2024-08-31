@@ -1,0 +1,73 @@
+.flink-group-item{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.flink-item{
+    display: grid;
+    margin-bottom:15px;
+    grid-template-columns: 100px calc(100% - 100px);
+    grid-template-rows: 40% 60%;
+    border-radius: 15px;
+    height: 100px;
+    margin-left:10px;
+    margin-right: 10px;
+}
+.flink-item:last-of-type{
+    margin-right:auto;
+}
+.flink-avatar{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    margin: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.flink-name{
+    margin:12px 15px 0 0;
+    font-size:22px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.flink-desc{
+    margin:0 15px 15px 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+@media screen and (min-width:1300px){
+    .flink-item{
+        width: calc(25% - 20px);
+    }
+}
+@media screen and (min-width:1000px) and (max-width:1300px){
+    .flink-item{
+        width: calc(33% - 20px);
+    }
+}
+@media screen and (min-width:600px) and (max-width:1000px){
+    .flink-item{
+        width: calc(50% - 20px);
+    }
+}
+@media screen and (max-width:600px){
+    .flink-item{
+        width: 100%;
+    }
+}
+.flink-avatar-img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    inset:0;
+    position:absolute;
+}

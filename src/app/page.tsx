@@ -1,9 +1,8 @@
-import Posts from 'src/components/PostCard';
-import { HomeASides } from 'src/components/ASides';
-import { RightButtonsHome } from 'src/components/RightButtons';
-import { siteConfigs } from 'public/config';
+import Posts from 'components/PostCard';
+import { HomeASides } from 'components/ASides';
+import { RightButtonsHome } from 'components/RightButtons';
 
-export default function homePage() {
+export default function Page() {
   return (
     <div id="main-container">
       <Posts page={1}/>

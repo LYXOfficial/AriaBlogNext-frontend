@@ -1,10 +1,10 @@
-import "src/styles/ASide/global.css"
+import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import ASideList from "src/components/asides/ASideList";
+import ASideList from "components/asides/ASideList";
 import moment from "moment";
-import { Post } from "src/interfaces/post";
-import { aSideListItem } from "src/interfaces/asidelistitem";
-import { siteConfigs } from "public/config"
+import { Post } from "interfaces/post";
+import { aSideListItem } from "interfaces/asidelistitem";
+import { siteConfigs } from "config"
 
 export default async function CardNewestPosts(){
     let posts:Post[]=[];

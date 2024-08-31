@@ -1,10 +1,10 @@
-import PostHeader from "src/components/PostHeader";
-import { Post } from "src/interfaces/post";
-import { PageASides } from "src/components/ASides";
-import PostContent from "src/components/PostContent";
-import { siteConfigs } from "public/config"
-import MDRender from "src/utils/mdrender";
-import { RightButtonsPages } from 'src/components/RightButtons';
+import PostHeader from "components/PostHeader";
+import { Post } from "interfaces/post";
+import { PageASides } from "components/ASides";
+import PostContent from "components/PostContent";
+import { siteConfigs } from "config";
+import MDRender from "utils/mdrender";
+import { RightButtonsPages } from 'components/RightButtons';
 import { notFound } from "next/navigation";
 import { cache } from "react";
 

@@ -2,7 +2,7 @@ import { cache } from "react";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import stringRandom from "string-random"
-import { siteConfigs } from "public/config";
+import { siteConfigs } from "config";
 // import rehypeStringify from 'rehype-stringify'
 // import remarkParse from 'remark-parse'
 // import remarkRehype from 'remark-rehype'
@@ -20,7 +20,7 @@ function escapeMarkdownInMath(text) {
         return open + escapedContent + close;
     });
 }
-const MDRenderer=cache(async (mdContent,slug)=>{
+const MDRenderer=cache(async (mdContent,slug=null)=>{
     // mdContent=escapeMarkdownInMath(mdContent);
     const renderer=new marked.Renderer();
     renderer.link=({href,title,tokens})=>{
@@ -55,17 +55,19 @@ const MDRenderer=cache(async (mdContent,slug)=>{
     };
     marked.use({renderer: renderer});
     const renderedHtml=await marked.parse(mdContent);
-    fetch(`${siteConfigs.backEndUrl}/update/post/pushRenderedHtmlCache`,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            slug: slug,
-            html: renderedHtml,
-            secret: process.env.SECRET
-        })
-    });
+    if(slug){
+        fetch(`${siteConfigs.backEndUrl}/update/post/pushRenderedHtmlCache`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                slug: slug,
+                html: renderedHtml,
+                secret: process.env.SECRET
+            })
+        });
+    }
     return renderedHtml;
     // return String(await unified()
     //     .use(remarkMath)

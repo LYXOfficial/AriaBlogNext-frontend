@@ -1,9 +1,9 @@
-import "src/styles/ASide/Archive.css";
-import "src/styles/ASide/global.css";
+import "styles/ASide/Archive.css";
+import "styles/ASide/global.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
-import { archiveListItem } from "src/interfaces/asidelistitem";
-import { siteConfigs } from "public/config";
+import { archiveListItem } from "interfaces/asidelistitem";
+import { siteConfigs } from "config";
 
 const monthToHanzi=["","一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
 export default async function ASideList(){

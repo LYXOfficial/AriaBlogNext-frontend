@@ -1,7 +1,7 @@
 "use client"
-import "src/styles/Footer.css"
+import "styles/Footer.css"
 import { useState } from "react"
-import { footerBadges,siteConfigs } from "public/config"
+import { footerBadges,siteConfigs } from "config"
 
 export default function Footer(){
     const [footerRunDaysContent,setFooterRunDaysContent]=useState("这个小破站已运行 2 年 85 天 2 时 12 分 19 秒");

@@ -1,9 +1,9 @@
 "use client"
-import "src/styles/ASide/global.css"
+import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
-import ASideList from "src/components/asides/ASideList";
-import { twikooCommentItem,aSideListItem } from "src/interfaces/asidelistitem";
-import { siteConfigs } from "public/config";
+import ASideList from "components/asides/ASideList";
+import { twikooCommentItem,aSideListItem } from "interfaces/asidelistitem";
+import { siteConfigs } from "config";
 import { useEffect, useState } from "react";
 
 export default function CardLatestComments(){

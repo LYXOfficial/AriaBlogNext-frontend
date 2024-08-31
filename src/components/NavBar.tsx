@@ -1,11 +1,23 @@
 "use client"
-import { useState } from "react";
-import "src/styles/NavBar.css";
+import { useState, useEffect } from "react";
+import "styles/NavBar.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
-import { menuItems,siteConfigs } from "public/config";
+import { menuItems,siteConfigs } from "config";
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
+    const router=useRouter();
+    useEffect(()=>{
+        (window as any).toRandomPost=async ()=>{
+            const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`);
+            if(res.ok){
+                const posts:string[]=(await res.json()).data;
+                const randomIndex:number=Math.round(Math.random()*posts.length);
+                router.push(`/posts/${posts[randomIndex]}`);
+            }
+        }
+    })
     const [hoveringElement,setHoveringElement]=useState("");
     const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
     return (<>
@@ -17,10 +29,17 @@ export default function NavBar() {
                         return (
                             <div className="menu-item" key={item.name}
                                 onMouseEnter={()=>setHoveringElement(item.name)} onMouseLeave={()=>setHoveringElement("")}>
-                                    <Link className="site-page" href={item.link}>
-                                        {item.icon}
-                                        <span>{" "+item.name}</span>
-                                    </Link>
+                                    {item.link?
+                                        <Link className="site-page" href={item.link}>
+                                            {item.icon}
+                                            <span>{" "+item.name}</span>
+                                        </Link>
+                                        :
+                                        <span className="site-page">
+                                            {item.icon}
+                                            <span>{" "+item.name}</span>
+                                        </span>
+                                    }
                                     {item.childs.length?
                                         <div className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
                                             {item.childs.map((child)=>{
@@ -43,7 +62,9 @@ export default function NavBar() {
                 <button className="menu-button" title="搜索">
                     <Icon icon="fa6-solid:magnifying-glass"/>
                 </button>
-                <button className="menu-button" title="随便逛逛">
+                <button className="menu-button" title="随便逛逛" onClick={()=>{
+                    (window as any).toRandomPost();
+                }}>
                     <Icon icon="fa6-solid:paper-plane"/>
                 </button>
                 <button className="menu-button" title="开往" onClick={()=>{

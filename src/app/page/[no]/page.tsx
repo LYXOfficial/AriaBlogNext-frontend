@@ -1,10 +1,9 @@
-import Posts from 'src/components/PostCard';
-import { HomeASides } from 'src/components/ASides';
-import { RightButtonsHome } from 'src/components/RightButtons';
+import Posts from 'components/PostCard';
+import { HomeASides } from 'components/ASides';
+import { RightButtonsHome } from 'components/RightButtons';
 import { notFound } from 'next/navigation';
-import { siteConfigs } from 'public/config';
 
-export default function homePage({params}:{params:{no:string}}) {
+export default function Page({params}:{params:{no:string}}) {
     try{
         return (
             <div id="main-container">

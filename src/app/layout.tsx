@@ -1,9 +1,9 @@
-import NavBar from 'src/components/NavBar';
-import Footer from 'src/components/Footer';
-import 'src/styles/global.css';
-import { siteConfigs } from "public/config";
-import Welcome from 'src/components/thirdpartyjs/Welcome';
-import LicenseTips from "src/components/thirdpartyjs/LicenseTips";
+import NavBar from 'components/NavBar';
+import Footer from 'components/Footer';
+import 'styles/global.css';
+import { siteConfigs } from "config";
+import Welcome from 'components/thirdpartyjs/Welcome';
+import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from 'nextjs-toploader';
 
 process.env.TZ="Asia/Shanghai";

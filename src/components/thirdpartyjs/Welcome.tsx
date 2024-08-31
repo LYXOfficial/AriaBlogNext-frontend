@@ -44,6 +44,6 @@ export default function Welcome() {
                 localStorage.setItem("showedWelcome","1");
             },3000);
         }
-    });
+    },[]);
     return <></>;
 }

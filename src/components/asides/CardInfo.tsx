@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import "src/styles/ASide/global.css"
-import "src/styles/ASide/Info.css"
-import { siteConfig,social } from "src/interfaces/siteconfig"
-import { siteConfigs } from 'public/config'
+import "styles/ASide/global.css"
+import "styles/ASide/Info.css"
+import { social } from "interfaces/siteconfig"
+import { siteConfigs } from 'config'
 
 export default async function CardInfo(){
     let postCount:number=0,tagCount:number=0,categoryCount:number=0;

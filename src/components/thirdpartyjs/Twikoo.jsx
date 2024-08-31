@@ -1,10 +1,10 @@
 "use client"
 import { useEffect,useState } from "react";
 import "twikoo/dist/twikoo.css";
-import "src/styles/Twikoo.css";
-import { siteConfigs } from "public/config";
+import "styles/Twikoo.css";
+import { siteConfigs } from "config";
 import { Icon } from "@iconify/react";
-import "src/styles/owoBig.css"
+import "styles/owoBig.css"
 
 export function TwikooPost(){
     const [tkloadState,setTkloadState]=useState("加载中...");
@@ -73,7 +73,8 @@ export function TwikooPost(){
                 urls: [document.location.pathname,document.location.pathname+"/"],
                 includeReply: true,
             }).then(res=>{
-                document.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
+                if(document.querySelector(".post-commentcount>.post-meta-content"))
+                    document.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
             });
         }
         catch(e){
@@ -89,7 +90,7 @@ export function TwikooPost(){
             }
         }
 
-    })
+    },[]);
     return <div id="post-comment-container">
         <div id="post-comment-header">
             <Icon icon="fa6-solid:comments"/>
@@ -120,8 +121,8 @@ export function TwikooHome(){
                 urls: postSlugs.map(res=>`/posts/${res}`).concat(postSlugs.map(res=>`/posts/${res}/`)).concat(pages),
                 includeReply: true
             }).then(res=>{
-                // console.log(res.map(r=>r.count).reduce((a,b)=>a+b));
-                document.querySelector(".card-webinfo-item-right.commentcount").innerText=res.map(r=>r.count).reduce((a,b)=>a+b);
+                if(document.querySelector(".card-webinfo-item-right.commentcount"))
+                    document.querySelector(".card-webinfo-item-right.commentcount").innerText=res.map(r=>r.count).reduce((a,b)=>a+b);
             });
         }
     })()},[]);

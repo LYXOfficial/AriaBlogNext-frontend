@@ -69,3 +69,6 @@
 .aside-list-item-content{
     overflow: hidden;
 }
+.aside-list-item-content-title{
+    line-height: 1.5;
+}

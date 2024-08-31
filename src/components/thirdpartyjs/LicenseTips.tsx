@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 export default function LicenseTips() {
     const router=useRouter();
     useEffect(()=>{
-        document.addEventListener("copy",function () {
+        const cpl:any=document.addEventListener("copy",function () {
             Snackbar.show({
                 text: '复制成功,转载请注明出处！',
                 pos: 'top-right',
@@ -17,7 +17,7 @@ export default function LicenseTips() {
                 actionText: "查看博客声明",
             });
         });
-        document.addEventListener("keydown",function (event) {
+        const kdl:any=document.addEventListener("keydown",function (event) {
             event = (event || window.event);
             if (event.keyCode == 123) {
                 Snackbar.show({
@@ -31,9 +31,9 @@ export default function LicenseTips() {
             }
         });
         return ()=>{
-            document.removeEventListener("copy",()=>{});
-            document.removeEventListener("keydown",()=>{});
+            document.removeEventListener("copy",cpl);
+            document.removeEventListener("keydown",kdl);
         }
-    });
+    },[]);
     return <></>;
 }

@@ -12,6 +12,8 @@ export declare interface siteConfig{
     siteDomain: string,
     pageMaxPosts: number,
     backEndUrl: string,
+    falldownAvatar: string,
+    falldownImg: string,
 }
 export declare interface social{
     name: string,

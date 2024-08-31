@@ -8,6 +8,6 @@ export default function FancyBox() {
         Fancybox.bind("[data-fancybox]",{
             toolbar  : true,
             smallBtn : true,});
-    })
+    },[]);
     return <></>
 }

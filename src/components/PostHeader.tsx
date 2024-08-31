@@ -1,9 +1,9 @@
-import "src/styles/PostHeader.css";
-import { Post } from "src/interfaces/post";
+import "styles/PostHeader.css";
+import { Post } from "interfaces/post";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import moment from "moment";
-import Busuanzi from "src/components/thirdpartyjs/Busuanzi";
+import Busuanzi from "components/thirdpartyjs/Busuanzi";
 
 export default function PostHeader({postInfo}:{postInfo:Post}) {
     return (
