@@ -5,7 +5,7 @@
 	right: 80px;
 }
 @media screen and (max-width: 600px) {
-	#barrage-container{
+	#barrage-container,.rightbutton-barrageShow{
 		display: none;
 	}
 }
@@ -72,12 +72,14 @@
 	
 }
 .barrageswiper{
+    width:250px;
+}
+#barrage-container{
     transition: all .7s;
     -webkit-transition: all .7s;
     -moz-transition: all .7s;
     -ms-transition: all .7s;
     -o-transition: all .7s;
-    width:250px;
 }
 .comment-barrage-item:hover{
     border: 1px solid var(--aria-theme);
@@ -97,4 +99,22 @@
 }
 .comment-barrage-item a:hover{
     color: var(--aria-theme) !important;;
+}
+#barrage-container.hide{
+    transform:translateX(514px);
+    -webkit-transform:translateX(514px);
+    -moz-transform:translateX(514px);
+    -ms-transform:translateX(514px);
+    -o-transform:translateX(514px);
+    opacity: 0;
+}
+@media screen and (max-width: 900px){
+    #main-container:has(.card-aside.card-toc.mobile-show)>#barrage-container{
+        transform:translateX(514px);
+        -webkit-transform:translateX(514px);
+        -moz-transform:translateX(514px);
+        -ms-transform:translateX(514px);
+        -o-transform:translateX(514px);
+        opacity: 0;
+    }
 }

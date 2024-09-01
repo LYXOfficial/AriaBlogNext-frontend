@@ -21,7 +21,7 @@ interface BarrageData {
   replies?: BarrageData[];
 }
 
-const CommentBarrage: React.FC = () => {
+const CommentBarrage:any=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
   const [currentSwiper, setCurrentSwiper] = useState<ReactElement>(<></>);
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +39,7 @@ const CommentBarrage: React.FC = () => {
         const comments = result.data.sort((a: BarrageData, b: BarrageData) => b.created! - a.created!);
         const flattenedComments = comments.flatMap(getCommentReplies);
         if(flattenedComments.length)
-          setCurrentSwiper(<BarrageSwiper barrages={flattenedComments} />);
+          setCurrentSwiper(<BarrageSwiper barrages={flattenedComments} toggleBarrage={toggleBarrage}/>);
       } catch (error) {
         console.error('Error fetching barrages:', error);
       }
@@ -52,9 +52,9 @@ const CommentBarrage: React.FC = () => {
       if (postCommentElement) {
         const isInViewPort = isInViewPortOfOne(postCommentElement);
         if (isInViewPort) {
-          document.querySelector('.barrageswiper')?.setAttribute('style', 'transform: translateX(514px); opacity: 0;');
+          document.querySelector('#barrage-container')?.setAttribute('style', 'transform: translateX(514px); opacity: 0;');
         } else {
-          document.querySelector('.barrageswiper')?.removeAttribute('style');
+          document.querySelector('#barrage-container')?.removeAttribute('style');
         }
       }
     }, 200); // 200ms 节流时间
@@ -86,10 +86,10 @@ const CommentBarrage: React.FC = () => {
 
 interface BarrageSwiperProps {
   barrages: BarrageData[];
+  toggleBarrage: ()=>void;
 }
 
-const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages }) => {
-  const [controlledSwiper, setControlledSwiper] = useState(null);
+const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages,toggleBarrage }) => {
   return (
     <Swiper
       modules={[Autoplay,Mousewheel]}
@@ -103,7 +103,7 @@ const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages }) => {
     >
       {barrages.map((barrage) => (
         <SwiperSlide key={barrage.id} className="comment-barrage-slide">
-          <CommentBarrageItem barrage={barrage}/>
+          <CommentBarrageItem barrage={barrage} toggleBarrage={toggleBarrage}/>
         </SwiperSlide>
       ))}
     </Swiper>
@@ -112,9 +112,10 @@ const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages }) => {
 
 interface CommentBarrageItemProps {
   barrage: BarrageData;
+  toggleBarrage: ()=>void;
 }
 
-const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage }) => {
+const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage,toggleBarrage }) => {
   const { avatar, link, nick, comment, id, mailMd5 } = barrage;
   const avatarUrl = avatar || `https://weavatar.com/avatar/${mailMd5}?d=mp`;
 
@@ -129,17 +130,13 @@ const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage }) => {
         ) : (
           <div className="barrageNick">{nick}</div>
         )}
-        <a onClick={() => switchCommentBarrage()} style={{ fontSize: '20px' }}>
+        <a onClick={toggleBarrage} style={{ fontSize: '20px' }}>
           ×
         </a>
       </div>
       <Link href={`#${id}`} className="barrageContent" dangerouslySetInnerHTML={{__html:comment}}/>
     </div>
   );
-};
-
-const switchCommentBarrage = () => {
-  // Placeholder for switchCommentBarrage function if needed
 };
 
 export default CommentBarrage;

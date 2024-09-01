@@ -6,9 +6,8 @@ import { PageASides } from "components/ASides";
 import PostContent from "components/PostContent";
 import { siteConfigs } from "config";
 import MDRender from "utils/mdrender";
-import { RightButtonsPages } from 'components/RightButtons';
 import { notFound } from "next/navigation";
-import CommentBarrage from "@/components/thirdpartyjs/CommentBarrage";
+import PostRightSide from "components/PostRightSide";
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{
@@ -41,8 +40,7 @@ export default async function Page({params}:{params:{slug:string}}){
         <div id="main-container" className="post">
             <PostContent htmlContent={htmlContent} postInfo={currentPost}/>
             <PageASides htmlContent={htmlContent} slug={currentPost.slug!}/>
-            <RightButtonsPages/>
-            <CommentBarrage/>
+            <PostRightSide/>
         </div>
     </>);
 }
