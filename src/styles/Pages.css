@@ -10,3 +10,9 @@
 .flink-avatar{
     position: relative;
 }
+@media screen and (min-width: 768px) {
+    #article-container.page{
+        padding-left:70px;
+        padding-right:70px;
+    }
+}

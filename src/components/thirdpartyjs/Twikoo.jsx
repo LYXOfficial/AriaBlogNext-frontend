@@ -86,7 +86,7 @@ export function TwikooBaseComment(){
     return <div id="post-comment-container">
         <div id="post-comment-header">
             <Icon icon="fa6-solid:comments"/>
-            <h1>评论</h1>
+            <h2>评论</h2>
         </div>
         <div id="post-comment">{tkloadState}</div>
     </div>;

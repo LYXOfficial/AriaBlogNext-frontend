@@ -4,13 +4,13 @@
 #post-comment-header{
     display: flex;
 }
-#post-comment-header h1{
+#post-comment-header h2{
     margin:0;
 }
 #post-comment-header svg{
     margin: auto 0;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
 }
 #twikoo .tk-icon.__comments path,.tk-action path{
