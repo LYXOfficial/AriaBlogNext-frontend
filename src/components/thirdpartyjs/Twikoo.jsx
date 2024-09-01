@@ -6,7 +6,7 @@ import { siteConfigs } from "config";
 import { Icon } from "@iconify/react";
 import "styles/owoBig.css"
 
-export function TwikooPost(){
+export function TwikooBaseComment(){
     const [tkloadState,setTkloadState]=useState("加载中...");
     useEffect(()=>{
         function owoBig() {
@@ -29,7 +29,7 @@ export function TwikooPost(){
                         owo_body = '';
                     if (dom.length == 2 && dom[1].className == 'OwO-body') owo_body = dom[1];
                     // 如果需要在评论内容中启用此功能请解除下面的注释
-                    // else if (dom.length == 1 && dom[0].className == 'tk-comment') owo_body = dom[0];
+                    else if (dom.length == 1 && dom[0].className == 'tk-comment') owo_body = dom[0];
                     else continue;
                     
                     // 禁用右键（手机端长按会出现右键菜单，为了体验给禁用掉）
@@ -68,14 +68,6 @@ export function TwikooPost(){
                 el: '#post-comment',
             })
             owoBig();
-            tk.getCommentsCount({
-                envId: siteConfigs.twikooEnv,
-                urls: [document.location.pathname,document.location.pathname+"/"],
-                includeReply: true,
-            }).then(res=>{
-                if(document.querySelector(".post-commentcount>.post-meta-content"))
-                    document.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
-            });
         }
         catch(e){
             setTkloadState('加载失败，请检查配置');
@@ -99,7 +91,21 @@ export function TwikooPost(){
         <div id="post-comment">{tkloadState}</div>
     </div>;
 }
-export function TwikooHome(){
+export function TwikooCountPost(){
+    useEffect(()=>{
+        const tk=require('twikoo/dist/twikoo.min');
+        tk.getCommentsCount({
+            envId: siteConfigs.twikooEnv,
+            urls: [document.location.pathname,document.location.pathname+"/"],
+            includeReply: true,
+        }).then(res=>{
+            if(document.querySelector(".post-commentcount>.post-meta-content"))
+                document.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
+        });
+    },[]);
+    return <></>;
+}
+export function TwikooCountHome(){
     useEffect(()=>{(async ()=>{
         const tk=require('twikoo/dist/twikoo.min');
         document.querySelectorAll(".post-info").forEach((el)=>{

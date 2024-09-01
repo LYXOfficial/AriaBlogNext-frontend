@@ -1,6 +1,7 @@
 #article-container.page{
     background-color: var(--aria-acrylic2);
     width:100%;
+    padding-top: 100px;
 }
 #main-container.page{
     margin:0;

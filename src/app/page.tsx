@@ -2,8 +2,8 @@ export const revalidate=7200;
 
 import Posts from 'components/PostCard';
 import { HomeASides } from 'components/ASides';
-import { RightButtonsHome } from 'components/RightButtons';
 import HomeSpeaks from '@/components/HomeSpeaks';
+import { HomeRightSide } from '@/components/RightSide';
 
 export default function Page() {
   return (
@@ -11,7 +11,7 @@ export default function Page() {
       <HomeSpeaks/>
       <Posts page={1}/>
       <HomeASides/>
-      <RightButtonsHome/>
+      <HomeRightSide/>
     </div>
   );
 }

@@ -6,11 +6,34 @@
     font-size: 18px;
     display: flex;
 }
+@keyframes homespeaks-container-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+        -webkit-transform: translateY(-50px);
+        -moz-transform: translateY(-50px);
+        -ms-transform: translateY(-50px);
+        -o-transform: translateY(-50px);
+}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+    }
+}
 #homespeaks-container{
     width: 100%;
     display: flex;
     padding: 10px 20px;
     min-height: 30px;
+    animation: homespeaks-container-animation .8s;
+    -webkit-animation: homespeaks-container-animation .8s;
+    -moz-animation: homespeaks-container-animation 1s ease-in-out;
+    -ms-animation: homespeaks-container-animation 1s ease-in-out;
+    -o-animation: homespeaks-container-animation 1s ease-in-out;
 }
 #homespeaks-container>*{
     margin:auto 0;

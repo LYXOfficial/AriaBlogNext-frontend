@@ -6,7 +6,7 @@ import Image from "next/image"
 import { Post } from "interfaces/post"
 import { siteConfigs } from 'config';
 import { notFound } from "next/navigation";
-import { TwikooHome } from "components/thirdpartyjs/Twikoo";
+import { TwikooCountHome } from "components/thirdpartyjs/Twikoo";
 import PostCategoryBar from "components/PostCategoryBar";
 
 export default async function Posts({page}:{page:number}){
@@ -84,7 +84,7 @@ export default async function Posts({page}:{page:number}){
                 {page+3<=maxPage?<span className="post-card-spec">...</span>:<></>}
                 {page+2<=maxPage?<Link className="post-card-pgbtn" href={`/page/${maxPage}`}>{maxPage}</Link>:<></>}
             </div>
-            <TwikooHome/>
+            <TwikooCountHome/>
         </div>
     );
 }

@@ -3,7 +3,7 @@ export const revalidate=7200;
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import FriendLinks from "components/FriendLinks";
-import { RightButtonsHome } from "components/RightButtons";
+import { HomeRightSide } from "components/RightSide";
 import { siteConfigs } from "@/config";
 
 export const metadata = {
@@ -12,9 +12,10 @@ export const metadata = {
 
 export default function Page(){
     return (
+        <><style>{`#navbar{position:fixed}`}</style>
         <div id="main-container" className="page">
             <FriendLinks/>
-            <RightButtonsHome/>
-        </div>
+            <HomeRightSide/>
+        </div></>
     );
 }

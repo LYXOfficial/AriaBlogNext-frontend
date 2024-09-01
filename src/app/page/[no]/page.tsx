@@ -2,7 +2,7 @@ export const revalidate=7200;
 
 import Posts from 'components/PostCard';
 import { HomeASides } from 'components/ASides';
-import { RightButtonsHome } from 'components/RightButtons';
+import { HomeRightSide } from 'components/RightSide';
 import { notFound } from 'next/navigation';
 
 export default function Page({params}:{params:{no:string}}) {
@@ -11,7 +11,7 @@ export default function Page({params}:{params:{no:string}}) {
             <div id="main-container">
                 <Posts page={Number(params.no)}/>
                 <HomeASides/>
-                <RightButtonsHome/>
+                <HomeRightSide/>
             </div>
         );
     }

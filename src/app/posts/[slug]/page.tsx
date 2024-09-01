@@ -7,7 +7,7 @@ import PostContent from "components/PostContent";
 import { siteConfigs } from "config";
 import MDRender from "utils/mdrender";
 import { notFound } from "next/navigation";
-import PostRightSide from "components/PostRightSide";
+import { PostRightSide } from "components/RightSide";
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{
