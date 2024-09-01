@@ -6,17 +6,17 @@ import { siteConfigs } from 'config'
 
 export default async function CardInfo(){
     let postCount:number=0,tagCount:number=0,categoryCount:number=0;
-    const resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`);
+    const resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{tags:["posts"]}});
     if(resp.ok){
         let pi=await resp.json();
         postCount=pi.count;
     }
-    const rest=await fetch(`${siteConfigs.backEndUrl}/get/tag/tagCount`);
+    const rest=await fetch(`${siteConfigs.backEndUrl}/get/tag/tagCount`,{next:{tags:["posts"]}});
     if(rest.ok){
         let ti=await rest.json();
         tagCount=ti.count;
     }
-    const resc=await fetch(`${siteConfigs.backEndUrl}/get/category/categoryCount`);
+    const resc=await fetch(`${siteConfigs.backEndUrl}/get/category/categoryCount`,{next:{tags:["posts"]}});
     if(resc.ok){
         let ti=await resc.json();
         categoryCount=ti.count;

@@ -15,8 +15,8 @@ export const siteConfigs:siteConfig={
     pageMaxPosts: 15,
     falldownAvatar: "https://bu.dusays.com/2024/07/07/668a8ffdacde3.png",
     falldownImg: "https://bu.dusays.com/2024/08/31/66d30329375a5.webp",
-    backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
-    // backEndUrl:"https://blognext-end.yaria.top",
+    // backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
+    backEndUrl:"https://blognext-end.yaria.top",
     socials: [
         {
             name:"Github",
@@ -77,7 +77,17 @@ export const menuItems:menuItem[]=[
                 name: "分类",
                 link: "/categories",
                 icon: <Icon icon="fa6-solid:folder-open"/>,
-            }
+            },
+            {
+                name: "说说",
+                link: "/speaks",
+                icon: <Icon icon="fa6-solid:comment"/>,
+            },
+            {
+                name: "声明",
+                link: "/license",
+                icon: <Icon icon="fa6-solid:bell"/>,
+            },
         ]
     },
     {
@@ -109,11 +119,6 @@ export const menuItems:menuItem[]=[
                 name: "日志",
                 link: "/update",
                 icon: <Icon icon="fa6-solid:calendar"/>,
-            },
-            {
-                name: "声明",
-                link: "/license",
-                icon: <Icon icon="fa6-solid:bell"/>,
             },
             {
                 name: "留言板",

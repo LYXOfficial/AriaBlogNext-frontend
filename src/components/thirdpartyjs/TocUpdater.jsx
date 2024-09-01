@@ -28,7 +28,6 @@ const calcProgress=()=>{
 }
 export default function TocUpdater({ tocTree }) {
     useEffect(() => {
-        // window.scrollTo(0, 0);
         calcProgress();
         const handleScroll = () => {
             const flatTOCTree=flattenTOC(tocTree);
@@ -36,7 +35,7 @@ export default function TocUpdater({ tocTree }) {
                 const element = document.getElementById(item.href);
                 return element ? [{ id: item.href.slice(0), offsetTop: element.offsetTop }] : [];
             });
-            const currentScrollPosition = window.scrollY + 80; // Offset for top padding
+            const currentScrollPosition = window.scrollY + 80; 
             let currentActiveId = '';
             for (let i = offsets.length - 1; i >= 0; i--) {
                 if (currentScrollPosition >= offsets[i].offsetTop) {

@@ -157,7 +157,8 @@ p,article{
     line-height:2;
 }
 #main-container{
-    display: flex;;
+    display: flex;
+    flex-wrap: wrap;
 }
 .card-title{
     flex-grow: 1;
@@ -192,11 +193,6 @@ p,article{
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
 }
-@media screen and (max-width:600px){
-    #main-container{
-        margin:0!important;
-    }
-}
 .normal-img{
     max-width: 100%;
 }
@@ -212,3 +208,4 @@ p,article{
 #nprogress>*{
     z-index:1145141919810!important;
 }
+

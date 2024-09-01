@@ -133,33 +133,33 @@
     -o-transform: scale(1.1);
 }
 @media screen and (min-width:1200px){
-    #posts-container .post-card:not(.post-card.first-page:first-child) .post-banner-img{
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-banner-img{
         border-radius: 12px 12px 0 0!important;
         -webkit-border-radius: 12px 12px 0 0!important;
         -moz-border-radius: 12px 12px 0 0!important;
         -ms-border-radius: 12px 12px 0 0!important;
         -o-border-radius: 12px 12px 0 0!important;
     }
-    #posts-container .post-card:not(.post-card.first-page:first-child) .post-content{
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-content{
         -webkit-line-clamp: 2!important;
         line-clamp: 2!important;
     }
-    #posts-container .post-card:not(.post-card.first-page:first-child){
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)){
         flex-direction: column;
         width:calc(50% - 10px)!important;
         height: 25em!important;
     }
-    #posts-container .post-card:not(.post-card.first-page:first-child) .post-info{
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-info{
         margin: 15px 40px 20px 40px;
     }
-    #posts-container .post-card:not(.post-card.first-page:first-child) .post-title{
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-title{
         font-size:20px;
     }
-    #posts-container .post-card:not(.post-card.first-page:first-child) .post-banner{
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-banner{
         min-width: 100%;
         max-width: 100%;
     }
-    #posts-container .post-card:not(.post-card.first-page:first-child) .post-banner-link{
+    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-banner-link{
         width:100%;
     }
 }
@@ -210,8 +210,6 @@
 }
 @media screen and (max-width:600px){
     #posts-container{
-        padding: 10px;
-        box-sizing: border-box;
         max-width: 100%;
     }
 }
@@ -237,7 +235,7 @@
     animation: posts-container-animation .8s;
     -webkit-animation: posts-container-animation .8s;
 }
-#posts-container .post-card.first-page:first-child:before{
+#posts-container .post-card.first-page:nth-child(2):before{
     position: absolute;
     content: "最新";
     top:15px;

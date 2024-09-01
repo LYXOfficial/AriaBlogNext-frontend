@@ -8,7 +8,7 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 
 export default async function PostEnd({ postInfo }: { postInfo: Post }) {
-    var res=await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`);
+    var res=await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`,{next:{tags:["posts"]}});
     var previousPost:Post={},nextPost:Post={};
     if(res.ok){
         var postNavigation=await res.json();

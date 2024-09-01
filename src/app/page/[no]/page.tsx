@@ -1,3 +1,5 @@
+export const revalidate=7200;
+
 import Posts from 'components/PostCard';
 import { HomeASides } from 'components/ASides';
 import { RightButtonsHome } from 'components/RightButtons';

@@ -9,17 +9,17 @@ import moment from "moment";
 
 export default async function CardWebInfo(){
     let lastUpdatedTime:number=0,wordCount:number=0,postCount:number=0;
-    const resu=await fetch(`${siteConfigs.backEndUrl}/get/siteInfo/lastUpdateTime`);
+    const resu=await fetch(`${siteConfigs.backEndUrl}/get/siteInfo/lastUpdateTime`,{next:{tags:["siteInfo"]}});
     if(resu.ok){
         let ui=await resu.json();
         lastUpdatedTime=ui.time;
     }
-    const resw=await fetch(`${siteConfigs.backEndUrl}/get/post/totalWordCount`);
+    const resw=await fetch(`${siteConfigs.backEndUrl}/get/post/totalWordCount`,{next:{tags:["posts"]}});
     if(resw.ok){
         let wi=await resw.json();
         wordCount=wi.count;
     }
-    const resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`);
+    const resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{tags:["posts"]}});
     if(resp.ok){
         let pi=await resp.json();
         postCount=pi.count;

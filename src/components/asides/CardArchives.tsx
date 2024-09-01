@@ -8,7 +8,7 @@ import { siteConfigs } from "config";
 const monthToHanzi=["","一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
 export default async function ASideList(){
     let items:archiveListItem[]=[];
-    const res=await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`);
+    const res=await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`,{next:{tags:["posts"]}});
     if(res.ok) items=(await res.json()).data.slice(0,8);
     return (
         <div className="card-widget card-aside card-latest-comments">

@@ -1,3 +1,5 @@
+export const revalidate=7200;
+
 import PostHeader from "components/PostHeader";
 import { Post } from "interfaces/post";
 import { PageASides } from "components/ASides";
@@ -6,12 +8,12 @@ import { siteConfigs } from "config";
 import MDRender from "utils/mdrender";
 import { RightButtonsPages } from 'components/RightButtons';
 import { notFound } from "next/navigation";
-import { cache } from "react";
+import CommentBarrage from "@/components/thirdpartyjs/CommentBarrage";
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{
         
-        fetch(`${siteConfigs.backEndUrl}/get/post/postBySlug?slug=${slug}`)
+        fetch(`${siteConfigs.backEndUrl}/get/post/postBySlug?slug=${slug}`,{next:{tags:[slug]}})
             .then(async res=>{
                 if(!res.ok) reject();
                 let data=(await res.json());
@@ -20,7 +22,7 @@ async function getPostInfo(slug:string):Promise<Post>{
             });
     });
 }
-export default async function Page({params}:{params:any}){
+export default async function Page({params}:{params:{slug:string}}){
     let currentPost:Post;
     try{
         currentPost=await getPostInfo(params.slug);
@@ -36,10 +38,13 @@ export default async function Page({params}:{params:any}){
         <title>{currentPost.title+" | "+siteConfigs.title}</title>
         <style>{`#navbar{position:fixed}`}</style>
         <PostHeader postInfo={currentPost}/>
-        <div id="main-container">
+        <div id="main-container" className="post">
             <PostContent htmlContent={htmlContent} postInfo={currentPost}/>
             <PageASides htmlContent={htmlContent} slug={currentPost.slug!}/>
             <RightButtonsPages/>
+            <CommentBarrage/>
         </div>
     </>);
 }
+
+

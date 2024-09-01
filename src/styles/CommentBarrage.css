@@ -1,0 +1,100 @@
+#barrage-container{
+	position: fixed;
+	z-index: 100;
+	bottom: 25px;
+	right: 80px;
+}
+@media screen and (max-width: 600px) {
+	#barrage-container{
+		display: none;
+	}
+}
+/* .comment-barrage-slide{
+    position: relative;
+} */
+.comment-barrage-item{
+	width: 250px;
+	position: absolute;
+	bottom: 5px;
+    box-sizing: border-box;
+	min-height: 80px;
+	max-height: 140px;
+	height: min-content!important;
+	margin: 4px 0;
+	padding: 8px;
+	border-radius: 8px;
+	transition: 1s;
+	display: flex;
+	flex-direction: column;
+	border: var(--aria-border);
+    box-shadow: 0 8px 16px -4px #2c2d300c;
+    background: var(--aria-acrylic2);
+    backdrop-filter: blur(10px);
+}
+.comment-barrage-item .barrageHead {
+	height: 30px;
+	padding: 0;
+	line-height: 30px;
+	font-size: 12px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.comment-barrage-item .barrageAvatar {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	border-radius: 50%;
+}
+
+.comment-barrage-item .barrageContent {
+	font-size: 14px;
+	height: calc(100% - 30px);
+	overflow: scroll;
+}
+.comment-barrage-item .barrageContent::-webkit-scrollbar {
+	height: 0;
+	width: 4px;
+}
+.comment-barrage-item .barrageContent::-webkit-scrollbar-button {
+	display: none;
+}
+.barrageContent:not(.barrageContent:hover),.barrageNick:not(.barrageNick:hover){
+	color:var(--aria-fontcolor)!important;
+}
+.barrageswiper{
+	height: 150px;
+}
+.comment-barrage-item p{
+	line-height: 1.2;
+	
+}
+.barrageswiper{
+    transition: all .7s;
+    -webkit-transition: all .7s;
+    -moz-transition: all .7s;
+    -ms-transition: all .7s;
+    -o-transition: all .7s;
+    width:250px;
+}
+.comment-barrage-item:hover{
+    border: 1px solid var(--aria-theme);
+    transition: all 0.2s;
+}
+@media screen and (max-width: 768px){
+    .comment-barrage{
+        display: none!important;
+    }
+}
+.comment-barrage-item a{
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+}
+.comment-barrage-item a:hover{
+    color: var(--aria-theme) !important;;
+}

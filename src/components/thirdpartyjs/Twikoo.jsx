@@ -112,7 +112,7 @@ export function TwikooHome(){
                 el.querySelector(".post-commentcount>.post-meta-content").innerText=`${res[0].count+res[1].count} 条评论`;
             });
         });
-        const rest=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`);
+        const rest=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`,{next:{tags:["posts"]}});
         const pages=["/messageboard","/messageboard/","/speaks","/speaks/","/about","/about/","/links","/links/"];
         if(rest.ok){
             const postSlugs=(await rest.json()).data;

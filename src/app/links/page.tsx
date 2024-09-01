@@ -1,3 +1,5 @@
+export const revalidate=7200;
+
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import FriendLinks from "components/FriendLinks";

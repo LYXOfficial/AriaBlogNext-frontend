@@ -7,18 +7,20 @@ import { Post } from "interfaces/post"
 import { siteConfigs } from 'config';
 import { notFound } from "next/navigation";
 import { TwikooHome } from "components/thirdpartyjs/Twikoo";
+import PostCategoryBar from "components/PostCategoryBar";
 
 export default async function Posts({page}:{page:number}){
     let startl=(page-1)*siteConfigs.pageMaxPosts,endl=page*siteConfigs.pageMaxPosts;
-    let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`);
+    let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`,{next:{tags:["posts"]}});
     if(!resp.ok) return notFound();
     let posts:Post[]=(await resp.json()).data;
-    let resm=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`);
+    let resm=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{tags:["posts"]}});
     if(!resm.ok) return notFound();
     let postTotal=(await resm.json()).count;
     const maxPage=Math.ceil(postTotal/siteConfigs.pageMaxPosts);
     return (
         <div id="posts-container">
+            <PostCategoryBar/>
             {posts.map((post)=>{
                     return (
                         <div className={`post-card card-widget ${startl?"":"first-page"}`} key={post.title}>
