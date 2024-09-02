@@ -1,3 +1,5 @@
+export const revalidate=3600;
+
 import RSS from 'rss'
 import { siteConfigs } from '@/config'
 import { Post } from 'interfaces/post'
@@ -11,8 +13,9 @@ export async function GET() {
     language: 'zh-CN',
     image_url: 'https://bu.dusays.com/2023/01/31/63d8e6e23ada6.webp',
     generator: 'AriaBlogNext Next.js',
+    copyright: 'CC BY-NC-SA 4.0',
   })
-  const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo`);
+  const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo`,{next:{tags:["posts"]}});
   if(res.ok){
     const data:Post[]=(await res.json()).data;
     data.forEach((post) => {
@@ -21,10 +24,11 @@ export async function GET() {
         guid: post.slug,
         url: `${siteConfigs.siteUrl}/posts/${post.slug}`,
         description: post.description?post.description:post.plainContent!,
-        date: new Date(post.publishTime!),
+        date: new Date(post.publishTime!*1000),
         enclosure: {
           url: post.bannerImg!,
-        }
+        },
+        
       })
     })
 }
