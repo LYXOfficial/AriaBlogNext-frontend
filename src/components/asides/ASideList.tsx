@@ -1,7 +1,7 @@
 import "styles/ASide/List.css";
 import Link from "next/link";
 import { aSideListItem } from "interfaces/asidelistitem";
-import ImageWithFalldown from "components/ImageWithFalldown";
+import { ImgWithFalldown } from "components/ImageWithFalldown";
 
 export default function ASideList({items,falldownImg}:{items:aSideListItem[],falldownImg:string}){
     return (
@@ -12,7 +12,7 @@ export default function ASideList({items,falldownImg}:{items:aSideListItem[],fal
                         <Link className="aside-list-item" title={item.title.substring(0,50)} href={item.link} key={item.title}>
                             {item.pic==""?<></>:
                                 <div className="aside-list-item-pic">
-                                    <ImageWithFalldown falldownImg={falldownImg} src={item.pic} className="aside-list-item-pic-img" alt=""/>
+                                    <ImgWithFalldown falldownImg={falldownImg} src={item.pic} className="aside-list-item-pic-img" alt=""/>
                                 </div>
                             }
                             <div className="aside-list-item-content">

@@ -105,7 +105,7 @@
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
-    background-color:var(--aria-acrylic1);
+    background-color:var(--aria-acrylic2);
     box-shadow: var(--aria-shadow);
     border: var(--aria-border);
     -webkit-transition: all .3s ease-out;
