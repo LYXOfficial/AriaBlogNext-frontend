@@ -2,12 +2,12 @@ import { Icon } from "@iconify/react"
 import moment from 'moment';
 import "styles/PostCard.css"
 import Link from 'next/link';
-import Image from "next/image"
 import { Post } from "interfaces/post"
 import { siteConfigs } from 'config';
 import { notFound } from "next/navigation";
 import { TwikooCountHome } from "components/thirdpartyjs/Twikoo";
 import PostCategoryBar from "components/PostCategoryBar";
+import ImageWithFalldown from "./ImageWithFalldown";
 
 export default async function Posts({page}:{page:number}){
     let startl=(page-1)*siteConfigs.pageMaxPosts,endl=page*siteConfigs.pageMaxPosts;
@@ -32,7 +32,7 @@ export default async function Posts({page}:{page:number}){
                             {post.bannerImg?
                                 <div className="post-banner">
                                     <Link className="post-banner-link" href={"/posts/"+post.slug} title={post.title}>
-                                        <Image fill={true} className="post-banner-img" src={post.bannerImg} alt={post.title!}/>
+                                        <ImageWithFalldown className="post-banner-img" src={post.bannerImg} alt={post.title!} falldownImg={siteConfigs.falldownImg}/>
                                     </Link>
                                 </div>:<></>}
                             <div className="post-info">

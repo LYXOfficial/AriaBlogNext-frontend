@@ -5,7 +5,7 @@ import "styles/PostEnd.css";
 import ShareJs from "components/thirdpartyjs/ShareJs";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
+import ImageWithFalldown from "components/ImageWithFalldown";
 
 export default async function PostEnd({ postInfo }: { postInfo: Post }) {
     var res=await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`,{next:{tags:["posts"]}});
@@ -74,7 +74,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
         <div id="postend-navigation">
             {previousPost?
                 <Link className={`postend-navigation-item previous${nextPost?"":" single"}`} href={`/posts/${previousPost.slug}`}>
-                    <Image className="postend-navigation-image" src={previousPost.bannerImg!} alt={previousPost.title!} fill={true}/>
+                    <ImageWithFalldown className="postend-navigation-image" src={previousPost.bannerImg!} alt={previousPost.title!} falldownImg={siteConfigs.falldownImg}/>
                     <span className="postend-navigation-headline">
                         <span className="postend-navigation-intro">
                             <Icon icon="fa6-solid:angle-left"/>上一篇
@@ -91,7 +91,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             :<></>}
             {nextPost?
                 <Link className={`postend-navigation-item next${previousPost?"":" single"}`} href={`/posts/${nextPost.slug}`}>
-                    <Image className="postend-navigation-image" src={nextPost.bannerImg?nextPost.bannerImg:siteConfigs.falldownImg} alt={nextPost.title!} fill={true}/>
+                    <ImageWithFalldown className="postend-navigation-image" src={nextPost.bannerImg?nextPost.bannerImg:siteConfigs.falldownImg} alt={nextPost.title!} falldownImg={siteConfigs.falldownImg}/>
                     <span className="postend-navigation-headline">
                         <span className="postend-navigation-date">
                             <Icon icon="fa6-solid:calendar-days"/>

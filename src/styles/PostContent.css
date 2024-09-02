@@ -124,6 +124,15 @@ td:not(code td){
 table:not(code table){
     border: var(--aria-border);
 }
+@media (prefers-color-scheme: dark) {
+    th{
+        background-color:#5e5e5edd;
+    }
+    td:not(code td){
+        background-color: #3b3b3b;
+        color:var(--aria-whitefont)
+    }
+}
 .hljs{
     font-weight: 500;
     margin:0;
@@ -296,6 +305,17 @@ table:not(code table){
     -moz-transition: .3s;
     -ms-transition: .3s;
     -o-transition: .3s;
+    position: relative;
+}
+.etag-link::after{
+    content: "";
+    top:50%;
+    position: absolute;
+    right:15px;
+    width:16px;
+    height: 16px;
+    background-color: var(--aria-fontcolor);
+    mask-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB0PSIxNzI1Mjk1MDA0Njc5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE2NTciIGlkPSJteF9uXzE3MjUyOTUwMDQ2NzkiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTgxNi42NTMwOTMgNDY5LjU0NDA0OWMtMS40OTUwNS0xLjQ5NTA1LTMuMDYwNzA5LTIuODc0NDY3LTQuNjc2NTA5LTQuMTU5NzRMNDI4LjQ3NTE5IDc5Ljg5NTY1NWMtMjEuMzUxMjg0LTIxLjM1MDI2MS01NS45Njc2ODYtMjEuMzUwMjYxLTc3LjMxNzk0NiAwLTIxLjM1MDI2MSAyMS4zNTEyODQtMjEuMzUwMjYxIDU1Ljk2NjY2MyAwIDc3LjMxNzk0NmwzNDkuMjU5NTIyIDM1MS4yNDc4MDZMMzQzLjY1NjQwOSA4NjQuODgzMDQ5Yy0yMS4zNTAyNjEgMjEuMzUxMjg0LTIxLjM1MDI2MSA1NS45NjY2NjMgMCA3Ny4zMTg5NyAyMS4zNTAyNjEgMjEuMzUwMjYxIDU1Ljk2NjY2MyAyMS4zNTAyNjEgNzcuMzE3OTQ2IDBsMzkwLjk5ODEzNS0zOTAuNjYxNDY4YzEuNjE2ODI0LTEuMjg2Mjk2IDMuMTgzNTA2LTIuNjY0Njg5IDQuNjc5NTc5LTQuMTYwNzYzIDEwLjc0MDYyMi0xMC43NDA2MjIgMTYuMDczMDctMjQuODM5NzM1IDE2LjAwNjU1Ni0zOC45MTczNThDODMyLjcyNjE2NCA0OTQuMzgyNzYgODI3LjM5MzcxNSA0ODAuMjg0NjcxIDgxNi42NTMwOTMgNDY5LjU0NDA0OXoiIGZpbGw9InZhcigtLWFyaWEtZm9udGNvbG9yKSIgcC1pZD0iMTY1OCI+PC9wYXRoPjwvc3ZnPg==);
 }
 .etag-link-tip{
     grid-column-start: 1;
@@ -328,7 +348,7 @@ table:not(code table){
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top:5px;
+    margin-top:10px;
 }
 .etag-link-subtitle{
     font-size: 12px;
@@ -341,6 +361,9 @@ table:not(code table){
 }
 .etag-link:hover *{
     color:white;
+}
+.etag-link:hover::after{
+    background-color: white;
 }
 @media (prefers-color-scheme: dark) {
     .etag-link{

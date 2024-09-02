@@ -47,7 +47,9 @@ export default function CardLatestComments(){
                                     link: item!.url as string+"#"+item!.id,
                                 };
                             }) as aSideListItem[]
-                        }/>):(comments.length?<center>评论获取失败，请检查相关配置是否正确</center>:<center>获取中...</center>)
+                        }
+                        falldownImg={siteConfigs.falldownAvatar}
+                        />):(comments.length?<center>评论获取失败，请检查相关配置是否正确</center>:<center>获取中...</center>)
                 }
             </div>
         </div>

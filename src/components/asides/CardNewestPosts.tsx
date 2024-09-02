@@ -26,6 +26,7 @@ export default async function CardNewestPosts(){
                             link: "/posts/"+item.slug
                         };
                     }) as aSideListItem[]}
+                    falldownImg={siteConfigs.falldownImg}
                 />
             </div>
         </div>

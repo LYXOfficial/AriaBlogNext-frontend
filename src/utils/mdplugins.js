@@ -1,6 +1,7 @@
 import hljs from "highlight.js";
 import stringRandom from "string-random"
 import colorName from "color-name";
+import { siteConfigs } from "@/config";
 
 export class MDFilters{
     static latex(text){
@@ -32,7 +33,7 @@ export class TagPlugin{
 <span class="etag-link-tip">
 前往以下网站，不保证安全性哦喵~
 </span>
-<img class="etag-link-img" src="https://api.iowen.cn/favicon/${link.split("://")[1].split("/")[0]}.png" onerror="this.src='https://bu.dusays.com/2024/07/07/668a8ffdacde3.png'">
+<img class="etag-link-img" src="https://api.iowen.cn/favicon/${link[0]=="/"||link[0]=="."?siteConfigs.siteUrl.split("://")[1]:link.split("://")[1]?.split("/")[0]}.png" onerror="this.src='https://bu.dusays.com/2024/07/07/668a8ffdacde3.png'">
 </img>
 <span class="etag-link-title">
 ${title}

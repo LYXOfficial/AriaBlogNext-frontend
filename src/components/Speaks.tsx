@@ -67,7 +67,7 @@ export function Speaks() {
         }
     })()},[]);
     return (
-        <wc-waterfall id="bb" gap={15} cols={speakCols}>
+        <wc-waterfall id="bb" gap={20} cols={speakCols}>
             {speakContent}
         </wc-waterfall>
     );
