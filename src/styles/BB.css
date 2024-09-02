@@ -37,7 +37,7 @@
     padding-bottom: 10px;
 }
 .bb-bottombar{
-    padding-top:5px;
+    padding-top:8px;
     display:flex;
     margin:0 5px;
 }
@@ -55,4 +55,11 @@
 }
 .bb-buttonbar *{
     color: var(--aria-light-fontcolor);
+}
+.bb-content{
+    line-height: 1.8;
+    word-wrap: break-word;
+}
+.bb-content img{
+    max-width: 100%;
 }

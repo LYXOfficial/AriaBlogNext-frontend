@@ -6,6 +6,7 @@ import HLJSNum from "components/thirdpartyjs/HLJSNum";
 import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import KaTex from "components/thirdpartyjs/KaTex";
 import { TwikooBaseComment,TwikooCountPost } from "components/thirdpartyjs/Twikoo";
+import Pangu from "components/thirdpartyjs/Pangu";
 
 import PostEnd from "components/PostEnd";
 import { Post } from "interfaces/post";
@@ -23,6 +24,7 @@ export default function PostContent({htmlContent,postInfo}:{htmlContent:string,p
             <PostEnd postInfo={postInfo}/>
             <TwikooBaseComment/>
             <TwikooCountPost/>
+            <Pangu container="article-container" />
         </article>
     );
 }

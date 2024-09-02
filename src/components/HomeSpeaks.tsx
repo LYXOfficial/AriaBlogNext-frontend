@@ -12,48 +12,34 @@ import "swiper/css/mousewheel";
 import "styles/HomeSpeaks.css";
 import Link from "next/link";
 
-const speaksContent:BB[]=[
-    {
-        time:0,
-        content:"这是测试！！！QwQ",
-        plainContent:"这是测试！！！QwQ"
-    },
-    {
-        time:1145141919,
-        content:"超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]",
-        plainContent:"超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]超长文本测试 [链接]"
-    },
-    {
-        time:1725176452,
-        content:"新博客正在测试与编写中QwQ",
-        plainContent:"新博客正在测试与编写中QwQ"
-    }
-]
-
 export default function HomeSpeaks() {
     const [speaks,setSpeaks] = useState<ReactElement>(<></>);
     useEffect(()=>{(async ()=>{
-        setSpeaks(
-            <Swiper 
-                modules={[Autoplay,Mousewheel]}
-                loop={true} 
-                autoplay={{delay:5000,disableOnInteraction:false,pauseOnMouseEnter:true,stopOnLastSlide: false}} 
-                className="homespeaks-swiper"
-                mousewheel={true}
-                direction="vertical"
-                slidesPerView={1}
-                spaceBetween={0}>
-                {
-                    speaksContent.map((item:BB,index:number)=>{
-                        return <SwiperSlide key={index} className="homespeaks-slide">
-                            <Link href="/speaks" className="homespeaks-item">
-                                {relativeTime(item.time)+": "+item.plainContent}
-                            </Link>
-                        </SwiperSlide>
-                    })
-                }
-            </Swiper>
-        );
+        const res=await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=10`);
+        if(res.ok){
+            const speaksContent:BB[]=(await res.json()).data;
+            setSpeaks(
+                <Swiper 
+                    modules={[Autoplay,Mousewheel]}
+                    loop={true} 
+                    autoplay={{delay:5000,disableOnInteraction:false,pauseOnMouseEnter:true,stopOnLastSlide: false}} 
+                    className="homespeaks-swiper"
+                    mousewheel={true}
+                    direction="vertical"
+                    slidesPerView={1}
+                    spaceBetween={0}>
+                    {
+                        speaksContent.map((item:BB,index:number)=>{
+                            return <SwiperSlide key={index} className="homespeaks-slide">
+                                <Link href="/speaks" className="homespeaks-item">
+                                    {relativeTime(item.time)+": "+item.plainContent}
+                                </Link>
+                            </SwiperSlide>
+                        })
+                    }
+                </Swiper>
+            );
+        }
     })();},[]);
     return <div id="homespeaks-container" className="card-widget">
         <Icon icon="mdi:comment" className="homespeaks-icon left" width={20} height={20}/>

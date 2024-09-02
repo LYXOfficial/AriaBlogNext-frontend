@@ -72,8 +72,45 @@ body{
     overflow-x:hidden;
     -webkit-tap-highlight-color: transparent;
 }
-a.normal-a,.tk-content a{
-    border-bottom: 2px solid var(--aria-theme);
+.normal-img{
+    margin:0 auto;
+}
+.normal-del{
+    background-color: black;
+    text-decoration: none;
+    color:black;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    margin: 0 5px;
+}
+.normal-del:hover{
+    color:white;
+}
+.normal-inlinecode{
+    padding: 2px 4px;
+    background: #1b1f230d;
+    color: #f47466;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    word-wrap: break-word;
+}
+code,pre{
+    font-size:16px;
+    font-family: "Monaco",monospace,"HYTMR";
+    line-height: 1.6;
+}
+code::selection,pre::selection,code *::selection,pre *::selection{
+    background-color: var(--aria-theme)!important;
+    color:white!important;
+}
+a.normal-a,.tk-content a,.bb-content a{
+    border-bottom: 2px dotted var(--aria-theme);
     color:var(--aria-fontcolor);
     padding:4px;
     text-decoration: none;
@@ -83,8 +120,13 @@ a.normal-a,.tk-content a{
     -ms-transition: all .3s;
     -o-transition: all .3s;
     word-wrap: break-word;
+    position: relative;
+    font-weight: 600;
 }
-a.normal-a:hover,.tk-content a:hover{
+.bb-content a{
+    padding-right:15px;
+}
+a.normal-a:hover,.tk-content a:hover,.bb-content a:hover{
     background-color: var(--aria-theme);
     text-decoration: none!important;
     color:var(--aria-white)!important;
@@ -95,6 +137,15 @@ a.normal-a:hover,.tk-content a:hover{
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
+}
+.bb-content a::after{
+    content: "\f35d";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    right:2px;
 }
 .card-widget{
     border-radius:12px;
@@ -154,7 +205,7 @@ a{
     color:var(--aria-fontcolor);
 }
 p,article{
-    line-height:2;
+    line-height:1.8;
 }
 #main-container{
     display: flex;

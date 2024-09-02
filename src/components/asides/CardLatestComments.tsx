@@ -44,7 +44,7 @@ export default function CardLatestComments(){
                                     title: item!.commentText!.replace("\n"," "),
                                     content: `${item!.nick} / ${item!.relativeTime}`,
                                     pic: item!.avatar,
-                                    link: item!.url
+                                    link: item!.url as string+"#"+item!.id,
                                 };
                             }) as aSideListItem[]
                         }/>):(comments.length?<center>评论获取失败，请检查相关配置是否正确</center>:<center>获取中...</center>)

@@ -108,25 +108,9 @@ blockquote{
 blockquote p{
     margin:0;
 }
-.normal-del{
-    background-color: black;
-    text-decoration: none;
-    color:black;
-    transition: all .3s;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
-}
-.normal-del:hover{
-    color:white;
-}
 a[data-fancybox]{
     width: 100%;
     display: flex;
-}
-.normal-img{
-    margin:0 auto;
 }
 th{
     background-color:#acacacDD;
@@ -139,26 +123,6 @@ td:not(code td){
 }
 table:not(code table){
     border: var(--aria-border);
-}
-.normal-inlinecode{
-    padding: 2px 4px;
-    background: #1b1f230d;
-    color: #f47466;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    word-wrap: break-word;
-}
-code,pre{
-    font-size:16px;
-    font-family: "Monaco",monospace,"HYTMR";
-    line-height: 1.6;
-}
-code::selection,pre::selection,code *::selection,pre *::selection{
-    background-color: var(--aria-theme)!important;
-    color:white!important;
 }
 .hljs{
     font-weight: 500;
@@ -439,4 +403,7 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     font-size: 12px;
     line-height: 16px;
     background-color: var(--aria-theme);
+}
+.normal-img{
+    margin-bottom: 20px;
 }
