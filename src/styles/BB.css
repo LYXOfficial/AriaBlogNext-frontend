@@ -1,0 +1,58 @@
+.bb-item{
+    padding:15px;
+
+}
+#bb{
+    margin:20px 10px;
+}
+.bb-comment-button{
+    border: none;
+    background-color: transparent;
+    padding:0;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .3s;
+    -o-transition: .2s;
+}
+.bb-comment-button:hover{
+    color:var(--aria-theme);
+    cursor: pointer;
+}
+.bb-time svg{
+    width:14px;
+    height:14px;
+}
+.bb-comment-button svg{
+    width:100%;
+    height:100%;
+}
+.bb-comment-button{
+    width:16px;
+    height:16px;
+    display: flex;
+}
+.bb-content{
+    border-bottom: 2px dashed var(--aria-gray);
+    padding-bottom: 10px;
+}
+.bb-bottombar{
+    padding-top:5px;
+    display:flex;
+    margin:0 5px;
+}
+.bb-time{
+    display: flex;
+}
+.bb-time>*,.bb-bottombar>*{
+    margin:auto 0;
+}
+.bb-time-text{
+    margin-left:3px;
+}
+.bb-time{
+    margin-right:auto;
+}
+.bb-buttonbar *{
+    color: var(--aria-light-fontcolor);
+}

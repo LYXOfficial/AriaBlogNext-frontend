@@ -130,7 +130,7 @@ const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage,toggleB
         ) : (
           <div className="barrageNick">{nick}</div>
         )}
-        <a onClick={toggleBarrage} style={{ fontSize: '20px' }}>
+        <a onClick={()=>{toggleBarrage()}} style={{ fontSize: '20px' }}>
           ×
         </a>
       </div>
