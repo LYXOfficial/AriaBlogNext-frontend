@@ -114,22 +114,22 @@
     -o-transition: all .3s ease-out;
 }
 .site-page-childs.show{
-    transform: translate(-40% 120%);
+    transform: translate(-40%,120%);
     opacity: 1;
-    -webkit-transform: translate(-40% 120%);
-    -moz-transform: translate(-40% 120%);
-    -ms-transform: translate(-40% 120%);
-    -o-transform: translate(-40% 120%);
+    -webkit-transform: translate(-40%,120%);
+    -moz-transform: translate(-40%,120%);
+    -ms-transform: translate(-40%,120%);
+    -o-transform: translate(-40%,120%);
 }
 .site-page-childs.hide{
     pointer-events: none;
     /*display: none;
     */opacity: 0;
-    transform: translate(-40% 140%);
-    -webkit-transform: translate(-40% 140%);
-    -moz-transform: translate(-40% 140%);
-    -ms-transform: translate(-40% 140%);
-    -o-transform: translate(-40% 140%);
+    transform: translate(-40%,140%);
+    -webkit-transform: translate(-40%,140%);
+    -moz-transform: translate(-40%,140%);
+    -ms-transform: translate(-40%,140%);
+    -o-transform: translate(-40%,140%);
 }
 .site-page-childs:hover{
     border: 1px solid var(--aria-theme);
