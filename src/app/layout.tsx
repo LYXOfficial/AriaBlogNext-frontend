@@ -1,7 +1,7 @@
 import NavBar from 'components/NavBar';
 import Footer from 'components/Footer';
 import 'styles/global.css';
-import { siteConfigs } from "config";
+import { siteConfigs } from "@/config";
 import Welcome from 'components/thirdpartyjs/Welcome';
 import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from 'nextjs-toploader';
@@ -10,6 +10,12 @@ process.env.TZ="Asia/Shanghai";
 
 export const metadata = {
   title: siteConfigs.title,
+  alternates: {
+    canonical: siteConfigs.siteUrl,
+    types: {
+      'application/rss+xml': [{ url: 'feed.xml', title: 'RSS 订阅' }],
+    },
+  }
 }
 export default function RootLayout({
   children,

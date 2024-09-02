@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 export const siteConfigs:siteConfig={
     author: "Ariasaka",
     title: "Ariasakaの小窝",
-    siteDomain: "blognext.yaria.top",
+    siteUrl: "https://blognext.yaria.top",
     avatar: "https://bu.dusays.com/2024/08/25/66caf920c5a28.png",
     twikooEnv: "https://tkapi.yaria.top",
     createYear: 2022,
@@ -40,7 +40,7 @@ export const siteConfigs:siteConfig={
         },
         {
             name:"RSS",
-            url:"/atom.xml",
+            url:"/feed.xml",
             icon:<Icon icon="fa6-solid:rss" />
         }
     ]

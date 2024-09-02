@@ -19,11 +19,16 @@ export default async function Posts({page}:{page:number}){
     let postTotal=(await resm.json()).count;
     const maxPage=Math.ceil(postTotal/siteConfigs.pageMaxPosts);
     return (
-        <div id="posts-container">
+        <div id="recent-posts">
             <PostCategoryBar/>
             {posts.map((post)=>{
                     return (
-                        <div className={`post-card card-widget ${startl?"":"first-page"}`} key={post.title}>
+                        <div className={`recent-post-info post-card card-widget ${startl?"":"first-page"}`} key={post.title}>
+                            <a className="for-fc post__title">{post.title}</a>
+                            <div className="for-fc post-meta-date">
+                                <span className="time for-fc">{moment.unix(post.publishTime!).format("YYYY-MM-DD")}</span>
+                                <span className="time for-fc">{moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}</span>
+                            </div>
                             {post.bannerImg?
                                 <div className="post-banner">
                                     <Link className="post-banner-link" href={"/posts/"+post.slug} title={post.title}>

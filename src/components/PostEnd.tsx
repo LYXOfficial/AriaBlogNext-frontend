@@ -24,8 +24,8 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             </div>
             <div className="post-copyright__type">
                 <span className="post-copyright-info">
-                    <a className="normal-a" href={`https://${siteConfigs.siteDomain}/posts/${postInfo.slug}/`}>
-                        {`https://${siteConfigs.siteDomain}/posts/${postInfo.slug}/`}
+                    <a className="normal-a" href={`${siteConfigs.siteUrl}/posts/${postInfo.slug}/`}>
+                        {`${siteConfigs.siteUrl}/posts/${postInfo.slug}/`}
                     </a>
                 </span>
             </div>

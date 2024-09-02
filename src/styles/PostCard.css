@@ -1,4 +1,4 @@
-#posts-container{
+#recent-posts{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -7,7 +7,7 @@
     height: fit-content;
     align-items: flex-start;
 }
-#posts-container .post-card{
+#recent-posts .post-card{
     height: 18em;
     position: relative;
     transition: all .3s;
@@ -18,18 +18,18 @@
     width:100%;
     overflow: hidden;
 }
-#posts-container .post-card:hover{
+#recent-posts .post-card:hover{
     scale: 1.005;
     transform: perspective(1px);
 }
-#posts-container .post-banner{
+#recent-posts .post-banner{
     width: 33%;
     min-width: 250px;
     height:18em;
     display: flex;
     position: relative;
 }
-#posts-container .post-banner-img{
+#recent-posts .post-banner-img{
     width:100%;
     height:100%;
     border-radius: 12px 0 0 12px;
@@ -40,17 +40,17 @@
     object-fit: cover;
     transition: all .5s;
 }
-#posts-container .post-banner{
+#recent-posts .post-banner{
     overflow: hidden;
 }
-#posts-container .post-card{
+#recent-posts .post-card{
     display: flex; 
 }
-#posts-container .post-info{
+#recent-posts .post-info{
     margin: auto 40px;
     box-sizing: border-box;
 }
-#posts-container .post-title{
+#recent-posts .post-title{
     text-decoration: none;
     color:var(--aria-highlight);
     font-size: 1.72em;
@@ -68,10 +68,10 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
-#posts-container .post-title:hover{
+#recent-posts .post-title:hover{
     color:var(--aria-theme);
 }
-#posts-container .post-content {
+#recent-posts .post-content {
     color: var(--aria-fontcolor);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -80,7 +80,7 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
 }
-#posts-container .post-metas{
+#recent-posts .post-metas{
     margin-top: 10px;
     color: var(--aria-light-fontcolor);
     font-size: 15px;
@@ -88,7 +88,7 @@
     word-wrap: break-word;
     line-height: 1.5;
 }
-#posts-container .post-metas .post-category{
+#recent-posts .post-metas .post-category{
     position: absolute;
     top:15px;
     right:20px;
@@ -102,30 +102,30 @@
     padding:5px 15px;
     line-height: 1.4;
 }
-#posts-container .post-tags>.post-meta-content{
+#recent-posts .post-tags>.post-meta-content{
     display: inline;
 }
-#posts-container .post-tags>.post-meta-content a{
+#recent-posts .post-tags>.post-meta-content a{
     color:var(--aria-light-fontcolor);
 }
-#posts-container .post-tags>.post-meta-content a:hover{
+#recent-posts .post-tags>.post-meta-content a:hover{
     color:var(--aria-theme);
     text-decoration: underline;
 }
-#posts-container .post-tags *{
+#recent-posts .post-tags *{
     margin:auto 1px;
     display: inline;
 }
-#posts-container .post-meta{
+#recent-posts .post-meta{
     margin-right:5px;
     display: inline;
     margin-top:2px;
 }
-#posts-container .post-info{
+#recent-posts .post-info{
     display: flex;
     flex-direction: column;
 }
-#posts-container .post-card:hover .post-banner-img{
+#recent-posts .post-card:hover .post-banner-img{
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
@@ -133,87 +133,87 @@
     -o-transform: scale(1.1);
 }
 @media screen and (min-width:1200px){
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-banner-img{
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)) .post-banner-img{
         border-radius: 12px 12px 0 0!important;
         -webkit-border-radius: 12px 12px 0 0!important;
         -moz-border-radius: 12px 12px 0 0!important;
         -ms-border-radius: 12px 12px 0 0!important;
         -o-border-radius: 12px 12px 0 0!important;
     }
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-content{
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)) .post-content{
         -webkit-line-clamp: 2!important;
         line-clamp: 2!important;
     }
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)){
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)){
         flex-direction: column;
         width:calc(50% - 10px)!important;
         height: 25em!important;
     }
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-info{
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)) .post-info{
         margin: 15px 40px 20px 40px;
     }
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-title{
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)) .post-title{
         font-size:20px;
     }
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-banner{
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)) .post-banner{
         min-width: 100%;
         max-width: 100%;
     }
-    #posts-container .post-card:not(.post-card.first-page:nth-child(2)) .post-banner-link{
+    #recent-posts .post-card:not(.post-card.first-page:nth-child(2)) .post-banner-link{
         width:100%;
     }
 }
 @media screen and (max-width:680px){
-    #posts-container .post-banner-img{
+    #recent-posts .post-banner-img{
         border-radius: 12px 12px 0 0!important;
         -webkit-border-radius: 12px 12px 0 0!important;
         -moz-border-radius: 12px 12px 0 0!important;
         -ms-border-radius: 12px 12px 0 0!important;
         -o-border-radius: 12px 12px 0 0!important;
     }
-    #posts-container .post-content{
+    #recent-posts .post-content{
         -webkit-line-clamp: 2!important;
         line-clamp: 2!important;
     }
-    #posts-container .post-card{
+    #recent-posts .post-card{
         flex-direction: column;
         width:100%!important;
         height: 23em!important;
     }
-    #posts-container .post-info {
+    #recent-posts .post-info {
         padding: 15px 25px 20px 25px;
         margin:0;
     }
-    #posts-container .post-title{
+    #recent-posts .post-title{
         font-size:20px;
     }
-    #posts-container .post-banner{
+    #recent-posts .post-banner{
         min-width: 100%;
         max-width: 100%;
     }
-    #posts-container .post-banner-link{
+    #recent-posts .post-banner-link{
         width:100%;
     }
 }
-#posts-container .post-meta>*{
+#recent-posts .post-meta>*{
     margin-top: auto;
     margin-bottom: auto;
 }
-#posts-container .post-meta-content:not(.post-tags>.post-meta-content){
+#recent-posts .post-meta-content:not(.post-tags>.post-meta-content){
     margin-left:3px;
 }
-#posts-container .post-content{
+#recent-posts .post-content{
     line-height: 24px;
 }
-#posts-container #posts-container{
+#recent-posts #recent-posts{
     height: fit-content;
 }
 @media screen and (max-width:600px){
-    #posts-container{
+    #recent-posts{
         max-width: 100%;
     }
 }
-@keyframes posts-container-animation {
+@keyframes recent-posts-animation {
     0% {
         opacity: 0;
         transform: translateY(50px);
@@ -231,11 +231,11 @@
         -o-transform: translateY(0);
     }
 }
-#posts-container{
-    animation: posts-container-animation .8s;
-    -webkit-animation: posts-container-animation .8s;
+#recent-posts{
+    animation: recent-posts-animation .8s;
+    -webkit-animation: recent-posts-animation .8s;
 }
-#posts-container .post-card.first-page:nth-child(2):before{
+#recent-posts .post-card.first-page:nth-child(2):before{
     position: absolute;
     content: "最新";
     top:15px;
@@ -282,17 +282,17 @@
     justify-content: center;
 }
 @media screen and (min-width: 768px) {
-    #posts-container .post-card:not(.post-card:has(img)) .post-info{
+    #recent-posts .post-card:not(.post-card:has(img)) .post-info{
         margin:40px;
     }
 }
 @media screen and (max-width: 680px){
-    #posts-container .post-card:not(.post-card:has(img)){
+    #recent-posts .post-card:not(.post-card:has(img)){
         height: fit-content !important;
     }
 }
 @media screen and (min-width:900px){
-    #posts-container{
+    #recent-posts{
         max-width: calc(100% - 300px);
     }
 }
@@ -303,7 +303,10 @@
     }
 }
 @media screen and (max-width:900px){
-    #posts-container{
+    #recent-posts{
         max-width: 100%;
     }
+}
+.for-fc{
+    display: none;
 }

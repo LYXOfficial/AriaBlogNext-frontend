@@ -8,14 +8,14 @@ import MDRenderer from "@/utils/mdrender";
 
 export function FriendLinkItem({link}:{link:FriendLink}) {
     return (
-        <a className="flink-item" href={link.url} target="_blank" rel="noopener noreferrer" 
+        <a className="flink-item cf-friends-link" href={link.url} target="_blank" rel="noopener noreferrer" 
             style={{backgroundColor:link.color,color:"white"}}>
-            <div className="flink-avatar" dangerouslySetInnerHTML={{
+            <div className="flink-avatar cf-friends-avatar" dangerouslySetInnerHTML={{
                 __html:`<img class="flink-avatar-img lazy-img" data-src=${link.avatar} alt=${link.name} 
                     onerror="this.src='${siteConfigs.falldownAvatar}'"/>`
             }}>
             </div>
-            <span className="flink-name">{link.name}</span>
+            <span className="flink-name cf-friends-name">{link.name}</span>
             <span className="flink-desc">{link.description}</span>
         </a>
     );
