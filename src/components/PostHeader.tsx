@@ -56,7 +56,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                             <div className="post-meta post-wordcount">
                                 <Icon icon="fa6-regular:file-word" />
                                 <span className="post-meta-content">
-                                    {`字数总计: ${(postInfo.wordCount as number)>=10000?((postInfo.wordCount as number)/10000).toFixed(2)+"w":(postInfo.wordCount as number)} |`}
+                                    {`字数总计: ${(postInfo.wordCount as number)>=1000?((postInfo.wordCount as number)/1000).toFixed(1)+"k":(postInfo.wordCount as number)} |`}
                                 </span>
                             </div>
                             <div className="post-meta post-wordcount">

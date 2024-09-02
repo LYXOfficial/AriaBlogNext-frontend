@@ -42,7 +42,7 @@ export default async function CardWebInfo(){
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">文章字数 :</span>
-                    <span className="card-webinfo-item-right">{Math.floor(wordCount/100)/10}k</span>
+                    <span className="card-webinfo-item-right">{Math.floor(wordCount/100)/100}w</span>
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">总访客数 :</span>
