@@ -30,10 +30,10 @@ export default async function Page({params}:{params:{slug:string}}){
         return notFound();
     }
     let htmlContent:string;
-    if(currentPost.cachedHtml)
-        htmlContent=currentPost.cachedHtml;
-    else 
-        htmlContent=await MDRender(currentPost.mdContent,currentPost.slug);
+    // if(currentPost.cachedHtml)
+    //     htmlContent=currentPost.cachedHtml;
+    // else 
+    htmlContent=await MDRender(currentPost.mdContent,currentPost.slug);
     return (<>
         <title>{currentPost.title+" | "+siteConfigs.title}</title>
         <style>{`#navbar{position:fixed}`}</style>
