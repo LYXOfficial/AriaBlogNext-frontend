@@ -85,3 +85,12 @@
 .tk-action-count{
     color: var(--aria-theme)!important;
 }
+@media (prefers-color-scheme:dark){
+    .OwO .OwO-body{
+        background-color:black!important;
+        color:var(--aria-fontcolor)!important;
+    }
+    #owo-big{
+        background-color:black!important;
+    }
+}

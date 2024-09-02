@@ -12,10 +12,10 @@ export function RightButtonsPosts({toggleBarrage}){
                 setRbHide(false);
             else setRbHide(true);
         }
-        const sel=document.addEventListener("scroll",scrollHandler);
+        document.addEventListener("scroll",scrollHandler);
         scrollHandler();
         return ()=>{
-            document.removeEventListener("scroll",sel);
+            document.removeEventListener("scroll",scrollHandler);
         }
     },[]);
     function scrollToTop(){
@@ -52,10 +52,10 @@ export function RightButtonsPages({toggleBarrage}){
                 setRbHide(false);
             else setRbHide(true);
         }
-        const sel=document.addEventListener("scroll",scrollHandler);
+        document.addEventListener("scroll",scrollHandler);
         scrollHandler();
         return ()=>{
-            document.removeEventListener("scroll",sel);
+            document.removeEventListener("scroll",scrollHandler);
         }
     },[]);
     function scrollToTop(){
@@ -79,13 +79,14 @@ export function RightButtonsPages({toggleBarrage}){
 export function RightButtonsHome(){
     const [rbHide,setRbHide]=useState(false);
     useEffect(()=>{
-        const sel=document.addEventListener("scroll",()=>{
+        const scrollHandler=()=>{
             if(document.documentElement.scrollTop>100)
                 setRbHide(false);
             else setRbHide(true);
-        })
+        }
+        document.addEventListener("scroll",scrollHandler);
         return ()=>{
-            document.removeEventListener("scroll",sel);
+            document.removeEventListener("scroll",scrollHandler);
         }
     });
     function scrollToTop(){

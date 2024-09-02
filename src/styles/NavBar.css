@@ -9,6 +9,11 @@
     background-color: var(--aria-acrylic1);
     backdrop-filter: blur(10px) saturate(180%);
     border-bottom: var(--aria-border);
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
 }
 #site-name,.menu-button{
     margin: auto 20px;
@@ -300,4 +305,12 @@
         margin-left:10px;
         margin-right: 0;
     }
+}
+#navbar.trans{
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+}
+#navbar.trans *:not(.site-page-childs *){
+    color:var(--aria-white);
 }

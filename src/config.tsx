@@ -79,7 +79,7 @@ export const menuItems:menuItem[]=[
                 icon: <Icon icon="fa6-solid:folder-open"/>,
             },
             {
-                name: "说说",
+                name: "哔哔",
                 link: "/speaks",
                 icon: <Icon icon="fa6-solid:comment"/>,
             },

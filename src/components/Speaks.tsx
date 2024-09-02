@@ -127,9 +127,9 @@ export function Speaks() {
             else setSpeakCols(1);
         },200);
         callBack();
-        var handler=window.addEventListener('resize',callBack);
+        window.addEventListener('resize',callBack);
         return ()=>{
-            window.removeEventListener('resize',handler as any);
+            window.removeEventListener('resize',callBack);
         }
     },[]);
     return (

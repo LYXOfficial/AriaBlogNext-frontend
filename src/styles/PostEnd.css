@@ -19,14 +19,13 @@
     position: relative;
     margin: 2rem 0 .5rem;
     padding: .5rem .8rem;
-    border: 1px solid var(--light-grey);
     transition: box-shadow .3s ease-in-out;
     overflow: hidden;
     border-radius: 12px!important;
     background-color: rgb(239 241 243);
 }
 .post-copyright::before{
-    background: var(--heo-post-blockquote-bg);
+    pointer-events: none;
     position: absolute;
     right: -26px;
     top: -120px;

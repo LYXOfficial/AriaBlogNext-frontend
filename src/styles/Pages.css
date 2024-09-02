@@ -15,3 +15,8 @@
         padding-right:70px;
     }
 }
+@media (prefers-color-scheme: dark) {
+    #article-container.page{
+        background-color: #0000007d;
+    }
+}

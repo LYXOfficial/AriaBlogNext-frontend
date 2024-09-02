@@ -36,7 +36,7 @@
     --aria-blackfont:#4c4948;
     --aria-highlight-black: #1f2d3d;
     --aria-highlight-white: #ffffff;
-    --aria-light-fontcolor:#858585;
+    --aria-light-fontcolor:#828282;
 }
 :root{
     --aria-background:#f7f9fe;
@@ -44,8 +44,8 @@
     --aria-acrylic2:var(--aria-white-acrylic2);
     --aria-fontcolor:var(--aria-blackfont);
     --aria-highlight:var(--aria-highlight-black);
-    --aria-shadow: 0 0 10px 3px #ebebeb;
-    --aria-shadow-color: #ebebeb;
+    --aria-shadow: 0 0 10px 3px #9595953b;
+    --aria-shadow-color: #9595953b;
 }
 @media (prefers-color-scheme:dark){
     :root{

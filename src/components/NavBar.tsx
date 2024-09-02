@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function NavBar() {
     const router=useRouter();
+    const [trans,setTrans]=useState(false);
     useEffect(()=>{
         (window as any).toRandomPost=async ()=>{
             const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`,{next:{tags:["posts"]}})
@@ -16,12 +17,24 @@ export default function NavBar() {
                 const randomIndex:number=Math.round(Math.random()*posts.length);
                 router.push(`/posts/${posts[randomIndex]}`);
             }
-        }
-    })
+        };
+        // const scrollHandler=()=>{
+        //     if(document.documentElement.scrollTop<60){
+        //         setTrans(true);
+        //     }else{
+        //         setTrans(false);
+        //     }
+        // }
+        // scrollHandler();
+        // window.addEventListener("scroll",scrollHandler);
+        // return ()=>{
+        //     window.removeEventListener("scroll",scrollHandler);
+        // }
+    },[]);
     const [hoveringElement,setHoveringElement]=useState("");
     const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
     return (<>
-        <nav id="navbar">
+        <nav id="navbar" className={trans?"trans":""}>
             <Link id="site-name" href="/">{siteConfigs.title}</Link>
             <div id="menu-center">
                 <div id="menu-items" className={mobileMenuOpen?"mobile-menu-open":"mobile-menu-close"}>
