@@ -14,6 +14,7 @@
     -moz-transition: .2s;
     -ms-transition: .3s;
     -o-transition: .2s;
+    color: var(--aria-fontcolor);
 }
 .bb-comment-button:hover{
     color:var(--aria-theme);

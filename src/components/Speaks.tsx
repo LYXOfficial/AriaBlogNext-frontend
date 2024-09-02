@@ -1,12 +1,30 @@
 "use client"
 import { BB } from "interfaces/bb";
-// import 'wc-waterfall';
 import { siteConfigs } from "@/config";
 import relativeTime from "@/utils/reltime";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import "styles/BB.css";
 import { ReactElement, useEffect, useState } from "react";
 import { throttle } from "lodash";
+import Snackbar from "node-snackbar";
+import "node-snackbar/src/sass/snackbar.sass";
+
+
+const bbClickHandle=(event:any)=>{
+    var str=(event.currentTarget as any).parentNode.parentNode.querySelector(".bb-content").innerText;
+    var e=document.getElementsByClassName("el-textarea__inner")[0],
+        t=document.createEvent("HTMLEvents");
+    t.initEvent("input", !0, !0);
+    (e as any).value="> "+str+"\n\n",e.dispatchEvent(t);
+    (document.getElementsByClassName("el-textarea__inner")[0] as any).value="> "+str+"\n\n";
+    document.location.href+="#twikoo";
+    (document.querySelector(".tk-col>.tk-input>.el-textarea__inner") as any).focus();
+    Snackbar.show({
+        text: '为保证最佳评论阅读体验，建议不要删除空行',
+        pos: 'top-center',
+        showAction: false,
+    });
+}
 
 export function Speaks() {
     const [speakCols,setSpeakCols]=useState(1);
@@ -29,7 +47,7 @@ export function Speaks() {
                                     {relativeTime(item.time)}
                                 </span>
                             </span>
-                            <button className="bb-comment-button">
+                            <button className="bb-comment-button" onClick={bbClickHandle}>
                                 <Icon icon="fa6-solid:comment"/>
                             </button>
                         </div>

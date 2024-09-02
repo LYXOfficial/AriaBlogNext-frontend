@@ -217,12 +217,24 @@ p,article{
 .snackbar-container .action{
     color:var(--aria-theme)!important;
     background-color: transparent!important;
-    font-family: "HYTMR";
+    font-family: "HYTMR"!important;
 }
 .snackbar-container{
-    font-family: "HYTMR";
+    font-family: "HYTMR"!important;
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
+}
+
+.snackbar-container{
+    z-index:1145141919!important;
+}
+.snackbar-container{
+    border-radius: 12px!important;
+    background-color: #000000aa!important;
+    -webkit-border-radius: 12px!important;
+    -moz-border-radius: 12px!important;
+    -ms-border-radius: 12px!important;
+    -o-border-radius: 12px!important;
 }
 @media screen and (max-width:640px){
     .snackbar-container{
@@ -232,17 +244,6 @@ p,article{
         -ms-border-radius:0px!important;
         -o-border-radius:0px!important;
     }
-}
-.snackbar-container{
-    z-index:1145141919;
-}
-.snackbar-container{
-    border-radius: 12px;
-    background-color: #000000aa!important;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    -ms-border-radius: 12px;
-    -o-border-radius: 12px;
 }
 .normal-img{
     max-width: 100%;
