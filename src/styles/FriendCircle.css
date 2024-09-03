@@ -84,7 +84,7 @@
     background-color: transparent !important;
 }
 #cf-more{
-    background-color: var(--aria-acrylic1);
+    background-color: var(--aria-acrylic1)!important;
     border: var(--aria-border);
 }
 #cf-more:hover{
