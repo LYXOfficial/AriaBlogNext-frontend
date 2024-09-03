@@ -29,12 +29,11 @@ export default async function Posts({page}:{page:number}){
                                 <span className="time for-fc">{moment.unix(post.publishTime!).format("YYYY-MM-DD")}</span>
                                 <span className="time for-fc">{moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}</span>
                             </div>
-                            {post.bannerImg?
-                                <div className="post-banner">
-                                    <Link className="post-banner-link" href={"/posts/"+post.slug} title={post.title}>
-                                        <ImageWithFalldown className="post-banner-img" src={post.bannerImg} alt={post.title!} falldownImg={siteConfigs.falldownImg}/>
-                                    </Link>
-                                </div>:<></>}
+                            <div className="post-banner">
+                                <Link className="post-banner-link" href={"/posts/"+post.slug} title={post.title}>
+                                    <ImageWithFalldown className="post-banner-img" src={post.bannerImg?post.bannerImg:siteConfigs.falldownImg} alt={post.title!} falldownImg={siteConfigs.falldownImg}/>
+                                </Link>
+                            </div>
                             <div className="post-info">
                                 <Link className="post-title" href={"/posts/"+post.slug} title={post.title} >{post.title}</Link>
                                 <div className="post-content">{post.description?post.description:post.plainContent}</div>
@@ -58,7 +57,7 @@ export default async function Posts({page}:{page:number}){
                                             {post.tags!.slice(0,5).map((tag,index) => {
                                                 return (
                                                     <div key={tag}>
-                                                        {index?(<span> · </span>):(<></>)}
+                                                        {index?(<span>·</span>):(<></>)}
                                                         <Link href={"/tags/"+tag}>
                                                             {tag}
                                                         </Link>

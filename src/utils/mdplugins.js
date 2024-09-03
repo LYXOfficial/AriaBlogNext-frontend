@@ -14,7 +14,6 @@ export class MDFilters{
             return `__CODEBLOCK_${codeBlockMatches.length - 1}__`;
         });
         tmptext=tmptext.replace(mathBlockRegexMultiLine,(match)=>{
-            console.log(match);
             return match.replace(/([*_~`>#+\-=|{}.!])/g,'\\$1');
         });
         tmptext=tmptext.replace(mathBlockRegexSingleLine,(match)=>{

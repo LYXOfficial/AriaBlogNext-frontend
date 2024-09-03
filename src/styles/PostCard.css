@@ -23,7 +23,8 @@
     transform: perspective(1px);
 }
 #recent-posts .post-banner{
-    width: 33%;
+    max-width: 400px;
+    flex-grow: 1;
     min-width: 250px;
     height:18em;
     display: flex;
@@ -49,6 +50,7 @@
 #recent-posts .post-info{
     margin: auto 40px;
     box-sizing: border-box;
+    flex:1;
 }
 #recent-posts .post-title{
     text-decoration: none;
@@ -294,6 +296,11 @@
 @media screen and (min-width:900px){
     #recent-posts{
         max-width: calc(100% - 300px);
+    }
+}
+@media screen and (min-width:1200px){
+    #recent-posts .post-card:not(.post-card:has(img),.post-card.first-page:nth-child(2)) .post-title{
+        margin-top:auto;
     }
 }
 @media screen and (min-width:768px) and (max-width:1200px){

@@ -4,10 +4,11 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import moment from "moment";
 import Busuanzi from "components/thirdpartyjs/Busuanzi";
+import { siteConfigs } from "@/config";
 
 export default function PostHeader({postInfo}:{postInfo:Post}) {
     return (
-        <header id="post-banner" style={{backgroundImage: `url(${postInfo.bannerImg})`}}>
+        <header id="post-banner" style={{backgroundImage: `url(${postInfo.bannerImg?postInfo.bannerImg:siteConfigs.falldownImg})`}}>
             <div id="post-banner-info">
                 <div id="post-banner-title">
                     {postInfo.title}
@@ -42,7 +43,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
                                     {postInfo.tags!.slice(0,5).map((tag,index) => {
                                         return (
                                             <div key={tag}>
-                                                {index?(<span> · </span>):(<></>)}
+                                                {index?(<span>·</span>):(<></>)}
                                                 <Link href={"/tags/"+tag}>
                                                     {tag}
                                                 </Link>
