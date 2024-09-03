@@ -588,7 +588,7 @@ table:not(code table){
     margin-bottom:0;
 }
 .etag-tab-headers{
-    border-bottom: 3px solid #c9c9c9;
+    border-bottom: 2px solid #c9c9c9;
     width: fit-content;
     padding-bottom:3px;
 }
@@ -619,12 +619,12 @@ table:not(code table){
     cursor: pointer;
 }
 .etag-tab-header::before{
-    content:"";
+    content: "";
     position: absolute;
     bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 3px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 2px;
     background-color: var(--aria-theme);
     opacity: 0;
     transition: .3s;
