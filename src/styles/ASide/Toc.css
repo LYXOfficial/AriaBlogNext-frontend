@@ -53,7 +53,7 @@
     box-shadow: 0 0 5px 1px var(--aria-theme);
 }
 .toc-content{
-    max-height: 500px;
+    max-height: calc(100vh - 250px);
     overflow-y: scroll;
     overflow-x: hidden;
 }
