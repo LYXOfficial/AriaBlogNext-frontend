@@ -17,6 +17,7 @@ export const siteConfigs:siteConfig={
     falldownImg: "https://bu.dusays.com/2024/08/31/66d30329375a5.webp",
     // backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
     backEndUrl:"https://blognext-end.yaria.top",
+    fcircleUrl: "https://fcircle.yaria.top",
     socials: [
         {
             name:"Github",

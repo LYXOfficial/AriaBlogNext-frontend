@@ -20,3 +20,6 @@
         background-color: #0000007d;
     }
 }
+#post-maincontent.page{
+    max-width: 1500px;
+}

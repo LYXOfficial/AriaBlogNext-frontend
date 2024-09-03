@@ -29,6 +29,7 @@
     "bufferutil": "^4.0.8",
     "color": "^4.2.3",
     "color-name": "^2.0.0",
+    "fcircle-theme-yyyz": "^1.0.13",
     "highlight.js": "^11.10.0",
     "highlightjs-line-numbers.js": "^2.8.0",
     "iconify": "^1.4.0",

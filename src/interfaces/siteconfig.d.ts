@@ -14,6 +14,7 @@ export declare interface siteConfig{
     backEndUrl: string,
     falldownAvatar: string,
     falldownImg: string,
+    fcircleUrl: string,
 }
 export declare interface social{
     name: string,
