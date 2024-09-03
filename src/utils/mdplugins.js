@@ -28,7 +28,7 @@ export class TagPlugin{
     static linkTag(markdown){
         const linkRegex=/\{%\s*link\s+([^,]+)\s*,\s*([^,]+)\s*,\s*([^\s%][^%]*)\s*%\}/g;
         return markdown.replace(linkRegex,(match,title,subtitle,link)=>{
-            return `<a class="etag-link" href="${link}" title="${title}">
+            return `<a class="etag-link" href="${link}" target="_blank" rel="noopener noreferrer" title="${title}">
 <span class="etag-link-tip">
 前往以下网站，不保证安全性哦喵~
 </span>
