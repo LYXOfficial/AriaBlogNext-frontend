@@ -10,8 +10,8 @@ export function FriendLinkItem({link}:{link:FriendLink}) {
     return (
         <a className="flink-item cf-friends-link" href={link.url} target="_blank" rel="noopener noreferrer" 
             style={{backgroundColor:link.color,color:"white"}}>
-            <div className="flink-avatar cf-friends-avatar" dangerouslySetInnerHTML={{
-                __html:`<img class="flink-avatar-img lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src=${link.avatar} alt=${link.name} 
+            <div className="flink-avatar" dangerouslySetInnerHTML={{
+                __html:`<img class="flink-avatar-img lazy-img cf-friends-avatar" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src=${link.avatar} alt=${link.name} 
                     onerror="this.src='${siteConfigs.falldownAvatar}'"/>`
             }}>
             </div>
