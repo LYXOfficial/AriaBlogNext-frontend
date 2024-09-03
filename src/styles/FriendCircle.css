@@ -79,7 +79,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#panel-btn{
+#panel-btn.el-button.is-circle{
     border: none!important;
     background-color: transparent !important;
 }
@@ -92,4 +92,7 @@
 }
 #cf-more:hover i{
     color: white!important;
+}
+.cf-label,.cf-message,.cf-article-title,.cf-article-author,.cf-time-created,.cf-time-updated{
+    color:var(--aria-fontcolor)!important;
 }
