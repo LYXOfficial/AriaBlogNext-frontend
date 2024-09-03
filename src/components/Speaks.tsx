@@ -31,7 +31,7 @@ export function Speaks() {
     const [speakContent,setSpeakContent]=useState<ReactElement[]>([]);
     useEffect(()=>{(async ()=>{
         import("wc-waterfall");
-        const res=await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=40`);
+        const res=await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=40`,{next:{tags:["speaks"]}});
         if(res.ok){
             let speaksContent:BB[]=(await res.json()).data;
             setSpeakContent(speaksContent.map((item,index)=>{

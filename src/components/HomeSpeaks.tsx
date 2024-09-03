@@ -15,7 +15,7 @@ import Link from "next/link";
 export default function HomeSpeaks() {
     const [speaks,setSpeaks] = useState<ReactElement>(<></>);
     useEffect(()=>{(async ()=>{
-        const res=await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=10`);
+        const res=await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=10`,{next:{tags:["speaks"]}});
         if(res.ok){
             const speaksContent:BB[]=(await res.json()).data;
             setSpeaks(
