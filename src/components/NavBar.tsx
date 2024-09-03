@@ -6,13 +6,12 @@ import Link from "next/link";
 import { menuItems,siteConfigs } from "config";
 import { useRouter } from "next/navigation";
 import { throttle } from "lodash";
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export default function NavBar() {
     const router=useRouter();
     const [trans,setTrans]=useState(false);
     const pathName=usePathname();
-    const searchParams=useSearchParams();
     const scrollHandler=throttle(()=>{
         if(document.location.href.includes("/posts/")){
             if(document.documentElement.scrollTop<60){
@@ -40,7 +39,7 @@ export default function NavBar() {
             window.removeEventListener("scroll",scrollHandler);
         }
     },[]);
-    useEffect(scrollHandler,[pathName,searchParams]);
+    useEffect(scrollHandler,[pathName]);
     const [hoveringElement,setHoveringElement]=useState("");
     const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
     return (<>
