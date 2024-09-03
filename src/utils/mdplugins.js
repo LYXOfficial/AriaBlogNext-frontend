@@ -27,7 +27,7 @@ export class MDFilters{
 };
 export class TagPlugin{
     static linkTag(markdown){
-        const linkRegex=/\{%\s*link\s+([^,]+)\s*,\s*([^,]+)\s*,\s*([^%]+)\s*%\}/g;
+        const linkRegex=/\{%\s*link\s+([^,]+)\s*,\s*([^,]+)\s*,\s*([^\s%][^%]*)\s*%\}/g;
         return markdown.replace(linkRegex,(match,title,subtitle,link)=>{
             return `<a class="etag-link" href="${link}" title="${title}">
 <span class="etag-link-tip">
