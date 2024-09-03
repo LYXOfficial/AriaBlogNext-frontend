@@ -5,10 +5,26 @@ import { Icon } from '@iconify/react';
 import Link from "next/link";
 import { menuItems,siteConfigs } from "config";
 import { useRouter } from "next/navigation";
+import { throttle } from "lodash";
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export default function NavBar() {
     const router=useRouter();
     const [trans,setTrans]=useState(false);
+    const pathName=usePathname();
+    const searchParams=useSearchParams();
+    const scrollHandler=throttle(()=>{
+        if(document.location.href.includes("/posts/")){
+            if(document.documentElement.scrollTop<60){
+                setTrans(true);
+            }else{
+                setTrans(false);
+            }
+        }
+        else{
+            setTrans(false);
+        }
+    },100);
     useEffect(()=>{
         (window as any).toRandomPost=async ()=>{
             const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`,{next:{tags:["posts"]}})
@@ -18,19 +34,13 @@ export default function NavBar() {
                 router.push(`/posts/${posts[randomIndex]}`);
             }
         };
-        // const scrollHandler=()=>{
-        //     if(document.documentElement.scrollTop<60){
-        //         setTrans(true);
-        //     }else{
-        //         setTrans(false);
-        //     }
-        // }
-        // scrollHandler();
-        // window.addEventListener("scroll",scrollHandler);
-        // return ()=>{
-        //     window.removeEventListener("scroll",scrollHandler);
-        // }
+        scrollHandler();
+        window.addEventListener("scroll",scrollHandler);
+        return ()=>{
+            window.removeEventListener("scroll",scrollHandler);
+        }
     },[]);
+    useEffect(scrollHandler,[pathName,searchParams]);
     const [hoveringElement,setHoveringElement]=useState("");
     const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
     return (<>

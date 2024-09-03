@@ -1,5 +1,5 @@
 #post-banner{
-    height: 400px;
+    height: 420px;
     width: 100%;
     background-position: center center;
     background-size: cover;
@@ -26,7 +26,7 @@
 #post-banner-info{
     z-index:2;
     position: absolute;
-    bottom:80px;
+    bottom:100px;
     width:84%;
     padding:0 8%;
 }
@@ -67,7 +67,7 @@
         transform: translateY(2px);
     }
     #post-banner-info{
-        bottom:50px!important;
+        bottom:70px!important;
     }
     #post-banner-meta .post-meta.post-tags{
         display: none!important;
@@ -87,7 +87,7 @@
         margin-bottom: 10px;
     }
     #post-banner-info{
-        bottom:20px!important;
+        bottom:40px!important;
     }
     #post-banner-meta{
         font-size: 14px;
@@ -101,7 +101,7 @@
         -moz-transform: translateY(-50px);
         -ms-transform: translateY(-50px);
         -o-transform: translateY(-50px);
-}
+    }
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -109,9 +109,79 @@
         -moz-transform: translateY(0);
         -ms-transform: translateY(0);
         -o-transform: translateY(0);
-}
+    }
 }
 #post-banner{
     animation: post-banner-animation .8s;
     -webkit-animation: post-banner-animation .8s;
+}
+.main-hero-waves-area {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -11px;
+    z-index: 5;
+}
+.waves-area .waves-svg {
+    width: 100%;
+    height: 5rem;
+}
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+    fill: #f7f9febd;
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+    fill: #f7f9fe82;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+    fill: #f7f9fe36;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+    fill: #f7f9fe;
+}
+@media (prefers-color-scheme: dark){
+    .parallax > use:nth-child(1) {
+        animation-delay: -2s;
+        animation-duration: 7s;
+        fill: #18171dc8;
+    }
+    .parallax > use:nth-child(2) {
+        animation-delay: -3s;
+        animation-duration: 10s;
+        fill: #18171d80;
+    }
+    .parallax > use:nth-child(3) {
+        animation-delay: -4s;
+        animation-duration: 13s;
+        fill: #18171d3e;
+    }
+    .parallax > use:nth-child(4) {
+        animation-delay: -5s;
+        animation-duration: 20s;
+        fill: #18171d;
+    }
+}
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+@media (max-width: 768px) {
+    .waves-area .waves-svg {
+        height: 40px;
+        min-height: 40px;
+    }
 }

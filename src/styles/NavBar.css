@@ -323,6 +323,7 @@
     background: transparent;
     backdrop-filter: none;
     border: none;
+    box-shadow: none;
 }
 #navbar.trans *:not(.site-page-childs *){
     color:var(--aria-white);
