@@ -12,6 +12,9 @@ const MDRenderer=cache(async (mdContent,slug="")=>{
             .addFilter(TagPlugin.colorTextTag)
             .addFilter(TagPlugin.inlineImgTag)
             .addFilter(TagPlugin.checkboxTag)
+            .addFilter(TagPlugin.noteTag)
+            .addFilter(TagPlugin.tipTag)
+            .addFilter(TagPlugin.tabsTag)
             .runRewrite();
     const renderer=new marked.Renderer();
     renderer.link=MarkedCustomTags.a;

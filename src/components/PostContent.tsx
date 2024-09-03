@@ -7,6 +7,7 @@ import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import KaTex from "components/thirdpartyjs/KaTex";
 import { TwikooBaseComment,TwikooCountPost } from "components/thirdpartyjs/Twikoo";
 import Pangu from "components/thirdpartyjs/Pangu";
+import TabPlugin from "components/thirdpartyjs/TabPlugin";
 
 import PostEnd from "components/PostEnd";
 import { Post } from "interfaces/post";
@@ -16,6 +17,7 @@ export default function PostContent({htmlContent,postInfo}:{htmlContent:string,p
     return (
         <article id="article-container" className="card-widget">
             <div id="post-maincontent" dangerouslySetInnerHTML={{ __html: htmlContent }}/>
+            <TabPlugin/>
             <FancyBox/>
             <HLJSNum/>
             <CodeCopier/>

@@ -79,13 +79,13 @@ ${content}
             return `<span style="color:${color}">${text}</span>`;
         })
     }
-    static inlineImgTag(markdown) {
+    static inlineImgTag(markdown){
         const inlineImgRegex=/{%\s*inlineImg\s+(\S+)\s+(\d+px)\s*%}/g;
-        return markdown.replace(inlineImgRegex, (match, imageUrl, width)=>{
-            return `<img src="${imageUrl}" style="width: ${width};"/>`;
+        return markdown.replace(inlineImgRegex, (match, imageUrl, height)=>{
+            return `<a href="${imageUrl}" title="点击查看大图" data-fancybox="gallery" class="inline-image" style="display:inline-flex;height: ${height};" ><img class="lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="${imageUrl}" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='"/></a>`;
         });
     }
-    static checkboxTag(markdown) {
+    static checkboxTag(markdown){
         const checkboxRegex=/{%\s*checkbox\s*(checked,)?(\s*([^%]*))?\s*%}/g;
         return markdown.replace(checkboxRegex,(match,checked,labelText)=>{
             const isChecked=checked?'checked':'';
@@ -94,6 +94,42 @@ ${content}
 <input type="checkbox" ${isChecked} disabled />
 <span>${text}</span>
 </label>`;
+        });
+    }
+    static noteTag(markdown){
+        const noteRegex = /{%\s*note\s+(\w+)(?:\s+\w+)?\s*%}([\s\S]*?){%\s*endnote\s*%}/g;
+        return markdown.replace(noteRegex,(match,icon,content)=>{
+            icon=icon.toLowerCase().trim();
+            content=content.trim();
+            return `<div class="etag-note ${icon}">${content}</div>
+ 
+`;
+        });
+    }
+    static tipTag(markdown){
+        const noteRegex = /{%\s*tip\s+(\w+)(?:\s+\w+)?\s*%}([\s\S]*?){%\s*endtip\s*%}/g;
+        return markdown.replace(noteRegex,(match,icon,content)=>{
+            icon=icon.toLowerCase().trim();
+            content=content.trim();
+            return `<div class="etag-note ${icon}">${content}</div>
+ 
+`;
+        });
+    }
+    static tabsTag(markdown){
+        const tabsRegex=/{%\s*tabs\s*%}([\s\S]*?){%\s*endtabs\s*%}/g;
+        const tabContentRegex=/<!--\s*tab\s+(.*?)\s*-->([\s\S]*?)<!--\s*endtab\s*-->/g;
+        return markdown.replace(tabsRegex,(match,tabsContent)=>{
+            let tabsHtml=`<div class="etag-tabs-container">`;
+            let tabHeaders="",tabBodies="",tabIndex=0;
+            tabsContent.replace(tabContentRegex,(match,tabTitle,tabBody)=>{
+                const isActive=tabIndex===0?" active":"";
+                tabHeaders+=`<button class="etag-tab-header${isActive}" data-index="${tabIndex}">${tabTitle}</button>`;
+                tabBodies+=`<div class="etag-tab-body${isActive}" data-index="${tabIndex}">${tabBody}</div>`;
+                tabIndex++;
+            });
+            tabsHtml+=`<div class="etag-tab-headers">${tabHeaders}</div><div class="etag-tab-bodies">${tabBodies}</div></div>`;
+            return tabsHtml;
         });
     }
 };
@@ -115,7 +151,7 @@ export class MarkedCustomTags{
         return `<a class="normal-a" href="${href}" target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
     }
     static img({href,title,text}){
-        return `<a href="${href}" title="点击查看大图" data-fancybox><img class="normal-img lazy-img" data-src="${href}" alt="${text}" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='"/></a>`;
+        return `<a href="${href}" title="点击查看大图" data-fancybox="gallery"><img class="normal-img lazy-img" data-src="${href}" alt="${text}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='"/></a>`;
     }
     static codespan({text}){
         return `<code class="normal-inlinecode">${text}</code>`;

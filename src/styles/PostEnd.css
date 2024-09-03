@@ -50,6 +50,9 @@
 .post-copyright-meta-info a{
     word-break: break-word;
 }
+.post-copyright-m-info{
+    margin-top:5px;
+}
 .postend-tag{
     margin: auto 0;
     margin-bottom:10px;
