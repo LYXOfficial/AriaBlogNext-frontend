@@ -20,11 +20,11 @@
     width: 100%;
     height: 100%;
     background-color: #0003;
-    z-index: 1;
+    z-index: 0;
     backdrop-filter: blur(10px) saturate(180%);
 }
 #post-banner-info{
-    z-index:2;
+    z-index:0;
     position: absolute;
     bottom:100px;
     width:84%;
@@ -65,9 +65,6 @@
 @media screen and (max-width:1000px){
     #post-banner .post-meta svg{
         transform: translateY(2px);
-    }
-    #post-banner-info{
-        bottom:70px!important;
     }
     #post-banner-meta .post-meta.post-tags{
         display: none!important;
@@ -120,7 +117,7 @@
     position: absolute;
     left: 0;
     bottom: -11px;
-    z-index: 5;
+    z-index: 0;
 }
 .waves-area .waves-svg {
     width: 100%;
@@ -153,22 +150,22 @@
     .parallax > use:nth-child(1) {
         animation-delay: -2s;
         animation-duration: 7s;
-        fill: #18171dc8;
+        fill: #552A2Ac8;
     }
     .parallax > use:nth-child(2) {
         animation-delay: -3s;
         animation-duration: 10s;
-        fill: #18171d80;
+        fill: #552A2A80;
     }
     .parallax > use:nth-child(3) {
         animation-delay: -4s;
         animation-duration: 13s;
-        fill: #18171d3e;
+        fill: #552A2A3e;
     }
     .parallax > use:nth-child(4) {
         animation-delay: -5s;
         animation-duration: 20s;
-        fill: #18171d;
+        fill: #552A2A;
     }
 }
 @keyframes move-forever {

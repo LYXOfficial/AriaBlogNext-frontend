@@ -31,7 +31,7 @@ export default async function Posts({page}:{page:number}){
                             </div>
                             <div className="post-banner">
                                 <Link className="post-banner-link" href={"/posts/"+post.slug} title={post.title}>
-                                    <ImageWithFalldown className="post-banner-img" src={post.bannerImg?post.bannerImg:siteConfigs.falldownImg} alt={post.title!} falldownImg={siteConfigs.falldownImg}/>
+                                    <ImageWithFalldown objectPosition={post?.coverFit} className="post-banner-img" src={post.bannerImg?post.bannerImg:siteConfigs.falldownImg} alt={post.title!} falldownImg={siteConfigs.falldownImg}/>
                                 </Link>
                             </div>
                             <div className="post-info">

@@ -12,4 +12,5 @@ export declare interface Post{
     wordCount?: number,
     bannerImg?: string,
     cachedHtml?: string,
+    coverFit?: string,
 }
