@@ -238,7 +238,7 @@ table:not(code table){
 }
 .hljs-ln-n{
     text-align: right;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 @media screen and (max-width:600px){
     #article-container{
@@ -635,4 +635,23 @@ table:not(code table){
 }
 .etag-tab-header.active::before{
     opacity: 1;
+}
+#article-container strong:not(strong:has(code)){
+    background: linear-gradient(rgb(255 51 184 / 15%), rgb(255 51 184 / 15%)) no-repeat bottom / 100% 30%;
+}
+.hljs-ln-numbers {
+    position: absolute;
+    width: 34px;
+    padding-right:10px;
+    left: 60px;
+    text-align: right;
+    background-color: #FAFAFA;
+}
+.hljs-ln-code{
+    padding-left: 28px!important;
+}
+@media (prefers-color-scheme: dark) {
+    .hljs-ln-numbers {
+        background-color: #2B2B2B;
+    }
 }
