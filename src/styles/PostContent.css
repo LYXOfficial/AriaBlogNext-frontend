@@ -148,7 +148,7 @@ table:not(code table){
         line-height: 1;
         cursor: pointer;
     }
-    .hljs-copy svg path{
+    :is(.hljs-copy,.hljs-wrapper) svg path{
         fill:#848484;
         transition: all .3s;
         -webkit-transition: all .3s;
@@ -167,7 +167,7 @@ table:not(code table){
         line-height: 1;
         cursor: pointer;
     }
-    .hljs-copy svg path{
+    :is(.hljs-wrapper,.hljs-copy) svg path{
         fill: #b7bec9;
         transition: all .3s;
     }
@@ -218,7 +218,7 @@ table:not(code table){
     -ms-transform:rotate(90deg);
     -o-transform:rotate(90deg);
 }
-.hljs-copy{
+.hljs-copy,.hljs-wrapper{
     position: absolute;
     right: 40px;
     top: 50%;
@@ -233,7 +233,15 @@ table:not(code table){
     -ms-transition: all .3s;
     -o-transition: all .3s;
 }
-.hljs-copy:hover svg path{
+.hljs-wrapper{
+    right:60px;
+    transform: rotate(90deg) translateY(10px);
+    -webkit-transform: rotate(90deg) translateY(10px);
+    -moz-transform: rotate(90deg) translateY(10px);
+    -ms-transform: rotate(90deg) translateY(10px);
+    -o-transform: rotate(90deg) translateY(10px);
+}
+:is(.hljs-copy,.hljs-wrapper):hover svg path{
     fill: var(--aria-theme);
 }
 .hljs-ln-n{
@@ -657,4 +665,13 @@ table:not(code table){
     .hljs-ln-numbers {
         background-color: #2B2B2B;
     }
+}
+pre.hljs.wrap{
+    white-space: pre-wrap;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.hljs-wrapper.wrap{
+    opacity: .5;
 }
