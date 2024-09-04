@@ -7,10 +7,12 @@ import { menuItems,siteConfigs } from "config";
 import { useRouter } from "next/navigation";
 import { throttle } from "lodash";
 import { usePathname } from 'next/navigation'
+import SearchBox from "components/SearchBox";
 
 export default function NavBar() {
     const router=useRouter();
     const [trans,setTrans]=useState(false);
+    const [searchBoxShow,setSearchBoxShow]=useState(false);
     const pathName=usePathname();
     const scrollHandler=throttle(()=>{
         if(document.location.href.includes("/posts/")){
@@ -81,7 +83,9 @@ export default function NavBar() {
                 </div>
             </div>
             <div id="menu-buttons">
-                <button className="menu-button" title="搜索">
+                <button className="menu-button" title="搜索" onClick={()=>{
+                    setSearchBoxShow(!searchBoxShow);
+                }}>
                     <Icon icon="fa6-solid:magnifying-glass"/>
                 </button>
                 <button className="menu-button" title="随便逛逛" onClick={()=>{
@@ -102,6 +106,7 @@ export default function NavBar() {
             </div>
         </nav>
         <div id="sidebar-mask" className={mobileMenuOpen?"active":"disactive"} onClick={()=>{setMobileMenuOpen(false)}}/>
+        <SearchBox show={searchBoxShow} closeFunction={setSearchBoxShow}/>
         </>
     );
 }
