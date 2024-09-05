@@ -7,11 +7,11 @@ export default function CodeCopier(){
         const code=block.querySelector(".hljs");
         const range=document.createRange();
         const selection=document.getSelection();
-        selection.removeAllRanges();
+        selection!.removeAllRanges();
         range.selectNode(code);
-        selection.addRange(range);
+        selection!.addRange(range);
         document.execCommand("copy");
-        selection.removeAllRanges();
+        selection!.removeAllRanges();
     },100),[]);
     const handleWrapperClick=useCallback(debounce((block)=>{
         const code=block.querySelector(".hljs");

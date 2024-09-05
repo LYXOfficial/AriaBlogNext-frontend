@@ -8,18 +8,21 @@ import calendar from "js-calendar-converter";
 const today=new Date();
 const year=today.getFullYear(),month=today.getMonth()+1,day=today.getDate();
 
-const FestivalGre=new Map([
+const SpecialDaysGre=new Map([
     ["1-1",`新年新气象，喜迎${year}，元旦快乐！`],
     ["4-4","清风化雨，润物无声，清明安康。"],
     ["4-5","清风化雨，润物无声，清明安康。"],
     ["4-6","清风化雨，润物无声，清明安康。"],
     ["5-1","劳动节快乐！"],
     ["6-1","儿童节快乐！大家都是永远的小朋友哦喵！"],
+    ["7-7","勿忘国耻，振兴中华！"],
+    ["9-18","勿忘国耻，振兴中华！"],
     ["10-1",`祖国 ${year-1949} 岁生日快乐！`],
     ["10-2",`祖国 ${year-1949} 岁生日快乐！`],
     ["10-3",`祖国 ${year-1949} 岁生日快乐！`],
+    ["12-13","勿忘国耻，振兴中华！"],
 ])
-const FestivalLunar=new Map([
+const SpecialDaysLunar=new Map([
     ["12-29","愿得长如此，年年物候新"],
     ["12-30","千门万户曈曈日，总把新桃换旧符"],
     ["1-1","爆竹声中一岁除，新年快乐！"],
@@ -57,8 +60,8 @@ export default function Welcome(){
             },3000);
         }
         const{lMonth,lDay}=calendar.solar2lunar(year,month,day);
-        const festivalMessage=FestivalGre.get(`${month}-${day}`)||FestivalLunar.get(`${lMonth}-${lDay}`);
-        if(festivalMessage)Snackbar.show({text:festivalMessage,pos:'top-left',showAction:false});
+        const specialDaysMessage=SpecialDaysGre.get(`${month}-${day}`)||SpecialDaysLunar.get(`${lMonth}-${lDay}`);
+        if(specialDaysMessage)Snackbar.show({text:specialDaysMessage,pos:'top-left',showAction:false});
     })()},[router]);
     return <></>;
 }

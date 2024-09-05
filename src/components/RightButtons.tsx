@@ -3,7 +3,7 @@ import "styles/RightButtons.css";
 import { Icon } from "@iconify/react";
 import { useEffect,useState } from "react";
 
-export function RightButtonsPosts({toggleBarrage}){
+export function RightButtonsPosts({toggleBarrage}:{toggleBarrage:()=>void}){
     const [rbHide,setRbHide]=useState(false);
     const [tocHide,setTocHide]=useState(false);
     useEffect(()=>{
@@ -22,12 +22,12 @@ export function RightButtonsPosts({toggleBarrage}){
         document.documentElement.scroll({behavior:"smooth",top:0});
     }
     function scrollToComments(){
-        document.documentElement.scroll({behavior:"smooth",top:document.querySelector("#post-comment-container").offsetTop-80});
+        document.documentElement.scroll({behavior:"smooth",top:(document.querySelector("#post-comment-container") as any).offsetTop-80});
     }
     function setToc(){
         setTocHide(!tocHide);
-        if(tocHide) document.querySelector(".card-toc").className="card-widget card-aside card-toc";
-        else document.querySelector(".card-toc").className="card-widget card-aside card-toc mobile-show";
+        if(tocHide) document.querySelector(".card-toc")!.className="card-widget card-aside card-toc";
+        else document.querySelector(".card-toc")!.className="card-widget card-aside card-toc mobile-show";
     }
     return (<div id="rightbuttons" className={rbHide?"rb-hide":"rb-show"}>
         <button className="rightbutton rightbutton-toc" title="文章目录" onClick={setToc}>
@@ -44,7 +44,7 @@ export function RightButtonsPosts({toggleBarrage}){
         </button>
     </div>);
 }
-export function RightButtonsPages({toggleBarrage}){
+export function RightButtonsPages({toggleBarrage}:{toggleBarrage:()=>void}){
     const [rbHide,setRbHide]=useState(false);
     useEffect(()=>{
         const scrollHandler=()=>{
@@ -62,7 +62,7 @@ export function RightButtonsPages({toggleBarrage}){
         document.documentElement.scroll({behavior:"smooth",top:0});
     }
     function scrollToComments(){
-        document.documentElement.scroll({behavior:"smooth",top:document.querySelector("#post-comment-container").offsetTop-80});
+        document.documentElement.scroll({behavior:"smooth",top:(document.querySelector("#post-comment-container") as any).offsetTop-80});
     }
     return (<div id="rightbuttons" className={rbHide?"rb-hide":"rb-show"}>
         <button className="rightbutton rightbutton-barrageShow" title="开关评论浮窗" onClick={toggleBarrage}>

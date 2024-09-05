@@ -3,7 +3,7 @@ import { marked } from "marked";
 import { siteConfigs } from "config";
 import { MDFilters,TagPlugin,MarkdownRewriter,MarkedCustomTags } from "utils/mdplugins";
 
-const MDRenderer=cache(async (mdContent,slug="")=>{
+const MDRenderer=cache(async (mdContent:string,slug="")=>{
     mdContent=(new MarkdownRewriter(mdContent))
             .addFilter(MDFilters.latex)
             .addFilter(TagPlugin.linkTag)

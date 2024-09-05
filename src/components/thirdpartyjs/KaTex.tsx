@@ -1,5 +1,5 @@
 "use client"
-import renderMathInText from 'katex/dist/contrib/auto-render';
+import renderMathInText from 'katex/contrib/auto-render';
 import { useEffect } from "react";
 import 'katex/dist/katex.min.css';
 
