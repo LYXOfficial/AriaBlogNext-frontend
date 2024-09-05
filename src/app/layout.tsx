@@ -24,7 +24,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-cn">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{__html:`if(!!window.ActiveXObject||"ActiveXObject" in window)window.location.href="./noie.html";//IE不欢迎你`}}
+        />
+      </head>
       <body>
+        
         <Welcome/>
         <LicenseTips/>
         <NavBar/>
