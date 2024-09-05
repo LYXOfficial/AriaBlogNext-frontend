@@ -680,3 +680,42 @@ pre.hljs.wrap{
 .hljs-wrapper.wrap{
     opacity: .5;
 }
+.etag-chat{
+    display: flex;
+    margin:10px;
+}
+.etag-chat.right>.etag-chat-content, .etag-chat.right>*>.etag-chat-author,.etag-chat.right>*>.etag-chat-message{
+    margin-left:auto;
+}
+.etag-chat.left>.etag-chat-content, .etag-chat.left>*>.etag-chat-author,.etag-chat-left>*>.etag-chat-message{
+    margin-right:auto;
+}
+.etag-chat-content{
+    display: flex;
+    flex-direction: column;
+}
+.etag-chat-author{
+    font-size: 14px;
+    line-height: 1;
+    color: var(--aria-light-fontcolor);
+    margin-bottom:5px;
+}
+.etag-chat-message{
+    padding: 5px 10px;
+}
+.etag-chat.right>*>.etag-chat-message{
+    background-color: #ed709b3b;
+    border-radius: 10px 0px 10px 10px;
+    -webkit-border-radius: 10px 0px 10px 10px;
+    -moz-border-radius: 10px 0px 10px 10px;
+    -ms-border-radius: 10px 0px 10px 10px;
+    -o-border-radius: 10px 0px 10px 10px;
+}
+.etag-chat.left>*>.etag-chat-message{
+    background-color: #a8a8a83b;
+    border-radius: 0px 10px 10px 10px;
+    -webkit-border-radius: 0px 10px 10px 10px;
+    -moz-border-radius: 0px 10px 10px 10px;
+    -ms-border-radius: 0px 10px 10px 10px;
+    -o-border-radius: 0px 10px 10px 10px;
+}

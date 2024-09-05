@@ -131,6 +131,19 @@ ${content}
             return tabsHtml;
         });
     }
+    static chatTag(markdown){
+        const chatRegex=/{%\s*chat\s+(left|right)\s*,\s*([^%]+)\s*%}([\s\S]*?)\s*{%\s*endchat\s*%}/g;
+        return markdown.replace(chatRegex, (match, position, author, content) => {
+            return `<div class="etag-chat ${position.trim()}">
+<div class="etag-chat-content">
+<span class="etag-chat-author">${author.trim()}</span>
+<div class="etag-chat-message">${content}</div>
+</div>
+</div>
+
+`;
+        });
+    }
 };
 export class MarkdownRewriter{
     constructor(markdown){
