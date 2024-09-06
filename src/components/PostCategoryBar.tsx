@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Icon } from "@iconify/react";
 import { useEffect,useState,ReactElement,useRef } from "react";
 import { siteConfigs } from "@/config";

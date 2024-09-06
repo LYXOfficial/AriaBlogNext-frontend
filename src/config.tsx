@@ -13,7 +13,7 @@ export const siteConfigs:siteConfig={
     createMonth: 6,
     createDay: 4,
     pageMaxPosts: 15,
-    falldownAvatar: "https://bu.dusays.com/2024/07/07/668a8ffdacde3.png",
+    falldownAvatar: "https://bu.dusays.com/2024/09/06/66dabf7f748c8.jpg",
     falldownImg: "https://bu.dusays.com/2024/08/31/66d30329375a5.webp",
     // backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
     backEndUrl:"https://blognext-end.yaria.top",
