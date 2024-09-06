@@ -40,7 +40,6 @@ const SpecialDaysLunar=new Map([
 export default function Welcome(){
     const router=useRouter();
     useEffect(()=>{(async()=>{
-        if(month==12&&day==13) document.body.style.filter="grayscale(100%)";
         if(localStorage.getItem("showedWelcome")!="1"){
             const referrer=document.referrer;
             Snackbar.show({
