@@ -73,7 +73,7 @@
     color: #fff;
 }
 @media (prefers-color-scheme:dark){
-    .tk-content{
+    .tk-main>.tk-content{
         background-color: #303030!important;
     }
 }
@@ -93,4 +93,13 @@
     #owo-big{
         background-color:black!important;
     }
+}
+.tk-admin-container{
+    position: fixed!important;
+    top: 60px!important;
+    right: 0!important;
+    width: min(500px, 100vw)!important;
+    height: calc(100% - 60px)!important;
+    z-index: 114514;
+    transform: translateX(calc(100vw - 100%));
 }
