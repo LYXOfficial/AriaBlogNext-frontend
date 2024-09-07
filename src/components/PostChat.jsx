@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 export default function PostChat(){
-    const router=useRouter();
     // useEffect(()=>{
     //     const postChatDOM=(document.getElementById("chatIframe") as any).contentWindow.document;
     //     const style=postChatDOM.createElement("style");
@@ -13,7 +12,7 @@ export default function PostChat(){
     // },[]);
     useEffect(()=>{
         postChat_load(),tianliGPT(true);
-    },[router.events]);
+    },[]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
