@@ -100,8 +100,10 @@ ${content}
         return markdown.replace(noteRegex,(match,icon,content)=>{
             icon=icon.toLowerCase().trim();
             content=content.trim();
-            return `<div class="etag-note ${icon}">${content}</div>
- 
+            return `<div class="etag-note ${icon}">
+${content}
+</div>
+
 `;
         });
     }
