@@ -37,6 +37,8 @@
     --aria-highlight-black: #1f2d3d;
     --aria-highlight-white: #ffffff;
     --aria-light-fontcolor:#828282;
+    --heo-main:var(--aria-theme)!important;
+    --heo-fontcolor:var(--aria-fontcolor)!important;
 }
 :root{
     --aria-background:#f7f9fe;
@@ -46,6 +48,7 @@
     --aria-highlight:var(--aria-highlight-black);
     --aria-shadow: 0 0 10px 3px #9595953b;
     --aria-shadow-color: #9595953b;
+    --style-border-always:var(--aria-border)!important;
 }
 @media (prefers-color-scheme:dark){
     :root{
@@ -56,6 +59,8 @@
         --aria-highlight:var(--aria-highlight-white);
         --aria-shadow:0 0 10px 3px #1c1c1c;
         --aria-shadow-color: #1c1c1c;
+        --heo-secondbg:#2f3031!important;
+        --heo-card-bg:#000!important;
     }
 }
 .fancybox__container{
