@@ -12,8 +12,8 @@ export default function PostChat(){
     //         }`
     // },[]);
     useEffect(()=>{
-        postChat_load(),tianliGPT();
-    },[router]);
+        postChat_load(),tianliGPT(true);
+    },[router.events]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
