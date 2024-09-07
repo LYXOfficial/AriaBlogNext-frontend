@@ -51,7 +51,9 @@ ${subtitle}
             return `<details class="etag-folding"${match.includes('open')?' open':''} style="border:2px solid rgba(${colorName[color as keyof typeof colorName]},.3);">
 <summary class="etag-folding-summary" style="background-color:rgba(${colorName[color as keyof typeof colorName]},.15);">${summary}</summary>
 <div class="etag-folding-content">
+
 ${content}
+
 </div>
 </details>
 
@@ -65,7 +67,9 @@ ${content}
             return `<details class="etag-folding"${open?' open':''} style="border:2px solid rgba(${colorName[color]},.3);">
 <summary class="etag-folding-summary" style="background-color:rgba(${colorName[color]},.15);">${summary}</summary>
 <div class="etag-folding-content">
+
 ${content}
+
 </div>
 </details>
 
@@ -141,7 +145,11 @@ ${content}
             return `<div class="etag-chat ${position.trim()}">
 <div class="etag-chat-content">
 <span class="etag-chat-author">${author.trim()}</span>
-<div class="etag-chat-message">${content}</div>
+<div class="etag-chat-message">
+
+${content}
+
+</div>
 </div>
 </div>
 

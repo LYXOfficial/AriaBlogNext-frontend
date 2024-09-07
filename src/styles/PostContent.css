@@ -719,3 +719,6 @@ pre.hljs.wrap{
     -ms-border-radius: 0px 10px 10px 10px;
     -o-border-radius: 0px 10px 10px 10px;
 }
+.etag-chat-message>p{
+    margin:0;
+}
