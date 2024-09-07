@@ -10,9 +10,6 @@ export default function PostChat(){
     //             --heo-theme:var(--aria-theme)!important;
     //         }`
     // },[]);
-    useEffect(()=>{
-        postChat_load(),tianliGPT(true);
-    },[]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
@@ -35,6 +32,8 @@ export default function PostChat(){
             };`
         }}/>
         <script async data-postChat_key="b2697bd81e3904826ee9c180db306e61b2691c" 
-            src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js"/>
+            src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js" onLoad={
+                ()=>{postChat_load(),tianliGPT(true);}
+            }/>
     </>
 }
