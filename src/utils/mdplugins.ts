@@ -101,7 +101,9 @@ ${content}
             icon=icon.toLowerCase().trim();
             content=content.trim();
             return `<div class="etag-note ${icon}">
+
 ${content}
+
 </div>
 
 `;
