@@ -20,7 +20,7 @@
     scrollbar-width: none;
 }
 #posts-categories-bars-container::-webkit-scrollbar {
-    width: 0px;
+    height: 0px;
 }
 #posts-categories-bar>*{
     margin: auto 0;
