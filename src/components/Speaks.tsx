@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { BB } from "interfaces/bb";
 import { siteConfigs } from "@/config";
 import relativeTime from "@/utils/reltime";

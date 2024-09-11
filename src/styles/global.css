@@ -1,12 +1,12 @@
 @font-face{
     font-family: 'HYTMR';
     font-display: swap;
-    src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/HYTangMeiRen55W.woff2') format("woff2");/*/font/HYTangMeiRen55W.woff2*/
+    src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/HYTangMeiRen55W.woff2') format("woff2");
 }
 @font-face{
     font-family: 'Monaco';
     font-display: swap; 
-    src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/MONACO.TTF') format("truetype");/*/font/HYTangMeiRen55W.ttf*/
+    src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/MONACO.TTF') format("truetype");
 }
 :root{
     --aria-border:1px solid#c9c9c9;

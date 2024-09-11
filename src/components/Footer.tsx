@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "styles/Footer.css"
 import { useState } from "react"
 import { footerBadges,siteConfigs } from "config"

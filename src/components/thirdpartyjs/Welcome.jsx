@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect } from 'react';
 import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";

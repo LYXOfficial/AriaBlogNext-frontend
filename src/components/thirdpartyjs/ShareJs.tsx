@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "social-share.js/dist/css/share.min.css";
 import { useEffect } from "react";
 import { Post } from "@/interfaces/post";

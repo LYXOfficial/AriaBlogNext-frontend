@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import LazyLoad from "vanilla-lazyload";
 import { useEffect } from "react";
 

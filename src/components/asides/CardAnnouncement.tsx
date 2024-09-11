@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import "styles/ASide/Announcement.css"

@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import { useEffect } from "react";
-
 export default function HLJSNum(){
     useEffect(()=>{(async()=>{
         const hljslm=require("utils/highlightjs-line-number")

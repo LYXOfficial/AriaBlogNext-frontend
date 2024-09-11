@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import "styles/NavBar.css";
 import { Icon } from '@iconify/react';
