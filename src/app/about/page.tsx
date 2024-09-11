@@ -11,7 +11,7 @@ export default function Page(){
             <div id="post-maincontent" className="page flink">
                 <h1>关于我</h1>
                 <p>
-                    你好啊，我是 <strong>Ariasaka</strong>，人，初中生（2026届），是活的！！
+                    你好啊，我是 <strong>Ariasaka</strong>，人，初中生（2026届），2010年一月生，是活的！！
                     <br/>
                     什（（
                 </p>
