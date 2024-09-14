@@ -85,6 +85,25 @@ export default function Page(){
                     没有想到，曾经一时兴起做的博客，在风雨阻拦下坚持到今天，访问量即使不高，小伙伴们的到访也成为了我坚持下去的动力。
                     <br/>
                     希望在未来的日子里，博客能继续陪伴我，见证我的成长与进步。
+                    <br/>
+                    这是博客的Github地址哦喵！虽然可能写的一坨史罢了（ 
+                    <a href="https://github.com/LYXOfficial/AriaBlogNext-frontend">
+                        https://github.com/LYXOfficial/AriaBlogNext-frontend
+                    </a>
+                    <br/>
+                    <a href="https://github.com/LYXOfficial/AriaBlogNext-backend">
+                        https://github.com/LYXOfficial/AriaBlogNext-backend
+                    </a>
+                    <br/>
+                    <a href="https://github.com/LYXOfficial/AriaBlogNext-dashboard">
+                        https://github.com/LYXOfficial/AriaBlogNext-dashboard
+                    </a>
+                    <br/>
+                    关于评论的话，可以随便说说，别把咱当GPT百度使就好qwq，但是<strong>禁止商业性质广告和友链申请！！！不要打广告！！！不要打广告！！！不要打广告！！！</strong>
+                    <br/>
+                    （当然玩玩博客的小伙伴推广一下倒是可以
+                    <br/>
+                    不然祝您早日倒闭！！！
                 </p>
                 <br/>
                 好了，事情到这里就交代的差不多了，祝各位小伙伴们天天开心哦！
