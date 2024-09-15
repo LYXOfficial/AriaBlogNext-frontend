@@ -24,7 +24,7 @@ export default async function Posts({page}:{page:number}){
             {posts.map((post)=>{
                     return (
                         <div className={`recent-post-info post-card card-widget ${startl?"":"first-page"}`} key={post.title}>
-                            <a className="for-fc post__title">{post.title}</a>
+                            <span className="for-fc post__title">{post.title}</span>
                             <div className="for-fc post-meta-date">
                                 <span className="time for-fc">{moment.unix(post.publishTime!).format("YYYY-MM-DD")}</span>
                                 <span className="time for-fc">{moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}</span>

@@ -6,6 +6,7 @@ import Welcome from 'components/thirdpartyjs/Welcome';
 import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from 'nextjs-toploader';
 import PostChat from 'components/PostChat';
+import { describe } from 'node:test';
 
 process.env.TZ="Asia/Shanghai";
 
@@ -16,7 +17,8 @@ export const metadata = {
     types: {
       'application/rss+xml': [{ url: 'feed.xml', title: 'RSS 订阅' }],
     },
-  }
+  },
+  describe: "Ariasakaの小窝QwQ",
 }
 export default function RootLayout({
   children,

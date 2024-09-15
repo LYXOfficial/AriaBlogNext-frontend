@@ -47,7 +47,7 @@ export default async function CardInfo(){
                 {
                     siteConfigs.socials.map((link:social)=>{
                         return (
-                            <a key={link.name} className="card-info-social" href={link.url}>
+                            <a key={link.name} className="card-info-social" href={link.url} title={link.name}>
                                 {link.icon}
                             </a>
                         )

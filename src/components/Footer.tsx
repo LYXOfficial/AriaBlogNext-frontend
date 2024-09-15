@@ -35,7 +35,7 @@ export default function Footer(){
                 {
                     footerBadges.map((item)=>{
                         return (
-                            <a target="_blank" key={item.link} rel="noopener external nofollow noreferrer" href={item.link}>
+                            <a target="_blank" key={item.link} title={item.link} rel="noopener external nofollow noreferrer" href={item.link}>
                                 <img src={item.badgeUrl} alt=""/>
                             </a>
                         );
