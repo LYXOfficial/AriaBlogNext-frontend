@@ -42,7 +42,7 @@ ${subtitle}
 </span>
 </a>
         
-        `;
+`;
         });
     }
     static foldingTag(markdown:string){
@@ -132,10 +132,14 @@ ${content}
             tabsContent.replace(tabContentRegex,(match:string,tabTitle:string,tabBody:string)=>{
                 const isActive=tabIndex===0?" active":"";
                 tabHeaders+=`<button class="etag-tab-header${isActive}" data-index="${tabIndex}">${tabTitle}</button>`;
-                tabBodies+=`<div class="etag-tab-body${isActive}" data-index="${tabIndex}">${tabBody}</div>`;
+                tabBodies+=`<div class="etag-tab-body${isActive}" data-index="${tabIndex}">
+${tabBody}
+</div>`;
                 tabIndex++;
             });
-            tabsHtml+=`<div class="etag-tab-headers">${tabHeaders}</div><div class="etag-tab-bodies">${tabBodies}</div></div>`;
+            tabsHtml+=`<div class="etag-tab-headers">${tabHeaders}</div><div class="etag-tab-bodies">${tabBodies}</div></div>
+
+`;
             return tabsHtml;
         });
     }
