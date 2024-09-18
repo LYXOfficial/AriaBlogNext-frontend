@@ -583,11 +583,11 @@ table:not(code table){
     margin-top:10px;
     margin-bottom:20px;
     padding:15px;
-    animation: etag-tab-body-fade-in 0.3s ease-in-out;
-    -webkit-animation: etag-tab-body-fade-in 0.3s ease-in-out;
-    -moz-animation: etag-tab-body-fade-in 0.3s ease-in-out;
-    -ms-animation: etag-tab-body-fade-in 0.3s ease-in-out;
-    -o-animation: etag-tab-body-fade-in 0.3s ease-in-out;
+    animation: etag-tab-body-fade-in 0.4s ease-in-out;
+    -webkit-animation: etag-tab-body-fade-in 0.4s ease-in-out;
+    -moz-animation: etag-tab-body-fade-in 0.4s ease-in-out;
+    -ms-animation: etag-tab-body-fade-in 0.4s ease-in-out;
+    -o-animation: etag-tab-body-fade-in 0.4s ease-in-out;
 }
 .etag-tab-body>:first-child,.etag-note>:first-child,.etag-folding-content>:first-child{
     margin-top:0;
