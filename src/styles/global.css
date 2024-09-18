@@ -257,7 +257,7 @@ p,article{
     }
 }
 .normal-img{
-    max-width: 100%;
+    max-width: 400px;
 }
 *{
     scroll-behavior: smooth;
