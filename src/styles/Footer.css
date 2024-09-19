@@ -14,6 +14,7 @@
     flex-grow: 1;
     text-align: right;
     margin-left:5px;
+    white-space: wrap;
 }
 #footer-copyright{
     margin-right:20px;
