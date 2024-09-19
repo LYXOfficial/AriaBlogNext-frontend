@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { TwikooCountHome } from "components/thirdpartyjs/Twikoo";
 import PostCategoryBar from "components/PostCategoryBar";
 import ImageWithFalldown from "./ImageWithFalldown";
+import { Category } from "@/interfaces/category";
 
 export default async function Posts({page}:{page:number}){
     let startl=(page-1)*siteConfigs.pageMaxPosts,endl=page*siteConfigs.pageMaxPosts;
@@ -18,9 +19,11 @@ export default async function Posts({page}:{page:number}){
     if(!resm.ok) return notFound();
     let postTotal=(await resm.json()).count;
     const maxPage=Math.ceil(postTotal/siteConfigs.pageMaxPosts);
+    const res=await fetch(`${siteConfigs.backEndUrl}/get/category/categories`);
+    const data:Category[]=(await res.json()).data;
     return (
         <div id="recent-posts">
-            <PostCategoryBar/>
+            <PostCategoryBar data={data}/>
             {posts.map((post)=>{
                     return (
                         <div className={`recent-post-info post-card card-widget ${startl?"":"first-page"}`} key={post.title}>

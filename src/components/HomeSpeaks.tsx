@@ -12,35 +12,31 @@ import "swiper/css/mousewheel";
 import "styles/HomeSpeaks.css";
 import Link from "next/link";
 
-export default function HomeSpeaks() {
+export default function HomeSpeaks({speaksContent}:{speaksContent:BB[]}) {
     const [speaks,setSpeaks] = useState<ReactElement>(<></>);
-    useEffect(()=>{(async ()=>{
-        const res=await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=10`,{next:{tags:["speaks"]}});
-        if(res.ok){
-            const speaksContent:BB[]=(await res.json()).data;
-            setSpeaks(
-                <Swiper 
-                    modules={[Autoplay,Mousewheel]}
-                    loop={true} 
-                    autoplay={{delay:5000,disableOnInteraction:false,pauseOnMouseEnter:true,stopOnLastSlide: false}} 
-                    className="homespeaks-swiper"
-                    mousewheel={true}
-                    direction="vertical"
-                    slidesPerView={1}
-                    spaceBetween={0}>
-                    {
-                        speaksContent.map((item:BB,index:number)=>{
-                            return <SwiperSlide key={index} className="homespeaks-slide">
-                                <Link href="/speaks" className="homespeaks-item">
-                                    {relativeTime(item.time)+": "+item.plainContent}
-                                </Link>
-                            </SwiperSlide>
-                        })
-                    }
-                </Swiper>
-            );
-        }
-    })();},[]);
+    useEffect(()=>{
+        setSpeaks(
+            <Swiper 
+                modules={[Autoplay,Mousewheel]}
+                loop={true} 
+                autoplay={{delay:5000,disableOnInteraction:false,pauseOnMouseEnter:true,stopOnLastSlide: false}} 
+                className="homespeaks-swiper"
+                mousewheel={true}
+                direction="vertical"
+                slidesPerView={1}
+                spaceBetween={0}>
+                {
+                    speaksContent.map((item:BB,index:number)=>{
+                        return <SwiperSlide key={index} className="homespeaks-slide">
+                            <Link href="/speaks" className="homespeaks-item">
+                                {relativeTime(item.time)+": "+item.plainContent}
+                            </Link>
+                        </SwiperSlide>
+                    })
+                }
+            </Swiper>
+        );
+    },[]);
     return <div id="homespeaks-container" className="card-widget">
         <Icon icon="mdi:comment" className="homespeaks-icon left" width={20} height={20}/>
         <div className="homespeaks-bbbox">{speaks}</div>
