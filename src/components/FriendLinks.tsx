@@ -52,7 +52,7 @@ export default async function FriendLinks() {
     link: https://blog.yaria.top
     avatar: https://weavatar.com/avatar/795ce413eb6c7485954b78283ffa3e00
     descr: 人有悲欢离合 月有阴晴圆缺
-    siteshot: https://vercel.yaria.top/img/siteshot.png
+    siteshot: https://bu.dusays.com/2024/09/19/66ec130ad1de0.png
     theme_color: '#ed709b'
 \`\`\`
 ## HTML
