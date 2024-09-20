@@ -84,7 +84,7 @@
     font-size:14px;
     border-radius: 15px;
     padding: 3px 5px;
-    background-color: var(--aria-acrylic2);
+    background-color: #fff6;
     color: var(--aria-fontcolor);
 }
 .flink-status svg{
