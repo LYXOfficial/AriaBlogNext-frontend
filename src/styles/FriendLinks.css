@@ -84,11 +84,19 @@
     font-size:14px;
     border-radius: 15px;
     padding: 3px 5px;
-    background-color: #fff6;
+    /* background-color: #fff6; */
     color: var(--aria-fontcolor);
 }
 .flink-status svg{
-    width:20px;
-    height:20px;
+    width:28px;
+    height:28px;
+    color:white;
     /* margin-right:5px; */
+}
+svg.flink-none-icon{
+    width:36px;
+    height:36px;
+    position: relative;
+    left: 3px;
+    top: 5px;
 }

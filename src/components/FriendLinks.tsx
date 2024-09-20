@@ -11,16 +11,16 @@ import { ReactElement } from "react";
 export function FriendLinkItem({link}:{link:FriendLink}) {
     let latencyIcon:ReactElement=<></>;
     if(link.latency!>0){
-        if(link.latency!<=0.5)
-            latencyIcon=<Icon icon="ph:cell-signal-full-bold" style={{color:"green"}}/>;
-        else if(link.latency!<=1)
-            latencyIcon=<Icon icon="ph:cell-signal-high-bold" style={{color:"#40c370"}}/>;
+        if(link.latency!<=1)
+            latencyIcon=<Icon icon="system-uicons:signal-full"/>;
         else if(link.latency!<=2)
-            latencyIcon=<Icon icon="ph:cell-signal-medium-bold" style={{color:"orange"}}/>;
+            latencyIcon=<Icon icon="system-uicons:signal-medium"/>;
+        else if(link.latency!<=3)
+            latencyIcon=<Icon icon="system-uicons:signal-low"/>;
         else
-            latencyIcon=<Icon icon="ph:cell-signal-low-bold" style={{color:"red"}}/>;
+            latencyIcon=<Icon icon="system-uicons:signal-none"/>;
     }
-    else latencyIcon=<Icon icon="ph:cell-signal-x-bold" color="red"/>;
+    else latencyIcon=<Icon icon="system-uicons:close" className="flink-none-icon"/>;
     return (
         <a className="flink-item cf-friends-link" href={link.url} target="_blank" rel="noopener noreferrer" 
             style={{backgroundColor:link.color,color:"white"}}>
