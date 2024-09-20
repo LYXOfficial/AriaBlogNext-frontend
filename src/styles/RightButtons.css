@@ -1,56 +1,56 @@
-#rightbuttons{
-    position: fixed;
-    right:30px;
-    bottom:50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
-    transition: all .5s;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -ms-transition: all .5s;
-    -o-transition: all .5s;
-    opacity: 1;
+#rightbuttons {
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  opacity: 1;
 }
-#rightbuttons.rb-hide{
-    transform:translateX(100px);
-    -webkit-transform:translateX(100px);
-    -moz-transform:translateX(100px);
-    -ms-transform:translateX(100px);
-    -o-transform:translateX(100px);
-    opacity: 0;
+#rightbuttons.rb-hide {
+  transform: translateX(100px);
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  -ms-transform: translateX(100px);
+  -o-transform: translateX(100px);
+  opacity: 0;
 }
-.rightbutton{
-    width:35px;
-    height:35px;
-    margin-bottom:6px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border:none;
-    background-color: var(--aria-theme);
-    color:white;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -ms-transition: .3s;
-    -o-transition: .3s;
+.rightbutton {
+  width: 35px;
+  height: 35px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: none;
+  background-color: var(--aria-theme);
+  color: white;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
-.rightbutton:hover{
-    background-color: #f9acc7;
+.rightbutton:hover {
+  background-color: #f9acc7;
 }
-.rightbutton>svg{
-    width:18px;
-    height:18px;
+.rightbutton > svg {
+  width: 18px;
+  height: 18px;
 }
-.rightbutton.rightbutton-toc{
-    display: none;
+.rightbutton.rightbutton-toc {
+  display: none;
 }
 @media screen and (max-width: 900px) {
-    .rightbutton.rightbutton-toc{
-        display: block!important;
-    }
+  .rightbutton.rightbutton-toc {
+    display: block !important;
+  }
 }

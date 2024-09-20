@@ -1,19 +1,21 @@
-export const revalidate=3600;
+export const revalidate = 3600;
 
-import { siteConfigs } from '@/config'
+import { siteConfigs } from "@/config";
 
 export async function GET() {
-    const res=await fetch(`${siteConfigs.backEndUrl}/get/sitemap/sitemapGen`,{next:{tags:["posts"]}});
-    if(res.ok){
-        return new Response(await res.text(), {
-            headers: {
-                'content-type': 'application/xml'
-            }
-        });
-    }
-    return new Response("", {
-        headers: {
-            'content-type': 'application/xml'
-        }
+  const res = await fetch(`${siteConfigs.backEndUrl}/get/sitemap/sitemapGen`, {
+    next: { tags: ["posts"] },
+  });
+  if (res.ok) {
+    return new Response(await res.text(), {
+      headers: {
+        "content-type": "application/xml",
+      },
     });
+  }
+  return new Response("", {
+    headers: {
+      "content-type": "application/xml",
+    },
+  });
 }
