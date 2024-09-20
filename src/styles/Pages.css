@@ -1,26 +1,26 @@
-#article-container.page{
-    width:100%;
-    padding-top: 100px;
+#article-container.page {
+  width: 100%;
+  padding-top: 100px;
 }
-#main-container.page{
-    margin:0;
-    max-width: 100%;
+#main-container.page {
+  margin: 0;
+  max-width: 100%;
 }
-.flink-avatar{
-    position: relative;
+.flink-avatar {
+  position: relative;
 }
 @media screen and (min-width: 768px) {
-    #article-container.page{
-        padding-left:70px;
-        padding-right:70px;
-    }
+  #article-container.page {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
 }
 @media (prefers-color-scheme: dark) {
-    #article-container.page{
-        background-color: #0000007d;
-    }
+  #article-container.page {
+    background-color: #0000007d;
+  }
 }
-#post-maincontent.page{
-    max-width: 1500px;
-    margin: 0 auto;
+#post-maincontent.page {
+  max-width: 1500px;
+  margin: 0 auto;
 }

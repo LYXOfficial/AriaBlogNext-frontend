@@ -1,25 +1,26 @@
-#footer-wrap{
-    background-color: var(--aria-acrylic2);
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px 30px;
-}  
-#footer-copyright,#footer-rundays{
-    white-space: nowrap; 
+#footer-wrap {
+  background-color: var(--aria-acrylic2);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 30px;
 }
-#footer-framework-info>a{
-    margin-right: 8px;
+#footer-copyright,
+#footer-rundays {
+  white-space: nowrap;
 }
-#footer-rundays{
-    flex-grow: 1;
-    text-align: right;
-    margin-left:5px;
-    white-space: wrap;
+#footer-framework-info > a {
+  margin-right: 8px;
 }
-#footer-copyright{
-    margin-right:20px;
-    margin-bottom:5px;
+#footer-rundays {
+  flex-grow: 1;
+  text-align: right;
+  margin-left: 5px;
+  white-space: wrap;
 }
-#footer-framework-info{
-    margin-bottom: 5px;
+#footer-copyright {
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+#footer-framework-info {
+  margin-bottom: 5px;
 }

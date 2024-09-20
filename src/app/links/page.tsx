@@ -1,4 +1,4 @@
-export const revalidate=7200;
+export const revalidate = 7200;
 
 import "styles/Pages.css";
 import "styles/PostContent.css";
@@ -7,15 +7,17 @@ import { HomeRightSide } from "components/RightSide";
 import { siteConfigs } from "@/config";
 
 export const metadata = {
-    title: "友链 | "+siteConfigs.title,
-}
+  title: "友链 | " + siteConfigs.title,
+};
 
-export default function Page(){
-    return (
-        <><style>{`#navbar{position:fixed}`}</style>
-        <div id="main-container" className="page">
-            <FriendLinks/>
-            <HomeRightSide/>
-        </div></>
-    );
+export default function Page() {
+  return (
+    <>
+      <style>{`#navbar{position:fixed}`}</style>
+      <div id="main-container" className="page">
+        <FriendLinks />
+        <HomeRightSide />
+      </div>
+    </>
+  );
 }

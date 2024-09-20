@@ -8,28 +8,34 @@ import CardToc from "components/asides/CardToc";
 import CardRelatedPosts from "components/asides/CardRelatedPosts";
 
 export function HomeASides() {
-    return (
-        <div id="aside-container">
-            <CardInfo/>
-            <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
-            <div className="aside-sticky-container">
-                <CardLatestComments/>
-                <CardArchives/>
-                <CardWebInfo/>
-            </div>
-        </div>
-    );
+  return (
+    <div id="aside-container">
+      <CardInfo />
+      <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>} />
+      <div className="aside-sticky-container">
+        <CardLatestComments />
+        <CardArchives />
+        <CardWebInfo />
+      </div>
+    </div>
+  );
 }
-export async function PageASides({htmlContent,slug}:{htmlContent:string,slug:string}) {
-    return (
-        <div id="aside-container">
-            <CardInfo/>
-            <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>}/>
-            <div className="aside-sticky-container">
-                <CardToc htmlContent={htmlContent}/>
-                <CardNewestPosts/>
-                <CardRelatedPosts slug={slug}/>
-            </div>
-        </div>
-    );
+export async function PageASides({
+  htmlContent,
+  slug,
+}: {
+  htmlContent: string;
+  slug: string;
+}) {
+  return (
+    <div id="aside-container">
+      <CardInfo />
+      <CardAnnouncement content={<>欢迎光临AriaのNext.js新博客QwQ~</>} />
+      <div className="aside-sticky-container">
+        <CardToc htmlContent={htmlContent} />
+        <CardNewestPosts />
+        <CardRelatedPosts slug={slug} />
+      </div>
+    </div>
+  );
 }

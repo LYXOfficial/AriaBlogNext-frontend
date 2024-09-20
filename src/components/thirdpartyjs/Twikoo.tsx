@@ -19,15 +19,24 @@ export function TwikooBaseComment() {
       div.id = "owo-big";
       body.appendChild(div);
 
-      let observer = new MutationObserver(mutations => {
+      let observer = new MutationObserver((mutations) => {
         for (let i = 0; i < mutations.length; i++) {
           let dom = mutations[i].addedNodes,
             owo_body: HTMLElement | null = null;
-          if (dom.length == 2 && (dom[1] as HTMLElement).className == "OwO-body") owo_body = dom[1] as HTMLElement;
-          else if (dom.length == 1 && (dom[0] as HTMLElement).className == "tk-comment") owo_body = dom[0] as HTMLElement;
+          if (
+            dom.length == 2 &&
+            (dom[1] as HTMLElement).className == "OwO-body"
+          )
+            owo_body = dom[1] as HTMLElement;
+          else if (
+            dom.length == 1 &&
+            (dom[0] as HTMLElement).className == "tk-comment"
+          )
+            owo_body = dom[0] as HTMLElement;
           else continue;
 
-          if (document.body.clientWidth <= 768) owo_body.addEventListener("contextmenu", e => e.preventDefault());
+          if (document.body.clientWidth <= 768)
+            owo_body.addEventListener("contextmenu", (e) => e.preventDefault());
 
           owo_body.onmouseover = (e: MouseEvent) => {
             const target = e.target as HTMLImageElement;
@@ -39,7 +48,8 @@ export function TwikooBaseComment() {
                   left = e.x - e.offsetX - (width - target.clientWidth) / 2,
                   top = e.y - e.offsetY;
 
-                if (left + width > body.clientWidth) left -= left + width - body.clientWidth + 10;
+                if (left + width > body.clientWidth)
+                  left -= left + width - body.clientWidth + 10;
                 if (left < 0) left = 10;
 
                 div.style.cssText = `display:flex; height:${height}px; width:${width}px; left:${left}px; top:${top}px;`;
@@ -102,7 +112,9 @@ export function TwikooCountPost() {
       urls: [document.location.pathname, document.location.pathname + "/"],
       includeReply: true,
     }).then((res: { count: number }[]) => {
-      const commentCountElement = document.querySelector(".post-commentcount>.post-meta-content");
+      const commentCountElement = document.querySelector(
+        ".post-commentcount>.post-meta-content",
+      );
       if (commentCountElement) {
         commentCountElement.textContent = `${res[0].count + res[1].count} 条评论`;
       }
@@ -116,7 +128,7 @@ export function TwikooCountHome() {
   useEffect(() => {
     (async () => {
       const tk = require("twikoo/dist/twikoo.min");
-      document.querySelectorAll(".post-info").forEach(el => {
+      document.querySelectorAll(".post-info").forEach((el) => {
         const postTitle = el.querySelector(".post-title") as HTMLAnchorElement;
         let hr = "/" + postTitle.href.split("/").slice(3).join("/");
         tk.getCommentsCount({
@@ -124,25 +136,46 @@ export function TwikooCountHome() {
           urls: [hr, hr + "/"],
           includeReply: true,
         }).then((res: { count: number }[]) => {
-          const commentCountElement = el.querySelector(".post-commentcount>.post-meta-content");
+          const commentCountElement = el.querySelector(
+            ".post-commentcount>.post-meta-content",
+          );
           if (commentCountElement) {
             commentCountElement.textContent = `${res[0].count + res[1].count} 条评论`;
           }
         });
       });
 
-      const rest = await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`, { next: { tags: ["posts"] } });
-      const pages = ["/messageboard", "/messageboard/", "/speaks", "/speaks/", "/about", "/about/", "/links", "/links/"];
+      const rest = await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`, {
+        next: { tags: ["posts"] },
+      });
+      const pages = [
+        "/messageboard",
+        "/messageboard/",
+        "/speaks",
+        "/speaks/",
+        "/about",
+        "/about/",
+        "/links",
+        "/links/",
+      ];
       if (rest.ok) {
         const postSlugs = (await rest.json()).data as string[];
         tk.getCommentsCount({
           envId: siteConfigs.twikooEnv,
-          urls: postSlugs.map(slug => `/posts/${slug}`).concat(postSlugs.map(slug => `/posts/${slug}/`)).concat(pages),
+          urls: postSlugs
+            .map((slug) => `/posts/${slug}`)
+            .concat(postSlugs.map((slug) => `/posts/${slug}/`))
+            .concat(pages),
           includeReply: true,
         }).then((res: { count: number }[]) => {
-          const webinfoCommentCountElement = document.querySelector(".card-webinfo-item-right.commentcount");
+          const webinfoCommentCountElement = document.querySelector(
+            ".card-webinfo-item-right.commentcount",
+          );
           if (webinfoCommentCountElement) {
-            webinfoCommentCountElement.textContent = res.map(r => r.count).reduce((a, b) => a + b).toString();
+            webinfoCommentCountElement.textContent = res
+              .map((r) => r.count)
+              .reduce((a, b) => a + b)
+              .toString();
           }
         });
       }
