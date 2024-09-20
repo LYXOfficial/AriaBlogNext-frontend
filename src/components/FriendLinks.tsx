@@ -5,8 +5,22 @@ import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import { siteConfigs } from "@/config";
 import Lazyload from "./thirdpartyjs/Lazyload";
 import MDRenderer from "@/utils/mdrender";
+import { Icon } from "@iconify/react";
+import { ReactElement } from "react";
 
 export function FriendLinkItem({link}:{link:FriendLink}) {
+    let latencyIcon:ReactElement=<></>;
+    if(link.latency!>0){
+        if(link.latency!<=0.5)
+            latencyIcon=<Icon icon="ph:cell-signal-full-bold" style={{color:"green"}}/>;
+        else if(link.latency!<=1)
+            latencyIcon=<Icon icon="ph:cell-signal-high-bold" style={{color:"#40c370"}}/>;
+        else if(link.latency!<=2)
+            latencyIcon=<Icon icon="ph:cell-signal-medium-bold" style={{color:"orange"}}/>;
+        else
+            latencyIcon=<Icon icon="ph:cell-signal-low-bold" style={{color:"red"}}/>;
+    }
+    else latencyIcon=<Icon icon="ph:cell-signal-x-bold" color="red"/>;
     return (
         <a className="flink-item cf-friends-link" href={link.url} target="_blank" rel="noopener noreferrer" 
             style={{backgroundColor:link.color,color:"white"}}>
@@ -17,6 +31,10 @@ export function FriendLinkItem({link}:{link:FriendLink}) {
             </div>
             <span className="flink-name cf-friends-name">{link.name}</span>
             <span className="flink-desc">{link.description}</span>
+            <span className="flink-status" title={link.latency!>0?"加载: "+link.latency!*1000+"ms":"不可达"}>
+                {latencyIcon}
+                {/* {link.latency!>0?`${link.latency}s`:""} */}
+            </span>
         </a>
     );
 }

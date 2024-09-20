@@ -14,6 +14,7 @@
     height: 100px;
     margin-left:10px;
     margin-right: 10px;
+    position: relative;
 }
 .flink-item:last-of-type{
     margin-right:auto;
@@ -73,4 +74,21 @@
 }
 #flinks{
     margin-bottom:20px;
+}
+.flink-status{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right:10px;
+    bottom:10px;
+    font-size:14px;
+    border-radius: 15px;
+    padding: 3px 5px;
+    background-color: var(--aria-acrylic2);
+    color: var(--aria-fontcolor);
+}
+.flink-status svg{
+    width:20px;
+    height:20px;
+    /* margin-right:5px; */
 }

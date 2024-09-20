@@ -4,6 +4,8 @@ export declare interface FriendLink{
     avatar: string;
     description: string;
     color: string;
+    id: string;
+    latency?: number;
 }
 export declare interface FriendLinkGroup{
     name: string;
