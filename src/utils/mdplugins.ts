@@ -133,13 +133,20 @@ ${content}
                 const isActive=tabIndex===0?" active":"";
                 tabHeaders+=`<button class="etag-tab-header${isActive}" data-index="${tabIndex}">${tabTitle}</button>`;
                 tabBodies+=`<div class="etag-tab-body${isActive}" data-index="${tabIndex}">
+
 ${tabBody}
+
 </div>`;
                 tabIndex++;
             });
-            tabsHtml+=`<div class="etag-tab-headers">${tabHeaders}</div><div class="etag-tab-bodies">${tabBodies}</div></div>
+            tabsHtml+=`<div class="etag-tab-headers">${tabHeaders}</div><div class="etag-tab-bodies">
+
+${tabBodies}
+
+</div></div>
 
 `;
+            console.log(tabsHtml);
             return tabsHtml;
         });
     }
