@@ -103,3 +103,6 @@
     z-index: 114514;
     transform: translateX(calc(100vw - 100%));
 }
+.tk-comments-container{
+    line-height: 2;
+}
