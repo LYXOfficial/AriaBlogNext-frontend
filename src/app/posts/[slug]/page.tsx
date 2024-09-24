@@ -11,7 +11,6 @@ import { PostRightSide } from "components/RightSide";
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{
-        
         fetch(`${siteConfigs.backEndUrl}/get/post/postBySlug?slug=${slug}`,{next:{tags:[slug]}})
             .then(async res=>{
                 if(!res.ok) reject();

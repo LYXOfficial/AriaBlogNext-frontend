@@ -119,7 +119,7 @@ ${content}
             icon=icon.toLowerCase().trim();
             content=content.trim();
             return `<div class="etag-note ${icon}">${content}</div>
- 
+
 `;
         });
     }
@@ -165,6 +165,12 @@ ${content}
 </div>
 
 `;
+        });
+    }
+    static promptTag(markdown: string) {
+        const promptRegex = /{%\s*prompt\s+([^,]+)\s*,\s*([^%]+)\s*%}/g;
+        return markdown.replace(promptRegex, (match, content, message) => {
+            return `<span class="etag-prompt" onmouseenter="this.querySelector('.etag-prompt-tooltip').className='etag-prompt-tooltip show'" onmouseleave="this.querySelector('.etag-prompt-tooltip').className='etag-prompt-tooltip hide'">${content.trim()}<span class="etag-prompt-tooltip hide">${message.trim()}</span></span>`;
         });
     }
 };

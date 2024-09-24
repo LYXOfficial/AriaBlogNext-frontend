@@ -16,6 +16,7 @@ const MDRenderer=cache(async (mdContent:string,slug="")=>{
             .addFilter(TagPlugin.tipTag)
             .addFilter(TagPlugin.tabsTag)
             .addFilter(TagPlugin.chatTag)
+            .addFilter(TagPlugin.promptTag)
             .runRewrite();
     const renderer=new marked.Renderer();
     renderer.link=MarkedCustomTags.a;
