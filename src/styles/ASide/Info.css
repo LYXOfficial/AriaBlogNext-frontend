@@ -63,10 +63,10 @@
     grid-column-end:3;
     grid-row:3;
 }
-.card-info-social{
+.card-info-Social{
     margin-right:10px;
 }
-.card-info-social svg{
+.card-info-Social svg{
     width: 1.1em;
     height: 1.1em;
 }

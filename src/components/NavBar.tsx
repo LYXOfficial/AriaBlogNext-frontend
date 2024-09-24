@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import "styles/NavBar.css";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
-import { menuItems,siteConfigs } from "config";
-import { useRouter } from "next/navigation";
+import { MenuItems,siteConfigs } from "config";
+import { useRouter } from "nextjs-toploader/app";
 import { throttle } from "lodash";
 import { usePathname } from 'next/navigation'
 import SearchBox from "components/SearchBox";
+import { MenuItem } from "@/interfaces/menuitem";
 
 export default function NavBar() {
     const router=useRouter();
@@ -49,7 +50,7 @@ export default function NavBar() {
             <Link id="site-name" href="/">{siteConfigs.title}</Link>
             <div id="menu-center">
                 <div id="menu-items" className={mobileMenuOpen?"mobile-menu-open":"mobile-menu-close"}>
-                    {menuItems.map((item)=>{
+                    {MenuItems.map((item)=>{
                         return (
                             <div className="menu-item" key={item.name}
                                 onMouseEnter={()=>setHoveringElement(item.name)} onMouseLeave={()=>setHoveringElement("")}>
@@ -66,7 +67,7 @@ export default function NavBar() {
                                     }
                                     {item.childs.length?
                                         <div className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
-                                            {item.childs.map((child)=>{
+                                            {item.childs.map((child:MenuItem)=>{
                                                 return (
                                                     <Link href={child.link} key={child.name} className="site-page-child">
                                                         {child.icon}

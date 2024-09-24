@@ -1,12 +1,12 @@
 "use client";
-import "social-share.js/dist/css/share.min.css";
+import "Social-share.js/dist/css/share.min.css";
 import { useEffect } from "react";
 import { Post } from "@/interfaces/post";
 
 export default function ShareJs({postInfo}:{postInfo:Post}) {
     useEffect(()=>{(async ()=>{
         require('jquery');
-        require('social-share.js/dist/js/social-share.min.js');
+        require('Social-share.js/dist/js/Social-share.min.js');
         (window as any).socialShare("#postend-share", {
             title: postInfo.title,
             description: postInfo.description?postInfo.description:postInfo.plainContent?.substring(0,100).replace("\n"," "),

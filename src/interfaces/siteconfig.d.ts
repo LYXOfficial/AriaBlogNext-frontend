@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 
-export declare interface siteConfig{
+export declare interface SiteConfig{
     author: string,
     avatar: string,
     title: string,
-    socials: social[],
+    socials: Social[],
     createYear: number,
     createDay: number,
     createMonth: number,
@@ -16,7 +16,7 @@ export declare interface siteConfig{
     falldownImg: string,
     fcircleUrl: string,
 }
-export declare interface social{
+export declare interface Social{
     name: string,
     url: string,
     icon: ReactElement,

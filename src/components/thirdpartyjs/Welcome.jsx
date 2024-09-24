@@ -60,7 +60,7 @@ export default function Welcome(){
         }
         const{lMonth,lDay}=calendar.solar2lunar(year,month,day);
         const specialDaysMessage=SpecialDaysGre.get(`${month}-${day}`)||SpecialDaysLunar.get(`${lMonth}-${lDay}`);
-        if(specialDaysMessage)Snackbar.show({text:specialDaysMessage,pos:'top-left',showAction:false});
+        if(specialDaysMessage) Snackbar.show({text:specialDaysMessage,pos:'top-left',showAction:false});
     })()},[router]);
     return <></>;
 }

@@ -1,7 +1,7 @@
 "use client";
 import "styles/Footer.css"
 import { useState } from "react"
-import { footerBadges,siteConfigs } from "config"
+import { FooterBadges,siteConfigs } from "config"
 
 export default function Footer(){
     const [footerRunDaysContent,setFooterRunDaysContent]=useState("这个小破站已运行 2 年 85 天 2 时 12 分 19 秒");
@@ -33,7 +33,7 @@ export default function Footer(){
             <div id="footer-copyright">©{siteConfigs.createYear} - {new Date().getFullYear()} By {siteConfigs.author}</div>
             <div id="footer-framework-info">
                 {
-                    footerBadges.map((item)=>{
+                    FooterBadges.map((item)=>{
                         return (
                             <a target="_blank" key={item.link} title={item.link} rel="noopener external nofollow noreferrer" href={item.link}>
                                 <img src={item.badgeUrl} alt=""/>

@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import ASideList from "components/asides/ASideList";
 import moment from "moment";
 import { Post } from "interfaces/post";
-import { aSideListItem } from "interfaces/asidelistitem";
+import { ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config"
 
 export default async function CardNewestPosts(){
@@ -25,7 +25,7 @@ export default async function CardNewestPosts(){
                             pic: item.bannerImg,
                             link: "/posts/"+item.slug
                         };
-                    }) as aSideListItem[]}
+                    }) as ASideListItem[]}
                     falldownImg={siteConfigs.falldownImg}
                 />
             </div>

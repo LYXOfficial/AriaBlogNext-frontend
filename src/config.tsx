@@ -1,9 +1,9 @@
-import { menuItem } from "interfaces/menuitem";
-import { siteConfig } from "interfaces/siteconfig";
-import { footerBadge } from "interfaces/footerbadge";
+import { MenuItem } from "interfaces/MenuItem";
+import { SiteConfig } from "interfaces/SiteConfig";
+import { FooterBadge } from "interfaces/FooterBadge";
 import { Icon } from "@iconify/react";
 
-export const siteConfigs:siteConfig={
+export const siteConfigs:SiteConfig={
     author: "Ariasaka",
     title: "Ariasakaの小窝",
     siteUrl: "https://blog.yaria.top",
@@ -47,7 +47,7 @@ export const siteConfigs:siteConfig={
     ]
 };
 
-export const menuItems:menuItem[]=[
+export const MenuItems:MenuItem[]=[
     {
         name: "首页",
         link: "/",
@@ -130,7 +130,7 @@ export const menuItems:menuItem[]=[
     },
 ];
 
-export const footerBadges:footerBadge[]=[
+export const FooterBadges:FooterBadge[]=[
     {
         badgeUrl: "https://img.shields.io/badge/Framework-Next.js-black",
         link: "https://nextjs.org"

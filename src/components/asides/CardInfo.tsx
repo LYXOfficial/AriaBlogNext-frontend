@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import "styles/ASide/global.css"
 import "styles/ASide/Info.css"
-import { social } from "interfaces/siteconfig"
+import { Social } from "interfaces/SiteConfig"
 import { siteConfigs } from 'config'
 
 export default async function CardInfo(){
@@ -45,9 +45,9 @@ export default async function CardInfo(){
             </div>
             <div className="card-info-socials">
                 {
-                    siteConfigs.socials.map((link:social)=>{
+                    siteConfigs.socials.map((link:Social)=>{
                         return (
-                            <a key={link.name} className="card-info-social" href={link.url} title={link.name}>
+                            <a key={link.name} className="card-info-Social" href={link.url} title={link.name}>
                                 {link.icon}
                             </a>
                         )

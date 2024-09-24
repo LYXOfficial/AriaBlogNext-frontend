@@ -2,22 +2,22 @@
 import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import ASideList from "components/asides/ASideList";
-import { twikooCommentItem,aSideListItem } from "interfaces/asidelistitem";
+import { TwikooCommentItem,ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
 import { useEffect, useState } from "react";
 
 export default function CardLatestComments(){
-    const [comments,setComments]=useState<twikooCommentItem[]>([]);
+    const [comments,setComments]=useState<TwikooCommentItem[]>([]);
     useEffect(()=>{(async ()=>{
         var twikoo=require('twikoo/dist/twikoo.min');
-        let res:twikooCommentItem[]=await new Promise((resolve,reject)=>{
+        let res:TwikooCommentItem[]=await new Promise((resolve,reject)=>{
             try{
                 twikoo.getRecentComments({
                     envId: siteConfigs.twikooEnv,
                     region: '',
                     pageSize: 5,
                     includeReply: true
-                }).then((res:twikooCommentItem[]) => {
+                }).then((res:TwikooCommentItem[]) => {
                     resolve(res);
                 })
             }
@@ -39,14 +39,14 @@ export default function CardLatestComments(){
                 {
                     comments.length==5?
                         (<ASideList items={
-                            comments.map((item:twikooCommentItem|undefined)=>{
+                            comments.map((item:TwikooCommentItem|undefined)=>{
                                 return {
                                     title: item!.commentText!.replace("\n"," "),
                                     content: `${item!.nick} / ${item!.relativeTime}`,
                                     pic: item!.avatar,
                                     link: item!.url as string+"#"+item!.id,
                                 };
-                            }) as aSideListItem[]
+                            }) as ASideListItem[]
                         }
                         falldownImg={siteConfigs.falldownAvatar}
                         />):(comments.length?<center>评论获取失败，请检查相关配置是否正确</center>:<center>获取中...</center>)

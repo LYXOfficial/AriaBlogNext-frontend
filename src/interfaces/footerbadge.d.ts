@@ -1,4 +1,4 @@
-export declare interface footerBadge {
+export declare interface FooterBadge {
     badgeUrl: string,
     link: string,
 }
