@@ -34,6 +34,13 @@
 .archive-item:hover{
     background-color: var(--aria-acrylic2);
 }
+.archive-item:hover .archive-item-title{
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+}
 .archive-item-category{
     margin-right: 15px;
     display: flex;
@@ -59,6 +66,7 @@
     margin: auto 0;
     /* color:black; */
     font-weight: bold;
+    transition: .3s;
 }
 .archive-item-category:hover{
     background-color: var(--aria-theme);

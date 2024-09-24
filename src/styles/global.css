@@ -271,4 +271,9 @@ p,article{
 #nprogress>*{
     z-index:1145141919810!important;
 }
-
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
