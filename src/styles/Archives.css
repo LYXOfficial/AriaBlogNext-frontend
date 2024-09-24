@@ -22,14 +22,14 @@
     align-items: center;
     color:var(--aria-light-fontcolor)!important;
 }
-object{
+.archive-item object{
     margin-left: auto;
 }
 .archive-item-banner-img{
     z-index: -1;
     object-fit: cover;
-    filter:blur(10px);
-    -webkit-filter:blur(10px);
+    filter:blur(10px) saturate(180%);
+    -webkit-filter:blur(10px) saturate(180%);
 }
 .archive-item:hover{
     background-color: var(--aria-acrylic2);
