@@ -643,11 +643,11 @@ table:not(code table){
 .etag-tab-header.active::before{
     opacity: 1;
 }
-#article-container strong:not(strong:has(code)){
+#article-container strong{
     background: linear-gradient(rgb(255 51 184 / 15%), rgb(255 51 184 / 15%)) no-repeat bottom / 100% 30%;
 }
 @media (prefers-color-scheme:dark){
-    #article-container strong:not(strong:has(code)){
+    #article-container strong{
         background: linear-gradient(rgb(255 51 184 / 30%), rgb(255 51 184 / 30%)) no-repeat bottom / 100% 30%!important;
     }
 }
