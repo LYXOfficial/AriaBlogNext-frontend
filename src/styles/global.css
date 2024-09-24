@@ -100,7 +100,7 @@ body{
 }
 .normal-inlinecode{
     padding: 2px 4px;
-    background: #1b1f230d;
+    background: #f3f3f3;
     color: #f47466;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -108,6 +108,11 @@ body{
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
     word-wrap: break-word;
+}
+@media (perfers-color-scheme:dark){
+    .normal-inlinecode{
+        background:#2f2f2f!important;
+    }
 }
 code,pre{
     font-size:14px;
