@@ -118,7 +118,7 @@ code::selection,pre::selection,code *::selection,pre *::selection{
     background-color: var(--aria-theme)!important;
     color:white!important;
 }
-a.normal-a,:is(.tk-content,.bb-content,.barrageContent) a{
+a.normal-a,:is(.tk-content,.bb-content) a{
     border-bottom: 2px dotted var(--aria-theme);
     color:var(--aria-fontcolor);
     padding:4px;
@@ -133,7 +133,7 @@ a.normal-a,:is(.tk-content,.bb-content,.barrageContent) a{
     font-weight: 600;
     padding-right:18px!important;
 }
-:is(a.normal-a,:is(.tk-content,.bb-content,#barrage-container .barrageContent) a):hover{
+:is(a.normal-a,:is(.tk-content,.bb-content) a):hover{
     background-color: var(--aria-theme);
     text-decoration: none!important;
     color:var(--aria-white)!important;
@@ -145,7 +145,7 @@ a.normal-a,:is(.tk-content,.bb-content,.barrageContent) a{
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
 }
-:is(a.normal-a,:is(.tk-content,.bb-content,.barrageContent) a)::after{
+:is(a.normal-a,:is(.tk-content,.bb-content) a)::after{
     content: "\f35d";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
