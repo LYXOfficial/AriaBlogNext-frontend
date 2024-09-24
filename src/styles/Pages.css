@@ -5,6 +5,7 @@
 #main-container.page{
     margin:0;
     max-width: 100%;
+    width: 100%;
 }
 .flink-avatar{
     position: relative;
