@@ -14,7 +14,7 @@ export default function PostChat(){
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
             dangerouslySetInnerHTML={{__html:`
-            let tianliGPT_postSelector='#article-container>#post-maincontent';
+            let tianliGPT_postSelector='#article-container:not(#article-container.page)>#post-maincontent';
             let tianliGPT_recommendation=true;
             let tianliGPT_Title='这是文章摘要！QwQ';
             let tianliGPT_postURL="*/posts/*";
