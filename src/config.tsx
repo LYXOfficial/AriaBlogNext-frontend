@@ -1,6 +1,6 @@
-import { MenuItem } from "interfaces/MenuItem";
-import { SiteConfig } from "interfaces/SiteConfig";
-import { FooterBadge } from "interfaces/FooterBadge";
+import { MenuItem } from "interfaces/menuitem";
+import { SiteConfig } from "interfaces/siteconfig";
+import { FooterBadge } from "interfaces/footerbadge";
 import { Icon } from "@iconify/react";
 
 export const siteConfigs:SiteConfig={

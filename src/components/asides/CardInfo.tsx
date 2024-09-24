@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import "styles/ASide/global.css"
 import "styles/ASide/Info.css"
-import { Social } from "interfaces/SiteConfig"
+import { Social } from "interfaces/siteconfig"
 import { siteConfigs } from 'config'
 
 export default async function CardInfo(){

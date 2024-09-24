@@ -8,7 +8,7 @@ import { useRouter } from "nextjs-toploader/app";
 import { throttle } from "lodash";
 import { usePathname } from 'next/navigation'
 import SearchBox from "components/SearchBox";
-import { MenuItem } from "@/interfaces/menuitem";
+import { MenuItem, MenuItemChild } from "@/interfaces/menuitem";
 
 export default function NavBar() {
     const router=useRouter();
@@ -67,7 +67,7 @@ export default function NavBar() {
                                     }
                                     {item.childs.length?
                                         <div className={"site-page-childs "+(hoveringElement==item.name?"show":"hide")}>
-                                            {item.childs.map((child:MenuItem)=>{
+                                            {item.childs.map((child:MenuItemChild)=>{
                                                 return (
                                                     <Link href={child.link} key={child.name} className="site-page-child">
                                                         {child.icon}
