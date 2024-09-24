@@ -109,7 +109,7 @@ body{
     -o-border-radius: 4px;
     word-wrap: break-word;
 }
-@media (perfers-color-scheme:dark){
+@media (prefers-color-scheme:dark){
     .normal-inlinecode{
         background:#2f2f2f!important;
     }

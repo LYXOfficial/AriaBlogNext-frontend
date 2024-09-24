@@ -185,7 +185,7 @@ table:not(code table){
     content:"";
 }
 .hljs-folder pre{
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 .hljs-folder pre::-webkit-scrollbar{
     height:8px;
