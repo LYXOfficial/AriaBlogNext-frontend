@@ -80,7 +80,32 @@ body{
     overflow-x:hidden;
     font-size: 16px;
     -webkit-tap-highlight-color: transparent;
+    /* background-color: transparent; */
 }
+/* body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:url(https://bu.dusays.com/2022/09/17/6324af3622884.webp);
+    z-index: -2;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+body::after{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff8;
+    z-index: -1;
+    backdrop-filter: blur(10px);
+} */
 .normal-img{
     margin:0 auto;
 }

@@ -14,7 +14,7 @@ export default function Page(){
       <style>{`#navbar{position:fixed}`}</style>
       <div id="main-container" className="page">
           <div id="article-container" className="page">
-            <div id="post-maincontent">
+            <div id="post-maincontent" className="page">
               <h1>哔哔</h1>
               <Speaks/>
             </div>
