@@ -22,15 +22,15 @@ export default function SearchBox({show,closeFunction}:{closeFunction:Function,s
             return (
               <div className="search-box-result card-widget" key={post.slug}>
                 <Link className="search-box-result-link" 
-                  href={`/posts/${post.slug}`} 
+                  href={`/posts/${post.slug}#:~:text=${encodeURI(query)}`}
                   onClick={()=>{closeFunction()}}
                   dangerouslySetInnerHTML={{
-                    __html:post.title!.replace(eval(`/${query}/gi`),(q)=>`<span class="search-box-result-highlight">${q}</span>`)
+                    __html:post.title!.replace(new RegExp(`${query}`,"gi"),(q)=>`<span class="search-box-result-highlight">${q}</span>`)
                   }}
                 />
                 <div className="search-box-result-context" 
                   dangerouslySetInnerHTML={{__html:
-                    post.context!.replace(eval(`/${query}/gi`),(q)=>`<span class="search-box-result-highlight">${q}</span>`)
+                    post.context!.replace(new RegExp(`${query}`,"gi"),(q)=>`<span class="search-box-result-highlight">${q}</span>`)
                   }}/>
                 <span className="search-box-result-time">
                   <Icon icon="fa6-solid:calendar"/>

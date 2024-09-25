@@ -7,6 +7,7 @@ import Lazyload from "./thirdpartyjs/Lazyload";
 import MDRenderer from "@/utils/mdrender";
 import { Icon } from "@iconify/react";
 import { ReactElement } from "react";
+import stringRandom from "string-random";
 
 export function FriendLinkItem({link}:{link:FriendLink}) {
     let latencyIcon:ReactElement=<></>;
@@ -21,9 +22,24 @@ export function FriendLinkItem({link}:{link:FriendLink}) {
             latencyIcon=<Icon icon="system-uicons:signal-none"/>;
     }
     else latencyIcon=<Icon icon="system-uicons:close" className="flink-none-icon"/>;
+    const id=stringRandom(16);
     return (
-        <a className="flink-item cf-friends-link" href={link.url} target="_blank" rel="noopener noreferrer" 
-            style={{backgroundColor:link.color,color:"white"}}>
+        <a 
+            className="flink-item cf-friends-link" 
+            href={link.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            id={`flink-${id}`}
+        >
+            <style>
+                {`
+                    #flink-${id}{
+                        background-color:${link.color??"#888888"};
+                        background-color:color-mix(in srgb,${link.color??"#888888"},transparent 25%);
+                        color:white;
+                    }
+                `}
+            </style>
             <div className="flink-avatar" dangerouslySetInnerHTML={{
                 __html:`<img class="flink-avatar-img lazy-img cf-friends-avatar" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src=${link.avatar} alt=${link.name} 
                     onerror="this.src='${siteConfigs.falldownAvatar}'"/>`
