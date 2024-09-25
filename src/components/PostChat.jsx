@@ -17,7 +17,7 @@ export default function PostChat(){
             let tianliGPT_postSelector='#article-container:not(#article-container.page)>#post-maincontent';
             let tianliGPT_recommendation=true;
             let tianliGPT_Title='这是文章摘要！QwQ';
-            let tianliGPT_postURL="*/posts/*";
+            let tianliGPT_postURL="*/posts/*"; 
             var postChatConfig={
                 backgroundColor: "#ed709b",
                 bottom: "16px",
