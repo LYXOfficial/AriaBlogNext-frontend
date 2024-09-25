@@ -69,7 +69,7 @@
     flex-grow: 1;
     font-size:18px;
     margin-left:10px;
-    font-family: "HYTMR";
+    font-family: "HYTMR",sans-serif;
     background-color: transparent;
     border:none;
     padding:5px;

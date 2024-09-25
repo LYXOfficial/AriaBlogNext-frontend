@@ -1,5 +1,5 @@
 #twikoo,#twikoo *{
-    font-family: "HYTMR";
+    font-family: "HYTMR",sans-serif;
 }
 #post-comment-header{
     display: flex;

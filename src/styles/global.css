@@ -141,7 +141,7 @@ body::after{
 }
 code,pre{
     font-size:14px;
-    font-family: "Monaco",monospace,"HYTMR";
+    font-family: "Monaco",monospace,sans-serif,"HYTMR";
     line-height: 1.6;
 }
 code::selection,pre::selection,code *::selection,pre *::selection{
@@ -258,10 +258,10 @@ p,article{
 .snackbar-container .action{
     color:var(--aria-theme)!important;
     background-color: transparent!important;
-    font-family: "HYTMR"!important;
+    font-family: "HYTMR",sans-serif!important;
 }
 .snackbar-container{
-    font-family: "HYTMR"!important;
+    font-family: "HYTMR",sans-serif!important;
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
 }

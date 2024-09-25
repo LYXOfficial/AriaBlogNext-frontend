@@ -21,7 +21,7 @@
     box-shadow: 0 0 3px var(--aria-theme)!important;
 }
 .cf-time-created i,.cf-time-updated i{
-    font-family: "HYTMR";
+    font-family: "HYTMR",sans-serif;
 }
 .cf-time-created i::before,.cf-time-updated i::before{
     font-family: "Font Awesome 5 Free";
