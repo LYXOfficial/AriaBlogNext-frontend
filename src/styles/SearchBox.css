@@ -5,7 +5,7 @@
     width:min(100vw - 40px, 500px);
     height:min-content;
     z-index:114514;
-    background-color: var(--aria-acrylic2);
+    background-color: var(--aria-acrylic1);
     backdrop-filter: blur(10px);
     opacity: 0;
     transition: .3s;
