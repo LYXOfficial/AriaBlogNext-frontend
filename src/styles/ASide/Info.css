@@ -5,7 +5,6 @@
     position: relative;
     background-image:url(https://bu.dusays.com/2024/06/30/66810ebad84f2.webp);
     z-index:1;
-    image-rendering: pixelated;
     overflow: hidden;
 }
 .card-info::before{
