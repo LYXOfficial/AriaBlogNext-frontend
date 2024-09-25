@@ -777,3 +777,12 @@ pre.hljs.wrap{
     top: -6px;
     right:-15px;
 }
+span[style="undefined:invert"]{
+    color:white;
+    background-color: var(--aria-fontcolor);
+}
+@media (prefers-color-scheme: dark) {
+    span[style="undefined:invert"]{
+        color:black;
+    }
+}

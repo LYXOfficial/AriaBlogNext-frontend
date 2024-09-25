@@ -28,6 +28,7 @@
     "@types/pangu": "^4.0.2",
     "@types/rss": "^0.0.32",
     "ajax-for-node": "^1.0.12",
+    "ansi2html": "^0.0.1",
     "axios": "^1.7.5",
     "bufferutil": "^4.0.8",
     "color": "^4.2.3",
