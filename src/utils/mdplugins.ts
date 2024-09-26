@@ -195,7 +195,7 @@ export class MarkedCustomTags{
         return `<a class="normal-a" href="${href}" target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
     }
     static img({href,title,text}:{href:string,title:string|null,text:string}){
-        return `<a href="${href}" title="点击查看大图" data-fancybox="gallery"><img class="normal-img lazy-img" data-src="${href}" alt="${text}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='"/></a>`;
+        return `<a href="${href}" title="点击查看大图" data-fancybox="gallery"><img class="normal-img lazy-img" data-src="${href}" alt="${text}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='"/><span class="normal-img-descr">${text}</span></a>`;
     }
     static codespan({text}:{text:string}){
         return `<code class="normal-inlinecode">${text}</code>`;

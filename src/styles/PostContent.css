@@ -110,6 +110,8 @@ blockquote p{
 a[data-fancybox]:not(a.inline-image){
     width: 100%;
     display: flex;
+    flex-direction: column;
+    margin-bottom:20px;
 }
 th{
     background-color:#acacacDD;
@@ -432,9 +434,6 @@ table:not(code table){
     font-size: 12px;
     line-height: 16px;
     background-color: var(--aria-theme);
-}
-.normal-img{
-    margin-bottom: 20px;
 }
 #article-container ul,#article-container ol{
     margin:0;
@@ -784,4 +783,9 @@ span[style="undefined:invert"]{
     span[style="undefined:invert"]{
         color:black;
     }
+}
+.normal-img-descr{
+    margin: 0 auto;
+    margin-top: 5px;
+    color: var(--aria-light-fontcolor);
 }
