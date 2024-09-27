@@ -1,5 +1,3 @@
-export const revalidate=7200;
-
 import PostHeader from "components/PostHeader";
 import { Post } from "interfaces/post";
 import { PageASides } from "components/ASides";
@@ -11,7 +9,7 @@ import { PostRightSide } from "components/RightSide";
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{
-        fetch(`${siteConfigs.backEndUrl}/get/post/postBySlug?slug=${slug}`,{next:{tags:[slug]}})
+        fetch(`${siteConfigs.backEndUrl}/get/post/postBySlug?slug=${slug}`,{next:{revalidate:7200,tags:[slug]}})
             .then(async res=>{
                 if(!res.ok) reject();
                 let data=(await res.json());

@@ -1,5 +1,3 @@
-export const revalidate=7200;
-
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import "styles/Archives.css"
@@ -15,12 +13,12 @@ import ImageWithFalldown from "@/components/ImageWithFalldown";
 import { Icon } from "@iconify/react"
 export default async function Page(){
   let ArchiveContent:ReactElement[]=[];
-  const res=await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`,{next:{tags:["posts"]}});
+  const res=await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`,{next:{revalidate:7200,tags:["posts"]}});
   if(res.ok){
     let Archives=new Map<number,Post[]>();
     const data:ArchiveListItem[]=(await res.json()).data;
     await Promise.all(data.map(async (item:ArchiveListItem)=>{
-      const res=await fetch(`${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,{next:{tags:["posts"]}});
+      const res=await fetch(`${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,{next:{revalidate:7200,tags:["posts"]}});
       if(res.ok){
         const posts:Post[]=(await res.json()).data;
         Archives.set(item.year,[...Archives.get(item.year)??[],...posts]);

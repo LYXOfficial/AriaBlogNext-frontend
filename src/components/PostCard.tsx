@@ -12,10 +12,10 @@ import { Category } from "@/interfaces/category";
 
 export default async function Posts({page}:{page:number}){
   let startl=(page-1)*siteConfigs.pageMaxPosts,endl=page*siteConfigs.pageMaxPosts;
-  let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`,{next:{tags:["posts"]}});
+  let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`,{next:{revalidate:7200,tags:["posts"]}});
   if(!resp.ok) return notFound();
   let posts:Post[]=(await resp.json()).data;
-  let resm=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{tags:["posts"]}});
+  let resm=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{revalidate:7200,tags:["posts"]}});
   if(!resm.ok) return notFound();
   let postTotal=(await resm.json()).count;
   const maxPage=Math.ceil(postTotal/siteConfigs.pageMaxPosts);

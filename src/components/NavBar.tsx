@@ -29,7 +29,7 @@ export default function NavBar() {
     },100);
     useEffect(()=>{
         (window as any).toRandomPost=async ()=>{
-            const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`,{next:{tags:["posts"]}})
+            const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`,{next:{revalidate:7200,tags:["posts"]}})
             if(res.ok){
                 const posts:string[]=(await res.json()).data;
                 const randomIndex:number=Math.round(Math.random()*posts.length);

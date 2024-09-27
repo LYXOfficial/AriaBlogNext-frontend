@@ -14,7 +14,7 @@ export default function SearchBox({show,closeFunction}:{closeFunction:Function,s
     const query=inputRef.current?.value.trim();
     if(query){
       setResults(<div id="search-box-results">搜索中...</div>);
-      const res=await fetch(`${siteConfigs.backEndUrl}/get/post/searchPosts?query=${query}`,{next:{tags:["posts"]}});
+      const res=await fetch(`${siteConfigs.backEndUrl}/get/post/searchPosts?query=${query}`,{next:{revalidate:7200,tags:["posts"]}});
       if(res.ok){
         const data:Post[]=(await res.json()).data;
         setResults(<div id="search-box-results">共找到{data.length}篇文章{data.map(

@@ -8,7 +8,7 @@ import { siteConfigs } from "config"
 
 export default async function CardRelatedPosts({slug}:{slug:string}){
     let posts:Post[]=[];
-    let res=await fetch(`${siteConfigs.backEndUrl}/get/post/relatedPosts?slug=${slug}`,{next:{tags:["posts"]}});
+    let res=await fetch(`${siteConfigs.backEndUrl}/get/post/relatedPosts?slug=${slug}`,{next:{revalidate:7200,tags:["posts"]}});
     if(res.ok) posts=(await res.json()).data;
     if(posts.length==0) return <></>;
     return (

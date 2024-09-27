@@ -15,7 +15,7 @@ export async function GET() {
     generator: 'AriaBlogNext Next.js',
     copyright: 'CC BY-NC-SA 4.0',
   })
-  const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo`,{next:{tags:["posts"]}});
+  const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo`,{next:{revalidate:7200,tags:["posts"]}});
   if(res.ok){
     const data:Post[]=(await res.json()).data;
     data.forEach((post) => {

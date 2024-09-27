@@ -67,7 +67,7 @@ export function FriendLinkGroupItem({group}:{group:FriendLinkGroup}) {
 
 export default async function FriendLinks() {
     let flinks:FriendLinkGroup[]=[];
-    const res=await fetch(`${siteConfigs.backEndUrl}/get/flink/flinks`,{next:{tags:["flinks"]}});
+    const res=await fetch(`${siteConfigs.backEndUrl}/get/flink/flinks`,{next:{revalidate:7200,tags:["flinks"]}});
     if(res.ok){
         flinks=(await res.json()).data;
     }
