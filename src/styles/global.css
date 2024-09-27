@@ -141,7 +141,7 @@ body::after{
 }
 code,pre{
     font-size:14px;
-    font-family: "Monaco",monospace,sans-serif,"HYTMR";
+    font-family: "Monaco",monospace,"HYTMR";
     line-height: 1.6;
 }
 code::selection,pre::selection,code *::selection,pre *::selection{

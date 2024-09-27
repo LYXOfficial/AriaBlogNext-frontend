@@ -142,12 +142,14 @@ table:not(code table){
 @media (prefers-color-scheme:light){
     .hljs-folder summary{
         color: #848484;
-        background: #f6f6f6;
+        background: #f0f0f0;
         position: relative;
-        padding: 8px 15px;;
+        padding: 5px 10px;;
         font-size:18px;
         line-height: 1;
         cursor: pointer;
+        display: flex;
+        align-items: center;
     }
     :is(.hljs-copy,.hljs-wrapper) svg path{
         fill:#848484;
@@ -163,15 +165,25 @@ table:not(code table){
         color: #b7bec9;
         background: #424346;
         position: relative;
-        padding:8px 15px;
+        padding:5px 10px;
         font-size:18px;
         line-height: 1;
         cursor: pointer;
+        display: flex;
+        align-items: center;
     }
     :is(.hljs-wrapper,.hljs-copy) svg path{
         fill: #b7bec9;
         transition: all .3s;
     }
+}
+.hljs-lang-icon{
+    display: inline-flex;
+}
+.hljs-lang-icon>svg{
+    width: 20px;
+    height: 20px;
+    margin: 2px 5px;
 }
 .hljs-folder{
     border-radius: 8px;

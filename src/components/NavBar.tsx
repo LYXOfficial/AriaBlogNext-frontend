@@ -86,6 +86,9 @@ export default function NavBar() {
             <div id="menu-buttons">
                 <button className="menu-button" title="搜索" onClick={()=>{
                     setSearchBoxShow(!searchBoxShow);
+                    setTimeout(()=>{
+                        document.getElementById("search-box-input")?.focus();
+                    },10);
                 }}>
                     <Icon icon="fa6-solid:magnifying-glass"/>
                 </button>
