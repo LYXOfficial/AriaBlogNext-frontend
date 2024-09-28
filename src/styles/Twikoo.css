@@ -106,3 +106,6 @@
 .tk-comments-container{
     line-height: 2;
 }
+#post-comment-container{
+    scroll-margin-top:80px;
+}

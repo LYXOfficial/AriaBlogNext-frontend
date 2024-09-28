@@ -14,6 +14,7 @@
     -o-transition: transform 0.4s ;
     padding-left:24px;
     position: relative;
+    scroll-margin-top: 70px;
 }
 #post-maincontent h1:hover,#post-maincontent h2:hover,#post-maincontent h3:hover,#post-maincontent h4:hover,#post-maincontent h5:hover,#post-maincontent h6:hover{
     transform: translateX(10px);

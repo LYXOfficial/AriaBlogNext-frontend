@@ -61,7 +61,7 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
                 document.querySelectorAll(`.toc-link:not(#toc-${currentActiveId})`).forEach(item => {
                     item.className = "toc-link";
                 });
-
+                (async ()=>currentTocLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' }))();
                 let currentTopToc = currentTocLink;
                 while (currentTopToc && currentTopToc.parentNode) {
                     currentTopToc = currentTopToc.parentNode as HTMLElement;
@@ -83,7 +83,7 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Run on mount to set initial active link
+        handleScroll(); 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };

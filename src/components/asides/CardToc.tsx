@@ -1,6 +1,6 @@
 //GPT万岁！！！ QwQ
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 import "styles/ASide/global.css";
 import "styles/ASide/Toc.css";
 import TocUpdater from "components/thirdpartyjs/TocUpdater";
@@ -49,14 +49,15 @@ export default function CardToc({ htmlContent }:CardTocProps){
         });
         return tocTree;
     });
-    const renderTOC=cache((toc:TOCItem[]):string=>{
-        if (!toc||toc.length===0) return '';
-        return toc.map((item)=>(
-            `<li class="toc-child">
-                ${item.href?`<a class="toc-link" id="toc-${item.href}" onclick="document.documentElement.scroll({top:document.querySelector('#${item.href}').offsetTop-70,behavior:'smooth'});">${item.text}</a>` : ''}
-                ${item.children && item.children.length>0?`<ul class="toc-children">${renderTOC(item.children)}</ul>` : ''}
-            </li>`
-        )).join('');
+    const renderTOC=cache((toc:TOCItem[]):ReactElement[]=>{
+        return (
+            toc.map(item=>
+                <li className="toc-child" key={item.href}>
+                    {item.href?<a className="toc-link" id={`toc-${item.href}`} href={`#${item.href}`}>{item.text}</a>:<></>}
+                    {item.children&&item.children.length>0?<ul className="toc-children">{renderTOC(item.children)}</ul>:<></>}
+                </li>
+            )
+        );
     });
     const tocTree=generateTOC(htmlContent);
     return (
@@ -66,7 +67,7 @@ export default function CardToc({ htmlContent }:CardTocProps){
                 <span className="card-title">目录</span>
             </div>
             <div className="card-body">
-                <div className="toc-content" dangerouslySetInnerHTML={{ __html:renderTOC(tocTree) }}></div>
+                <div className="toc-content">{renderTOC(tocTree)}</div>
                 <span className="toc-counter">0</span>
             </div>
             <TocUpdater tocTree={tocTree}/>
