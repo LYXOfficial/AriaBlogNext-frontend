@@ -117,11 +117,6 @@ export const MenuItems:MenuItem[]=[
                 icon: <Icon icon="fa6-solid:circle-info"/>,
             },
             {
-                name: "日志",
-                link: "/update",
-                icon: <Icon icon="fa6-solid:calendar"/>,
-            },
-            {
                 name: "留言板",
                 link: "/messageboard",
                 icon: <Icon icon="fa6-solid:chalkboard"/>,
