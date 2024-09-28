@@ -73,7 +73,7 @@ export default function License() {
             </p>
             <h2>网站源代码相关</h2>
             <p>
-              本站使用 <code className="normal-inlinecode">Next.js</code> 编写，采用 <code className="normal-inlinecode">GPL</code> 许可协议分发源码，并托管源码于 <a href="https://github.com">Github</a>。
+              本站使用 <code className="normal-inlinecode">Next.js</code> 编写，采用 <code className="normal-inlinecode">GPL</code> 许可协议分发源码，并托管源码于 <a className="normal-a" href="https://github.com">Github</a>。
               <br/>
               允许自由使用本站源码，但原则上不允许商业使用与更改许可协议的源码复用。
             </p>

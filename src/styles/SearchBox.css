@@ -42,6 +42,7 @@
     -webkit-transition: .5s;
     -moz-transition: .5s;
     -ms-transition: .5s;
+    backdrop-filter: blur(5px);
 }
 #search-box-mask.show{
     opacity: 1;
