@@ -11,6 +11,7 @@
     -moz-transition: all .5s;
     -ms-transition: all .5s;
     -o-transition: all .5s;
+    /* mask-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%); */
 }
 #post-banner::before{
     content:"";
