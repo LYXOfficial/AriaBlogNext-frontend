@@ -116,7 +116,7 @@ export default function Page(){
                     <li><strong>部署</strong>：Vercel && 群友友情赞助 CDN</li>
                     <li><strong>包管理</strong>：pnpm</li>
                     <li><strong>构建</strong>：Node.js Webpack</li>
-                    <li><strong>样式</strong>：CSS 3 Sass</li>
+                    <li><strong>样式</strong>：CSS3 Sass</li>
                     <li><strong>框架</strong>：Next.js 14 App Router React 18</li>
                     <li><strong>工具库</strong>：color.js lodash string-random js-calendar-converter jquery moment rss JSDOM</li>
                     <li><strong>图标库</strong>：Iconify FontAwesome</li>

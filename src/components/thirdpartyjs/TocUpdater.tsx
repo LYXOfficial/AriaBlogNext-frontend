@@ -61,7 +61,19 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
                 document.querySelectorAll(`.toc-link:not(#toc-${currentActiveId})`).forEach(item => {
                     item.className = "toc-link";
                 });
-                // (async ()=>currentTocLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' }))();
+                if (currentTocLink) {
+                    const tocContent = document.querySelector(".toc-content")!;
+                    const bounding = currentTocLink.getBoundingClientRect();
+                    const tocBounding = tocContent.getBoundingClientRect();
+                    const isAbove = bounding.top < tocBounding.top;
+                    const isBelow = bounding.bottom > tocBounding.bottom;
+                    if (isAbove) {
+                        tocContent.scrollTop -= tocBounding.top - bounding.top+10;
+                    } 
+                    else if (isBelow) {
+                        tocContent.scrollTop += bounding.bottom - tocBounding.bottom+10;
+                    }
+                }
                 let currentTopToc = currentTocLink;
                 while (currentTopToc && currentTopToc.parentNode) {
                     currentTopToc = currentTopToc.parentNode as HTMLElement;
