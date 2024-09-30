@@ -802,3 +802,6 @@ span[style="undefined:invert"]{
     margin-top: 5px;
     color: var(--aria-light-fontcolor);
 }
+#post-maincontent ul, #post-maincontent ol{
+    line-height: 1.8;
+}
