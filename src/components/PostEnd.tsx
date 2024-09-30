@@ -6,6 +6,7 @@ import ShareJs from "components/thirdpartyjs/ShareJs";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import ImageWithFalldown from "components/ImageWithFalldown";
+import React from "react";
 
 export default async function PostEnd({ postInfo }: { postInfo: Post }) {
   var res=await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`,{next:{revalidate:7200,tags:["posts"]}});

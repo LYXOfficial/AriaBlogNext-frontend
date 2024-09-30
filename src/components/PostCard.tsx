@@ -9,6 +9,7 @@ import { TwikooCountHome } from "components/thirdpartyjs/Twikoo";
 import PostCategoryBar from "components/PostCategoryBar";
 import ImageWithFalldown from "./ImageWithFalldown";
 import { Category } from "@/interfaces/category";
+import React from "react";
 
 export default async function Posts({page}:{page:number}){
   let startl=(page-1)*siteConfigs.pageMaxPosts,endl=page*siteConfigs.pageMaxPosts;

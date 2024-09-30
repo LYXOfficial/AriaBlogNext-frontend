@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";
 import { useRouter } from 'nextjs-toploader/app';
+import React from "react";
 
 export default function LicenseTips() {
     const router=useRouter();

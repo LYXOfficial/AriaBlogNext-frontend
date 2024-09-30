@@ -1,6 +1,7 @@
 "use client";
 import { useEffect,useCallback } from 'react';
 import { debounce } from 'lodash';
+import React from "react";
 
 export default function CodeCopier(){
     const handleCopyClick=useCallback(debounce((block)=>{

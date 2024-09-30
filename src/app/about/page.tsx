@@ -134,6 +134,7 @@ export default function Page(){
                     <li><strong>朋友圈</strong>：hexo-friendcircle</li>
                     <li><strong>AI</strong>：TianliGPT PostChat</li>
                     <li><strong>评论</strong>：Twikoo</li>
+                    <li><strong>统计</strong>：不蒜子 By <a className="normal-a">杜老师</a></li>
                 </ul>
                 <h3>后端</h3>
                 <ul>

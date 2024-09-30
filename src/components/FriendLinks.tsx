@@ -8,6 +8,7 @@ import MDRenderer from "@/utils/mdrender";
 import { Icon } from "@iconify/react";
 import { ReactElement } from "react";
 import stringRandom from "string-random";
+import React from "react";
 
 export function FriendLinkItem({link}:{link:FriendLink}) {
     let latencyIcon:ReactElement=<></>;

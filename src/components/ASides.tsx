@@ -6,6 +6,7 @@ import CardWebInfo from "components/asides/CardWebInfo";
 import CardNewestPosts from "components/asides/CardNewestPosts";
 import CardToc from "components/asides/CardToc";
 import CardRelatedPosts from "components/asides/CardRelatedPosts";
+import React from "react";
 
 export function HomeASides() {
     return (

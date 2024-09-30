@@ -6,6 +6,7 @@ import { siteConfigs } from "config";
 import MDRender from "utils/mdrender";
 import { notFound } from "next/navigation";
 import { PostRightSide } from "components/RightSide";
+import React from "react";
 
 async function getPostInfo(slug:string):Promise<Post>{
     return new Promise((resolve,reject)=>{

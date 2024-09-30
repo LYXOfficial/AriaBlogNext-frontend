@@ -2,6 +2,7 @@ import { HomeRightSide } from "@/components/RightSide";
 import { siteConfigs } from "@/config";
 import "styles/Pages.css";
 import "styles/PostContent.css";
+import React from "react";
 export const metadata = {
   title: "声明 | "+siteConfigs.title,
 }

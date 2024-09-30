@@ -6,6 +6,7 @@ import { siteConfigs } from "@/config";
 import { Post } from "@/interfaces/post";
 import moment from "moment";
 import Link from "next/link";
+import React from "react";
 
 export default function SearchBox({show,closeFunction}:{closeFunction:Function,show:boolean}) {
   const [results,setResults]=useState<ReactElement>();

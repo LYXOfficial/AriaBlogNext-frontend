@@ -9,6 +9,7 @@ import { throttle } from "lodash";
 import { usePathname } from 'next/navigation'
 import SearchBox from "components/SearchBox";
 import { MenuItem, MenuItemChild } from "@/interfaces/menuitem";
+import React from "react";
 
 export default function NavBar() {
     const router=useRouter();

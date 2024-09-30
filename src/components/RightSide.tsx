@@ -2,6 +2,7 @@
 import CommentBarrage from "@/components/thirdpartyjs/CommentBarrage";
 import { RightButtonsPosts, RightButtonsPages, RightButtonsHome } from 'components/RightButtons';
 import { useState, useEffect } from "react";
+import React from "react";
 
 export function PostRightSide() {
     const [barrageShow,setBarrageShow]=useState(2);

@@ -2,6 +2,7 @@
 import renderMathInText from 'katex/contrib/auto-render';
 import { useEffect } from "react";
 import 'katex/dist/katex.min.css';
+import React from "react";
 
 export default function KaTex(){
     useEffect(()=>{(async ()=>{

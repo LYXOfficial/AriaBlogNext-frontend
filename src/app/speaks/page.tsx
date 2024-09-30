@@ -5,6 +5,7 @@ import { TwikooBaseComment } from "components/thirdpartyjs/Twikoo";
 import { PageRightSide } from "components/RightSide";
 import { Speaks } from "components/Speaks";
 import { siteConfigs } from "@/config";
+import React from "react";
 
 export const metadata={
   title: `哔哔 | ${siteConfigs.title}`,

@@ -5,6 +5,7 @@ import Link from "next/link";
 import moment from "moment";
 import Busuanzi from "components/thirdpartyjs/Busuanzi";
 import { siteConfigs } from "@/config";
+import React from "react";
 
 export default function PostHeader({postInfo}:{postInfo:Post}) {
   return (
