@@ -3,6 +3,7 @@ import stringRandom from "string-random"
 import colorName from "color-name";
 import { siteConfigs } from "@/config";
 import ansi2html from "ansi2html";
+import { Tokens } from "marked";
 
 export class MDFilters{
     static latex(text:string){
@@ -236,7 +237,7 @@ const codeIcons={
     "swift":`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M17.09 19.72c-2.36 1.36-5.59 1.5-8.86.1A13.8 13.8 0 0 1 2 14.5c.67.55 1.46 1 2.3 1.4c3.37 1.57 6.73 1.46 9.1 0c-3.37-2.59-6.24-5.96-8.37-8.71c-.45-.45-.78-1.01-1.12-1.51c8.28 6.05 7.92 7.59 2.41-1.01c4.89 4.94 9.43 7.74 9.43 7.74c.16.09.25.16.36.22c.1-.25.19-.51.26-.78c.79-2.85-.11-6.12-2.08-8.81c4.55 2.75 7.25 7.91 6.12 12.24c-.03.11-.06.22-.05.39c2.24 2.83 1.64 5.78 1.35 5.22c-1.21-2.39-3.48-1.65-4.62-1.17"/></svg>`,
 };
 export class MarkedCustomTags{
-    static a({href,title,tokens}:{href:string,title?:string|undefined|null,tokens:any[]}){
+    static a({href,title,tokens}:{href:string,title?:string|undefined|null,tokens:Tokens.Link[]}){
         return `<a class="normal-a" href="${href}" target="_blank" rel="noopener noreferrer">${tokens[0].text}</a>`;
     }
     static img({href,title,text}:{href:string,title:string|null,text:string}){
@@ -262,7 +263,7 @@ export class MarkedCustomTags{
         }
         return `<details class="hljs-folder" open><summary><span class="hljs-lang-icon">${codeIcons[language.toLowerCase() as keyof typeof codeIcons]??codeIcons["text"]}</span><span class="hljs-lang">${lang?lang.toUpperCase():"TEXT"}</span><button class="hljs-wrapper" title="自动换行"><svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" viewBox="0 0 384 512"><path fill="currentColor" d="M32 64C14.3 64 0 49.7 0 32S14.3 0 32 0h96c53 0 96 43 96 96v306.7l73.4-73.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-128 128c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l73.3 73.4V96c0-17.7-14.3-32-32-32z"/></svg></button><button class="hljs-copy" title="复制代码"><svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" viewBox="0 0 448 512"><path fill="#4a2121" d="M208 0h124.1C344.8 0 357 5.1 366 14.1L433.9 82c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48M48 128h80v64H64v256h192v-32h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48"/></svg></button></summary><pre class="hljs language-${language}" data-language="${language}"><code>${highlightedCode}</code></pre></details>`;
     }
-    static del({tokens}:{tokens:any}){
+    static del({tokens}:{tokens:Tokens.Del[]}){
         return `<del class="normal-del" title="你知道的太多了">${tokens[0].text}</del>`;
     }
     static heading({text,depth}:{text:string,depth:number}){

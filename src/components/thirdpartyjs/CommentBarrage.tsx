@@ -21,7 +21,7 @@ interface BarrageData {
   replies?: BarrageData[];
 }
 
-const CommentBarrage:any=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
+const CommentBarrage=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
   const [currentSwiper, setCurrentSwiper] = useState<ReactElement>(<></>);
   useEffect(() => {
     const fetchData = async () => {
