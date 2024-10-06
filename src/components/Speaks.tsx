@@ -10,15 +10,15 @@ import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";
 
 
-const bbClickHandle=(event:any)=>{
-  var str=(event.currentTarget as any).parentNode.parentNode.querySelector(".bb-content").innerText;
+const bbClickHandle=(event:React.MouseEvent)=>{
+  var str=((event.currentTarget as HTMLElement)!.parentNode!.parentNode!.querySelector(".bb-content") as HTMLElement).innerText;
   var e=document.getElementsByClassName("el-textarea__inner")[0],
     t=document.createEvent("HTMLEvents");
-  t.initEvent("input", !0, !0);
-  (e as any).value="> "+str+"\n\n",e.dispatchEvent(t);
-  (document.getElementsByClassName("el-textarea__inner")[0] as any).value="> "+str+"\n\n";
+  t.initEvent("input",true,true);
+  (e as HTMLInputElement).value="> "+str+"\n\n",e.dispatchEvent(t);
+  (document.getElementsByClassName("el-textarea__inner")[0] as HTMLInputElement).value="> "+str+"\n\n";
   document.location.href+="#twikoo";
-  (document.querySelector(".tk-col>.tk-input>.el-textarea__inner") as any).focus();
+  (document.querySelector(".tk-col>.tk-input>.el-textarea__inner") as HTMLInputElement).focus();
   Snackbar.show({
     text: '为保证最佳评论阅读体验，建议不要删除空行',
     pos: 'top-center',

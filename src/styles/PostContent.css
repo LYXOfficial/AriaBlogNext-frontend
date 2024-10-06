@@ -801,6 +801,8 @@ span[style="undefined:invert"]{
     margin: 0 auto;
     margin-top: 5px;
     color: var(--aria-light-fontcolor);
+    font-size: 15px;
+    text-align: center;
 }
 #post-maincontent ul, #post-maincontent ol{
     line-height: 1.8;

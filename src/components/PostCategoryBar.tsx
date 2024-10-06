@@ -8,7 +8,7 @@ import "styles/PostCategoryBar.css";
 export default function PostCategoryBar({data}:{data:Category[]}){
     const barRef=useRef<HTMLDivElement>(null);
     useEffect(()=>{
-        barRef.current?.addEventListener("wheel",(e:any)=>{
+        barRef.current?.addEventListener("wheel",(e:WheelEvent)=>{
             e.stopPropagation();
             e.preventDefault();
             barRef.current!.scrollLeft += e.deltaY;
@@ -19,7 +19,7 @@ export default function PostCategoryBar({data}:{data:Category[]}){
             <Icon icon="fa6-solid:list-ul" />
             <div id="posts-categories-bars-container" ref={barRef}>
                 {
-                    data.map((item:any)=>{
+                    data.map((item:Category)=>{
                         return (<div className="posts-categories-bar-item" key={item.name}>
                             <span className="posts-categories-bar-item-name">{item.name}</span>
                             <span className="posts-categories-bar-item-count">{item.count}</span>

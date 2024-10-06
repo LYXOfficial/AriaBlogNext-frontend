@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 export default function PostChat(){
     // useEffect(()=>{
-    //     const postChatDOM=(document.getElementById("chatIframe") as any).contentWindow.document;
+    //     const postChatDOM=(document.getElementById("chatIframe") as HTMLElement).contentWindow.document;
     //     const style=postChatDOM.createElement("style");
     //     style.innerText=`
     //         :root{

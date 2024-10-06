@@ -22,7 +22,7 @@ export function RightButtonsPosts({toggleBarrage}:{toggleBarrage:()=>void}){
         document.documentElement.scroll({behavior:"smooth",top:0});
     }
     function scrollToComments(){
-        document.documentElement.scroll({behavior:"smooth",top:(document.querySelector("#post-comment-container") as any).offsetTop-80});
+        document.documentElement.scroll({behavior:"smooth",top:(document.querySelector("#post-comment-container") as HTMLElement).offsetTop-80});
     }
     function setToc(){
         setTocHide(!tocHide);
@@ -62,7 +62,7 @@ export function RightButtonsPages({toggleBarrage}:{toggleBarrage:()=>void}){
         document.documentElement.scroll({behavior:"smooth",top:0});
     }
     function scrollToComments(){
-        document.documentElement.scroll({behavior:"smooth",top:(document.querySelector("#post-comment-container") as any).offsetTop-80});
+        document.documentElement.scroll({behavior:"smooth",top:(document.querySelector("#post-comment-container") as HTMLElement).offsetTop-80});
     }
     return (<div id="rightbuttons" className={rbHide?"rb-hide":"rb-show"}>
         <button className="rightbutton rightbutton-barrageShow" title="开关评论浮窗" onClick={toggleBarrage}>
