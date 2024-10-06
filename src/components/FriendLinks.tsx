@@ -84,11 +84,11 @@ export default async function FriendLinks() {
 ## Butterfly
 \`\`\`YAML
 - name: Ariasakaの小窝
-    link: https://blog.yaria.top
-    avatar: https://weavatar.com/avatar/795ce413eb6c7485954b78283ffa3e00
-    descr: 人有悲欢离合 月有阴晴圆缺
-    siteshot: https://bu.dusays.com/2024/09/19/66ec130ad1de0.png
-    theme_color: '#ed709b'
+  link: https://blog.yaria.top
+  avatar: https://weavatar.com/avatar/795ce413eb6c7485954b78283ffa3e00
+  descr: 人有悲欢离合 月有阴晴圆缺
+  siteshot: https://bu.dusays.com/2024/09/19/66ec130ad1de0.png
+  theme_color: '#ed709b'
 \`\`\`
 ## HTML
 \`\`\`HTML
