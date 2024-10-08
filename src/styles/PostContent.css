@@ -640,8 +640,8 @@ table:not(code table){
     content: "";
     position: absolute;
     bottom: -5px;
-    left: 20px;
-    width: calc(100% - 40px);
+    left: 10px;
+    width: calc(100% - 20px);
     height: 2px;
     background-color: var(--aria-theme);
     opacity: 0;
