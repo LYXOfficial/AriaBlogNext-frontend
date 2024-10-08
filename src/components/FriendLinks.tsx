@@ -1,60 +1,12 @@
 import "styles/FriendLinks.css";
-import { FriendLink,FriendLinkGroup } from "interfaces/friendlink";
+import { FriendLinkGroup } from "interfaces/friendlink";
 import HLJSNum from "components/thirdpartyjs/HLJSNum";
 import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import { siteConfigs } from "@/config";
 import Lazyload from "./thirdpartyjs/Lazyload";
 import MDRenderer from "@/utils/mdrender";
-import { Icon } from "@iconify/react";
-import { ReactElement } from "react";
-import stringRandom from "string-random";
 import React from "react";
-
-export function FriendLinkItem({link}:{link:FriendLink}) {
-    let latencyIcon:ReactElement=<></>;
-    if(link.latency!>0){
-        if(link.latency!<=1)
-            latencyIcon=<Icon icon="system-uicons:signal-full"/>;
-        else if(link.latency!<=2)
-            latencyIcon=<Icon icon="system-uicons:signal-medium"/>;
-        else if(link.latency!<=3)
-            latencyIcon=<Icon icon="system-uicons:signal-low"/>;
-        else
-            latencyIcon=<Icon icon="system-uicons:signal-none"/>;
-    }
-    else latencyIcon=<Icon icon="system-uicons:close" className="flink-none-icon"/>;
-    const id=stringRandom(16);
-    return (
-        <a 
-            className="flink-item cf-friends-link" 
-            href={link.url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            id={`flink-${id}`}
-        >
-            <style>
-                {`
-                    #flink-${id}{
-                        background-color:${link.color??"#888888"};
-                        background-color:color-mix(in srgb,${link.color??"#888888"},transparent 25%);
-                        color:white;
-                    }
-                `}
-            </style>
-            <div className="flink-avatar" dangerouslySetInnerHTML={{
-                __html:`<img class="flink-avatar-img lazy-img cf-friends-avatar" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src=${link.avatar} alt=${link.name} 
-                    onerror="this.src='${siteConfigs.falldownAvatar}'"/>`
-            }}>
-            </div>
-            <span className="flink-name cf-friends-name">{link.name}</span>
-            <span className="flink-desc">{link.description}</span>
-            <span className="flink-status" title={link.latency!>0?"加载: "+link.latency!*1000+"ms":"不可达"}>
-                {latencyIcon}
-                {/* {link.latency!>0?`${link.latency}s`:""} */}
-            </span>
-        </a>
-    );
-}
+import { FriendLinkItem } from "./FriendLinkItem";
 
 export function FriendLinkGroupItem({group}:{group:FriendLinkGroup}) {
     return (<div className="flink-group">
