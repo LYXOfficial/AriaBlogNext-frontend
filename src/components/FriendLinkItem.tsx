@@ -48,7 +48,7 @@ export function FriendLinkItem({link}:{link:FriendLink}) {
             </div>
             <span className="flink-name cf-friends-name">{link.name}</span>
             <span className="flink-desc">{link.description}</span>
-            <span className="flink-status" title={link.latency!>0?"加载: "+link.latency!*1000+"ms":"不可达"}>
+            <span className="flink-status" title={link.latency!>0?"加载: "+Math.round(link.latency!*1000)+"ms":"不可达"}>
                 {latencyIcon}
                 {/* {link.latency!>0?`${link.latency}s`:""} */}
             </span>
