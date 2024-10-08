@@ -63,7 +63,7 @@ const CommentBarrage=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [toggleBarrage]);
 
   const isInViewPortOfOne = (el: HTMLElement) => {
     const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -130,7 +130,7 @@ const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage,toggleB
         ) : (
           <div className="barrageNick">{nick}</div>
         )}
-        <a onClick={()=>{toggleBarrage()}} style={{ fontSize: '20px' }}>
+        <a onClick={()=>{toggleBarrage()}} style={{ fontSize: '20px' }} className="barrageClose">
           ×
         </a>
       </div>

@@ -1,13 +1,14 @@
 //GPT万岁！！！ QwQ
 
-import React, { ReactElement } from 'react';
+import React from 'react';
 import "styles/ASide/global.css";
 import "styles/ASide/Toc.css";
 import TocUpdater from "components/thirdpartyjs/TocUpdater";
 import { Icon } from '@iconify/react';
 import { JSDOM } from "jsdom";
 import { cache } from "react";
-interface TOCItem {
+import TocBody from './TocBody';
+export interface TOCItem {
     text:string;
     href:string;
     level:number;
@@ -49,16 +50,6 @@ export default function CardToc({ htmlContent }:CardTocProps){
         });
         return tocTree;
     });
-    const renderTOC=cache((toc:TOCItem[]):ReactElement[]=>{
-        return (
-            toc.map(item=>
-                <li className="toc-child" key={item.href}>
-                    {item.href?<a className="toc-link" id={`toc-${item.href}`} href={`#${item.href}`}>{item.text}</a>:<></>}
-                    {item.children&&item.children.length>0?<ul className="toc-children">{renderTOC(item.children)}</ul>:<></>}
-                </li>
-            )
-        );
-    });
     const tocTree=generateTOC(htmlContent);
     return (
         <div className="card-widget card-aside card-toc">
@@ -67,7 +58,7 @@ export default function CardToc({ htmlContent }:CardTocProps){
                 <span className="card-title">目录</span>
             </div>
             <div className="card-body">
-                <div className="toc-content">{renderTOC(tocTree)}</div>
+                <div className="toc-content"><TocBody toc={tocTree}/></div>
                 <span className="toc-counter">0</span>
             </div>
             <TocUpdater tocTree={tocTree}/>

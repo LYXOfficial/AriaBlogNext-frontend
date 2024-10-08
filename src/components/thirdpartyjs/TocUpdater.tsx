@@ -93,7 +93,7 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
             }
             calcProgress();
         };
-
+        (window as any).tocHandleScroll=handleScroll;
         window.addEventListener('scroll', handleScroll);
         handleScroll(); 
         return () => {

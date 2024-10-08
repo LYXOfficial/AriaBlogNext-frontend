@@ -118,3 +118,6 @@
         opacity: 0;
     }
 }
+.barrageClose{
+	cursor: pointer;
+}
