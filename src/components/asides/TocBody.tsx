@@ -8,18 +8,15 @@ function scrollToElementAndWait(elementId:string,waitTime:number=50):Promise<voi
       resolve();
       return;
     }
-    console.log("scrolling...");
     const scrollHandler=()=>{
       clearTimeout(timer);
       timer=setTimeout(()=>{
-        console.log("done");
         resolve();
         window.removeEventListener("scroll",scrollHandler); 
       },waitTime);
     };
     targetElement.scrollIntoView({behavior:"smooth"});
     let timer=setTimeout(()=>{
-      console.log("done");
       resolve();
       window.removeEventListener("scroll",scrollHandler); 
     },waitTime);

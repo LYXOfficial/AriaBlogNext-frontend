@@ -148,7 +148,6 @@ ${tabBodies}
 </div></div>
 
 `;
-            console.log(tabsHtml);
             return tabsHtml;
         });
     }
