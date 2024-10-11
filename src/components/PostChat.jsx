@@ -1,6 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect,useState } from "react";
 export default function PostChat(){
     // useEffect(()=>{
     //     const postChatDOM=(document.getElementById("chatIframe") as HTMLElement).contentWindow.document;
@@ -10,6 +9,14 @@ export default function PostChat(){
     //             --heo-theme:var(--aria-theme)!important;
     //         }`
     // },[]);
+    const [loaded,setLoaded]=useState(0);
+    useEffect(()=>{
+        if(loaded==1){
+            postChat_load();
+            tianliGPT(true);
+            setLoaded(2);
+        }
+    },[loaded]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
@@ -33,7 +40,7 @@ export default function PostChat(){
         }}/>
         <script async data-postChat_key="b2697bd81e3904826ee9c180db306e61b2691c" 
             src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js" onLoad={
-                ()=>{postChat_load(),tianliGPT(true);}
+                ()=>{setLoaded(1)}
             }/>
     </>
 }
