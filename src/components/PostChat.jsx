@@ -10,13 +10,18 @@ export default function PostChat(){
     //         }`
     // },[]);
     const [loaded,setLoaded]=useState(0);
+    const router=useRouter();
     useEffect(()=>{
         if(loaded==1){
             postChat_load();
             tianliGPT(true);
             setLoaded(2);
         }
+        window.history.onpushstate=null;
     },[loaded]);
+    useEffect(()=>{
+        tianliGPT(true);
+    },[router]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
