@@ -1,7 +1,6 @@
 "use client";
 import { Icon } from "@iconify/react";
 import { ReactElement, useRef } from "react";
-import stringRandom from "string-random";
 import { FriendLink } from "interfaces/friendlink";
 import { siteConfigs } from "@/config";
 

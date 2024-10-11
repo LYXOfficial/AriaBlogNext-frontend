@@ -17,7 +17,7 @@ export default function Page(){
                     什（（
                 </p>
                 <p>
-                    目前在重庆西大附中上学，老家在四川绵阳和泸州（如果有本地人的话来聊聊天就好了<del className="normal-del">但是一定不会线下面基qwq！</del>）
+                    目前在重庆上学，老家在四川绵阳和泸州（如果有本地人的话来聊聊天就好了<del className="normal-del">但是一定不会线下面基qwq！</del>）
                 </p>
                 <p>
                     日常写博客发发电，如果看到我没更新的话那大概率不是似了，应该是在学校坐牢了（悲）。
