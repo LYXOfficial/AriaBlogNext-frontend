@@ -9,12 +9,12 @@ import { siteConfigs } from "@/config";
 export default function Page() {
     useEffect(()=>{
         window.UserConfig={
-            private_api_url: siteConfigs.fcircleUrl,
-            page_init_number: 20,
-            page_turning_number: 10,
-            error_img: siteConfigs.falldownAvatar,
-            sort_rule: 'created',
-            expire_days: 1, 
+            private_api_url:siteConfigs.fcircleUrl,
+            page_init_number:20,
+            page_turning_number:10,
+            error_img:siteConfigs.falldownAvatar,
+            sort_rule:'created',
+            expire_days:1, 
         }
         import("fcircle-theme-yyyz/dist/fcircle.min");
     },[]);

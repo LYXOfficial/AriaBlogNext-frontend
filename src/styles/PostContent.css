@@ -1,7 +1,7 @@
 #article-container{
     flex-grow: 1;
     height: fit-content;
-    padding: 50px 40px;
+    padding: 40px;
     box-sizing: border-box;
     margin-bottom: 0;
     width: 0;
@@ -806,4 +806,7 @@ span[style="undefined:invert"]{
 }
 #post-maincontent ul, #post-maincontent ol{
     line-height: 1.8;
+}
+.post-TianliGPT{
+    margin-top: 0;
 }
