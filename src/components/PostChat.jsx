@@ -1,9 +1,9 @@
 "use client";
 import { useEffect,useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 export default function PostChat(){
     const [loaded,setLoaded]=useState(0);
-    const router=useRouter();
+    const pathname=usePathname();
     useEffect(()=>{
         const script=document.createElement("script");
         script.src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js";
@@ -18,7 +18,6 @@ export default function PostChat(){
         };
     },[]);
     useEffect(()=>{
-        console.log(loaded);
         if(loaded==1){
             postChat_load();
             tianliGPT(true);
@@ -28,7 +27,7 @@ export default function PostChat(){
     },[loaded]);
     useEffect(()=>{
         if(loaded) tianliGPT(true);
-    },[router]);
+    },[pathname]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
         <script
