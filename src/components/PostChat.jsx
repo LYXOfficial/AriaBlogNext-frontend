@@ -27,9 +27,7 @@ export default function PostChat(){
         window.history.onpushstate=null;
     },[loaded]);
     useEffect(()=>{
-        try{
-            tianliGPT(true);
-        }catch(e){}
+        if(loaded) tianliGPT(true);
     },[router]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
