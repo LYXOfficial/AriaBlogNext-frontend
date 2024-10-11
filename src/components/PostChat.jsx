@@ -1,17 +1,24 @@
 "use client";
 import { useEffect,useState } from "react";
+import { useRouter } from "next/navigation";
 export default function PostChat(){
-    // useEffect(()=>{
-    //     const postChatDOM=(document.getElementById("chatIframe") as HTMLElement).contentWindow.document;
-    //     const style=postChatDOM.createElement("style");
-    //     style.innerText=`
-    //         :root{
-    //             --heo-theme:var(--aria-theme)!important;
-    //         }`
-    // },[]);
     const [loaded,setLoaded]=useState(0);
     const router=useRouter();
     useEffect(()=>{
+        const script=document.createElement("script");
+        script.src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js";
+        script.async=true;
+        script.setAttribute("data-postChat_key","b2697bd81e3904826ee9c180db306e61b2691c");
+        script.onload=()=>{
+            setLoaded(1);
+        };
+        document.body.appendChild(script);
+        return ()=>{
+            document.body.removeChild(script);
+        };
+    },[]);
+    useEffect(()=>{
+        console.log(loaded);
         if(loaded==1){
             postChat_load();
             tianliGPT(true);
@@ -20,7 +27,9 @@ export default function PostChat(){
         window.history.onpushstate=null;
     },[loaded]);
     useEffect(()=>{
-        tianliGPT(true);
+        try{
+            tianliGPT(true);
+        }catch(e){}
     },[router]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
@@ -44,9 +53,5 @@ export default function PostChat(){
                 showInviteLink: true
             };`
         }}/>
-        <script async data-postChat_key="b2697bd81e3904826ee9c180db306e61b2691c" 
-            src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js" onLoad={
-                ()=>{setLoaded(1)}
-            }/>
     </>
 }
