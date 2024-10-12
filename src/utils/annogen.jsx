@@ -139,7 +139,7 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                         posdesc = "遥望齐州九点烟，一泓海水杯中泻。";
                         break;
                     case "湖北省":
-                        posdesc = "故人西辞黄鹤楼，烟花三月下扬州";
+                        posdesc = "故人西辞黄鹤楼，烟花三月下扬州。";
                         break;
                     case "湖南省":
                         posdesc = "爱看守护解放西。";
