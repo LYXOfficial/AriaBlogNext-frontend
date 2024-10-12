@@ -42,7 +42,7 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                 posdesc = "想同你一起夜乘伦敦眼";
                 break;
             case "俄罗斯":
-                posdesc = "干了这瓶伏特加！";
+                posdesc = "达瓦里氏，干了这瓶伏特加！";
                 break;
             case "法国":
                 posdesc = "C'est La Vie";
@@ -60,16 +60,37 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                 pos = ipLocation.result.ad_info.province + " " + ipLocation.result.ad_info.city;
                 switch (ipLocation.result.ad_info.province) {
                     case "北京市":
-                        posdesc = "北——京——欢迎你~~~";
+                        posdesc = "AUV，咱老北京爷讲的就是一个地道儿～";
                         break;
                     case "天津市":
                         posdesc = "讲段相声吧。";
                         break;
                     case "重庆市":
-                        posdesc = "轻轨亲鬼，才不是亲鬼！"
+                        switch (ipLocation.result.ad_info.city) {
+                            case "渝北区":
+                            case "巴南区":
+                            case "九龙坡区":
+                            case "南岸区":
+                            case "大渡口区":
+                            case "沙坪坝区":
+                            case "江北区":
+                            case "渝中区":
+                            case "北碚区":
+                            case "璧山区":
+                            case "铜梁区":
+                            case "江津区":
+                                posdesc = "轻轨亲鬼，才不是亲鬼！"
+                                break;
+                            default:
+                                posdesc = "崽儿，重庆重庆走不走 北站走起！";
+                                break;
+                        }
                         break;
                     case "河北省":
-                        posdesc = "山势巍巍成壁垒，天下雄关。铁马金戈由此向，无限江山。";
+                        posdesc = "生命可以重来，高考只有一次。";
+                        break;
+                    case "河南省":
+                        posdesc = "这是俺拾嘞，中不中！";
                         break;
                     case "山西省":
                         posdesc = "展开坐具长三尺，已占山河五百余。";
@@ -87,7 +108,7 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                         posdesc = "很喜欢哈尔滨大剧院。";
                         break;
                     case "上海市":
-                        posdesc = "众所周知，中国只有两个城市。";
+                        posdesc = "沪 爷 冲 击 ！";
                         break;
                     case "江苏省":
                         switch (ipLocation.result.ad_info.city) {
@@ -95,7 +116,7 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                                 posdesc = "欢迎来自安徽省南京市的小伙伴。";
                                 break;
                             case "苏州市":
-                                posdesc = "上有天堂，下有苏杭。";
+                                posdesc = "苏州梅友机场，苏州享耀机场。";
                                 break;
                             default:
                                 posdesc = "散装是必须要散装的。";
@@ -103,25 +124,25 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                         }
                         break;
                     case "浙江省":
-                        posdesc = "东风渐绿西湖柳，雁已还人未南归。";
+                        posdesc = "浙江温州、浙江温州，江南皮革厂倒闭了。";
                         break;
                     case "安徽省":
                         posdesc = "蚌埠住了，芜湖起飞。";
                         break;
                     case "福建省":
-                        posdesc = "井邑白云间，岩城远带山。";
+                        posdesc = "妈祖批准，全球免签。";
                         break;
                     case "江西省":
-                        posdesc = "落霞与孤鹜齐飞，秋水共长天一色。";
+                        posdesc = "阿卡林省的小朋友你好。";
                         break;
                     case "山东省":
                         posdesc = "遥望齐州九点烟，一泓海水杯中泻。";
                         break;
                     case "湖北省":
-                        posdesc = "来碗热干面！";
+                        posdesc = "故人西辞黄鹤楼，烟花三月下扬州";
                         break;
                     case "湖南省":
-                        posdesc = "74751，长沙斯塔克。";
+                        posdesc = "爱看守护解放西。";
                         break;
                     case "广东省":
                         posdesc = "老板来两斤福建人。";
@@ -133,16 +154,38 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                         posdesc = "朝观日出逐白浪，夕看云起收霞光。";
                         break;
                     case "四川省":
-                        posdesc = "康康川妹子。";
+                        switch (ipLocation.result.ad_info.city) {
+                            case "成都市":
+                                posdesc = "戳啦，成都省四川市啦！";
+                                break;
+                            case "泸州市":
+                                posdesc = "百年老窖，千年酒城。";
+                                break;
+                            case "绵阳市":
+                                posdesc = "不当万年川老二辣！";
+                                break;
+                            case "广安市":
+                                posdesc = "走开走开，我要跟重庆玩！";
+                                break;
+                            case "宜宾市":
+                                posdesc = "五粮液为您报时。";
+                                break;
+                            case "甘孜藏族自治州":
+                                posdesc = "到达世界最高城理塘！AUV这不顶针吗？";
+                                break;
+                            default:
+                                posdesc = "干爪子嘛仙人。";
+                                break;
+                        }
                         break;
                     case "贵州省":
                         posdesc = "茅台，学生，再塞200。";
                         break;
                     case "云南省":
-                        posdesc = "玉龙飞舞云缠绕，万仞冰川直耸天。";
+                        posdesc = "红伞伞，白杆杆，吃完一起躺板板。";
                         break;
                     case "西藏自治区":
-                        posdesc = "躺在茫茫草原上，仰望蓝天。";
+                        posdesc = "青春没有售价，硬座直达拉萨。";
                         break;
                     case "陕西省":
                         posdesc = "来份臊子面加馍。";
@@ -160,10 +203,10 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                         posdesc = "驼铃古道丝绸路，胡马犹闻唐汉风。";
                         break;
                     case "台湾省":
-                        posdesc = "我在这头，大陆在那头。";
+                        posdesc = "拜托啦～你说话真的好机车的欸～";
                         break;
                     case "香港特别行政区":
-                        posdesc = "永定贼有残留地鬼嚎，迎击光非岁玉。";
+                        posdesc = "干天贼有残留滴窥阔，迎击光非岁玉。";
                         break;
                     case "澳门特别行政区":
                         posdesc = "性感荷官，在线发牌。";
