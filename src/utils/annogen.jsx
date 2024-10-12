@@ -66,25 +66,26 @@ const genanno=cache(async ()=>{return await new Promise((resolve,reject)=>$.ajax
                         posdesc = "讲段相声吧。";
                         break;
                     case "重庆市":
-                        switch (ipLocation.result.ad_info.city) {
-                            case "渝北区":
-                            case "巴南区":
-                            case "九龙坡区":
-                            case "南岸区":
-                            case "大渡口区":
-                            case "沙坪坝区":
-                            case "江北区":
-                            case "渝中区":
-                            case "北碚区":
-                            case "璧山区":
-                            case "铜梁区":
-                            case "江津区":
-                                posdesc = "轻轨亲鬼，才不是亲鬼！"
-                                break;
-                            default:
-                                posdesc = "崽儿，重庆重庆走不走 北站走起！";
-                                break;
-                        }
+                        // switch (ipLocation.result.ad_info.city) {
+                        //     case "渝北区":
+                        //     case "巴南区":
+                        //     case "九龙坡区":
+                        //     case "南岸区":
+                        //     case "大渡口区":
+                        //     case "沙坪坝区":
+                        //     case "江北区":
+                        //     case "渝中区":
+                        //     case "北碚区":
+                        //     case "璧山区":
+                        //     case "铜梁区":
+                        //     case "江津区":
+                        //         posdesc = "轻轨亲鬼，才不是亲鬼！";
+                        //         break;
+                        //     default:
+                        //         posdesc = "崽儿，重庆重庆走不走 北站走起！";
+                        //         break;
+                        // }
+                        posdesc = "轻轨亲鬼，才不是亲鬼！";
                         break;
                     case "河北省":
                         posdesc = "生命可以重来，高考只有一次。";
