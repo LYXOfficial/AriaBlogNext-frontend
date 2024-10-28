@@ -7,7 +7,7 @@ export const siteConfigs:SiteConfig={
     author: "Ariasaka",
     title: "Ariasakaの小窝",
     siteUrl: "https://blog.yaria.top",
-    avatar: "https://bu.dusays.com/2024/09/25/66f3c6536ae1e.png",
+    avatar: "https://bu.dusays.com/2024/10/28/671f8bf00317e.jpg",
     twikooEnv: "https://tkapi.yaria.top",
     createYear: 2022,
     createMonth: 6,
