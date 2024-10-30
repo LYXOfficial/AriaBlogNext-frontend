@@ -42,7 +42,7 @@
     line-height: 1.5;
 }
 .tk-meta:has(.tk-tag-green)>.tk-nick>strong{
-    background: linear-gradient(rgb(136 65 9 / 10%), rgb(136 65 9 / 10%)) no-repeat bottom / 100% 30% !important!important;
+    background: linear-gradient(rgb(136 65 9 / 10%), rgb(136 65 9 / 10%)) no-repeat bottom / 100% 30% !important;
 }
 .tk-tag-green {
     border-radius: 2px !important;
