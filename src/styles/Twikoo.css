@@ -35,11 +35,14 @@
     color:var(--aria-theme);
 }
 .tk-meta>.tk-nick {
-    color: #0e90d2;
+    color: var(--aria-theme)!important;
 }
 .tk-meta:has(.tk-tag-green)>.tk-nick {
     color: #960 !important;
     line-height: 1.5;
+}
+.tk-meta:has(.tk-tag-green)>.tk-nick>strong{
+    background: linear-gradient(rgb(136 65 9 / 10%), rgb(136 65 9 / 10%)) no-repeat bottom / 100% 30% !important!important;
 }
 .tk-tag-green {
     border-radius: 2px !important;
