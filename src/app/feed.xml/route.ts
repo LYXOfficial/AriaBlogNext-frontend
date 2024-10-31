@@ -21,7 +21,7 @@ export async function GET() {
     const data:Post[]=(await res.json()).data;
     for(const post of data) {
       if(!post.cachedHtml){
-        post.cachedHtml=await MDRender(post.cachedHtml,slug=post.slug)
+        post.cachedHtml=await MDRender(post.mdContent!,post.slug);
       }
       feed.item({
         title: post.title!,
@@ -34,7 +34,7 @@ export async function GET() {
         },
         description: `${post.description??""}</br><img src="${post.bannerImg!}"/><p><strong>RSS 阅读器可能渲染错误。查看原文：<a href="${siteConfigs.siteUrl}/posts/${post.slug}">${siteConfigs.siteUrl}/posts/${post.slug}</a></strong></p>${post.cachedHtml!}`,
       });
-    });
+    };
 }
   return new Response(feed.xml(), {
     headers: {
