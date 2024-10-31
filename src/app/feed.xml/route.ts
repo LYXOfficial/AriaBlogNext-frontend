@@ -6,7 +6,7 @@ import { Post } from 'interfaces/post'
 
 export async function GET() {
   const feed = new RSS({
-    title: 'Ariasakaの小窝',
+    title: siteConfigs.title,
     description: '分享Ariaの生活与编码',
     site_url: siteConfigs.siteUrl,
     feed_url: `${siteConfigs.siteUrl}/feed.xml`,
@@ -23,12 +23,12 @@ export async function GET() {
         title: post.title!,
         guid: post.slug,
         url: `${siteConfigs.siteUrl}/posts/${post.slug}`,
-        description: post.description?post.description:post.plainContent!,
+        // description: post.description?post.description:post.plainContent!,
         date: new Date(post.publishTime!*1000),
         enclosure: {
           url: post.bannerImg!,
         },
-        
+        description: `<p><strong>RSS 阅读器可能渲染错误。查看原文：<a href="${siteConfigs.siteUrl}/posts/${post.slug}">${siteConfigs.siteUrl}/posts/${post.slug}</a></strong></p>`+post.cachedHtml!,
       })
     })
 }
