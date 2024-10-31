@@ -32,7 +32,7 @@ export async function GET() {
         enclosure: {
           url: post.bannerImg!,
         },
-        description: `${post.description??""}<img src="${post.bannerImg!}"/></br><p><strong>RSS 阅读器可能渲染错误。查看原文：<a href="${siteConfigs.siteUrl}/posts/${post.slug}">${siteConfigs.siteUrl}/posts/${post.slug}</a></strong></p>${post.cachedHtml!}`,
+        description: `${post.description??""}</br><img src="${post.bannerImg!}"/><p><strong>RSS 阅读器可能渲染错误。查看原文：<a href="${siteConfigs.siteUrl}/posts/${post.slug}">${siteConfigs.siteUrl}/posts/${post.slug}</a></strong></p>${post.cachedHtml!}`,
       });
     });
 }
