@@ -42,6 +42,10 @@ const nextConfig = {
             destination: '/feed.xml',
           },
           {
+            source: '/index.xml',
+            destination: '/feed.xml',
+          },
+          {
             source: '/wp-admin',
             destination: '/admin',
           },
