@@ -41,7 +41,7 @@ export default function PostHeader({postInfo}:{postInfo:Post}) {
               <div className="post-meta post-tags">
                 <Icon icon="fa6-solid:tag" />
                 <span className="post-meta-content">
-                  {postInfo.tags!.slice(0,5).map((tag,index) => {
+                  {postInfo.tags?.slice(0,5).map((tag,index) => {
                     return (
                       <div key={tag}>
                         {index?(<span>·</span>):(<></>)}

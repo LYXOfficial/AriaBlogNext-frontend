@@ -58,7 +58,7 @@ export default async function Posts({page}:{page:number}){
                   <div className="post-meta post-tags">
                     <Icon icon="fa6-solid:tag" />
                     <span className="post-meta-content">
-                      {post.tags!.slice(0,5).map((tag,index) => {
+                      {post.tags?.slice(0,5).map((tag,index) => {
                         return (
                           <div key={tag}>
                             {index?(<span>·</span>):(<></>)}
