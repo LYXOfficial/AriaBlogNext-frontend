@@ -19,7 +19,7 @@ export async function GET() {
   const res=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?type=full`,{next:{revalidate:3600,tags:["posts"]}});
   if(res.ok){
     const data:Post[]=(await res.json()).data;
-    data.forEach(async (post) => {
+    for(const post of data) {
       if(!post.cachedHtml){
         post.cachedHtml=await MDRender(post.cachedHtml,slug=post.slug)
       }
