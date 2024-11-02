@@ -42,7 +42,7 @@ export default async function Posts({page}:{page:number}){
                 <Link className="post-title" href={"/posts/"+post.slug} title={post.title} >{post.title}</Link>
                 <div className="post-content">{post.description?post.description:post.plainContent}</div>
                 <div className="post-metas">
-                  <Link className="post-category" href={"/catogories/" + post.category} title={post.category}>{post.category}</Link>
+                  <Link className="post-category" href={"/categories/" + post.category} title={post.category}>{post.category}</Link>
                   <div className="post-meta post-publishdate">
                     <Icon icon="fa6-solid:calendar-days"/>
                     <span className="post-meta-content">
