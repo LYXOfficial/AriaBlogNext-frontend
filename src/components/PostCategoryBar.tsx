@@ -1,14 +1,13 @@
 "use client";
 import { Icon } from "@iconify/react";
 import { useEffect,useRef } from "react";
-import { siteConfigs } from "@/config";
 import { Category } from "interfaces/category";
 import "styles/PostCategoryBar.css";
 import Link from "next/link";
 
-export default function PostCategoryBar({data,type,current="",wrap=false}:{data:Category[],type:"categories"|"tags",current:string,wrap:bool}){
+export default function PostCategoryBar({data,type,current="",wrap=false}:{data:Category[],type:"categories"|"tags",current:string,wrap:boolean}){
     const barRef=useRef<HTMLDivElement>(null);
-    const currentRef=useRef<HTMLDivElement>(null);
+    const currentRef=useRef<HTMLAnchorElement>(null);
     useEffect(()=>{
         barRef.current?.addEventListener("wheel",(e:WheelEvent)=>{
             e.stopPropagation();
@@ -22,7 +21,7 @@ export default function PostCategoryBar({data,type,current="",wrap=false}:{data:
     return (
         <div id="posts-categories-bar" className="card-widget">
             <Link href={`/${type}`}><Icon icon={type=="categories"?"fa6-solid:list-ul":"fa6-solid:tags"}/></Link>
-            <div id="posts-categories-bars-container" ref={barRef} style={{flexWrap:wrap?"wrap":"nowrap",rowGap:wrap*3}}>
+            <div id="posts-categories-bars-container" ref={barRef} style={{flexWrap:wrap?"wrap":"nowrap",rowGap:wrap?3:0}}>
                 {
                     data.map((item:Category)=>{
                         return (

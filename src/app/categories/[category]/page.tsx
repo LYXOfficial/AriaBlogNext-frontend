@@ -18,7 +18,7 @@ export default async function Page({params}:{params:{category:string}}){
   const res=await fetch(`${siteConfigs.backEndUrl}/get/category/categories`,{next:{revalidate:7200,tags:["posts"]}});
   let data:Category[]=[];
   if(res.ok){
-    let Archives=new Map<number,Post[]>();
+    let Archives=new Map<string,Post[]>();
     data=(await res.json()).data;
     data.sort((a,b)=>a.name.localeCompare(b.name,"zh-cn"));
     await Promise.all(data.map(async (item:Category)=>{
@@ -50,7 +50,7 @@ export default async function Page({params}:{params:{category:string}}){
                   </div>
                   <span className="archive-item-title">{post.title}</span>
                   <object>
-                    <Link className="archive-item-category" href={`/tags/${post.tags[0]}`}><Icon icon="fa6-solid:tags"/>{post.tags[0]}</Link>
+                    <Link className="archive-item-category" href={`/tags/${post.tags?.[0]}`}><Icon icon="fa6-solid:tags"/>{post.tags?.[0]}</Link>
                   </object>
                   <span className="archive-item-date"><Icon icon="fa6-solid:calendar-days"/>{moment.unix(post.publishTime!).format('YYYY-MM-DD')}</span>
                 </Link>
