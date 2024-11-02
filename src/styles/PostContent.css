@@ -304,7 +304,7 @@ table:not(code table){
 }
 
 #article-container hr {
-    background: url(https://cdn1.tianli0.top/jsd/hassan-assets/img/Bilibili_Dividing_Line.png) !important;
+    background: url(https://cdn1.tianli0.top/npm/hassan-assets/img/Bilibili_Dividing_Line.png) !important;
     height: 80px;
     max-width: min(840px, 100%);
     border: hidden !important;
