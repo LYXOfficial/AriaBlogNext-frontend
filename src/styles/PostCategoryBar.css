@@ -48,15 +48,19 @@
     -ms-transition: .2s;
     -o-transition: .2s;
 }
-.posts-categories-bar-item:hover{
+.posts-categories-bar-item:hover,.posts-categories-bar-item.current{
     background-color: var(--aria-theme);
     cursor: pointer;
 }
-.posts-categories-bar-item:hover>*{
+.posts-categories-bar-item:hover>*,.posts-categories-bar-item.current>*{
     color:white!important;
 }
-#posts-categories-bar>svg{
+#posts-categories-bar svg{
     width:14px;
     height:14px;
     flex-shrink: 0;
+    transition: .3s;
+}
+#posts-categories-bar svg:hover{
+    color:var(--aria-theme);
 }

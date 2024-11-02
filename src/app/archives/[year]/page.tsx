@@ -25,20 +25,21 @@ export default async function Page({params}:{params:{year:string}}){
         if(res.ok){
           const posts:Post[]=(await res.json()).data;
           Archives.set(item.year,[...Archives.get(item.year)??[],...posts]);
+          cnt++;
         }
-        cnt++;
       }
     }));
     if(cnt===0){
       return notFound();
     }
+    Archives=new Map([...Archives.entries()].sort((a,b)=>b[0]-a[0]));
     Archives.forEach((value,key)=>{
       Archives.set(key,value.sort((a,b)=>b.publishTime!-a.publishTime!));
     });
     Archives.forEach((value,key)=>{
       ArchiveContent.push(
         <div key={key} className="archive-year">
-          <h2 className="archive-year-title">{key}</h2>
+          <h2 className="archive-year-title"><Link href={`/archives/${key}`}>{key}</Link></h2>
           {
             value.map(post=>{
               return (
@@ -48,7 +49,7 @@ export default async function Page({params}:{params:{year:string}}){
                   </div>
                   <span className="archive-item-title">{post.title}</span>
                   <object>
-                    <Link className="archive-item-category" href={`/categories/${post.category}`}><Icon icon="fa6-solid:tag"/>{post.category}</Link>
+                    <Link className="archive-item-category" href={`/categories/${post.category}`}><Icon icon="fa6-solid:list-ul"/>{post.category}</Link>
                   </object>
                   <span className="archive-item-date"><Icon icon="fa6-solid:calendar-days"/>{moment.unix(post.publishTime!).format('YYYY-MM-DD')}</span>
                 </Link>
@@ -64,7 +65,7 @@ export default async function Page({params}:{params:{year:string}}){
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <h1>归档</h1>
+          <h1><Link href="/archives">归档</Link></h1>
           <div id="archives-container">
             {ArchiveContent}
           </div>

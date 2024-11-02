@@ -24,7 +24,7 @@ export default async function Posts({page}:{page:number}){
   const data:Category[]=(await res.json()).data;
   return (
     <div id="recent-posts">
-      <PostCategoryBar data={data}/>
+      <PostCategoryBar data={data} type="categories"/>
       {posts.map((post)=>{
           return (
             <div className={`recent-post-info post-card card-widget ${startl?"":"first-page"}`} key={post.title}>
