@@ -132,27 +132,31 @@ export const MenuItems:MenuItem[]=[
 
 export const FooterBadges:FooterBadge[]=[
     {
-        badgeUrl: "https://img.shields.io/badge/Framework-Next.js-black",
+        badgeUrl: "https://img.shields.io/badge/Framework-Next.js-black?style=flat",
         link: "https://nextjs.org"
     },
     {
-        badgeUrl: "https://img.shields.io/badge/Language-TypeScript-blue",
-        link: "https://typescriptlang.org"
-    },
-    {
-        badgeUrl: "https://img.shields.io/badge/Hosted-Vercel-success",
+        badgeUrl: "https://img.shields.io/badge/Hosted-Vercel-success?style=flat",
         link: "https://vercel.app"
     },
     {
-        badgeUrl: "https://img.shields.io/badge/CDN-ChuqiCDN-006CFF",
+        badgeUrl: "https://img.shields.io/badge/CDN-ChuqiCDN-006CFF?style=flat",
         link: "https://www.chuqiyun.com"
     },
     {
-        badgeUrl: "https://img.shields.io/badge/CC-BY--NC--SA4.0-red",
+        badgeUrl: "https://img.shields.io/badge/CC-BY--NC--SA4.0-red?style=flat",
         link: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
     },
     {
-        badgeUrl: "https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20222035-ff69b4",
+        badgeUrl: "https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20222035-ff69b4?style=flat",
         link: "https://icp.gov.moe/?keyword=20222035"
+    },
+    {
+        badgeUrl: "https://img.shields.io/badge/%E5%8D%81%E5%B9%B4%E4%B9%8B%E7%BA%A6-63D3C9",
+        link: "https://foreverblog.cn"
+    },
+    {
+        badgeUrl: "https://img.shields.io/badge/%E5%BC%80%E5%BE%80-lightgray",
+        link: "https://www.travellings.cn/"
     },
 ]

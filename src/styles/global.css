@@ -6,7 +6,7 @@
 @font-face{
     font-family: 'Monaco';
     font-display: swap; 
-    src: url('https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/MONACO.TTF') format("truetype");
+    src: url('https://cdn1.tianli0.top/jsd/fontcdn-ariasaka@1.0.0/MONACO.TTF') format("truetype");
 }
 :root{
     --aria-border:1px solid#c9c9c9;

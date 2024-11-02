@@ -16,6 +16,20 @@
     -moz-transition: .3s;
     -ms-transition: .3s;
     -o-transition: .3s;
+    width: 100%;
+}
+@media screen and (min-width:960px){
+    .archive-item{
+        width: calc(50% - 55px);
+        height: 40px;
+    }
+}
+.archive-year-title{
+    width: 100%;
+}
+.archive-year{
+    display: flex;
+    flex-wrap: wrap;
 }
 .archive-item svg{
     flex-shrink: 0;
@@ -27,7 +41,7 @@
     white-space: nowrap;
 }
 .archive-item object{
-    margin-left: auto;
+    margin: auto 0 auto auto;
 }
 .archive-item-banner-img{
     z-index: -1;

@@ -13,6 +13,7 @@ import ImageWithFalldown from "@/components/ImageWithFalldown";
 import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
 import PostCategoryBar from "@/components/PostCategoryBar";
+import ArchiveItem from "@/components/Archives";
 export default async function Page({params}:{params:{tag:string}}){
   let ArchiveContent:ReactElement[]=[],flag=false;
   const res=await fetch(`${siteConfigs.backEndUrl}/get/tag/tags`,{next:{revalidate:7200,tags:["posts"]}});
@@ -42,20 +43,7 @@ export default async function Page({params}:{params:{tag:string}}){
         <div key={key} className="archive-year">
           <h2 className="archive-year-title"><Link href={`/tags/${key}`}>{key}</Link></h2>
           {
-            value.map(post=>{
-              return (
-                <Link key={post.slug} href={`/posts/${post.slug}`} className="archive-item">
-                  <div className="archive-item-banner">
-                    <ImageWithFalldown className="archive-item-banner-img" alt={post.title!} falldownImg={siteConfigs.falldownImg} src={post.bannerImg!}/>
-                  </div>
-                  <span className="archive-item-title">{post.title}</span>
-                  <object>
-                    <Link className="archive-item-category" href={`/categories/${post.category}`}><Icon icon="fa6-solid:list-ul"/>{post.category}</Link>
-                  </object>
-                  <span className="archive-item-date"><Icon icon="fa6-solid:calendar-days"/>{moment.unix(post.publishTime!).format('YYYY-MM-DD')}</span>
-                </Link>
-              );
-            })
+            value.map(post=><ArchiveItem post={post} type="tags"/>)
           }
         </div>
       );

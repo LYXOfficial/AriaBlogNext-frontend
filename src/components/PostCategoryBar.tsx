@@ -9,19 +9,19 @@ export default function PostCategoryBar({data,type,current="",wrap=false}:{data:
     const barRef=useRef<HTMLDivElement>(null);
     const currentRef=useRef<HTMLAnchorElement>(null);
     useEffect(()=>{
-        barRef.current?.addEventListener("wheel",(e:WheelEvent)=>{
-            e.stopPropagation();
-            e.preventDefault();
-            barRef.current!.scrollLeft += e.deltaY;
-        });
-    },[]);
-    useEffect(()=>{
-        currentRef.current?.scrollIntoView();
-    },[current]);
+        if(!wrap)
+            barRef.current?.addEventListener("wheel",(e:WheelEvent)=>{
+                e.stopPropagation();
+                e.preventDefault();
+                barRef.current!.scrollLeft += e.deltaY;
+            });
+    },[wrap]);
     return (
         <div id="posts-categories-bar" className="card-widget">
-            <Link href={`/${type}`}><Icon icon={type=="categories"?"fa6-solid:list-ul":"fa6-solid:tags"}/></Link>
-            <div id="posts-categories-bars-container" ref={barRef} style={{flexWrap:wrap?"wrap":"nowrap",rowGap:wrap?3:0}}>
+            <Link className="post-categories-bar-icon-link" href={`/${type}`}>
+                <Icon icon={type=="categories"?"fa6-solid:list-ul":"fa6-solid:tags"}/>
+            </Link>
+            <div id="posts-categories-bar-container" ref={barRef} style={{flexWrap:wrap?"wrap":"nowrap",rowGap:wrap?3:0}}>
                 {
                     data.map((item:Category)=>{
                         return (

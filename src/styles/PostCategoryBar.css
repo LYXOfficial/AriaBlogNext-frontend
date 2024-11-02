@@ -13,13 +13,13 @@
     box-sizing: border-box;
     min-height: 36px;
 }
-#posts-categories-bars-container{
+#posts-categories-bar-container{
     display: flex;
     margin-left:10px!important;
     overflow: scroll;
     scrollbar-width: none;
 }
-#posts-categories-bars-container::-webkit-scrollbar {
+#posts-categories-bar-container::-webkit-scrollbar {
     height: 0px;
 }
 #posts-categories-bar>*{
@@ -63,4 +63,10 @@
 }
 #posts-categories-bar svg:hover{
     color:var(--aria-theme);
+}
+.post-categories-bar-icon-link{
+    display: flex;
+}
+.post-categories-bar-icon-link>svg{
+    margin:auto;
 }
