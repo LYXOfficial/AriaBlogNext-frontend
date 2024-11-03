@@ -36,6 +36,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
     line-height: 1.2;
+    word-wrap: break-word;
 }
 .flink-desc{
     margin:0 15px 15px 0;
