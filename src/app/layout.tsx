@@ -12,7 +12,6 @@ process.env.TZ="Asia/Shanghai";
 export const metadata = {
   title: siteConfigs.title,
   alternates: {
-    canonical: siteConfigs.siteUrl,
     types: {
       'application/rss+xml': [{ url: 'feed.xml', title: 'RSS 订阅' }],
     },
