@@ -37,17 +37,17 @@ export default async function FriendLinks() {
 \`\`\`YAML
 - name: Ariasakaの小窝
   link: https://blog.yaria.top
-  avatar: https://weavatar.com/avatar/ae64fbbd18c13144d3e48ed089b5d07359ff071d6310d0c376d53ac8a213f6fc
+  avatar: https://bu.dusays.com/2024/12/05/67517bcf104da.png
   descr: 人有悲欢离合 月有阴晴圆缺
   siteshot: https://bu.dusays.com/2024/09/19/66ec130ad1de0.png
   theme_color: '#ed709b'
 \`\`\`
 ## HTML
 \`\`\`HTML
-<a href="https://blog.yaria.top"><img src="https://weavatar.com/avatar/ae64fbbd18c13144d3e48ed089b5d07359ff071d6310d0c376d53ac8a213f6fc" alt="avatar">Ariasakaの小窝</a>
+<a href="https://blog.yaria.top"><img src="https://bu.dusays.com/2024/12/05/67517bcf104da.png" alt="avatar">Ariasakaの小窝</a>
 \`\`\`
 # 如何申请友链？
-咕咕咕。。。`)}}></div>
+咕咕咕。。。这样的话可以去留言板找我哦喵～`)}}></div>
                 <HLJSNum/>
                 <CodeCopier/>
                 <Lazyload/>
