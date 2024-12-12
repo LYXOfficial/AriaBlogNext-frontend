@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";
 import { useRouter } from 'next/navigation';
@@ -39,9 +39,11 @@ const SpecialDaysLunar = new Map([
 
 export default function Welcome() {
     const router = useRouter();
+    const [gray, setGray] = useState(null);
     useEffect(() => {
         if (month === 12 && day === 13) {
             document.documentElement.style.filter = "grayscale(100%)";
+            setGray(<style dangerouslySetInnerHTML={{ __html: `body { filter: grayscale(100%); }` }}></style>);
         }
         (async () => {
             if (localStorage.getItem("showedWelcome") != "1") {
@@ -68,5 +70,5 @@ export default function Welcome() {
             if (specialDaysMessage) Snackbar.show({ text: specialDaysMessage, pos: 'top-left', showAction: false });
         })()
     }, [router]);
-    return <></>;
+    return <>{gray}</>;
 }
