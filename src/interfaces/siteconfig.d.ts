@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export declare interface SiteConfig{
+export declare interface SiteConfig {
     author: string,
     avatar: string,
     title: string,
@@ -16,7 +16,7 @@ export declare interface SiteConfig{
     falldownImg: string,
     fcircleUrl: string,
 }
-export declare interface Social{
+export declare interface Social {
     name: string,
     url: string,
     icon: ReactElement,

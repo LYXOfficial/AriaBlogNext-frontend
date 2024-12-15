@@ -1,12 +1,12 @@
 // jshint multistr:true
 
 const TABLE_NAME = 'hljs-ln',
-LINE_NAME = 'hljs-ln-line',
-CODE_BLOCK_NAME = 'hljs-ln-code',
-NUMBERS_BLOCK_NAME = 'hljs-ln-numbers',
-NUMBER_LINE_NAME = 'hljs-ln-n',
-DATA_ATTR_NAME = 'data-line-number',
-BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
+    LINE_NAME = 'hljs-ln-line',
+    CODE_BLOCK_NAME = 'hljs-ln-code',
+    NUMBERS_BLOCK_NAME = 'hljs-ln-numbers',
+    NUMBER_LINE_NAME = 'hljs-ln-n',
+    DATA_ATTR_NAME = 'data-line-number',
+    BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
 
 addStyles();
 

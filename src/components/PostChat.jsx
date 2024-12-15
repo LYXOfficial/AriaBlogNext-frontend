@@ -1,37 +1,38 @@
 "use client";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-export default function PostChat(){
-    const [loaded,setLoaded]=useState(0);
-    const pathname=usePathname();
-    useEffect(()=>{
-        const script=document.createElement("script");
-        script.src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js";
-        script.async=true;
-        script.setAttribute("data-postChat_key","b2697bd81e3904826ee9c180db306e61b2691c");
-        script.onload=()=>{
+export default function PostChat() {
+    const [loaded, setLoaded] = useState(0);
+    const pathname = usePathname();
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://ai.tianli0.top/static/public/postChatUser_summary.min.js";
+        script.async = true;
+        script.setAttribute("data-postChat_key", "b2697bd81e3904826ee9c180db306e61b2691c");
+        script.onload = () => {
             setLoaded(1);
         };
         document.body.appendChild(script);
-        return ()=>{
+        return () => {
             document.body.removeChild(script);
         };
-    },[]);
-    useEffect(()=>{
-        if(loaded==1){
+    }, []);
+    useEffect(() => {
+        if (loaded == 1) {
             postChat_load();
             tianliGPT(true);
             setLoaded(2);
         }
-        window.history.onpushstate=null;
-    },[loaded]);
-    useEffect(()=>{
-        if(loaded) tianliGPT(true);
-    },[pathname]);
+        window.history.onpushstate = null;
+    }, [loaded]);
+    useEffect(() => {
+        if (loaded) tianliGPT(true);
+    }, [pathname]);
     return <>
-        <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css"/>
+        <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css" />
         <script
-            dangerouslySetInnerHTML={{__html:`
+            dangerouslySetInnerHTML={{
+                __html: `
             let tianliGPT_postSelector='#article-container:not(#article-container.page)>#post-maincontent';
             let tianliGPT_recommendation=true;
             let tianliGPT_Title='这是文章摘要！QwQ';
@@ -49,6 +50,6 @@ export default function PostChat(){
                 upLoadWeb: true,
                 showInviteLink: true
             };`
-        }}/>
+            }} />
     </>
 }

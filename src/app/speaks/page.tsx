@@ -1,4 +1,4 @@
-export const revalidate=1800;
+export const revalidate = 1800;
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import { TwikooBaseComment } from "components/thirdpartyjs/Twikoo";
@@ -7,22 +7,22 @@ import { Speaks } from "components/Speaks";
 import { siteConfigs } from "@/config";
 import React from "react";
 
-export const metadata={
+export const metadata = {
   title: `哔哔 | ${siteConfigs.title}`,
 }
-export default function Page(){
-    return (<>
-      <style>{`#navbar{position:fixed}`}</style>
-      <div id="main-container" className="page">
-          <div id="article-container" className="page">
-            <div id="post-maincontent" className="page">
-              <h1>哔哔</h1>
-              <Speaks/>
-            </div>
-            <hr/>
-            <TwikooBaseComment/>
-          </div>
-          <PageRightSide/>
+export default function Page() {
+  return (<>
+    <style>{`#navbar{position:fixed}`}</style>
+    <div id="main-container" className="page">
+      <div id="article-container" className="page">
+        <div id="post-maincontent" className="page">
+          <h1>哔哔</h1>
+          <Speaks />
+        </div>
+        <hr />
+        <TwikooBaseComment />
       </div>
-    </>);
+      <PageRightSide />
+    </div>
+  </>);
 }

@@ -1,4 +1,4 @@
-export declare interface BB{
+export declare interface BB {
     content: string;
     time: number;
     plainContent: string;

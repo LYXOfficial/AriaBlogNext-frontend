@@ -7,24 +7,24 @@ import Busuanzi from "components/thirdpartyjs/Busuanzi";
 import { siteConfigs } from "config";
 import moment from "moment";
 
-export default async function CardWebInfo(){
-    let lastUpdatedTime:number=0,wordCount:number=0,postCount:number=0;
-    const resu=await fetch(`${siteConfigs.backEndUrl}/get/siteInfo/lastUpdateTime`,{next:{revalidate:7200,tags:["siteInfo"]}});
-    if(resu.ok){
-        let ui=await resu.json();
-        lastUpdatedTime=ui.time;
+export default async function CardWebInfo() {
+    let lastUpdatedTime: number = 0, wordCount: number = 0, postCount: number = 0;
+    const resu = await fetch(`${siteConfigs.backEndUrl}/get/siteInfo/lastUpdateTime`, { next: { revalidate: 7200, tags: ["siteInfo"] } });
+    if (resu.ok) {
+        let ui = await resu.json();
+        lastUpdatedTime = ui.time;
     }
-    const resw=await fetch(`${siteConfigs.backEndUrl}/get/post/totalWordCount`,{next:{revalidate:7200,tags:["posts"]}});
-    if(resw.ok){
-        let wi=await resw.json();
-        wordCount=wi.count;
+    const resw = await fetch(`${siteConfigs.backEndUrl}/get/post/totalWordCount`, { next: { revalidate: 7200, tags: ["posts"] } });
+    if (resw.ok) {
+        let wi = await resw.json();
+        wordCount = wi.count;
     }
-    const resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{revalidate:7200,tags:["posts"]}});
-    if(resp.ok){
-        let pi=await resp.json();
-        postCount=pi.count;
+    const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
+    if (resp.ok) {
+        let pi = await resp.json();
+        postCount = pi.count;
     }
-    const runDays=moment().diff(moment([siteConfigs.createYear,siteConfigs.createMonth-1,siteConfigs.createDay]),"days");
+    const runDays = moment().diff(moment([siteConfigs.createYear, siteConfigs.createMonth - 1, siteConfigs.createDay]), "days");
     return (
         <div className="card-widget card-aside card-webinfo">
             <div className="card-headline">
@@ -42,7 +42,7 @@ export default async function CardWebInfo(){
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">文章字数 :</span>
-                    <span className="card-webinfo-item-right">{Math.floor(wordCount/100)/100}w</span>
+                    <span className="card-webinfo-item-right">{Math.floor(wordCount / 100) / 100}w</span>
                 </div>
                 <div className="card-webinfo-item">
                     <span className="card-webinfo-item-left">总访客数 :</span>
@@ -61,7 +61,7 @@ export default async function CardWebInfo(){
                     <span className="card-webinfo-item-right commentcount"></span>
                 </div>
             </div>
-            <Busuanzi/>
+            <Busuanzi />
         </div>
     );
 }

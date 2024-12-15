@@ -1,27 +1,32 @@
-#article-container.page{
-    width:100%;
+#article-container.page {
+    width: 100%;
     padding-top: 100px;
 }
-#main-container.page{
-    margin:0;
+
+#main-container.page {
+    margin: 0;
     max-width: 100%;
     width: 100%;
 }
-.flink-avatar{
+
+.flink-avatar {
     position: relative;
 }
+
 @media screen and (min-width: 768px) {
-    #article-container.page{
-        padding-left:70px;
-        padding-right:70px;
+    #article-container.page {
+        padding-left: 70px;
+        padding-right: 70px;
     }
 }
+
 @media (prefers-color-scheme: dark) {
-    #article-container.page{
+    #article-container.page {
         background-color: #0000007d;
     }
 }
-#post-maincontent.page{
+
+#post-maincontent.page {
     max-width: 1500px;
     margin: 0 auto;
 }

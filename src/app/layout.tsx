@@ -7,7 +7,7 @@ import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from 'nextjs-toploader';
 import PostChat from 'components/PostChat';
 
-process.env.TZ="Asia/Shanghai";
+process.env.TZ = "Asia/Shanghai";
 
 export const metadata = {
   title: siteConfigs.title,
@@ -27,18 +27,18 @@ export default function RootLayout({
     <html lang="zh-cn">
       <head>
         <script
-          dangerouslySetInnerHTML={{__html:`if(!!window.ActiveXObject||"ActiveXObject" in window)window.location.href="./noie.html";//IE不欢迎你`}}
+          dangerouslySetInnerHTML={{ __html: `if(!!window.ActiveXObject||"ActiveXObject" in window)window.location.href="./noie.html";//IE不欢迎你` }}
         />
-        <script src="/js/piratesHaveNoMother.js"/>
+        <script src="/js/piratesHaveNoMother.js" />
       </head>
       <body>
-        <Welcome/>
-        <LicenseTips/>
-        <NavBar/>
-        <NextTopLoader color="var(--aria-theme)" height={5}/>
+        <Welcome />
+        <LicenseTips />
+        <NavBar />
+        <NextTopLoader color="var(--aria-theme)" height={5} />
         {children}
-        <PostChat/>
-        <Footer/>
+        <PostChat />
+        <Footer />
       </body>
     </html>
   )
