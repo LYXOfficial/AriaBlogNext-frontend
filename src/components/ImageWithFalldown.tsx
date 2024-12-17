@@ -22,7 +22,7 @@ export default function ImageWithFalldown({ className, src, alt, falldownImg, da
     );
 }
 
-export function LazyImageWithFalldown({ className, src, alt, falldownImg, dataSrc, objectPosition = "center" }: { className?: string, dataSrc?: string, src: string, alt: string, falldownImg?: string, objectPosition?: string }) {
+export function LazyImageWithFalldown({ className, src, alt, falldownImg, dataSrc, objectPosition = "center", style }: { className?: string, dataSrc?: string, src: string, alt: string, falldownImg?: string, objectPosition?: string, style?: React.CSSProperties }) {
     const [srcNow, setSrcNow] = useState(src);
     falldownImg = falldownImg ?? "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
     return (
@@ -36,12 +36,13 @@ export function LazyImageWithFalldown({ className, src, alt, falldownImg, dataSr
             }}
             effect="blur"
             wrapperProps={{
-                style: {transitionDelay: "1s"},
+                style: { transitionDelay: "1s" },
             }}
+            style={{ ...style, objectPosition: objectPosition }}
         />
     );
 }
-export function ImgWithFalldown({ className, src, alt, dataSrc, falldownImg }: { className: string, dataSrc?: string, src: string, alt: string, falldownImg?: string }) {
+export function ImgWithFalldown({ className, src, alt, dataSrc, falldownImg }: { className: string, dataSrc?: string, src: string, alt?: string, falldownImg?: string }) {
     const [srcNow, setSrcNow] = useState(src);
     falldownImg = falldownImg ?? "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
     return (
@@ -49,7 +50,7 @@ export function ImgWithFalldown({ className, src, alt, dataSrc, falldownImg }: {
             className={className}
             src={srcNow}
             data-src={dataSrc}
-            alt={alt}
+            alt={alt ?? ""}
             onError={() => {
                 setSrcNow(falldownImg);
             }}

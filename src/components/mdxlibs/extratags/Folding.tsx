@@ -6,10 +6,11 @@ export default function FoldingTag(
         {
             children: ReactElement[] | ReactElement,
             open?: boolean,
-            color: string,
+            color?: string,
             summary: string
         }
 ) {
+    color = color ?? "gray";
     return (
         <details
             className={`etag-folding${open ? ' open' : ''}`}
