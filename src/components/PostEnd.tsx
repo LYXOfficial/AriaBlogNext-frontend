@@ -9,10 +9,10 @@ import ImageWithFalldown from "components/ImageWithFalldown";
 import React from "react";
 
 export default async function PostEnd({ postInfo }: { postInfo: Post }) {
-  var res = await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`, { next: { revalidate: 7200, tags: ["posts"] } });
-  var previousPost: Post = {}, nextPost: Post = {};
+  const res = await fetch(`${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`, { next: { revalidate: 7200, tags: ["posts"] } });
+  let previousPost: Post = {}, nextPost: Post = {};
   if (res.ok) {
-    var postNavigation = await res.json();
+    const postNavigation = await res.json();
     previousPost = postNavigation.previous;
     nextPost = postNavigation.next;
   }

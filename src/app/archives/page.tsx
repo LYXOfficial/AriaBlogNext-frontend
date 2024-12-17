@@ -10,7 +10,7 @@ import { Post } from "@/interfaces/post";
 import Link from "next/link";
 import ArchiveItem from "@/components/Archives";
 export default async function Page() {
-  let ArchiveContent: ReactElement[] = [];
+  const ArchiveContent: ReactElement[] = [];
   const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, { next: { revalidate: 7200, tags: ["posts"] } });
   if (res.ok) {
     let Archives = new Map<number, Post[]>();

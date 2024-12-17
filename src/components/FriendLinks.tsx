@@ -1,7 +1,6 @@
 import "styles/FriendLinks.css";
 import { FriendLinkGroup } from "interfaces/friendlink";
 import { siteConfigs } from "@/config";
-import Lazyload from "./thirdpartyjs/Lazyload";
 import React from "react";
 import { FriendLinkItem } from "./FriendLinkItem";
 
@@ -26,7 +25,6 @@ export default async function FriendLinks() {
             <div id="flinks">
                 {flinks.map((group) => <FriendLinkGroupItem key={group.name} group={group} />)}
             </div>
-            <Lazyload />
         </>
     );
 }

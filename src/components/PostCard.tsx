@@ -12,13 +12,13 @@ import { Category } from "@/interfaces/category";
 import React from "react";
 
 export default async function Posts({ page }: { page: number }) {
-  let startl = (page - 1) * siteConfigs.pageMaxPosts, endl = page * siteConfigs.pageMaxPosts;
-  let resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`, { next: { revalidate: 7200, tags: ["posts"] } });
+  const startl = (page - 1) * siteConfigs.pageMaxPosts, endl = page * siteConfigs.pageMaxPosts;
+  const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`, { next: { revalidate: 7200, tags: ["posts"] } });
   if (!resp.ok) return notFound();
-  let posts: Post[] = (await resp.json()).data;
-  let resm = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
+  const posts: Post[] = (await resp.json()).data;
+  const resm = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
   if (!resm.ok) return notFound();
-  let postTotal = (await resm.json()).count;
+  const postTotal = (await resm.json()).count;
   const maxPage = Math.ceil(postTotal / siteConfigs.pageMaxPosts);
   const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`);
   const data: Category[] = (await res.json()).data;

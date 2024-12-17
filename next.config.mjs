@@ -18,6 +18,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    unoptimized: true,
   },
   experimental: {
     scrollRestoration: false,

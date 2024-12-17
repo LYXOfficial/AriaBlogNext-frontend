@@ -1,11 +1,11 @@
 "use client";
 import { Icon } from "@iconify/react";
-import { ReactElement, useRef } from "react";
+import { ReactElement } from "react";
 import { FriendLink } from "interfaces/friendlink";
 import { siteConfigs } from "@/config";
+import { LazyImageWithFalldown } from "./ImageWithFalldown";
 
 export function FriendLinkItem({ link }: { link: FriendLink }) {
-    const imageRef = useRef<HTMLImageElement>(null);
     let latencyIcon: ReactElement = <></>;
     if (link.latency! > 0) {
         if (link.latency! <= 1)
@@ -36,13 +36,12 @@ export function FriendLinkItem({ link }: { link: FriendLink }) {
                 `}
             </style>
             <div className="flink-avatar">
-                <img
-                    className="flink-avatar-img lazy-img cf-friends-avatar"
-                    src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                <LazyImageWithFalldown
+                    className="flink-avatar-img cf-friends-avatar"
+                    src={link.avatar}
                     data-src={link.avatar}
                     alt={link.name}
-                    ref={imageRef}
-                    onError={() => imageRef.current!.src = siteConfigs.falldownAvatar}
+                    falldownImg={siteConfigs.falldownAvatar}
                 />
             </div>
             <span className="flink-name cf-friends-name">{link.name}</span>

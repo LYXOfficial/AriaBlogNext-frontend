@@ -11,7 +11,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArchiveItem from "@/components/Archives";
 export default async function Page({ params }: { params: { year: string } }) {
-  let ArchiveContent: ReactElement[] = [];
+  const ArchiveContent: ReactElement[] = [];
   const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, { next: { revalidate: 7200, tags: ["posts"] } });
   if (res.ok) {
     let Archives = new Map<number, Post[]>();

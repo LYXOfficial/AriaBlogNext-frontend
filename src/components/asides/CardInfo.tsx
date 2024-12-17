@@ -8,17 +8,17 @@ export default async function CardInfo() {
     let postCount: number = 0, tagCount: number = 0, categoryCount: number = 0;
     const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
     if (resp.ok) {
-        let pi = await resp.json();
+        const pi = await resp.json();
         postCount = pi.count;
     }
     const rest = await fetch(`${siteConfigs.backEndUrl}/get/tag/tagCount`, { next: { revalidate: 7200, tags: ["posts"] } });
     if (rest.ok) {
-        let ti = await rest.json();
+        const ti = await rest.json();
         tagCount = ti.count;
     }
     const resc = await fetch(`${siteConfigs.backEndUrl}/get/category/categoryCount`, { next: { revalidate: 7200, tags: ["posts"] } });
     if (resc.ok) {
-        let ti = await resc.json();
+        const ti = await resc.json();
         categoryCount = ti.count;
     }
     return (

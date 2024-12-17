@@ -33,7 +33,7 @@ const MDRenderer = cache(async (mdContent: string, slug = "") => {
         heading: MarkedCustomTags.heading,
     }
     marked.use({ renderer: renderer });
-    let renderedHtml = await marked.parse(mdContent);
+    const renderedHtml = await marked.parse(mdContent);
     if (slug) {
         fetch(`${siteConfigs.backEndUrl}/update/post/pushRenderedHtmlCache`, {
             method: 'POST',

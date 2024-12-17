@@ -131,7 +131,7 @@ pre *::selection {
 }
 
 a.normal-a,
-:is(.tk-content, .bb-content, #post-maincontent) a:not(#flinks a, a.heading-link) {
+:is(.tk-content, .bb-content, #post-maincontent) a:not(#flinks a, a.heading-link, a.fancybox-img-a, a.etag-link) {
     border-bottom: 2px dotted var(--aria-theme);
     color: var(--aria-fontcolor);
     padding: 4px;
@@ -147,7 +147,7 @@ a.normal-a,
     padding-right: 18px !important;
 }
 
-:is(a.normal-a, :is(.tk-content, .bb-content, #post-maincontent) a:not(#flinks a, a.heading-link)):hover {
+:is(a.normal-a, :is(.tk-content, .bb-content, #post-maincontent) a:not(#flinks a, a.heading-link, a.fancybox-img-a, a.etag-link)):hover {
     background-color: var(--aria-theme);
     text-decoration: none !important;
     color: var(--aria-white) !important;
@@ -161,7 +161,7 @@ a.normal-a,
     -o-border-radius: 6px;
 }
 
-:is(a.normal-a, :is(.tk-content, .bb-content, #post-maincontent) a:not(#flinks a, a.heading-link))::after {
+:is(a.normal-a, :is(.tk-content, .bb-content, #post-maincontent) a:not(#flinks a, a.heading-link, a.fancybox-img-a, a.etag-link))::after {
     content: "\f35d";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;

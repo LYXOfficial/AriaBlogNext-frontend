@@ -10,7 +10,7 @@ export class MDFilters {
         const mathBlockRegexMultiLine = /\$\$[\s\S]*?\$\$/g;
         const mathBlockRegexSingleLine = /.\$(.*?)\$/g;
         const codeBlockRegex = /```[\s\S]*?```|`[^`]*?`/g;
-        let codeBlockMatches: string[] = [];
+        const codeBlockMatches: string[] = [];
         let tmptext = text.replace(codeBlockRegex, (match) => {
             codeBlockMatches.push(match);
             return `__CODEBLOCK_${codeBlockMatches.length - 1}__`;
@@ -79,7 +79,7 @@ ${content}
         });
     }
     static colorTextTag(markdown: string) {
-        const pRegex = /{%\s*p\s+(\w+)\s*,\s*([^%]+?)\s*%}/g;
+        const pRegex = /{%\s*p\s+(\w+)\s*,\s*([^%]+?)\s*%}/g; //还有{%span%}
         return markdown.replace(pRegex, (match, color, text) => {
             return `<span style="color:${color}">${text}</span>`;
         })
@@ -266,7 +266,7 @@ export class MarkedCustomTags {
         return `<del class="normal-del" title="你知道的太多了">${(tokens[0] as any).text}</del>`;
     }
     static heading({ text, depth }: { text: string, depth: number }) {
-        let id = stringRandom(8, { numbers: false });
+        const id = stringRandom(8, { numbers: false });
         return `<a class="heading-link" onclick=\"document.documentElement.scroll({top:this.offsetTop-70,behavior:\'smooth\'})\"><h${depth} id="title-${id}">${text}</h${depth}></a>`;
     }
 }

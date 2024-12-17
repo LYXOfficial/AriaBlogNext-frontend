@@ -956,10 +956,6 @@ span[style="undefined:invert"] {
     margin-top: 0 !important;
 }
 
-#post-maincontent img {
-    margin: 0 auto;
-}
-
 #post-maincontent del:not(#post-maincontent del.noheimu) {
     background-color: black;
     text-decoration: none;
@@ -992,4 +988,9 @@ span[style="undefined:invert"] {
     #post-maincontent code:not(#post-maincontent pre.hljs code) {
         background: #2f2f2f !important;
     }
+}
+
+.fancybox-img-a>.lazy-load-image-background {
+    margin: 0 auto;
+    max-width: min(400px, 100%);
 }

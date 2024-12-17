@@ -11,8 +11,8 @@ import "node-snackbar/src/sass/snackbar.sass";
 
 
 const bbClickHandle = (event: React.MouseEvent) => {
-  var str = ((event.currentTarget as HTMLElement)!.parentNode!.parentNode!.querySelector(".bb-content") as HTMLElement).innerText;
-  var e = document.getElementsByClassName("el-textarea__inner")[0],
+  const str = ((event.currentTarget as HTMLElement)!.parentNode!.parentNode!.querySelector(".bb-content") as HTMLElement).innerText;
+  const e = document.getElementsByClassName("el-textarea__inner")[0],
     t = document.createEvent("HTMLEvents");
   t.initEvent("input", true, true);
   (e as HTMLInputElement).value = "> " + str + "\n\n", e.dispatchEvent(t);
@@ -34,7 +34,7 @@ export function Speaks() {
       import("wc-waterfall");
       const res = await fetch(`${siteConfigs.backEndUrl}/get/speaks/speaks?endl=40`, { next: { revalidate: 7200, tags: ["speaks"] } });
       if (res.ok) {
-        let speaksContent: BB[] = (await res.json()).data;
+        const speaksContent: BB[] = (await res.json()).data;
         setSpeakContent(speaksContent.map((item, index) => {
           return (
             <div key={index} className="bb-item card-widget">

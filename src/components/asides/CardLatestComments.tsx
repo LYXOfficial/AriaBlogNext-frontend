@@ -10,8 +10,8 @@ export default function CardLatestComments() {
     const [comments, setComments] = useState<TwikooCommentItem[]>([]);
     useEffect(() => {
         (async () => {
-            var twikoo = require('twikoo/dist/twikoo.min');
-            let res: TwikooCommentItem[] = await new Promise((resolve, reject) => {
+            const twikoo = require('twikoo/dist/twikoo.min');
+            const res: TwikooCommentItem[] = await new Promise((resolve, reject) => {
                 try {
                     twikoo.getRecentComments({
                         envId: siteConfigs.twikooEnv,

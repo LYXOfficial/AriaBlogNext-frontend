@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { category: string } })
   const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`, { next: { revalidate: 7200, tags: ["posts"] } });
   let data: Category[] = [];
   if (res.ok) {
-    let Archives = new Map<string, Post[]>();
+    const Archives = new Map<string, Post[]>();
     data = (await res.json()).data;
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
     await Promise.all(data.map(async (item: Category) => {

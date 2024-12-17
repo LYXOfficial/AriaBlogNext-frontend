@@ -8,7 +8,7 @@ import { siteConfigs } from "config"
 
 export default async function CardNewestPosts() {
     let posts: Post[] = [];
-    let resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`, { next: { revalidate: 7200, tags: ["posts"] } });
+    const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`, { next: { revalidate: 7200, tags: ["posts"] } });
     if (resp.ok) posts = (await resp.json()).data;
     return (
         <div className="card-widget card-aside card-latest-posts">

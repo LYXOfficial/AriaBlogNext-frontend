@@ -11,17 +11,17 @@ export default async function CardWebInfo() {
     let lastUpdatedTime: number = 0, wordCount: number = 0, postCount: number = 0;
     const resu = await fetch(`${siteConfigs.backEndUrl}/get/siteInfo/lastUpdateTime`, { next: { revalidate: 7200, tags: ["siteInfo"] } });
     if (resu.ok) {
-        let ui = await resu.json();
+        const ui = await resu.json();
         lastUpdatedTime = ui.time;
     }
     const resw = await fetch(`${siteConfigs.backEndUrl}/get/post/totalWordCount`, { next: { revalidate: 7200, tags: ["posts"] } });
     if (resw.ok) {
-        let wi = await resw.json();
+        const wi = await resw.json();
         wordCount = wi.count;
     }
     const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
     if (resp.ok) {
-        let pi = await resp.json();
+        const pi = await resp.json();
         postCount = pi.count;
     }
     const runDays = moment().diff(moment([siteConfigs.createYear, siteConfigs.createMonth - 1, siteConfigs.createDay]), "days");

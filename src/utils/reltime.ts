@@ -1,7 +1,8 @@
 import moment from "moment";
 
 export default function relativeTime(timestamp: number) {
-    let aftertime, nowtime = Math.floor(Date.now() / 1000);
+    let aftertime;
+    const nowtime = Math.floor(Date.now() / 1000);
     if (nowtime - timestamp < 60)
         aftertime = "刚刚";
     else if (nowtime - timestamp < 3600)

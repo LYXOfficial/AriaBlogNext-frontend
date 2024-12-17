@@ -30,25 +30,29 @@ export default function TocBody({ toc }: { toc: TOCItem[] }) {
       {
         toc.map(item =>
           <li className="toc-child" key={item.href}>
-            {item.href ?
-              <a
-                className="toc-link"
-                id={`toc-${item.href}`}
-                onClick={
-                  async () => {
-                    window.removeEventListener("scroll", (window as any).tocHandleScroll);
-                    await scrollToElementAndWait(item.href);
-                    (window as any).tocHandleScroll?.();
-                    window.addEventListener("scroll", (window as any).tocHandleScroll);
+            {
+              item.href ?
+                <a
+                  className="toc-link"
+                  id={`toc-${item.href}`}
+                  onClick={
+                    async () => {
+                      window.removeEventListener("scroll", (window as any).tocHandleScroll);
+                      await scrollToElementAndWait(item.href);
+                      (window as any).tocHandleScroll?.();
+                      window.addEventListener("scroll", (window as any).tocHandleScroll);
+                    }
                   }
-                }
-              >
-                {item.text}
-              </a> :
-              <></>}
-            {item.children && item.children.length > 0 ?
-              <ul className="toc-children"><TocBody toc={item.children} /></ul>
-              : <></>}
+                >
+                  {item.text}
+                </a> :
+                <></>
+            }
+            {
+              item.children && item.children.length > 0 ?
+                <ul className="toc-children"><TocBody toc={item.children} /></ul>
+                : <></>
+            }
           </li>
         )
       }
