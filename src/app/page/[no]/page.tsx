@@ -3,11 +3,11 @@ import { HomeASides } from 'components/ASides';
 import { HomeRightSide } from 'components/RightSide';
 import { notFound } from 'next/navigation';
 
-export default function Page({ params }: { params: { no: string } }) {
+export default function Page({ params }: { params: { no: number } }) {
     try {
         return (
             <div id="main-container">
-                <Posts page={Number(params.no)} />
+                <Posts page={params.no} />
                 <HomeASides />
                 <HomeRightSide />
             </div>

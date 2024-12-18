@@ -25,7 +25,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     return Object.assign({}, config, {
-      module: {
+      module: Object.assign({}, config.module, {
         rules: config.module.rules.concat([{
             test: /\.mdx$/i,
             use: 'raw-loader',
@@ -35,7 +35,7 @@ const nextConfig = {
             use: 'raw-loader',
           }
         ])
-      },
+      }),
     });
   },
   async rewrites() {
