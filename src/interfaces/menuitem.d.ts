@@ -8,7 +8,8 @@ export declare interface MenuItem {
 }
 export declare interface MenuItemChild {
     name: string,
-    link: string,
+    link?: string,
+    func?: MouseEventHandler<HTMLAnchorElement>,
     icon: ReactElement,
 }
 export declare interface MenuButton {

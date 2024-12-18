@@ -61,8 +61,10 @@ export const MenuItems: MenuItem[] = [
         childs: [
             {
                 name: "随便逛逛",
-                link: "javascript:window.toRandomPost();",
                 icon: <Icon icon="fa6-solid:paper-plane" />,
+                func: () => {
+                    (window as any).toRandomPost();
+                }
             },
             {
                 name: "归档",

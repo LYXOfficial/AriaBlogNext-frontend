@@ -1,9 +1,9 @@
 import createMDX from '@next/mdx'
-
+import Markdown from 'markdown-to-jsx';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   images: {
     remotePatterns: [{
         protocol: 'https',
@@ -22,6 +22,21 @@ const nextConfig = {
   },
   experimental: {
     scrollRestoration: false,
+  },
+  webpack: (config) => {
+    return Object.assign({}, config, {
+      module: {
+        rules: config.module.rules.concat([{
+            test: /\.mdx$/i,
+            use: 'raw-loader',
+          },
+          {
+            test: /\.md$/i,
+            use: 'raw-loader',
+          }
+        ])
+      },
+    });
   },
   async rewrites() {
     return [{
@@ -87,7 +102,4 @@ const nextConfig = {
   }
 };
 
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-})
-export default withMDX(nextConfig);
+export default nextConfig;

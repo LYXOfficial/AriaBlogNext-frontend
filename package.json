@@ -63,6 +63,7 @@
     "penndu": "^13.0.0",
     "prettier": "^3.4.2",
     "random-string": "^0.2.0",
+    "raw-loader": "^4.0.2",
     "react": "^18",
     "react-dom": "^18",
     "react-lazy-load-image-component": "^1.6.2",

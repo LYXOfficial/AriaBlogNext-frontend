@@ -26,7 +26,8 @@
     }
 }
 
-#post-maincontent.page {
+#post-maincontent.page,
+#post-maincontent.page+#post-comment-container {
     max-width: 1500px;
     margin: 0 auto;
 }

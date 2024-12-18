@@ -1,6 +1,11 @@
-"use client";
-import Content from "./content.mdx";
 import KaTex from "@/components/thirdpartyjs/KaTex";
+import Content from "./content.mdx";
+import MDToTSXWithPlugins from "@/components/mdxlibs"
 export default function Renderer() {
-    return <><Content /><KaTex /></>;
+    return (
+        <>
+            <MDToTSXWithPlugins mdContent={Content.toString()} />
+            <KaTex />
+        </>
+    );
 }

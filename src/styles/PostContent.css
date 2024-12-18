@@ -234,6 +234,24 @@ table:not(code table) {
     margin: 2px 5px;
 }
 
+@keyframes code-expand {
+    0% {
+        max-height: 2.5em;
+    }
+    100%{
+        max-height: 1000px;
+    }
+}
+
+.hljs-folder:not([open]){
+    max-height: 2.5em;
+    overflow: hidden;
+}
+
+.hljs-folder[open] {
+    animation: code-expand .8s;
+}
+
 .hljs-folder {
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -243,6 +261,7 @@ table:not(code table) {
     box-shadow: var(--aria-shadow);
     margin: 20px 0;
     overflow: hidden;
+    transition: .8s;
 }
 
 .hljs-folder summary::marker {
@@ -466,6 +485,24 @@ table:not(code table) {
     .etag-link {
         background: #2c2c2c;
     }
+}
+
+@keyframes folding-expand {
+    0% {
+        max-height: 2.5em;
+    }
+    100%{
+        max-height: 1000px;
+    }
+}
+
+.etag-folding:not([open]){
+    max-height: 2.5em;
+    overflow: hidden;
+}
+
+.etag-folding[open] {
+    animation: folding-expand .8s;
 }
 
 .etag-folding {
