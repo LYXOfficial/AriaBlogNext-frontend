@@ -1,10 +1,16 @@
 export const revalidate = 3600;
 
-import RSS from 'rss'
-import { siteConfigs } from '@/config'
-import { Post } from 'interfaces/post'
-import MDRender from "@/utils/mdrender"
+import RSS from 'rss';
+import { siteConfigs } from '@/config';
+import { Post } from 'interfaces/post';
+import { cache } from 'react';
 
+declare const Lute: any;
+require("@/utils/lute.min.js");
+
+const lute = Lute.New();
+
+const renderer = (md: string): string => lute.MarkdownStr("", md);
 export async function GET() {
   const feed = new RSS({
     title: siteConfigs.title,
@@ -20,9 +26,7 @@ export async function GET() {
   if (res.ok) {
     const data: Post[] = (await res.json()).data;
     for (const post of data) {
-      if (!post.cachedHtml) {
-        post.cachedHtml = await MDRender(post.mdContent!, post.slug);
-      }
+      const renderedHTML = cache(renderer)(post.mdContent!);
       feed.item({
         title: post.title!,
         guid: post.slug,
@@ -31,7 +35,7 @@ export async function GET() {
         enclosure: {
           url: post.bannerImg!,
         },
-        description: `${post.description ?? ""}</br><img src="${post.bannerImg}"/><p><strong>RSS 阅读器可能渲染错误。查看原文：<a href="${siteConfigs.siteUrl}/posts/${post.slug}">${siteConfigs.siteUrl}/posts/${post.slug}</a></strong></p>${post.cachedHtml.replace("data-src=", "src=")}`,
+        description: `${post.description ?? ""}</br><img src="${post.bannerImg}"/><p><strong>RSS 阅读器可能渲染错误。查看原文：<a href="${siteConfigs.siteUrl}/posts/${post.slug}">${siteConfigs.siteUrl}/posts/${post.slug}</a></strong></p>${renderedHTML}`,
       });
     };
   }
