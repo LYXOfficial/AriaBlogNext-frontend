@@ -24,6 +24,7 @@
     "@next/mdx": "^15.1.0",
     "@sergeymyssak/nextjs-sitemap": "^2.0.3",
     "@types/color": "^3.0.6",
+    "@types/color-name": "^2.0.0",
     "@types/fancybox": "^3.5.7",
     "@types/jsdom": "^21.1.7",
     "@types/katex": "^0.16.7",
