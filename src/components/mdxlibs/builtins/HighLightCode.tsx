@@ -1,6 +1,8 @@
+"use client";
 import ansi2html from "ansi2html";
 import hljs from "highlight.js";
 import { Icon } from "@iconify/react";
+import { useEffect, useRef, useState } from "react";
 
 const codeIcons = {
     "c": <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m15.45 15.97l.42 2.44c-.26.14-.68.27-1.24.39c-.57.13-1.24.2-2.01.2c-2.21-.04-3.87-.7-4.98-1.96c-1.14-1.27-1.68-2.88-1.68-4.83C6 9.9 6.68 8.13 8 6.89C9.28 5.64 10.92 5 12.9 5c.75 0 1.4.07 1.94.19s.94.25 1.2.4l-.6 2.49l-1.04-.34c-.4-.1-.87-.15-1.4-.15c-1.15-.01-2.11.36-2.86 1.1c-.76.73-1.14 1.85-1.18 3.34c.01 1.36.37 2.42 1.08 3.2c.71.77 1.7 1.17 2.99 1.18l1.33-.12c.43-.08.79-.19 1.09-.32" /></svg>,
@@ -47,36 +49,59 @@ const codeIcons = {
     "sql": <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M18.68 12.32a4.49 4.49 0 0 0-6.36.01a4.49 4.49 0 0 0 0 6.36a4.51 4.51 0 0 0 5.57.63L21 22.39L22.39 21l-3.09-3.11c1.13-1.77.87-4.09-.62-5.57m-1.41 4.95c-.98.98-2.56.97-3.54 0c-.97-.98-.97-2.56.01-3.54c.97-.97 2.55-.97 3.53 0c.97.98.97 2.56 0 3.54M10.9 20.1a6.5 6.5 0 0 1-1.48-2.32C6.27 17.25 4 15.76 4 14v3c0 2.21 3.58 4 8 4c-.4-.26-.77-.56-1.1-.9M4 9v3c0 1.68 2.07 3.12 5 3.7v-.2c0-.93.2-1.85.58-2.69C6.34 12.3 4 10.79 4 9m8-6C7.58 3 4 4.79 4 7c0 2 3 3.68 6.85 4h.05c1.2-1.26 2.86-2 4.6-2c.91 0 1.81.19 2.64.56A3.22 3.22 0 0 0 20 7c0-2.21-3.58-4-8-4" /></svg>,
     "swift": <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M17.09 19.72c-2.36 1.36-5.59 1.5-8.86.1A13.8 13.8 0 0 1 2 14.5c.67.55 1.46 1 2.3 1.4c3.37 1.57 6.73 1.46 9.1 0c-3.37-2.59-6.24-5.96-8.37-8.71c-.45-.45-.78-1.01-1.12-1.51c8.28 6.05 7.92 7.59 2.41-1.01c4.89 4.94 9.43 7.74 9.43 7.74c.16.09.25.16.36.22c.1-.25.19-.51.26-.78c.79-2.85-.11-6.12-2.08-8.81c4.55 2.75 7.25 7.91 6.12 12.24c-.03.11-.06.22-.05.39c2.24 2.83 1.64 5.78 1.35 5.22c-1.21-2.39-3.48-1.65-4.62-1.17" /></svg>,
 };
-export default function HighLightCode({ lang, code }: { lang?: string, code: string }) {
+export default function HighLightCode({ lang, code }: { lang?: string; code: string }) {
     let language = lang?.toUpperCase() ?? "TEXT";
     let highlightedCode;
+
     try {
         highlightedCode = hljs.highlight(code, { language: language }).value;
-    }
-    catch (e) {
+    } catch (e) {
         language = "TEXT";
         highlightedCode = hljs.highlight(code, { language: language }).value;
     }
-    if (lang?.toUpperCase() == "ANSI") {
+
+    if (lang?.toUpperCase() === "ANSI") {
         highlightedCode = ansi2html(highlightedCode);
     }
+
+    const codeRef = useRef<HTMLPreElement>(null);
+    const [isWrapped, setIsWrapped] = useState(false);
+
+    const handleCopyClick = () => {
+        if (codeRef.current) {
+            const range = document.createRange();
+            const selection = document.getSelection();
+            selection?.removeAllRanges();
+            range.selectNode(codeRef.current);
+            selection?.addRange(range);
+            document.execCommand("copy");
+            selection?.removeAllRanges();
+        }
+    };
+
+    const handleWrapperClick = () => {
+        setIsWrapped((prev) => !prev);
+    };
+
     return (
         <details className="hljs-folder" open>
             <summary>
                 <span className="hljs-lang-icon">
                     {codeIcons[language.toLowerCase() as keyof typeof codeIcons] ?? codeIcons["text"]}
                 </span>
-                <span className="hljs-lang">
-                    {language.toUpperCase()}
-                </span>
-                <button className="hljs-wrapper" title="自动换行">
+                <span className="hljs-lang">{language.toUpperCase()}</span>
+                <button className={`hljs-wrapper ${isWrapped ? "wrap" : ""}`} title="自动换行" onClick={handleWrapperClick}>
                     <Icon icon="fa6-solid:arrow-turn-down" />
                 </button>
-                <button className="hljs-copy" title="复制代码">
+                <button className="hljs-copy" title="复制代码" onClick={handleCopyClick}>
                     <Icon icon="fa6-solid:copy" />
                 </button>
             </summary>
-            <pre className={`hljs language-${language}`} data-language={language}>
+            <pre
+                ref={codeRef}
+                className={`hljs language-${language} ${isWrapped ? "wrap" : ""}`}
+                data-language={language}
+            >
                 <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
             </pre>
         </details>

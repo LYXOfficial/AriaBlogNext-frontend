@@ -2,7 +2,6 @@ import "styles/PostContent.css"
 
 import FancyBox from "components/thirdpartyjs/FancyBox";
 import HLJSNum from "components/thirdpartyjs/HLJSNum";
-import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import KaTex from "components/thirdpartyjs/KaTex";
 import { TwikooBaseComment, TwikooCountPost } from "components/thirdpartyjs/Twikoo";
 import Pangu from "components/thirdpartyjs/Pangu";
@@ -19,7 +18,6 @@ export default function PostContent({ mdContent, postInfo }: { mdContent: string
       </div>
       <FancyBox />
       <HLJSNum />
-      <CodeCopier />
       <KaTex />
       <PostEnd postInfo={postInfo} />
       <TwikooBaseComment />

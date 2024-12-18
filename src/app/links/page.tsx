@@ -6,7 +6,6 @@ import { siteConfigs } from "@/config";
 import React from "react";
 
 import HLJSNum from "components/thirdpartyjs/HLJSNum";
-import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import MDRenderer from "@/utils/mdrender";
 
 export const metadata = {
@@ -41,7 +40,6 @@ theme_color: '#ed709b'
 咕咕咕。。。这样的话可以去留言板找我哦喵～`)
                         }}></div>
                         <HLJSNum />
-                        <CodeCopier />
                     </div>
                 </div>
                 <HomeRightSide />
