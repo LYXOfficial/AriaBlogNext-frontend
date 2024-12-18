@@ -489,7 +489,7 @@ table:not(code table) {
 
 @keyframes folding-expand {
     0% {
-        max-height: 2.5em;
+        max-height: 3em;
     }
     100%{
         max-height: 1000px;
@@ -497,7 +497,7 @@ table:not(code table) {
 }
 
 .etag-folding:not([open]){
-    max-height: 2.5em;
+    max-height: 3em;
     overflow: hidden;
 }
 

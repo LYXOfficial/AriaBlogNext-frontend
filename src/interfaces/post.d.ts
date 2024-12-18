@@ -11,7 +11,6 @@ export declare interface Post {
     summary?: string,
     wordCount?: number,
     bannerImg?: string,
-    cachedHtml?: string,
     coverFit?: string,
     context?: string,
 }
