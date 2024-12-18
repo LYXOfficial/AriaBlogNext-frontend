@@ -6,10 +6,10 @@ import { Post } from "interfaces/post";
 import { ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config"
 
-export default async function CardNewestPosts(){
-    let posts:Post[]=[];
-    let resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`,{next:{revalidate:7200,tags:["posts"]}});
-    if(resp.ok) posts=(await resp.json()).data;
+export default async function CardNewestPosts() {
+    let posts: Post[] = [];
+    const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`, { next: { revalidate: 7200, tags: ["posts"] } });
+    if (resp.ok) posts = (await resp.json()).data;
     return (
         <div className="card-widget card-aside card-latest-posts">
             <div className="card-headline">
@@ -18,12 +18,12 @@ export default async function CardNewestPosts(){
             </div>
             <div className="card-body">
                 <ASideList items={
-                    posts.map((item:Post)=>{
+                    posts.map((item: Post) => {
                         return {
                             title: item.title,
                             content: moment.unix(item.publishTime!).format("yyyy-MM-DD"),
                             pic: item.bannerImg,
-                            link: "/posts/"+item.slug
+                            link: "/posts/" + item.slug
                         };
                     }) as ASideListItem[]}
                     falldownImg={siteConfigs.falldownImg}

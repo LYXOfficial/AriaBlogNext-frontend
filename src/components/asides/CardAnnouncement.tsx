@@ -2,18 +2,18 @@
 import "styles/ASide/global.css"
 import { Icon } from '@iconify/react';
 import "styles/ASide/Announcement.css"
-import { ReactElement,useEffect,useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { annogen } from "utils/annogen"
 
-export default function CardInfo({content}:{content:ReactElement}){
-    const [annoContent,setAnnoContent]=useState(content);
-    useEffect(()=>{
-        (async ()=>{
-            try{
+export default function CardInfo({ content }: { content: ReactElement }) {
+    const [annoContent, setAnnoContent] = useState(content);
+    useEffect(() => {
+        (async () => {
+            try {
                 setAnnoContent(await annogen());
-            }catch(e){}
+            } catch (e) { }
         })();
-    },[]);
+    }, []);
     return (
         <div className="card-widget card-aside card-announcement">
             <div className="card-headline">

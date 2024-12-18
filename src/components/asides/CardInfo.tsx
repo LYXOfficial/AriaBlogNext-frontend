@@ -4,27 +4,27 @@ import "styles/ASide/Info.css"
 import { Social } from "interfaces/siteconfig"
 import { siteConfigs } from 'config'
 
-export default async function CardInfo(){
-    let postCount:number=0,tagCount:number=0,categoryCount:number=0;
-    const resp=await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`,{next:{revalidate:7200,tags:["posts"]}});
-    if(resp.ok){
-        let pi=await resp.json();
-        postCount=pi.count;
+export default async function CardInfo() {
+    let postCount: number = 0, tagCount: number = 0, categoryCount: number = 0;
+    const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
+    if (resp.ok) {
+        const pi = await resp.json();
+        postCount = pi.count;
     }
-    const rest=await fetch(`${siteConfigs.backEndUrl}/get/tag/tagCount`,{next:{revalidate:7200,tags:["posts"]}});
-    if(rest.ok){
-        let ti=await rest.json();
-        tagCount=ti.count;
+    const rest = await fetch(`${siteConfigs.backEndUrl}/get/tag/tagCount`, { next: { revalidate: 7200, tags: ["posts"] } });
+    if (rest.ok) {
+        const ti = await rest.json();
+        tagCount = ti.count;
     }
-    const resc=await fetch(`${siteConfigs.backEndUrl}/get/category/categoryCount`,{next:{revalidate:7200,tags:["posts"]}});
-    if(resc.ok){
-        let ti=await resc.json();
-        categoryCount=ti.count;
+    const resc = await fetch(`${siteConfigs.backEndUrl}/get/category/categoryCount`, { next: { revalidate: 7200, tags: ["posts"] } });
+    if (resc.ok) {
+        const ti = await resc.json();
+        categoryCount = ti.count;
     }
     return (
         <div className="card-widget card-aside card-info">
             <div className="card-info-avatar">
-                <img alt="avatar" src={siteConfigs.avatar} className="card-info-avatar-img"/>
+                <img alt="avatar" src={siteConfigs.avatar} className="card-info-avatar-img" />
             </div>
             <span className="card-info-name">
                 {siteConfigs.author}
@@ -45,7 +45,7 @@ export default async function CardInfo(){
             </div>
             <div className="card-info-socials">
                 {
-                    siteConfigs.socials.map((link:Social)=>{
+                    siteConfigs.socials.map((link: Social) => {
                         return (
                             <a key={link.name} className="card-info-Social" href={link.url} title={link.name}>
                                 {link.icon}

@@ -47,7 +47,7 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
                 const element = document.getElementById(item.href);
                 return element ? [{ id: item.href.slice(0), offsetTop: element.offsetTop }] : [];
             });
-            const currentScrollPosition = window.scrollY + 80; 
+            const currentScrollPosition = window.scrollY + 80;
             let currentActiveId = '';
             for (let i = offsets.length - 1; i >= 0; i--) {
                 if (currentScrollPosition >= offsets[i].offsetTop) {
@@ -68,10 +68,10 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
                     const isAbove = bounding.top < tocBounding.top;
                     const isBelow = bounding.bottom > tocBounding.bottom;
                     if (isAbove) {
-                        tocContent.scrollTop -= tocBounding.top - bounding.top+10;
-                    } 
+                        tocContent.scrollTop -= tocBounding.top - bounding.top + 10;
+                    }
                     else if (isBelow) {
-                        tocContent.scrollTop += bounding.bottom - tocBounding.bottom+10;
+                        tocContent.scrollTop += bounding.bottom - tocBounding.bottom + 10;
                     }
                 }
                 let currentTopToc = currentTocLink;
@@ -93,9 +93,9 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
             }
             calcProgress();
         };
-        (window as any).tocHandleScroll=handleScroll;
+        (window as any).tocHandleScroll = handleScroll;
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); 
+        handleScroll();
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };

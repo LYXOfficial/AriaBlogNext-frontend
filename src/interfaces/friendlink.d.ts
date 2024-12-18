@@ -1,4 +1,4 @@
-export declare interface FriendLink{
+export declare interface FriendLink {
     name: string;
     url: string;
     avatar: string;
@@ -7,7 +7,7 @@ export declare interface FriendLink{
     id: string;
     latency?: number;
 }
-export declare interface FriendLinkGroup{
+export declare interface FriendLinkGroup {
     name: string;
     description: string;
     links: FriendLink[];

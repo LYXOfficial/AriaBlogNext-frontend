@@ -5,8 +5,8 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import React from "react";
 
 export default function FancyBox() {
-    useEffect(()=>{
+    useEffect(() => {
         Fancybox.bind("[data-fancybox]");
-    },[]);
+    }, []);
     return <></>;
 }

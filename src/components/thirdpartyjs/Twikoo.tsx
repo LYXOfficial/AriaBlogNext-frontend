@@ -14,12 +14,12 @@ export function TwikooBaseComment() {
       let flag = 1,
         owo_time: NodeJS.Timeout | null = null,
         m = 3;
-      let div = document.createElement("div"),
+      const div = document.createElement("div"),
         body = document.querySelector("body") as HTMLElement;
       div.id = "owo-big";
       body.appendChild(div);
 
-      let observer = new MutationObserver(mutations => {
+      const observer = new MutationObserver(mutations => {
         for (let i = 0; i < mutations.length; i++) {
           let dom = mutations[i].addedNodes,
             owo_body: HTMLElement | null = null;
@@ -118,7 +118,7 @@ export function TwikooCountHome() {
       const tk = require("twikoo/dist/twikoo.min");
       document.querySelectorAll(".post-info").forEach(el => {
         const postTitle = el.querySelector(".post-title") as HTMLAnchorElement;
-        let hr = "/" + postTitle.href.split("/").slice(3).join("/");
+        const hr = "/" + postTitle.href.split("/").slice(3).join("/");
         tk.getCommentsCount({
           envId: siteConfigs.twikooEnv,
           urls: [hr, hr + "/"],

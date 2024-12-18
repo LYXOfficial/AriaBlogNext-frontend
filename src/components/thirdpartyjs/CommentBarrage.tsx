@@ -21,7 +21,7 @@ interface BarrageData {
   replies?: BarrageData[];
 }
 
-const CommentBarrage=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
+const CommentBarrage = ({ toggleBarrage }: { toggleBarrage: () => void }) => {
   const [currentSwiper, setCurrentSwiper] = useState<ReactElement>(<></>);
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +38,8 @@ const CommentBarrage=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
         const result = await response.json();
         const comments = result.data.sort((a: BarrageData, b: BarrageData) => b.created! - a.created!);
         const flattenedComments = comments.flatMap(getCommentReplies);
-        if(flattenedComments.length)
-          setCurrentSwiper(<BarrageSwiper barrages={flattenedComments} toggleBarrage={toggleBarrage}/>);
+        if (flattenedComments.length)
+          setCurrentSwiper(<BarrageSwiper barrages={flattenedComments} toggleBarrage={toggleBarrage} />);
       } catch (error) {
         console.error('Error fetching barrages:', error);
       }
@@ -86,16 +86,16 @@ const CommentBarrage=({toggleBarrage}:{toggleBarrage: ()=>void}) => {
 
 interface BarrageSwiperProps {
   barrages: BarrageData[];
-  toggleBarrage: ()=>void;
+  toggleBarrage: () => void;
 }
 
-const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages,toggleBarrage }) => {
+const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages, toggleBarrage }) => {
   return (
     <Swiper
-      modules={[Autoplay,Mousewheel]}
+      modules={[Autoplay, Mousewheel]}
       direction="vertical"
-      loop={true} 
-      autoplay={{delay:3000,disableOnInteraction:false,pauseOnMouseEnter:true,stopOnLastSlide:false}}
+      loop={true}
+      autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true, stopOnLastSlide: false }}
       mousewheel={true}
       slidesPerView={1}
       spaceBetween={0}
@@ -103,7 +103,7 @@ const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages,toggleBarrage })
     >
       {barrages.map((barrage) => (
         <SwiperSlide key={barrage.id} className="comment-barrage-slide">
-          <CommentBarrageItem barrage={barrage} toggleBarrage={toggleBarrage}/>
+          <CommentBarrageItem barrage={barrage} toggleBarrage={toggleBarrage} />
         </SwiperSlide>
       ))}
     </Swiper>
@@ -112,10 +112,10 @@ const BarrageSwiper: React.FC<BarrageSwiperProps> = ({ barrages,toggleBarrage })
 
 interface CommentBarrageItemProps {
   barrage: BarrageData;
-  toggleBarrage: ()=>void;
+  toggleBarrage: () => void;
 }
 
-const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage,toggleBarrage }) => {
+const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage, toggleBarrage }) => {
   const { avatar, link, nick, comment, id, mailMd5 } = barrage;
   const avatarUrl = avatar || `https://weavatar.com/avatar/${mailMd5}?d=mp`;
 
@@ -130,11 +130,11 @@ const CommentBarrageItem: React.FC<CommentBarrageItemProps> = ({ barrage,toggleB
         ) : (
           <div className="barrageNick">{nick}</div>
         )}
-        <a onClick={()=>{toggleBarrage()}} style={{ fontSize: '20px' }} className="barrageClose">
+        <a onClick={() => { toggleBarrage() }} style={{ fontSize: '20px' }} className="barrageClose">
           ×
         </a>
       </div>
-      <Link href={`#${id}`} className="barrageContent" dangerouslySetInnerHTML={{__html:comment}}/>
+      <Link href={`#${id}`} className="barrageContent" dangerouslySetInnerHTML={{ __html: comment }} />
     </div>
   );
 };

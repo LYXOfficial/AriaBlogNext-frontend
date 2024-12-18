@@ -25,6 +25,7 @@
         transform: translate(0, -95%);
         opacity: 0;
     }
+
     100% {
         transform: translate(0, -105%);
         opacity: 1;

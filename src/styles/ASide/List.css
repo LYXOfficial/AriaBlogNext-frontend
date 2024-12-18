@@ -1,5 +1,5 @@
-.aside-list-item-pic{
-    width:68px;
+.aside-list-item-pic {
+    width: 68px;
     min-width: 68px;
     height: 68px;
     overflow: hidden;
@@ -9,9 +9,10 @@
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
 }
-.aside-list-item-pic-img{
-    width:100%;
-    height:100%;
+
+.aside-list-item-pic-img {
+    width: 100%;
+    height: 100%;
     transition: filter 375ms ease-in .2s, transform .6s;
     object-fit: cover;
     -webkit-transition: filter 375ms ease-in .2s, transform .6s;
@@ -19,10 +20,12 @@
     -ms-transition: filter 375ms ease-in .2s, transform .6s;
     -o-transition: filter 375ms ease-in .2s, transform .6s;
 }
-.aside-list-item-pic-img:hover{
+
+.aside-list-item-pic-img:hover {
     transform: scale(1.1);
 }
-.aside-list-item{
+
+.aside-list-item {
     display: flex;
     padding: 8px;
     padding-top: 6px !important;
@@ -36,18 +39,22 @@
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
 }
-.aside-list-item-content{
+
+.aside-list-item-content {
     display: flex;
     flex-direction: column;
-    margin-left:10px;
+    margin-left: 10px;
 }
-.aside-list{
-    margin-top:15px;
+
+.aside-list {
+    margin-top: 15px;
 }
-.aside-list-item-content-text{
+
+.aside-list-item-content-text {
     font-size: 14px;
-    color:var(--aria-light-fontcolor)
+    color: var(--aria-light-fontcolor)
 }
+
 .aside-list-item:hover {
     background: var(--aria-theme);
     color: var(--aria-white);
@@ -55,10 +62,12 @@
     box-shadow: var(--aria-theme);
     scale: 1.04;
 }
-.aside-list-item:hover .aside-list-item-content-text{
-    color:var(--aria-white);
+
+.aside-list-item:hover .aside-list-item-content-text {
+    color: var(--aria-white);
 }
-.aside-list-item-content-title{
+
+.aside-list-item-content-title {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 3;
@@ -66,9 +75,11 @@
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
 }
-.aside-list-item-content{
+
+.aside-list-item-content {
     overflow: hidden;
 }
-.aside-list-item-content-title{
+
+.aside-list-item-content-title {
     line-height: 1.5;
 }
