@@ -1,6 +1,3 @@
-import createMDX from '@next/mdx'
-import Markdown from 'markdown-to-jsx';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -79,7 +76,6 @@ const nextConfig = {
   },
   async headers() {
     return [{
-      // matching all API routes
       source: "/",
       headers: [{
           key: "Access-Control-Allow-Credentials",
@@ -88,7 +84,7 @@ const nextConfig = {
         {
           key: "Access-Control-Allow-Origin",
           value: "*"
-        }, // replace this your actual origin
+        },
         {
           key: "Access-Control-Allow-Methods",
           value: "GET,DELETE,PATCH,POST,PUT"

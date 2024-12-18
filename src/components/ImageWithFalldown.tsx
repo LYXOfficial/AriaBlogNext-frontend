@@ -8,7 +8,6 @@ export default function ImageWithFalldown({ className, src, alt, falldownImg, da
     return (
         <Image
             fill={true}
-            objectPosition={objectPosition}
             className={className}
             src={srcNow}
             data-src={dataSrc}
@@ -16,6 +15,9 @@ export default function ImageWithFalldown({ className, src, alt, falldownImg, da
             alt={alt}
             onError={() => {
                 setSrcNow(falldownImg);
+            }}
+            style={{
+                objectPosition: objectPosition,
             }}
             blurDataURL="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
         />
