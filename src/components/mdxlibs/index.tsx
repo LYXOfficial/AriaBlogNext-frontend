@@ -9,8 +9,8 @@ import InlineImageTag from "./extratags/InlineImage";
 import CheckBoxTag from "./extratags/CheckBox";
 import NoteTag from "./extratags/Note";
 import ChatTag from "./extratags/Chat";
-import PromptTag from "./extratags/Prompt";
-import TabsTag, { TabTag } from "./extratags/Tabs";
+import PromptTag from "./extratags/PromptShell";
+import TabsTag, { Tab } from "./extratags/TabsShell";
 
 import JSMD5 from "js-md5";
 import Markdown, { RuleType } from "markdown-to-jsx";
@@ -44,7 +44,7 @@ export default function MDToTSXWithPlugins({ mdContent }: { mdContent: string })
           Chat: ChatTag,
           Prompt: PromptTag,
           Tabs: TabsTag,
-          Tab: TabTag,
+          Tab: Tab,
         },
         slugify(inp) {
           return `title-${JSMD5.md5(inp).slice(0, 8)}`;

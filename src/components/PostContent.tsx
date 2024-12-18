@@ -6,8 +6,6 @@ import CodeCopier from "components/thirdpartyjs/CodeCopier";
 import KaTex from "components/thirdpartyjs/KaTex";
 import { TwikooBaseComment, TwikooCountPost } from "components/thirdpartyjs/Twikoo";
 import Pangu from "components/thirdpartyjs/Pangu";
-import TabPlugin from "components/thirdpartyjs/TabPlugin";
-
 import PostEnd from "components/PostEnd";
 import { Post } from "interfaces/post";
 import MDToTSXWithPlugins from "./mdxlibs";
@@ -19,7 +17,6 @@ export default function PostContent({ mdContent, postInfo }: { mdContent: string
 
         <MDToTSXWithPlugins mdContent={mdContent} />
       </div>
-      <TabPlugin />
       <FancyBox />
       <HLJSNum />
       <CodeCopier />

@@ -122,16 +122,19 @@ h1 {
 }
 
 blockquote {
-    background: var(--aria-light-grey);
     padding: 10px 20px;
-    border-left: 5px solid var(--aria-theme);
+    border-left: 5px solid #d1d1d1;
     border-radius: 5px;
     margin: 10px 0;
+    color: gray;
+    outline: 1px solid #dfdfdf;
 }
 
 @media (prefers-color-scheme: dark) {
     blockquote {
-        background: #232323 !important;
+        color:rgb(156, 156, 156);
+        outline: 1px solid #757575;
+        border-left: 5px solid #757575;
     }
 }
 

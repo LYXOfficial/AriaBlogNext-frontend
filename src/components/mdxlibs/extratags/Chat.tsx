@@ -1,6 +1,6 @@
 export default function ChatTag(
   { children, position, author }:
-    { children: React.ReactNode, position: "left" | "right", author: string }
+    { children: React.ReactNode, position: "left" | "right", author?: string }
 ) {
   return (
     <div className={`etag-chat ${position}`}>
