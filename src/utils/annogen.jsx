@@ -61,7 +61,7 @@ const genanno = cache(async () => {
                     pos = ipLocation.result.ad_info.province + " " + ipLocation.result.ad_info.city;
                     switch (ipLocation.result.ad_info.province) {
                         case "北京市":
-                            posdesc = "AUV，咱老北京爷讲的就是一个地道儿～";
+                            posdesc = "AUV，咱老北京爷讲的就是一个地地地地道道地道地道儿～";
                             break;
                         case "天津市":
                             posdesc = "讲段相声吧。";
@@ -101,13 +101,13 @@ const genanno = cache(async () => {
                             posdesc = "天苍苍，野茫茫，风吹草低见牛羊。";
                             break;
                         case "辽宁省":
-                            posdesc = "我想吃烤鸡架！";
+                            posdesc = "你从丹东来，换我一城雪白。";
                             break;
                         case "吉林省":
-                            posdesc = "状元阁就是东北烧烤之王。";
+                            posdesc = "想吃广东菜～";
                             break;
                         case "黑龙江省":
-                            posdesc = "很喜欢哈尔滨大剧院。";
+                            posdesc = "会看南方小土豆嘛";
                             break;
                         case "上海市":
                             posdesc = "沪 爷 冲 击 ！";
@@ -138,7 +138,7 @@ const genanno = cache(async () => {
                             posdesc = "阿卡林省的小朋友你好。";
                             break;
                         case "山东省":
-                            posdesc = "遥望齐州九点烟，一泓海水杯中泻。";
+                            posdesc = "正步踢进台球厅，打个响袋给党听。";
                             break;
                         case "湖北省":
                             posdesc = "故人西辞黄鹤楼，烟花三月下扬州。";
