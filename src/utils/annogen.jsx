@@ -132,7 +132,7 @@ const genanno = cache(async () => {
                             posdesc = "蚌埠住了，芜湖起飞。";
                             break;
                         case "福建省":
-                            posdesc = "妈祖批准，全球免签。";
+                            posdesc = "胡建小朋友小心被广东银做成煲仔饭了喵～";
                             break;
                         case "江西省":
                             posdesc = "阿卡林省的小朋友你好。";
