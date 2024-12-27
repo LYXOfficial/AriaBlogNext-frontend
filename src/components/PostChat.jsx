@@ -20,13 +20,13 @@ export default function PostChat() {
     useEffect(() => {
         if (loaded == 1) {
             postChat_load();
-            tianliGPT(true);
+            window.tianliGPT.checkURLAndRun();
             setLoaded(2);
         }
         window.history.onpushstate = null;
     }, [loaded]);
     useEffect(() => {
-        if (loaded) tianliGPT(true);
+        if (loaded) window.tianliGPT.checkURLAndRun();
     }, [pathname]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css" />
