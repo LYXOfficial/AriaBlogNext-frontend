@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+
+declare const postChat_load: () => void;
 export default function PostChat() {
     const [loaded, setLoaded] = useState(0);
     const pathname = usePathname();
@@ -20,13 +22,13 @@ export default function PostChat() {
     useEffect(() => {
         if (loaded == 1) {
             postChat_load();
-            window.tianliGPT.checkURLAndRun();
+            (window as any).tianliGPT.checkURLAndRun();
             setLoaded(2);
         }
-        window.history.onpushstate = null;
+        (window as any).history.onpushstate = null;
     }, [loaded]);
     useEffect(() => {
-        if (loaded) window.tianliGPT.checkURLAndRun();
+        if (loaded) (window as any).tianliGPT.checkURLAndRun();
     }, [pathname]);
     return <>
         <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css" />
@@ -50,6 +52,7 @@ export default function PostChat() {
                 upLoadWeb: true,
                 showInviteLink: true
             };`
-            }} />
+            }}
+        />
     </>
 }
