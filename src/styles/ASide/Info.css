@@ -3,7 +3,7 @@
     grid-template-columns: 95px calc(100% - 95px);
     grid-template-rows: 30px 65px calc(100% - 95px);
     position: relative;
-    background-image: url(https://bu.dusays.com/2024/06/30/66810ebad84f2.webp);
+    background-image: url(https://img.0v0.my/2024/06/30/66810ebad84f2.webp);
     z-index: 1;
     overflow: hidden;
 }

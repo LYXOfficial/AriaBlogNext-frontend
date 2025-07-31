@@ -14,7 +14,7 @@ export default function LinkTag({ link, title, subtitle }: { link: string, title
             `https://toolb.cn/favicon/${link[0] == "/" || link[0] == "." ?
               siteConfigs.siteUrl.split("://")[1] : link.split("://")[1]?.split("/")[0]}`
           }
-          falldownImg="https://bu.dusays.com/2024/07/07/668a8ffdacde3.png" />
+          falldownImg="https://img.0v0.my/2024/07/07/668a8ffdacde3.png" />
         <span className="etag-link-title">
           {title}
         </span>

@@ -18,7 +18,7 @@ export async function GET() {
     site_url: siteConfigs.siteUrl,
     feed_url: `${siteConfigs.siteUrl}/feed.xml`,
     language: 'zh-CN',
-    image_url: 'https://bu.dusays.com/2024/10/28/671f8bf00317e.jpg',
+    image_url: 'https://img.0v0.my/2024/10/28/671f8bf00317e.jpg',
     generator: 'AriaBlogNext Next.js',
     copyright: 'CC BY-NC-SA 4.0',
   })
