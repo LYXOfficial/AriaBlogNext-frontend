@@ -13,31 +13,34 @@ import PromptTag from "./extratags/PromptShell";
 import TabsTag, { Tab } from "./extratags/TabsShell";
 
 import JSMD5 from "js-md5";
-import Markdown, { RuleType } from "markdown-to-jsx";
+import Markdown from "markdown-to-jsx";
 import FancyBox from "../thirdpartyjs/FancyBox";
 import HLJSNum from "../thirdpartyjs/HLJSNum";
 import KaTex from "../thirdpartyjs/KaTex";
 import Pangu from "../thirdpartyjs/Pangu";
 import FriendLinks from "../FriendLinks";
 
-export default function MDToTSXWithPlugins({ mdContent }: { mdContent: string }) {
+export default function MDToTSXWithPlugins({
+  mdContent,
+}: {
+  mdContent: string;
+}) {
   mdContent = LateXFilter(mdContent);
   return (
     <>
-      <Markdown options={
-        {
-          renderRule(next, node) {
-            if (node.type === RuleType.codeBlock) {
-              return (
-                <HighLightCode code={node.text} lang={node.lang} />
-              );
+      <Markdown
+        options={{
+          extendsRules: {
+            codeBlock: {
+              react(node) {
+                return <HighLightCode code={node.content} lang={node.lang} />;
+              }
+            },
+            image: {
+              react(node) {
+                return <MarkdownImage src={node.target} alt={node.alt} />;
+              }
             }
-            else if (node.type === RuleType.image) {
-              return (
-                <MarkdownImage src={node.target} alt={node.alt} />
-              );
-            }
-            return next();
           },
           overrides: {
             a: MarkdownLink,
@@ -55,9 +58,9 @@ export default function MDToTSXWithPlugins({ mdContent }: { mdContent: string })
           },
           slugify(inp) {
             return `title-${JSMD5.md5(inp).slice(0, 8)}`;
-          }
-        }
-      }>
+          },
+        }}
+      >
         {mdContent}
       </Markdown>
       <FancyBox />

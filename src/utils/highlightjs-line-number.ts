@@ -69,7 +69,7 @@ function addLineNumbersBlockFor(inputHtml: string, options: any): string {
     const lines = getLines(inputHtml);
 
     // if last line contains only carriage return remove it
-    if (lines[lines.length - 1].trim() === '') {
+    if (lines[lines.length - 1]?.trim() === '') {
         lines.pop();
     }
 
