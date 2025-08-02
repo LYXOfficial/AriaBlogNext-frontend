@@ -854,6 +854,20 @@ pre.hljs.wrap {
 .etag-chat {
     display: flex;
     margin: 10px;
+    word-break: break-word;
+}
+
+.etag-chat .fancybox-img-a>span:not(.normal-img-descr){
+    margin: 0;
+}
+
+.etag-chat .fancybox-img-a{
+    max-width: 500px;
+    margin-bottom:0!important;
+}
+
+.etag-chat .normal-img-descr{
+    display: none;
 }
 
 .etag-chat.right>.etag-chat-content,
