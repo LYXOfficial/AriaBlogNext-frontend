@@ -37,12 +37,13 @@ export function FriendLinkItem({ link }: { link: FriendLink }) {
             </style>
             <div className="flink-avatar">
                 <LazyImageWithFalldown
-                    className="flink-avatar-img cf-friends-avatar"
+                    className="flink-avatar-img"
                     src={link.avatar}
                     data-src={link.avatar}
                     alt={link.name}
                     falldownImg={siteConfigs.falldownAvatar}
                 />
+                <span className="cf-friends-avatar" data-src={link.avatar}/>
             </div>
             <span className="flink-name cf-friends-name">{link.name}</span>
             <span className="flink-desc">{link.description}</span>
