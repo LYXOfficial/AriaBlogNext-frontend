@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  CONTAINER_TAG: reg.liteyuki.org/snowykami/aria-blog-frontend:latest
+  CONTAINER_TAG: reg.liteyuki.org/ariasaka/aria-blog-frontend:latest
   CONTAINER_NAME: aria-blog-frontend
   CONTAINER_OPTIONS: --network liteyuki-network --network liteyuki6-network
 
