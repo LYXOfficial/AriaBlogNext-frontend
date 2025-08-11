@@ -37,10 +37,6 @@ next-env.d.ts
 
 /.vscode/
 
-/pnpm-lock.yaml
-
 /.env
 
 /report
-
-package-lock.json
