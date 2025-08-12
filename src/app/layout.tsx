@@ -29,7 +29,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{ __html: `if(!!window.ActiveXObject||"ActiveXObject" in window)window.location.href="./noie.html";//IE不欢迎你` }}
         />
-        {/* <script src="/js/piratesHaveNoMother.js" /> */}
+        <script src="/js/piratesHaveNoMother.js" />
       </head>
       <body>
         <Welcome />
