@@ -27,7 +27,7 @@ concurrency:
 env:
   CONTAINER_TAG: reg.liteyuki.org/ariasaka/aria-blog-frontend:latest
   CONTAINER_NAME: aria-blog-frontend
-  CONTAINER_OPTIONS: --network liteyuki-network --network liteyuki6-network
+  CONTAINER_OPTIONS: --network liteyuki-network --network liteyuki6-network --restart=always
 
 jobs:
   build-and-push-and-deploy:
@@ -71,4 +71,4 @@ jobs:
           docker pull ${{ env.CONTAINER_TAG }}
           docker stop ${{ env.CONTAINER_NAME }} || true
           docker rm ${{ env.CONTAINER_NAME }} || true
-          docker run -d --restart=always --name ${{ env.CONTAINER_NAME }} ${{ env.CONTAINER_OPTIONS }} ${{ env.CONTAINER_TAG }}
+          docker run -d --name ${{ env.CONTAINER_NAME }} ${{ env.CONTAINER_OPTIONS }} ${{ env.CONTAINER_TAG }}
