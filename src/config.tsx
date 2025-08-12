@@ -17,6 +17,7 @@ export const siteConfigs: SiteConfig = {
     falldownImg: "https://img.0v0.my/2024/08/31/66d30329375a5.webp",
     // backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
     backEndUrl: "https://blognext-end.yaria.top",
+    // backEndUrl: "https://aria-blog-backend.072190.xyz",
     fcircleUrl: "https://fcircle.yaria.top",
     socials: [
         {
