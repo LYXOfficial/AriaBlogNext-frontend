@@ -21,10 +21,10 @@ export const siteConfigs: SiteConfig = {
 
         if (isServer) {
             // 服务器端
-            return isProd ? "http://aria-blog-backend:8000" : "http://localhost:8000";
+            return isProd ? "http://aria-blog-backend:8000" : "https://blognext-end.yaria.top";
         } else {
             // 客户端
-            return isProd ? "https://blognext-end.yaria.top" : "http://localhost:8000";
+            return isProd ? "https://blognext-end.yaria.top" : "https://blognext-end.yaria.top";
         }
     })(),
     fcircleUrl: "https://fcircle.yaria.top",
@@ -172,3 +172,4 @@ export const FooterBadges: FooterBadge[] = [
         link: "https://www.travellings.cn/"
     },
 ]
+
