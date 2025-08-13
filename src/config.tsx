@@ -15,9 +15,18 @@ export const siteConfigs: SiteConfig = {
     pageMaxPosts: 15,
     falldownAvatar: "https://img.0v0.my/2024/09/06/66dabf7f748c8.jpg",
     falldownImg: "https://img.0v0.my/2024/08/31/66d30329375a5.webp",
-    // backEndUrl: process.env.NODE_ENV=="production"?"https://blognext-end.yaria.top":"http://localhost:2333",
-    backEndUrl: "https://blognext-end.yaria.top",
-    // backEndUrl: "https://aria-blog-backend.072190.xyz",
+    backEndUrl: (() => {
+        const isServer = typeof window === 'undefined';
+        const isProd = process.env.NODE_ENV === 'production';
+
+        if (isServer) {
+            // 服务器端
+            return isProd ? "http://aria-blog-backend:8000" : "https://blognext-end.yaria.top";
+        } else {
+            // 客户端
+            return isProd ? "https://blognext-end.yaria.top" : "https://blognext-end.yaria.top";
+        }
+    })(),
     fcircleUrl: "https://fcircle.yaria.top",
     socials: [
         {
@@ -163,3 +172,4 @@ export const FooterBadges: FooterBadge[] = [
         link: "https://www.travellings.cn/"
     },
 ]
+
