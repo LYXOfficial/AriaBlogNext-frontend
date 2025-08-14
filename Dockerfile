@@ -5,7 +5,7 @@ FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-ENV NODE_ENV=development
+ENV BUILDING=true
 
 COPY . .
 RUN corepack enable pnpm && \
@@ -16,6 +16,7 @@ RUN corepack enable pnpm && \
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+ENV BUILDING=false
 ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs

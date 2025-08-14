@@ -18,9 +18,12 @@ export const siteConfigs: SiteConfig = {
     backEndUrl: (() => {
         const isServer = typeof window === 'undefined';
         const isProd = process.env.NODE_ENV === 'production';
-
+        const isBuilding = process.env.BUILDING === 'true';
         if (isServer) {
             // 服务器端
+            if(isBuilding){
+                return "https://blognext-end.yaria.top";
+            }
             return isProd ? "http://aria-blog-backend:8000" : "https://blognext-end.yaria.top";
         } else {
             // 客户端
