@@ -44,6 +44,8 @@ jobs:
           echo "${{ secrets.DOCKER_TLS_KEY }}" > /certs/key.pem
           chmod 600 /certs/key.pem
           echo "Docker TLS setup complete."
+          curl -v https://blognext-end.yaria.top/get/post/postSlugs
+
           
 
       - name: Log in to Liteyuki Container Registry
