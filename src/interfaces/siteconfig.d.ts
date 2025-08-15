@@ -10,6 +10,7 @@ export declare interface SiteConfig {
     createMonth: number,
     twikooEnv: string,
     siteUrl: string,
+    homeMaxPosts: number,
     pageMaxPosts: number,
     backEndUrl: string,
     falldownAvatar: string,

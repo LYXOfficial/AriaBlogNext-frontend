@@ -12,7 +12,8 @@ export const siteConfigs: SiteConfig = {
     createYear: 2022,
     createMonth: 6,
     createDay: 4,
-    pageMaxPosts: 15,
+    homeMaxPosts: 15,
+    pageMaxPosts: 16,
     falldownAvatar: "https://img.0v0.my/2024/09/06/66dabf7f748c8.jpg",
     falldownImg: "https://img.0v0.my/2024/08/31/66d30329375a5.webp",
     backEndUrl: (() => {
@@ -175,4 +176,3 @@ export const FooterBadges: FooterBadge[] = [
         link: "https://www.travellings.cn/"
     },
 ]
-

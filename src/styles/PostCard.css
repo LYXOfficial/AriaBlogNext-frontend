@@ -313,7 +313,8 @@
 
 .post-card-pgwrap {
     margin: 10px 20px;
-    flex: 1;
+    flex: 100%;
+    text-align: center;
 }
 
 .post-card-pgbtn:hover,

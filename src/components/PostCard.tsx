@@ -12,14 +12,18 @@ import { Category } from "@/interfaces/category";
 import React from "react";
 
 export default async function Posts({ page }: { page: number }) {
-  const startl = (page - 1) * siteConfigs.pageMaxPosts, endl = page * siteConfigs.pageMaxPosts;
-  const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`, { next: { revalidate: 7200, tags: ["posts"] } });
-  if (!resp.ok) return notFound();
-  const posts: Post[] = (await resp.json()).data;
+  if (page < 1) return notFound();
   const resm = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, { next: { revalidate: 7200, tags: ["posts"] } });
   if (!resm.ok) return notFound();
   const postTotal = (await resm.json()).count;
-  const maxPage = Math.ceil(postTotal / siteConfigs.pageMaxPosts);
+  const maxPage = Math.ceil(Math.max(postTotal - siteConfigs.homeMaxPosts, 0) / siteConfigs.pageMaxPosts) + 1;
+  if (page > maxPage) return notFound();
+  const offset = siteConfigs.homeMaxPosts - siteConfigs.pageMaxPosts;
+  const startl = page === 1 ? 0 : Math.max(((page - 1) * siteConfigs.pageMaxPosts) + offset, 0);
+  const endl = Math.max((page * siteConfigs.pageMaxPosts) + offset, 0);
+  const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`, { next: { revalidate: 7200, tags: ["posts"] } });
+  if (!resp.ok) return notFound();
+  const posts: Post[] = (await resp.json()).data;
   const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`);
   const data: Category[] = (await res.json()).data;
   return (
@@ -83,7 +87,7 @@ export default async function Posts({ page }: { page: number }) {
         );
       }
       )}
-      <div className="post-card-pgwrap">
+      <nav className="post-card-pgwrap">
         {page - 2 > 0 ? <Link className="post-card-pgbtn" href="/page/1">1</Link> : <></>}
         {page - 3 > 0 ? <span className="post-card-spec">...</span> : <></>}
         {page - 1 > 0 ? <Link className="post-card-pgbtn" href={`/page/${page - 1}`}>{page - 1}</Link> : <></>}
@@ -91,7 +95,7 @@ export default async function Posts({ page }: { page: number }) {
         {page + 1 <= maxPage ? <Link className="post-card-pgbtn" href={`/page/${page + 1}`}>{page + 1}</Link> : <></>}
         {page + 3 <= maxPage ? <span className="post-card-spec">...</span> : <></>}
         {page + 2 <= maxPage ? <Link className="post-card-pgbtn" href={`/page/${maxPage}`}>{maxPage}</Link> : <></>}
-      </div>
+      </nav>
       <TwikooCountHome />
     </div>
   );
