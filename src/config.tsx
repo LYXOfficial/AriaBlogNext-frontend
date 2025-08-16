@@ -19,6 +19,7 @@ export const siteConfigs: SiteConfig = {
         const isServer = typeof window === 'undefined';
         const isProd = process.env.NODE_ENV === 'production';
         const isBuilding = process.env.BUILDING === 'true';
+        const isVercel = process.env.IS_VERCEL === 'true';
         if (isServer) {
             // 服务器端
             if(isBuilding){
