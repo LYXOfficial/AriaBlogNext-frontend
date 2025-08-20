@@ -142,7 +142,7 @@ blockquote p {
     margin: 0;
 }
 
-a[data-fancybox]:not(a.inline-image) {
+a[data-fancybox]:not(a.inline-image),video {
     width: 100%;
     display: flex;
     flex-direction: column;
