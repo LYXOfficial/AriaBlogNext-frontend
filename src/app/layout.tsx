@@ -5,7 +5,6 @@ import { siteConfigs } from "@/config";
 import Welcome from "components/thirdpartyjs/Welcome";
 import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from "nextjs-toploader";
-import PostChat from "components/PostChat";
 
 process.env.TZ = "Asia/Shanghai";
 
@@ -39,7 +38,6 @@ export default function RootLayout({
         <NavBar />
         <NextTopLoader color="var(--aria-theme)" height={5} />
         {children}
-        <PostChat />
         <Footer />
       </body>
     </html>

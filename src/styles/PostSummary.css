@@ -1,0 +1,77 @@
+/* ...existing code... */
+
+.post-summary-content {
+  position: relative;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  line-height: 20px;
+  padding: 8px;
+  border: var(--aria-border);
+  border-radius: 8px;
+  background: white;
+  min-height: 20px;
+  box-sizing: border-box;
+  margin-top: 2px;
+}
+
+/* 打字光标效果 */
+.post-summary-content.typing::after {
+  content: "|";
+  position: relative;
+  display: inline-block;
+  margin-left: 2px;
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.post-summary-title {
+  font-weight: bold;
+  color: var(--aria-theme);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.post-summary {
+  border: var(--aria-border);
+  border-radius: 12px;
+  padding: 10px;
+  padding-top: 5px;
+  background: var(--aria-background);
+}
+.post-summary-icon {
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--aria-theme);
+  color: white;
+}
+.post-summary-refreshbutton {
+  margin-left: auto;
+  padding: 3px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  transition: 0.3s;
+  color: var(--aria-fontcolor);
+  width: 22px;
+  height: 22px;
+}
+.post-summary-refreshbutton:hover {
+  background-color: var(--aria-shadow-color);
+}
+@media screen and (prefers-color-scheme: dark) {
+  .post-summary-content {
+    background: black;
+  }
+  .post-summary {
+    background: #383232;
+  }
+}

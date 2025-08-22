@@ -6,6 +6,7 @@ import {
 import PostEnd from "components/PostEnd";
 import { Post } from "interfaces/post";
 import MDToTSXWithPlugins from "./mdxlibs";
+import PostSummary from "./PostSummary";
 
 export default function PostContent({
   mdContent,
@@ -16,6 +17,7 @@ export default function PostContent({
 }) {
   return (
     <article id="article-container" className="card-widget">
+      <PostSummary slug={postInfo.slug!} />
       <div id="post-maincontent">
         <MDToTSXWithPlugins mdContent={mdContent} />
       </div>
