@@ -1,85 +1,95 @@
 .aside-list-item-pic {
-    width: 68px;
-    min-width: 68px;
-    height: 68px;
-    overflow: hidden;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+  width: 68px;
+  min-width: 68px;
+  height: 68px;
+  overflow: hidden;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
 }
 
 .aside-list-item-pic-img {
-    width: 100%;
-    height: 100%;
-    transition: filter 375ms ease-in .2s, transform .6s;
-    object-fit: cover;
-    -webkit-transition: filter 375ms ease-in .2s, transform .6s;
-    -moz-transition: filter 375ms ease-in .2s, transform .6s;
-    -ms-transition: filter 375ms ease-in .2s, transform .6s;
-    -o-transition: filter 375ms ease-in .2s, transform .6s;
+  width: 100%;
+  height: 100%;
+  transition:
+    filter 375ms ease-in 0.2s,
+    transform 0.6s;
+  object-fit: cover;
+  -webkit-transition:
+    filter 375ms ease-in 0.2s,
+    transform 0.6s;
+  -moz-transition:
+    filter 375ms ease-in 0.2s,
+    transform 0.6s;
+  -ms-transition:
+    filter 375ms ease-in 0.2s,
+    transform 0.6s;
+  -o-transition:
+    filter 375ms ease-in 0.2s,
+    transform 0.6s;
 }
 
 .aside-list-item-pic-img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .aside-list-item {
-    display: flex;
-    padding: 8px;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-    border-radius: 12px;
-    transition: .3s;
-    margin: 4px 0;
-    border-radius: 12px;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    -ms-border-radius: 12px;
-    -o-border-radius: 12px;
+  display: flex;
+  padding: 8px;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  border-radius: 12px;
+  transition: 0.3s;
+  margin: 4px 0;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 }
 
 .aside-list-item-content {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
 }
 
 .aside-list {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .aside-list-item-content-text {
-    font-size: 14px;
-    color: var(--aria-light-fontcolor)
+  font-size: 14px;
+  color: var(--aria-light-fontcolor);
 }
 
 .aside-list-item:hover {
-    background: var(--aria-theme);
-    color: var(--aria-white);
-    transition: .3s;
-    box-shadow: var(--aria-theme);
-    scale: 1.04;
+  background: var(--aria-theme);
+  color: var(--aria-white);
+  transition: 0.3s;
+  box-shadow: var(--aria-theme);
+  scale: 1.04;
 }
 
 .aside-list-item:hover .aside-list-item-content-text {
-    color: var(--aria-white);
+  color: var(--aria-white);
 }
 
 .aside-list-item-content-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
 }
 
 .aside-list-item-content {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .aside-list-item-content-title {
-    line-height: 1.5;
+  line-height: 1.5;
 }

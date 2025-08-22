@@ -9,20 +9,22 @@ import React from "react";
 
 export const metadata = {
   title: `哔哔 | ${siteConfigs.title}`,
-}
+};
 export default function Page() {
-  return (<>
-    <style>{`#navbar{position:fixed}`}</style>
-    <div id="main-container" className="page">
-      <div id="article-container" className="page">
-        <div id="post-maincontent" className="page">
-          <h1>哔哔</h1>
-          <Speaks />
+  return (
+    <>
+      <style>{`#navbar{position:fixed}`}</style>
+      <div id="main-container" className="page">
+        <div id="article-container" className="page">
+          <div id="post-maincontent" className="page">
+            <h1>哔哔</h1>
+            <Speaks />
+          </div>
+          <hr />
+          <TwikooBaseComment />
         </div>
-        <hr />
-        <TwikooBaseComment />
+        <PageRightSide />
       </div>
-      <PageRightSide />
-    </div>
-  </>);
+    </>
+  );
 }

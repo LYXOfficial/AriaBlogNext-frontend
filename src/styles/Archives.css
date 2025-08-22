@@ -1,127 +1,127 @@
 .archive-item {
-    display: flex;
-    padding: 10px 20px;
-    background-color: var(--aria-acrylic1);
-    margin: 10px 5px;
-    border-radius: 12px;
-    border: var(--aria-border);
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    -ms-border-radius: 12px;
-    -o-border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -ms-transition: .3s;
-    -o-transition: .3s;
-    width: 100%;
+  display: flex;
+  padding: 10px 20px;
+  background-color: var(--aria-acrylic1);
+  margin: 10px 5px;
+  border-radius: 12px;
+  border: var(--aria-border);
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  width: 100%;
 }
 
-@media screen and (min-width:960px) {
-    .archive-item {
-        width: calc(50% - 55px);
-        height: 40px;
-    }
+@media screen and (min-width: 960px) {
+  .archive-item {
+    width: calc(50% - 55px);
+    height: 40px;
+  }
 }
 
 .archive-year-title {
-    width: 100%;
+  width: 100%;
 }
 
 .archive-year {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .archive-item svg {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .archive-item-date {
-    display: flex;
-    align-items: center;
-    color: var(--aria-light-fontcolor) !important;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  color: var(--aria-light-fontcolor) !important;
+  white-space: nowrap;
 }
 
 .archive-item object {
-    margin: auto 0 auto auto;
+  margin: auto 0 auto auto;
 }
 
 .archive-item-banner-img {
-    z-index: -1;
-    object-fit: cover;
-    filter: blur(10px) saturate(180%);
-    -webkit-filter: blur(10px) saturate(180%);
+  z-index: -1;
+  object-fit: cover;
+  filter: blur(10px) saturate(180%);
+  -webkit-filter: blur(10px) saturate(180%);
 }
 
 .archive-item:hover {
-    background-color: var(--aria-acrylic2);
+  background-color: var(--aria-acrylic2);
 }
 
 .archive-item:hover .archive-item-title {
-    transform: scale(1.01);
-    -webkit-transform: scale(1.01);
-    -moz-transform: scale(1.01);
-    -ms-transform: scale(1.01);
-    -o-transform: scale(1.01);
+  transform: scale(1.01);
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
 }
 
 .archive-item-category {
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    padding: 5px 10px;
-    border: var(--aria-border);
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -ms-transition: .3s;
-    -o-transition: .3s;
-    white-space: nowrap;
-    /* color:var(--aria-light-fontcolor)!important; */
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  padding: 5px 10px;
+  border: var(--aria-border);
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  white-space: nowrap;
+  /* color:var(--aria-light-fontcolor)!important; */
 }
 
 .archive-item-date svg,
 .archive-item-category svg {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .archive-item-title {
-    margin: auto 0;
-    font-weight: bold;
-    transition: .3s;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre-wrap;
-    margin-right: 10px;
+  margin: auto 0;
+  font-weight: bold;
+  transition: 0.3s;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  margin-right: 10px;
 }
 
 .archive-item-category:hover {
-    background-color: var(--aria-theme);
-    color: white
+  background-color: var(--aria-theme);
+  color: white;
 }
 
 #post-maincontent.archives {
-    max-width: 1200px;
+  max-width: 1200px;
 }
 
 @media screen and (max-width: 900px) {
-    .archive-item-category {
-        display: none;
-    }
+  .archive-item-category {
+    display: none;
+  }
 
-    .archive-item {
-        padding: 15px 20px;
-    }
+  .archive-item {
+    padding: 15px 20px;
+  }
 }

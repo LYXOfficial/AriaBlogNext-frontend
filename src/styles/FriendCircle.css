@@ -1,131 +1,131 @@
 #hexo-circle-of-friends-root {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #cf-state,
 .cf-overshow,
 .cf-article {
-    background-color: var(--aria-acrylic1) !important;
-    padding: 20px !important;
-    border: var(--aria-border);
-    border-radius: 12px !important;
-    -webkit-border-radius: 12px !important;
-    -moz-border-radius: 12px !important;
-    -ms-border-radius: 12px !important;
-    -o-border-radius: 12px !important;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -ms-transition: .3s;
-    -o-transition: .3s;
+  background-color: var(--aria-acrylic1) !important;
+  padding: 20px !important;
+  border: var(--aria-border);
+  border-radius: 12px !important;
+  -webkit-border-radius: 12px !important;
+  -moz-border-radius: 12px !important;
+  -ms-border-radius: 12px !important;
+  -o-border-radius: 12px !important;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 
 #cf-state:hover,
 .cf-overshow:hover,
 .cf-article:hover {
-    border: 1px solid var(--aria-theme) !important;
-    box-shadow: 0 0 3px var(--aria-theme) !important;
+  border: 1px solid var(--aria-theme) !important;
+  box-shadow: 0 0 3px var(--aria-theme) !important;
 }
 
 .cf-time-created i,
 .cf-time-updated i {
-    font-family: "HYTMR", sans-serif;
+  font-family: "HYTMR", sans-serif;
 }
 
 .cf-time-created i::before,
 .cf-time-updated i::before {
-    font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Free";
 }
 
 .cf-img-avatar.avatar {
-    opacity: .3;
-    position: absolute;
-    height: 100px !important;
-    width: 100px !important;
-    right: -10px;
-    bottom: -10px;
-    border-radius: 50% !important;
-    -webkit-border-radius: 50% !important;
-    -moz-border-radius: 50% !important;
-    -ms-border-radius: 50% !important;
-    -o-border-radius: 50% !important;
+  opacity: 0.3;
+  position: absolute;
+  height: 100px !important;
+  width: 100px !important;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  -ms-border-radius: 50% !important;
+  -o-border-radius: 50% !important;
 }
 
-#cf-container>:nth-child(2)>* {
-    margin: 10px 1%;
-    font-weight: bolder;
-    transition: all ease-out .3s;
-    position: relative;
+#cf-container > :nth-child(2) > * {
+  margin: 10px 1%;
+  font-weight: bolder;
+  transition: all ease-out 0.3s;
+  position: relative;
 }
 
 #cf-container {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: none !important;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: none !important;
+  justify-content: space-around;
 }
 
 @media screen and (min-width: 0px) {
-    #cf-container>:nth-child(2)>* {
-        width: 100%;
-    }
+  #cf-container > :nth-child(2) > * {
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    #cf-container>:nth-child(2)>* {
-        width: 48%;
-    }
+  #cf-container > :nth-child(2) > * {
+    width: 48%;
+  }
 }
 
 @media screen and (min-width: 1200px) {
-    #cf-container>:nth-child(2)>* {
-        width: 31%;
-    }
+  #cf-container > :nth-child(2) > * {
+    width: 31%;
+  }
 }
 
-#cf-container>:nth-child(2) {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 10px;
+#cf-container > :nth-child(2) {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .cf-article {
-    margin: 0 !important;
-    padding: 0.5rem 1rem !important;
+  margin: 0 !important;
+  padding: 0.5rem 1rem !important;
 }
 
-#cf-container>:nth-child(2)>:nth-last-child(2) {
-    margin-right: auto;
+#cf-container > :nth-child(2) > :nth-last-child(2) {
+  margin-right: auto;
 }
 
-#cf-container>:nth-child(2)>:last-child {
-    width: 100% !important;
+#cf-container > :nth-child(2) > :last-child {
+  width: 100% !important;
 }
 
 .cf-article-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #panel-btn.el-button.is-circle {
-    border: none !important;
-    background-color: transparent !important;
+  border: none !important;
+  background-color: transparent !important;
 }
 
 #cf-more {
-    background-color: var(--aria-acrylic1) !important;
-    border: var(--aria-border);
+  background-color: var(--aria-acrylic1) !important;
+  border: var(--aria-border);
 }
 
 #cf-more:hover {
-    background-color: var(--aria-theme) !important;
+  background-color: var(--aria-theme) !important;
 }
 
 #cf-more:hover i {
-    color: white !important;
+  color: white !important;
 }
 
 .cf-label,
@@ -134,9 +134,9 @@
 .cf-article-author,
 .cf-time-created,
 .cf-time-updated {
-    color: var(--aria-fontcolor) !important;
+  color: var(--aria-fontcolor) !important;
 }
 
 :root {
-    --lmm-hover: var(--aria-theme) !important;
+  --lmm-hover: var(--aria-theme) !important;
 }

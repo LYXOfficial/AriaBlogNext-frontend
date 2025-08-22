@@ -1,9 +1,7 @@
 "use client";
 import React, { ReactNode, useState } from "react";
 
-export default function TabsTag({ children }: {
-  children: ReactNode;
-}) {
+export default function TabsTag({ children }: { children: ReactNode }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabHeaders: string[] = [];
   const tabContents: ReactNode[] = [];
@@ -41,9 +39,12 @@ export default function TabsTag({ children }: {
       </div>
     </div>
   );
-};
+}
 
-export const TabTag = ({ title, children }: {
+export const TabTag = ({
+  title,
+  children,
+}: {
   title: string;
   children: ReactNode;
 }) => {

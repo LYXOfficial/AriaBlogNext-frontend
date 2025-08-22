@@ -7,7 +7,7 @@ import { siteConfigs } from "@/config";
 
 export const metadata = {
   title: `声明 | ${siteConfigs.title}`,
-}
+};
 
 export default function License() {
   return (
