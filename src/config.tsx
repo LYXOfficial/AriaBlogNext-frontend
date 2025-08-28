@@ -171,11 +171,11 @@ export const FooterBadges: FooterBadge[] = [
     badgeUrl: "https://img.shields.io/badge/CC-BY--NC--SA4.0-red?style=flat",
     link: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
   },
-  {
-    badgeUrl:
-      "https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20250810-ff69b4?style=flat",
-    link: "https://icp.gov.moe/?keyword=20250810",
-  },
+  //{
+  //  badgeUrl:
+  //    "https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20250810-ff69b4?style=flat",
+  //  link: "https://icp.gov.moe/?keyword=20250810",
+  //},
   {
     badgeUrl:
       "https://img.shields.io/badge/%E5%8D%81%E5%B9%B4%E4%B9%8B%E7%BA%A6-63D3C9",
