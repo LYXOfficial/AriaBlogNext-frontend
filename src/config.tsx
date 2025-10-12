@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 export const siteConfigs: SiteConfig = {
   author: "Ariasaka",
   title: "Ariasakaの小窝",
+  titleIcon: "https://img.0v0.my/2025/10/12/6dd5eec4823f8.webp",
   siteUrl: "https://blog.yaria.top",
   avatar: "https://img.0v0.my/2024/12/05/67517ba094506.png",
   twikooEnv: "https://tkapi.yaria.top",

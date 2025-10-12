@@ -39,6 +39,22 @@
   background-color: transparent;
 }
 
+#site-name {
+  position: relative;
+  width: 80px;
+  height: 38px;
+  border-radius: 38px;
+  box-shadow: none!important;
+  border: var(--aria-border);
+}
+
+#site-name-icon {
+  height: 70px;
+  object-fit: cover;
+  transform: translate3d(-12px,-14px,0);
+  position: absolute;
+}
+
 .menu-button {
   margin-left: 2px !important;
   margin-right: 2px !important;

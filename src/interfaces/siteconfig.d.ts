@@ -4,6 +4,7 @@ export declare interface SiteConfig {
   author: string;
   avatar: string;
   title: string;
+  titleIcon: string;
   socials: Social[];
   createYear: number;
   createDay: number;

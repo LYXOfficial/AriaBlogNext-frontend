@@ -51,7 +51,7 @@ export default function NavBar() {
     <>
       <nav id="navbar" className={trans ? "trans" : ""}>
         <Link id="site-name" href="/">
-          {siteConfigs.title}
+          <img id="site-name-icon" src={siteConfigs.titleIcon} title={siteConfigs.title} alt="" />
         </Link>
         <div id="menu-center">
           <div
