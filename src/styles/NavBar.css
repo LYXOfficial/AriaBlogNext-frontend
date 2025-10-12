@@ -45,7 +45,8 @@
   height: 38px;
   border-radius: 38px;
   box-shadow: none!important;
-  border: var(--aria-border);
+  border: none;
+  background: transparent!important;
 }
 
 #site-name-icon {
@@ -53,6 +54,7 @@
   object-fit: cover;
   transform: translate3d(-12px,-14px,0);
   position: absolute;
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 }
 
 .menu-button {

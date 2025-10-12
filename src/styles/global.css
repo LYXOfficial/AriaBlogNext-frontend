@@ -34,7 +34,7 @@
   --aria-orange: #ed8e00;
   --aria-yellow: rgb(209, 205, 17);
   --aria-purple: rgb(159, 76, 208);
-  --aria-pink: #fda5c3;
+  --aria-pink: #f79dbc;
   --aria-heoblue: #0098db;
   --aria-darkblue: #61649f;
   --aria-blackfont: #4c4948;
@@ -173,11 +173,11 @@ a.normal-a,
 }
 
 .card-widget {
-  border-radius: 12px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
   margin-bottom: 15px;
   border: var(--aria-border);
   background-color: var(--aria-acrylic2);
