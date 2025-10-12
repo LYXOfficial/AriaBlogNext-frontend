@@ -99,11 +99,7 @@
   padding: 5px 8px;
   margin-right: 20px;
   display: flex;
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
+  border-radius: 12px;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -130,11 +126,7 @@
   top: 0;
   padding: 3px;
   border: var(--aria-border);
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
+  border-radius: 8px;
   background-color: var(--aria-acrylic2);
   box-shadow: var(--aria-shadow);
   border: var(--aria-border);
@@ -174,11 +166,7 @@
   margin-left: 5px;
   padding: 8px;
   list-style: none;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
+  border-radius: 8px;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
