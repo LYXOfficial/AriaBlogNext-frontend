@@ -13,7 +13,7 @@
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
   margin: 0 10px;
-  transform: translateY(10px);
+  transform: translateY(5px);
   width: calc(100% - 20px);
   border: var(--aria-border);
   border-radius: 30px;
