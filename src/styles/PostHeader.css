@@ -44,6 +44,15 @@
   font-size: 3em;
 }
 
+#post-banner-meta {
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: #fff2;
+  border: var(--aria-border);
+  box-shadow: 0 0 20px #0002;
+  backdrop-filter: blur(8px);
+}
+
 #post-banner .post-meta-content,
 #post-banner .post-meta {
   display: flex;

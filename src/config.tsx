@@ -1,6 +1,7 @@
 import { MenuItem } from "interfaces/menuitem";
 import { SiteConfig } from "interfaces/siteconfig";
 import { FooterBadge } from "interfaces/footerbadge";
+import { LoveU } from "interfaces/loveu";
 import { Icon } from "@iconify/react";
 
 export const siteConfigs: SiteConfig = {
@@ -187,3 +188,12 @@ export const FooterBadges: FooterBadge[] = [
     link: "https://www.travellings.cn/",
   },
 ];
+
+export const LoveUContent: LoveU = {
+  enable: true,
+  myName: "Aria",
+  yourName: "Silvaire",
+  myAvatar: "https://img.0v0.my/2025/10/13/ad792f27817ef.webp",
+  yourAvatar: "https://img.0v0.my/2025/10/13/e519f47d45be3.webp",
+  startDate: [2024, 10, 4],
+}

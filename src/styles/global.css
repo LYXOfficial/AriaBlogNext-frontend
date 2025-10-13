@@ -13,7 +13,7 @@
 }
 
 :root {
-  --aria-border: 1px solid#c9c9c9;
+  --aria-border: 1px solid #c9c9c9;
   --aria-blue: #6cf;
   --aria-gray: #e2e2e2;
   --aria-theme: var(--aria-pink);
@@ -67,6 +67,7 @@
     --aria-shadow-color: #1c1c1c;
     --heo-secondbg: #2f3031 !important;
     --heo-card-bg: #000 !important;
+    --aria-border: 1px solid rgb(138, 138, 138);
   }
 }
 

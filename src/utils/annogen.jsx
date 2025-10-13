@@ -274,7 +274,7 @@ const genanno = cache(async () => {
         else timeChange = "夜深了，早点休息，少熬夜";
         resolve(
           <>
-            Next.js新博客！
+            QwQ！
             <br />
             欢迎来自<span>{pos}</span>的小伙伴，{timeChange}
             <br />

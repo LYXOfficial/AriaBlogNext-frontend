@@ -14,10 +14,25 @@ import React from "react";
 export default function NavBar() {
   const router = useRouter();
   const [trans, setTrans] = useState(false);
+  const [onTop, setOnTop] = useState(true);
   const [searchBoxShow, setSearchBoxShow] = useState(false);
   const pathName = usePathname();
   const scrollHandler = throttle(() => {
+    if (window.innerWidth <= 768) {
+      setOnTop(true);
+      if (document.location.href.includes("/posts/")) {
+        if (document.documentElement.scrollTop < 60) {
+          setTrans(true);
+        } else {
+          setTrans(false);
+        }
+      } else {
+        setTrans(false);
+      }
+      return;
+    }
     if (document.location.href.includes("/posts/")) {
+      setOnTop(false);
       if (document.documentElement.scrollTop < 60) {
         setTrans(true);
       } else {
@@ -25,6 +40,11 @@ export default function NavBar() {
       }
     } else {
       setTrans(false);
+      if (document.documentElement.scrollTop < 60) {
+        setOnTop(true);
+      } else {
+        setOnTop(false);
+      }
     }
   }, 100);
   useEffect(() => {
@@ -49,9 +69,14 @@ export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <>
-      <nav id="navbar" className={trans ? "trans" : ""}>
+      <nav id="navbar" className={trans ? "trans" : onTop ? "ontop" : ""}>
         <Link id="site-name" href="/">
-          <img id="site-name-icon" src={siteConfigs.titleIcon} title={siteConfigs.title} alt="" />
+          <img
+            id="site-name-icon"
+            src={siteConfigs.titleIcon}
+            title={siteConfigs.title}
+            alt=""
+          />
         </Link>
         <div id="menu-center">
           <div
