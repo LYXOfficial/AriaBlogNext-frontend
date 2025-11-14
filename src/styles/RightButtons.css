@@ -26,6 +26,7 @@
 .rightbutton {
   width: 35px;
   height: 35px;
+  place-items: center;
   margin-bottom: 6px;
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -47,6 +48,7 @@
 }
 
 .rightbutton > svg {
+  display: block;
   width: 18px;
   height: 18px;
 }

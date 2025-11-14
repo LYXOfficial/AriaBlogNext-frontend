@@ -202,6 +202,7 @@
 }
 
 .menu-button svg {
+  display: block;
   width: 18px;
   height: 18px;
 }
