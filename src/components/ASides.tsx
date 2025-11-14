@@ -14,7 +14,7 @@ export function HomeASides() {
   return (
     <div id="aside-container">
       <CardInfo />
-      <CardLoveU />
+      {/* <CardLoveU /> */}
       <CardAnnouncement content={<>欢迎光临Ariaの博客QwQ~</>} />
       <div className="aside-sticky-container">
         <CardLatestComments />
