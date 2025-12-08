@@ -18,7 +18,7 @@ export default function TabsTag({ children }: { children: ReactNode }) {
       <div className="etag-tab-headers">
         {tabHeaders.map((title, index) => (
           <button
-            key={index}
+            key={title}
             className={`etag-tab-header${activeIndex === index ? " active" : ""}`}
             onClick={() => setActiveIndex(index)}
           >
@@ -29,7 +29,7 @@ export default function TabsTag({ children }: { children: ReactNode }) {
       <div className="etag-tab-bodies">
         {tabContents.map((content, index) => (
           <div
-            key={index}
+            key={`tab-content-${index}`}
             className={`etag-tab-body${activeIndex === index ? " active" : ""}`}
             style={{ display: activeIndex === index ? "block" : "none" }}
           >

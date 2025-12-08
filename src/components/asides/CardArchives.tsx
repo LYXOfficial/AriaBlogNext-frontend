@@ -42,7 +42,7 @@ export default async function ASideList() {
               <Link
                 className="archives-list-item"
                 href={`/archives/${item.year}/${item.month}`}
-                key={index}
+                key={`${item.year}-${item.month}`}
               >
                 <span className="archives-list-item-content-date">{`${monthToHanzi[item.month]} ${item.year}`}</span>
                 <span className="archives-list-item-content-count">

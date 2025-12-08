@@ -33,7 +33,7 @@ export default function HomeSpeaks({ speaksContent }: { speaksContent: BB[] }) {
       >
         {speaksContent.map((item: BB, index: number) => {
           return (
-            <SwiperSlide key={index} className="homespeaks-slide">
+            <SwiperSlide key={`${item.time}-${index}`} className="homespeaks-slide">
               <Link href="/speaks" className="homespeaks-item">
                 {relativeTime(item.time) + ": " + item.plainContent}
               </Link>

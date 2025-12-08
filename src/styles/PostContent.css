@@ -1,3 +1,7 @@
+@import "highlight.js/styles/base16/edge-light.css"
+  (prefers-color-scheme: light);
+@import "highlight.js/styles/base16/darcula.css" (prefers-color-scheme: dark);
+
 #article-container {
   flex-grow: 1;
   height: fit-content;
@@ -281,15 +285,7 @@ table:not(code table) {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   transition: all 0.3s;
-  transform: rotate(0deg);
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
+  transform: rotate(180deg);
   position: absolute;
   right: 20px;
   top: 50%;
@@ -358,10 +354,6 @@ table:not(code table) {
     margin: 0 !important;
   }
 }
-
-@import "highlight.js/styles/base16/edge-light.css"
-  (prefers-color-scheme: light);
-@import "highlight.js/styles/base16/darcula.css" (prefers-color-scheme: dark);
 
 @keyframes article-container-animation {
   0% {

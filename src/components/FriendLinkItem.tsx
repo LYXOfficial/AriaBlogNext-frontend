@@ -41,7 +41,7 @@ export function FriendLinkItem({ link }: { link: FriendLink }) {
           className="flink-avatar-img"
           src={link.avatar}
           data-src={link.avatar}
-          alt={link.name}
+          alt={""}
           falldownImg={siteConfigs.falldownAvatar}
         />
         <span className="cf-friends-avatar" data-src={link.avatar} />

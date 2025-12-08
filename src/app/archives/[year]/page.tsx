@@ -10,7 +10,9 @@ import { Post } from "@/interfaces/post";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArchiveItem from "@/components/Archives";
-export default async function Page({ params }: { params: { year: string } }) {
+export default async function Page({ params }: { params: Promise<{ year: string }> }) {
+  const { year } = await params;
+  const yearNum = Number(year);
   const ArchiveContent: ReactElement[] = [];
   const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, {
     next: { revalidate: 7200, tags: ["posts"] },
@@ -21,7 +23,7 @@ export default async function Page({ params }: { params: { year: string } }) {
     let cnt = 0;
     await Promise.all(
       data.map(async (item: ArchiveListItem) => {
-        if (item.year === Number(params.year)) {
+        if (item.year === yearNum) {
           const res = await fetch(
             `${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,
             { next: { revalidate: 7200, tags: ["posts"] } },
@@ -54,7 +56,7 @@ export default async function Page({ params }: { params: { year: string } }) {
             <Link href={`/archives/${key}`}>{key}</Link>
           </h2>
           {value.map((post) => (
-            <ArchiveItem post={post} type="archives" />
+            <ArchiveItem key={post.slug} post={post} type="archives" />
           ))}
         </div>,
       );

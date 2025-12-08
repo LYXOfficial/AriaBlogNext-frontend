@@ -14,8 +14,10 @@ import ArchiveItem from "@/components/Archives";
 export default async function Page({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
+  const { category } = await params;
+  const decodedCategory = decodeURI(category);
   let ArchiveContent: ReactElement[] = [],
     flag = false;
   const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`, {
@@ -28,7 +30,7 @@ export default async function Page({
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
     await Promise.all(
       data.map(async (item: Category) => {
-        if (decodeURI(params.category) == item.name) {
+        if (decodedCategory == item.name) {
           const res = await fetch(
             `${siteConfigs.backEndUrl}/get/category/categoryInfo?category=${item.name}`,
             { next: { revalidate: 7200, tags: ["posts"] } },
@@ -60,7 +62,7 @@ export default async function Page({
             <Link href={`/categories/${key}`}>{key}</Link>
           </h2>
           {value.map((post) => (
-            <ArchiveItem post={post} type="categories" />
+            <ArchiveItem key={post.slug} post={post} type="categories" />
           ))}
         </div>,
       );
@@ -77,7 +79,7 @@ export default async function Page({
           <PostCategoryBar
             data={data}
             type="categories"
-            current={decodeURI(params.category)}
+            current={decodedCategory}
             wrap={true}
           />
           <div id="archives-container">{ArchiveContent}</div>

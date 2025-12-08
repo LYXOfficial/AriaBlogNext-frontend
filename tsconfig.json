@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,7 +14,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "target": "ES2015",
     "plugins": [
@@ -20,7 +23,24 @@
       }
     ],
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "styles/*": [
+        "./src/styles/*"
+      ],
+      "interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "utils/*": [
+        "./src/utils/*"
+      ],
+      "config": [
+        "./src/config.tsx"
+      ]
     }
   },
   "include": [
@@ -29,7 +49,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/utils/annogen.jsx",
-    "src/components/HLJSNum.jsx"
+    "src/components/HLJSNum.jsx",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

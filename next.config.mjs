@@ -20,6 +20,27 @@ const nextConfig = {
   },
   experimental: {
     scrollRestoration: false,
+    // 在 Next.js 15+ 中，某些实验性功能可能已经稳定或移除
+  },
+  // Turbopack 配置
+  turbopack: {
+    rules: {
+      '*.mdx': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+      '*.md': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+    },
+    resolveAlias: {
+      'components': './src/components',
+      'styles': './src/styles',
+      'interfaces': './src/interfaces',
+      'utils': './src/utils',
+      'config': './src/config.tsx',
+    },
   },
   webpack: (config) => {
     return Object.assign({}, config, {

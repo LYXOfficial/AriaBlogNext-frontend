@@ -3,11 +3,12 @@ import { HomeASides } from "components/ASides";
 import { HomeRightSide } from "components/RightSide";
 import { notFound } from "next/navigation";
 
-export default function Page({ params }: { params: { no: string } }) {
+export default async function Page({ params }: { params: Promise<{ no: string }> }) {
+  const { no } = await params;
   try {
     return (
       <div id="main-container">
-        <Posts page={parseInt(params.no)} />
+        <Posts page={parseInt(no)} />
         <HomeASides />
         <HomeRightSide />
       </div>

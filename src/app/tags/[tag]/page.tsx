@@ -14,7 +14,9 @@ import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
 import PostCategoryBar from "@/components/PostCategoryBar";
 import ArchiveItem from "@/components/Archives";
-export default async function Page({ params }: { params: { tag: string } }) {
+export default async function Page({ params }: { params: Promise<{ tag: string }> }) {
+  const { tag } = await params;
+  const decodedTag = decodeURI(tag);
   let ArchiveContent: ReactElement[] = [],
     flag = false;
   const res = await fetch(`${siteConfigs.backEndUrl}/get/tag/tags`, {
@@ -27,7 +29,7 @@ export default async function Page({ params }: { params: { tag: string } }) {
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
     await Promise.all(
       data.map(async (item: Category) => {
-        if (decodeURI(params.tag) == item.name) {
+        if (decodedTag == item.name) {
           const res = await fetch(
             `${siteConfigs.backEndUrl}/get/tag/tagInfo?tag=${item.name}`,
             { next: { revalidate: 7200, tags: ["posts"] } },
@@ -59,7 +61,7 @@ export default async function Page({ params }: { params: { tag: string } }) {
             <Link href={`/tags/${key}`}>{key}</Link>
           </h2>
           {value.map((post) => (
-            <ArchiveItem post={post} type="tags" />
+            <ArchiveItem key={post.slug} post={post} type="tags" />
           ))}
         </div>,
       );
@@ -76,7 +78,7 @@ export default async function Page({ params }: { params: { tag: string } }) {
           <PostCategoryBar
             data={data}
             type="tags"
-            current={decodeURI(params.tag)}
+            current={decodedTag}
             wrap={true}
           />
           <div id="archives-container">{ArchiveContent}</div>

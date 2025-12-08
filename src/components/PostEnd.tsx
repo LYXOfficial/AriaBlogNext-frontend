@@ -98,7 +98,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             return (
               <a
                 className="postend-tag"
-                key={index}
+                key={tag}
                 href={`/tags/${tag}`}
                 rel="noopener external nofollow noreferrer"
                 target="_blank"

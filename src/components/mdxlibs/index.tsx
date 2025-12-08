@@ -53,7 +53,7 @@ export default function MDToTSXWithPlugins({
                 react(node) {
                   try {
                     return (
-                      <HighLightCode code={node.content} lang={node.lang} />
+                      <HighLightCode key={node.content} code={node.content} lang={node.lang} />
                     );
                   } catch (error) {
                     console.warn("CodeBlock render error:", error);
@@ -68,10 +68,10 @@ export default function MDToTSXWithPlugins({
               image: {
                 react(node) {
                   try {
-                    return <MarkdownImage src={node.target} alt={node.alt} />;
+                    return <MarkdownImage key={node.target} src={node.target} alt={node.alt} />;
                   } catch (error) {
                     console.warn("Image render error:", error);
-                    return <img src={node.target} alt={node.alt} />;
+                    return <img key={node.target} src={node.target} alt={node.alt} />;
                   }
                 },
               },

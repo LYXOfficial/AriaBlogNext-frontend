@@ -13,8 +13,11 @@ import ArchiveItem from "@/components/Archives";
 export default async function Page({
   params,
 }: {
-  params: { year: string; month: string };
+  params: Promise<{ year: string; month: string }>;
 }) {
+  const { year, month } = await params;
+  const yearNum = Number(year);
+  const monthNum = Number(month);
   const ArchiveContent: ReactElement[] = [];
   const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, {
     next: { revalidate: 7200, tags: ["posts"] },
@@ -26,8 +29,8 @@ export default async function Page({
     await Promise.all(
       data.map(async (item: ArchiveListItem) => {
         if (
-          item.year === Number(params.year) &&
-          item.month === Number(params.month)
+          item.year === yearNum &&
+          item.month === monthNum
         ) {
           const res = await fetch(
             `${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,
@@ -59,12 +62,12 @@ export default async function Page({
         <div key={key} className="archive-year">
           <h2 className="archive-year-title">
             <Link href={`/archives/${key}`}>{key}</Link> -{" "}
-            <Link href={`/archives/${key}/${params.month}`}>
-              {params.month}
+            <Link href={`/archives/${key}/${month}`}>
+              {month}
             </Link>
           </h2>
           {value.map((post) => (
-            <ArchiveItem post={post} type="archives" />
+            <ArchiveItem key={post.slug} post={post} type="archives" />
           ))}
         </div>,
       );

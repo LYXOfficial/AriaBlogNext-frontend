@@ -46,7 +46,7 @@ export default async function Page() {
             <Link href={`/archives/${key}`}>{key}</Link>
           </h2>
           {value.map((post) => (
-            <ArchiveItem post={post} type="archives" />
+            <ArchiveItem key={post.slug} post={post} type="archives" />
           ))}
         </div>,
       );

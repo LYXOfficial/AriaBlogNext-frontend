@@ -1,3 +1,5 @@
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 @font-face {
   font-family: "HYTMR";
   font-display: swap;
@@ -319,5 +321,3 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
 }
-
-@import "@fortawesome/fontawesome-free/css/all.min.css";

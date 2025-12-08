@@ -23,23 +23,23 @@ export const siteConfigs: SiteConfig = {
     const isProd = process.env.NODE_ENV === "production";
     const isBuilding = process.env.BUILDING === "true";
     const isVercel = process.env.IS_VERCEL === "true";
-    if (isVercel) {
+    // if (isVercel) {
       return "https://blognext-end.yaria.top";
-    }
-    if (isServer) {
-      // 服务器端
-      if (isBuilding) {
-        return "https://blognext-end.yaria.top";
-      }
-      return isProd
-        ? "http://aria-blog-backend:8000"
-        : "https://blognext-end.yaria.top";
-    } else {
-      // 客户端
-      return isProd
-        ? "https://blognext-end.yaria.top"
-        : "https://blognext-end.yaria.top";
-    }
+    // }
+    // if (isServer) {
+    //   // 服务器端
+    //   if (isBuilding) {
+    //     return "https://blognext-end.yaria.top";
+    //   }
+    //   return isProd
+    //     ? "http://aria-blog-backend:8000"
+    //     : "https://blognext-end.yaria.top";
+    // } else {
+    //   // 客户端
+    //   return isProd
+    //     ? "https://blognext-end.yaria.top"
+    //     : "https://blognext-end.yaria.top";
+    // }
   })(),
   fcircleUrl: "https://fcircle.yaria.top",
   socials: [
