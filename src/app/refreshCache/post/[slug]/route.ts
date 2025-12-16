@@ -6,6 +6,6 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  await revalidateTag(slug, "/");
+  revalidateTag(slug, "default");
   return NextResponse.json({ revalidated: true, now: Date.now(), slug });
 }
