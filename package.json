@@ -58,7 +58,6 @@
     "next": "16.4.1",
     "next-auth": "^4.24.13",
     "next-images": "^1.8.5",
-    "next-mdx-remote": "^5.0.0",
     "nextjs-toploader": "^3.6.15",
     "node-snackbar": "^0.1.16",
     "nunjucks": "^3.2.4",
