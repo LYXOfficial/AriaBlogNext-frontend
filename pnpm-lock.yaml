@@ -155,9 +155,6 @@ importers:
       next-images:
         specifier: ^1.8.5
         version: 1.8.5(webpack@5.103.0(postcss@8.5.30))
-      next-mdx-remote:
-        specifier: ^6.0.0
-        version: 6.0.0(@types/react@18.3.31)(react@19.3.1)
       nextjs-toploader:
         specifier: ^3.6.15
         version: 3.9.17(next@16.4.1(@babel/core@7.29.7)(@types/node@20.19.43)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.105.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -4554,12 +4551,6 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
 
-  next-mdx-remote@6.0.0:
-    resolution: {integrity: sha512-cJEpEZlgD6xGjB4jL8BnI8FaYdN9BzZM4NwadPe1YQr7pqoWjg9EBCMv3nXBkuHqMRfv2y33SzUsuyNh9LFAQQ==}
-    engines: {node: '>=14', npm: '>=7'}
-    peerDependencies:
-      react: '>=16'
-
   next@16.4.1:
     resolution: {integrity: sha512-uc657V62E34fOI6W5NtG9IzwsPcms0Z60grz2MJGtglgD+pTFnNt4Yw2PzaU622tfX4vhrDgLZzicE2YlhI20Q==}
     engines: {node: '>=20.9.0'}
@@ -6299,9 +6290,6 @@ packages:
   unist-util-position@5.0.0:
     resolution: {integrity: sha512-fucsC7HjXvkB5R3kTCO7kUjRdrS0BJt3M/FPxmHMBOm8JQi2BsHAHFsy27E0EolP8rp0NzXsJ+jNPyDWvOJZPA==}
 
-  unist-util-remove@4.0.0:
-    resolution: {integrity: sha512-b4gokeGId57UVRX/eVKej5gXqGlc9+trkORhFJpu9raqZkZhU0zm8Doi05+HaiBsMEIJowL+2WtQ5ItjsngPXg==}
-
   unist-util-stringify-position@4.0.0:
     resolution: {integrity: sha512-0ASV06AAoKCDkS2+xw5RXJywruurpbC4JZSm7nr7MOt1ojAzvyyaO+UxZf18j8FCF6kmzCZKcAgN/yu2gm2XgQ==}
 
@@ -6405,9 +6393,6 @@ packages:
 
   vanilla-lazyload@19.1.3:
     resolution: {integrity: sha512-bBMERPu2AFJc35krS+8BOhq++c6dRfL6q368lJPnkS5U92fRQagTR3FsNta69/GukfZzDwDEjD5M3U7VuSiCDw==}
-
-  vfile-matter@5.0.1:
-    resolution: {integrity: sha512-o6roP82AiX0XfkyTHyRCMXgHfltUNlXSEqCIS80f+mbAyiQBE2fxtDVMtseyytGx75sihiJFo/zR6r/4LTs2Cw==}
 
   vfile-message@4.0.3:
     resolution: {integrity: sha512-QTHzsGd1EhbZs4AsQ20JX1rC3cOlt/IWJruk893DfLRr57lcnOeMaWG4K0JrRta4mIJZKth2Au3mM3u03/JWKw==}
@@ -6599,11 +6584,6 @@ packages:
   yaml@1.10.3:
     resolution: {integrity: sha512-vIYeF1u3CjlhAFekPPAk2h/Kv4T3mAkMox5OymRiJQB0spDP10LHvt+K7G9Ny6NuuMAb25/6n1qyUjAcGNf/AA==}
     engines: {node: '>= 6'}
-
-  yaml@2.9.1:
-    resolution: {integrity: sha512-3NxN8+78OdzbT7C/WjGsyfPAtJaN3FNDsWxv7Y7mcDsT/oOmgW8BpyQQFFBnvZE3j9Y2Sdz1ULFLezL7Eb2yFw==}
-    engines: {node: '>= 14.6'}
-    hasBin: true
 
   yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
@@ -11906,20 +11886,6 @@ snapshots:
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.103.0(postcss@8.5.30)))(webpack@5.103.0(postcss@8.5.30))
       webpack: 5.103.0(postcss@8.5.30)
 
-  next-mdx-remote@6.0.0(@types/react@18.3.31)(react@19.3.1):
-    dependencies:
-      '@babel/code-frame': 7.29.7
-      '@mdx-js/mdx': 3.1.1
-      '@mdx-js/react': 3.1.1(@types/react@18.3.31)(react@19.3.1)
-      react: 19.3.1
-      unist-util-remove: 4.0.0
-      unist-util-visit: 5.1.0
-      vfile: 6.0.3
-      vfile-matter: 5.0.1
-    transitivePeerDependencies:
-      - '@types/react'
-      - supports-color
-
   next@16.4.1(@babel/core@7.29.7)(@types/node@20.19.43)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.105.1):
     dependencies:
       '@next/env': 16.4.1
@@ -13771,12 +13737,6 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
-  unist-util-remove@4.0.0:
-    dependencies:
-      '@types/unist': 3.0.3
-      unist-util-is: 6.0.1
-      unist-util-visit-parents: 6.0.2
-
   unist-util-stringify-position@4.0.0:
     dependencies:
       '@types/unist': 3.0.3
@@ -13902,11 +13862,6 @@ snapshots:
       spdx-expression-parse: 3.0.1
 
   vanilla-lazyload@19.1.3: {}
-
-  vfile-matter@5.0.1:
-    dependencies:
-      vfile: 6.0.3
-      yaml: 2.9.1
 
   vfile-message@4.0.3:
     dependencies:
@@ -14144,8 +14099,6 @@ snapshots:
   yallist@4.0.0: {}
 
   yaml@1.10.3: {}
-
-  yaml@2.9.1: {}
 
   yargs-parser@21.1.1: {}
 
