@@ -42,3 +42,5 @@ next-env.d.ts
 /report
 
 dist
+
+pnpm-lock.yaml
