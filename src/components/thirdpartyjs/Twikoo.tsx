@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import "twikoo/dist/twikoo.css";
+// twikoo 2.x ships its stylesheet inlined in the bundle (and no longer exposes
+// "twikoo/dist/twikoo.css" through its package "exports" map), so the separate
+// CSS import is no longer needed.
 import "styles/Twikoo.css";
 import { siteConfigs } from "config";
 import { Icon } from "@iconify/react";
@@ -72,11 +74,14 @@ export function TwikooBaseComment() {
       }
     }
 
-    const tk = require("twikoo/dist/twikoo.min");
+    const tk = require("twikoo");
     try {
       tk.init({
         envId: siteConfigs.twikooEnv,
         el: "#post-comment",
+        // twikoo 2.x 新增了前端 i18n，不指定就跟浏览器语言走（1.6 没有这个行为）。
+        // 本站界面全中文，固定下来避免英文浏览器看到英文评论框。
+        lang: "zh-CN",
       });
       owoBig();
     } catch (e) {
@@ -106,7 +111,7 @@ export function TwikooBaseComment() {
 
 export function TwikooCountPost() {
   useEffect(() => {
-    const tk = require("twikoo/dist/twikoo.min");
+    const tk = require("twikoo");
     tk.getCommentsCount({
       envId: siteConfigs.twikooEnv,
       urls: [document.location.pathname, document.location.pathname + "/"],
@@ -127,7 +132,7 @@ export function TwikooCountPost() {
 export function TwikooCountHome() {
   useEffect(() => {
     (async () => {
-      const tk = require("twikoo/dist/twikoo.min");
+      const tk = require("twikoo");
       document.querySelectorAll(".post-info").forEach((el) => {
         const postTitle = el.querySelector(".post-title") as HTMLAnchorElement;
         const hr = "/" + postTitle.href.split("/").slice(3).join("/");

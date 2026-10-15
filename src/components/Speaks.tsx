@@ -15,17 +15,17 @@ const bbClickHandle = (event: React.MouseEvent) => {
       ".bb-content",
     ) as HTMLElement
   ).innerText;
-  const e = document.getElementsByClassName("el-textarea__inner")[0],
+  const e = document.getElementsByClassName("tk-textarea__inner")[0],
     t = document.createEvent("HTMLEvents");
   t.initEvent("input", true, true);
   (((e as HTMLInputElement).value = "> " + str + "\n\n"), e.dispatchEvent(t));
   (
-    document.getElementsByClassName("el-textarea__inner")[0] as HTMLInputElement
+    document.getElementsByClassName("tk-textarea__inner")[0] as HTMLInputElement
   ).value = "> " + str + "\n\n";
   document.location.href += "#twikoo";
   (
     document.querySelector(
-      ".tk-col>.tk-input>.el-textarea__inner",
+      ".tk-col>.tk-input>.tk-textarea__inner",
     ) as HTMLInputElement
   ).focus();
   Snackbar.show({
