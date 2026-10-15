@@ -10,6 +10,8 @@ export function RightButtonsPosts({
 }) {
   const [rbHide, setRbHide] = useState(false);
   const [tocHide, setTocHide] = useState(false);
+  // 文章没有标题时 CardToc 不会渲染，此时目录按钮也不该出现
+  const [hasToc, setHasToc] = useState(false);
   useEffect(() => {
     const scrollHandler = () => {
       if (document.documentElement.scrollTop > 100) setRbHide(false);
@@ -32,24 +34,28 @@ export function RightButtonsPosts({
           .offsetTop - 80,
     });
   }
+  useEffect(() => {
+    setHasToc(!!document.querySelector(".card-toc"));
+  }, []);
   function setToc() {
+    const toc = document.querySelector(".card-toc");
+    if (!toc) return;
     setTocHide(!tocHide);
-    if (tocHide)
-      document.querySelector(".card-toc")!.className =
-        "card-widget card-aside card-toc";
-    else
-      document.querySelector(".card-toc")!.className =
-        "card-widget card-aside card-toc mobile-show";
+    toc.className = tocHide
+      ? "card-widget card-aside card-toc"
+      : "card-widget card-aside card-toc mobile-show";
   }
   return (
     <div id="rightbuttons" className={rbHide ? "rb-hide" : "rb-show"}>
-      <button
-        className="rightbutton rightbutton-toc"
-        title="文章目录"
-        onClick={setToc}
-      >
-        <Icon icon="fa6-solid:align-left" />
-      </button>
+      {hasToc && (
+        <button
+          className="rightbutton rightbutton-toc"
+          title="文章目录"
+          onClick={setToc}
+        >
+          <Icon icon="fa6-solid:align-left" />
+        </button>
+      )}
       <button
         className="rightbutton rightbutton-barrageShow"
         title="开关评论浮窗"

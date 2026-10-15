@@ -2,6 +2,7 @@ import HighLightCode from "./builtins/HighLightCode";
 import MarkdownImage from "./builtins/MarkdownImage";
 import MarkdownLink from "./builtins/MarkdownLink";
 import LateXFilter from "./builtins/LaTeXFilter";
+import normalizeExtraTagLayout from "./builtins/ExtraTagLayout";
 import FoldingTag from "./extratags/Folding";
 import LinkTag from "./extratags/Link";
 import ColorTextTag from "./extratags/ColorText";
@@ -41,6 +42,9 @@ export default function MDToTSXWithPlugins({
 }: {
   mdContent: string;
 }) {
+  // 先规整外挂标签的空行位置，否则 markdown-to-jsx 会把标签内层按行内解析，
+  // 标题/列表/代码块会以原始 markdown 文本漏出来（详见 ExtraTagLayout.ts）
+  mdContent = normalizeExtraTagLayout(mdContent);
   mdContent = LateXFilter(mdContent);
 
   try {

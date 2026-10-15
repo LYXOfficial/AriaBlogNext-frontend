@@ -381,7 +381,7 @@ table:not(code table) {
 }
 
 #article-container hr {
-  background: url(https://cdn1.tianli0.top/npm/hassan-assets/img/Bilibili_Dividing_Line.png) !important;
+  background: url(https://testingcf.jsdelivr.net/npm/hassan-assets/img/Bilibili_Dividing_Line.png) !important;
   height: 80px;
   max-width: min(840px, 100%);
   border: hidden !important;
@@ -800,13 +800,13 @@ table:not(code table) {
   opacity: 1;
 }
 
-#article-container strong {
+#article-container strong:not(.tk-nick) {
   background: linear-gradient(rgb(255 51 184 / 15%), rgb(255 51 184 / 15%))
     no-repeat bottom / 100% 30%;
 }
 
 @media (prefers-color-scheme: dark) {
-  #article-container strong {
+  #article-container strong:not(.tk-nick) {
     background: linear-gradient(rgb(255 51 184 / 30%), rgb(255 51 184 / 30%))
       no-repeat bottom / 100% 30% !important;
   }
@@ -927,11 +927,12 @@ pre.hljs.wrap {
   bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+  /* 只过渡透明度：水平/垂直的位置纠偏由 JS 即时设置，跟着动画会滑动 */
+  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
   width: max-content;
   background-color: #4d4d4d;
   color: white;
@@ -942,6 +943,10 @@ pre.hljs.wrap {
   -o-border-radius: 5px;
   padding: 0 10px;
   pointer-events: none;
+  max-width: min(290px, 80vw);
+  z-index: 999;
+  line-height: 1.2;
+  padding: 5px 10px;
 }
 
 .etag-prompt-tooltip::after {
@@ -965,6 +970,18 @@ pre.hljs.wrap {
 
 .etag-prompt-tooltip.show {
   opacity: 1;
+}
+
+/* 上方放不下时翻到触发词下方显示（位置由 Prompt.tsx 按视口计算） */
+.etag-prompt-tooltip.flip-down {
+  bottom: auto;
+  top: 130%;
+}
+
+.etag-prompt-tooltip.flip-down::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent #4d4d4d transparent;
 }
 
 .etag-prompt::after {

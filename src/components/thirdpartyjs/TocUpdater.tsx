@@ -22,6 +22,18 @@ const flattenTOC = cache((toc: TOCItem[]) => {
   return flatList;
 });
 
+// markdown 里长得像标题、但渲染器并没有真的输出对应 <h_> 的行（例如 <Folding> 这类
+// JSX 块内部的内容）会指向不存在的锚点，这里按真实 DOM 把它们隐藏掉。
+// 无效项不会出现在下面的 offsets 里，因此永远不会被选中，隐藏它们是安全的。
+const hideEntriesWithoutTarget = () => {
+  document
+    .querySelectorAll<HTMLAnchorElement>(".toc-content .toc-link")
+    .forEach((link) => {
+      const targetId = link.id.replace(/^toc-/, "");
+      link.classList.toggle("toc-invalid", !document.getElementById(targetId));
+    });
+};
+
 const calcProgress = () => {
   const postContent = document.querySelector<HTMLElement>(
     "#post-maincontent:not(#article-container.page #post-maincontent)",
@@ -67,11 +79,11 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
       }
       const currentTocLink = document.getElementById(`toc-${currentActiveId}`);
       if (currentTocLink) {
-        currentTocLink.className = "toc-link active";
+        currentTocLink.classList.add("active");
         document
           .querySelectorAll(`.toc-link:not(#toc-${currentActiveId})`)
           .forEach((item) => {
-            item.className = "toc-link";
+            item.classList.remove("active");
           });
         if (currentTocLink) {
           const tocContent = document.querySelector(".toc-content")!;
@@ -112,6 +124,7 @@ export default function TocUpdater({ tocTree }: TocUpdaterProps) {
       calcProgress();
     };
     (window as any).tocHandleScroll = handleScroll;
+    hideEntriesWithoutTarget();
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => {

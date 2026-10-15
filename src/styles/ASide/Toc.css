@@ -62,6 +62,11 @@
   box-shadow: 0 0 5px 1px var(--aria-theme);
 }
 
+/* 锚点在页面上不存在（JSX 块内部的伪标题）时不显示 */
+.toc-link.toc-invalid {
+  display: none;
+}
+
 .toc-content {
   max-height: calc(100vh - 250px);
   overflow-y: scroll;

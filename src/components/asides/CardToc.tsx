@@ -17,6 +17,9 @@ export interface TOCItem {
 }
 export default function CardToc({ mdContent }: { mdContent: string }) {
   const tocTree = generateTOC(mdContent);
+  // 文章里一个标题都没有时不显示空目录卡片
+  // （RightButtons 会同步隐藏右侧的目录按钮）
+  if (tocTree.length === 0) return null;
   return (
     <div className="card-widget card-aside card-toc">
       <div className="card-headline">
