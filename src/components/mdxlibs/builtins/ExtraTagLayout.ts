@@ -19,6 +19,7 @@ const BLOCK_TAGS = [
   "Chat",
   "CheckBox",
   "FriendLinks",
+  "FlinkApply",
 ];
 
 // 所有自定义容器标签：开标签后不能紧跟空行（Prompt/ColorText 等行内标签正常用法
@@ -34,8 +35,10 @@ const CONTAINER_TAGS = [
 const blockTagAtLineStart = new RegExp(
   `^\\s*<(?:${BLOCK_TAGS.join("|")})\\b[^>]*>`,
 );
+// 末尾的 [^/>] 用于排除自闭合标签（<Link ... />、<FlinkApply /> 等），
+// 它们没有内层内容，去掉其后的空行反而可能让下一段被并进同一块
 const containerTagAtLineEnd = new RegExp(
-  `<(?:${CONTAINER_TAGS.join("|")})\\b[^>]*>\\s*$`,
+  `<(?:${CONTAINER_TAGS.join("|")})\\b[^>]*[^/>]>\\s*$`,
 );
 
 // 标记每一行是否处于围栏代码块内（围栏行本身也算）

@@ -1,0 +1,632 @@
+.flink-apply {
+  box-sizing: border-box;
+  margin: 16px 0;
+  padding: 20px;
+  border: var(--aria-border);
+  border-radius: 12px;
+  /* 用 acrylic 变量：它在深色模式下会翻转（--aria-whitegray 不会） */
+  background-color: var(--aria-acrylic1);
+  color: var(--aria-fontcolor);
+}
+
+.flink-apply *,
+.flink-apply *::before,
+.flink-apply *::after {
+  box-sizing: border-box;
+}
+
+/* 按钮/输入框默认不继承字体，这里统一跟随站点字体 */
+.flink-apply button,
+.flink-apply input,
+.flink-apply textarea {
+  font-family: inherit;
+  font-size: 13.5px;
+}
+
+/* 颜色只对输入框做继承；按钮颜色由各自样式决定（否则会盖掉实心按钮的白字） */
+.flink-apply input,
+.flink-apply textarea {
+  color: inherit;
+}
+
+/* ---------- 模式切换 ---------- */
+
+.flink-apply-modes {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.flink-apply-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  color: var(--aria-fontcolor);
+  background: transparent;
+  border: var(--aria-border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.flink-apply-mode:hover {
+  color: var(--aria-theme);
+  border-color: var(--aria-theme);
+}
+
+.flink-apply-mode.active {
+  color: #fff;
+  background-color: var(--aria-theme);
+  border-color: var(--aria-theme);
+}
+
+/* ---------- 申请须知 ---------- */
+
+.flink-apply-rules {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  /* 去序号：不用 ol 计数器，也不显示 marker */
+  list-style: none;
+  background-color: var(--aria-acrylic2);
+  border-radius: 10px;
+}
+
+.flink-apply-rules li + li {
+  margin-top: 8px;
+}
+
+.flink-apply-rules label,
+.flink-apply-existing-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.flink-apply-rules label > span {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- 自定义复选框（白勾、无黑框、对齐） ---------- */
+
+.flink-apply input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 3px 0 0;
+  border: var(--aria-border);
+  border-radius: 4px;
+  background-color: var(--aria-background);
+  cursor: pointer;
+  outline: none; /* 去掉浏览器默认的黑框 */
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+
+.flink-apply input[type="checkbox"]:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aria-theme) 35%, transparent);
+}
+
+.flink-apply input[type="checkbox"]:checked {
+  background-color: var(--aria-theme);
+  border-color: var(--aria-theme);
+}
+
+/* 白色勾 */
+.flink-apply input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4.5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ---------- 表单 ---------- */
+
+.flink-apply-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.flink-apply-wide {
+  grid-column: 1 / -1;
+}
+
+.flink-apply-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.flink-apply-field > span:first-child {
+  font-size: 13.5px;
+}
+
+.flink-apply-field input[type="text"],
+.flink-apply-field input[type="url"],
+.flink-apply-field input[type="email"],
+.flink-apply-field textarea,
+.flink-apply-query input[type="email"] {
+  width: 100%;
+  min-width: 0;
+  /* box-sizing 已在顶部统一设置，避免 padding/border 撑出容器 */
+  padding: 9px 12px;
+  color: var(--aria-fontcolor);
+  background-color: var(--aria-background);
+  border: var(--aria-border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.flink-apply-field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.flink-apply-field input:focus,
+.flink-apply-field textarea:focus,
+.flink-apply-query input:focus {
+  border-color: var(--aria-theme);
+}
+
+.flink-apply-color {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.flink-apply-color input[type="color"] {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 36px;
+  padding: 2px;
+  border: var(--aria-border);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.flink-apply-color input[type="text"] {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- 已收录友链：combobox ---------- */
+
+.flink-apply-combo {
+  position: relative;
+}
+
+.flink-apply-combo > input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 12px;
+  color: var(--aria-fontcolor);
+  background-color: var(--aria-background);
+  border: var(--aria-border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.flink-apply-combo > input:focus {
+  border-color: var(--aria-theme);
+}
+
+.flink-apply-combo-list {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  max-height: 240px;
+  overflow-y: auto;
+  background-color: var(--aria-background);
+  border: var(--aria-border);
+  border-radius: 8px;
+  box-shadow: var(--aria-shadow);
+}
+
+.flink-apply-combo-list li {
+  padding: 7px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  word-break: break-all;
+}
+
+.flink-apply-combo-list li:hover,
+.flink-apply-combo-list li.active {
+  background-color: var(--aria-acrylic2);
+}
+
+.flink-apply-combo-list li.selected {
+  color: var(--aria-theme);
+  font-weight: 600;
+}
+
+.flink-apply-combo-list li.empty {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* ---------- 智能识别 ---------- */
+
+.flink-apply-smart {
+  margin-bottom: 14px;
+}
+
+.flink-apply-smart-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13.5px;
+}
+
+.flink-apply-smart-head button {
+  margin-left: auto;
+  padding: 5px 14px;
+  color: var(--aria-theme);
+  background: transparent;
+  border: 1px solid var(--aria-theme);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.flink-apply-smart-head button:hover:not(:disabled) {
+  color: #fff;
+  background-color: var(--aria-theme);
+}
+
+.flink-apply-smart-head button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.flink-apply-smart textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 12px;
+  color: var(--aria-fontcolor);
+  background-color: var(--aria-background);
+  border: var(--aria-border);
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+}
+
+.flink-apply-smart textarea:focus {
+  border-color: var(--aria-theme);
+}
+
+/* ---------- 操作区 ---------- */
+
+.flink-apply-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.flink-apply-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  color: #fff;
+  background-color: var(--aria-theme);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.flink-apply-submit:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.flink-apply-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 提示文字不要用 --aria-gray（#e2e2e2 太淡） */
+.flink-apply-hint {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--aria-fontcolor);
+  opacity: 0.55;
+}
+
+/* ---------- 消息 ---------- */
+
+.flink-apply-msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  border-radius: 8px;
+  border-left: 10px solid var(--aria-gray);
+  background-color: var(--aria-acrylic2);
+}
+
+.flink-apply-msg.ok {
+  border-left-color: var(--aria-green);
+}
+
+.flink-apply-msg.err {
+  border-left-color: var(--aria-red);
+}
+
+/* ---------- 进度查询 ---------- */
+
+.flink-apply-query {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: var(--aria-border);
+}
+
+.flink-apply-query h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+
+.flink-apply-query-row {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+}
+
+.flink-apply-query-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.flink-apply-query-row button {
+  flex: 0 0 auto;
+  padding: 9px 20px;
+  color: var(--aria-theme);
+  background: transparent;
+  border: 1px solid var(--aria-theme);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.flink-apply-query-row button:hover:not(:disabled) {
+  color: #fff;
+  background-color: var(--aria-theme);
+}
+
+.flink-apply-query-row button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.flink-apply-result {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.flink-apply-result li {
+  padding: 12px 0;
+  border-bottom: var(--aria-border);
+}
+
+/* 每条申请的卡片式展示 */
+.flink-apply-record-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.flink-apply-record-head b {
+  font-weight: 600;
+}
+
+.flink-apply-record-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  padding-left: 2px;
+  font-size: 12.5px;
+}
+
+.flink-apply-record-body a {
+  color: var(--aria-theme);
+  word-break: break-all;
+}
+
+.flink-apply-record-color {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flink-apply-record-color i {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: var(--aria-border);
+  border-radius: 4px;
+}
+
+.flink-apply-record-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.flink-apply-record-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  color: var(--aria-theme);
+  background: transparent;
+  border: 1px solid var(--aria-theme);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.flink-apply-record-actions button:hover {
+  color: #fff;
+  background-color: var(--aria-theme);
+}
+
+.flink-apply-record-actions button.danger {
+  color: var(--aria-red);
+  border-color: var(--aria-red);
+}
+
+.flink-apply-record-actions button.danger:hover {
+  color: #fff;
+  background-color: var(--aria-red);
+}
+
+/* 编辑待审申请时的提示条 */
+.flink-apply-editing {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-left: 10px solid var(--aria-orange);
+  border-radius: 8px;
+  background-color: var(--aria-acrylic2);
+}
+
+.flink-apply-editing button {
+  margin-left: auto;
+  padding: 4px 12px;
+  color: var(--aria-theme);
+  background: transparent;
+  border: 1px solid var(--aria-theme);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.flink-apply-cancel {
+  padding: 8px 18px;
+  color: var(--aria-fontcolor);
+  background: transparent;
+  border: var(--aria-border);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.flink-apply-result a {
+  color: var(--aria-theme);
+  word-break: break-all;
+}
+
+.flink-apply-tag {
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #fff;
+  background-color: var(--aria-green);
+  border-radius: 10px;
+}
+
+.flink-apply-tag.modify {
+  background-color: var(--aria-orange);
+}
+
+/* 审核状态：用高对比色，避免"太淡" */
+.flink-apply-state {
+  margin-left: auto;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.flink-apply-state.pending {
+  color: var(--aria-orange);
+}
+
+.flink-apply-state.approved {
+  color: var(--aria-green);
+}
+
+.flink-apply-state.rejected {
+  color: var(--aria-red);
+}
+
+.flink-apply-reason {
+  flex: 1 0 100%;
+  font-size: 12.5px;
+  opacity: 0.6;
+}
+
+/* ---------- 深色模式 ---------- */
+
+@media (prefers-color-scheme: dark) {
+  /* 深色下 --aria-background 是暗红色(#552a2a)，输入框沿用会发红；
+     这里统一换成站点的深灰次要背景色 */
+  .flink-apply-field input[type="text"],
+  .flink-apply-field input[type="url"],
+  .flink-apply-field input[type="email"],
+  .flink-apply-field textarea,
+  .flink-apply-query input[type="email"],
+  .flink-apply-combo > input,
+  .flink-apply-combo-list,
+  .flink-apply-smart textarea {
+    background-color: var(--heo-secondbg, #2f3031);
+  }
+
+  .flink-apply input[type="checkbox"] {
+    background-color: var(--heo-secondbg, #2f3031);
+  }
+
+  .flink-apply input[type="checkbox"]:checked {
+    background-color: var(--aria-theme);
+  }
+
+  .flink-apply ::placeholder {
+    color: #8a8a8a;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .flink-apply {
+    padding: 14px;
+  }
+
+  .flink-apply-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

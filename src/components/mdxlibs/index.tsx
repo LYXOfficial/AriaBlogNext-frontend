@@ -20,6 +20,7 @@ import HLJSNum from "../thirdpartyjs/HLJSNum";
 import KaTex from "../thirdpartyjs/KaTex";
 import Pangu from "../thirdpartyjs/Pangu";
 import FriendLinks from "../FriendLinks";
+import FlinkApply from "../FlinkApply";
 
 // 安全的组件包装器
 function SafeComponent({
@@ -114,6 +115,9 @@ export default function MDToTSXWithPlugins({
               Tab: (props: any) => <SafeComponent component={Tab} {...props} />,
               FriendLinks: (props: any) => (
                 <SafeComponent component={FriendLinks} {...props} />
+              ),
+              FlinkApply: (props: any) => (
+                <SafeComponent component={FlinkApply} {...props} />
               ),
             },
             slugify(inp) {
