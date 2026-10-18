@@ -92,6 +92,8 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
     let touchY = 0;
     let nativeContentGesture = false;
     let nativeBoundarySettled = false;
+    let lastWheelAt = -Infinity;
+    let wheelFromContent = false;
     const supportsScrollEnd = "onscrollend" in document;
     const scheduleNativeSettle = () => {
       window.clearTimeout(settleTimer);
@@ -202,7 +204,8 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       }
       // Follow the swipe direction: down enters the content, up returns to the
       // banner. A swipe never strands the page between the two blocks.
-      animateTo(scrollDirection < 0 ? 0 : top, 340);
+      // 正文开始的同一轮滚轮惯性即使跨过边界，也只能补齐到正文顶。
+      animateTo(wheelFromContent ? top : scrollDirection < 0 ? 0 : top, 340);
     };
 
     const onScroll = () => {
@@ -253,6 +256,15 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
 
       const now = performance.now();
       const current = window.scrollY;
+      // 以整轮输入而非吸附动画时长区分回程，不能把惯性尾段当成第二次操作。
+      if (now - lastWheelAt > 240 && !animating) {
+        wheelFromContent = current > top + 2;
+      }
+      lastWheelAt = now;
+      if (event.deltaY < 0 && wheelFromContent && current <= top + 2) {
+        event.preventDefault();
+        return;
+      }
       // The landing guard only prevents another upward section transition.
       // Scrolling down into the content must always remain available.
       if ((animating || now < quietUntil) && !(event.deltaY > 0 && current >= top - 2)) {
