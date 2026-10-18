@@ -2,6 +2,12 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { siteConfigs } from "@/config";
+import {
+  COLOR_RE,
+  EMAIL_RE,
+  isSameAsCurrentLink,
+  validateFlinkForm,
+} from "@/utils/flinkForm";
 import { parseFlinkText } from "@/utils/flinkParse";
 import { ensureCardColor, extractThemeColorFromImage } from "@/utils/themeColor";
 import "styles/FlinkApply.css";
@@ -22,11 +28,6 @@ const RULES = [
   "建议网站头像不要有防盗链，否则无法正常显示",
   "审核未通过时，若博主填写了理由会通过邮件告知，可修改后重新提交",
 ];
-
-const URL_RE = /^https?:\/\/[^\s<>"'\\]+$/i;
-const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-const COLOR_RE =
-  /^(#[0-9a-fA-F]{3,8}|rgba?\([0-9.,%\s]+\)|hsla?\([0-9.,%\s]+\)|[a-zA-Z]{3,20})$/;
 
 interface ExistingLink {
   label: string;
@@ -208,37 +209,6 @@ export default function FlinkApply() {
     }
   }
 
-  /** 与选中的现网友链相比是否完全没变（修改申请不该提交这种） */
-  function sameAsCurrent(item: ExistingLink): boolean {
-    const text = (v: string) => (v || "").trim();
-    const url = (v: string) => {
-      const s = text(v);
-      return s.endsWith("/") ? s.slice(0, -1) : s;
-    };
-    const color = (v: string) => (text(v) || "#888888").toLowerCase();
-    return (
-      text(item.name) === text(form.name) &&
-      url(item.url) === url(form.link) &&
-      text(item.avatar) === text(form.avatar) &&
-      text(item.descr) === text(form.descr) &&
-      color(item.color) === color(form.color)
-    );
-  }
-
-  function localValidate(): string {
-    if (mode === 1 && !targetUrl && !editing) return "请先在列表里选择要修改的友链";
-    if (!form.name.trim()) return "请填写站点名称";
-    if (!URL_RE.test(form.link.trim())) return "网址格式不正确";
-    if (!URL_RE.test(form.avatar.trim())) return "头像格式不正确";
-    if (form.descr.trim() && form.descr.trim().length > 200)
-      return "站点描述不超过 200 字";
-    if (form.email.trim() && !EMAIL_RE.test(form.email.trim()))
-      return "邮箱格式不正确（不想填可以留空）";
-    if (form.color.trim() && !COLOR_RE.test(form.color.trim()))
-      return "颜色格式不正确";
-    return "";
-  }
-
   function resetEdit() {
     setEditing(null);
     setForm({ ...EMPTY_FORM });
@@ -252,7 +222,7 @@ export default function FlinkApply() {
       setMessage({ ok: false, text: "请先逐条阅读并勾选上方的申请须知" });
       return;
     }
-    const invalid = localValidate();
+    const invalid = validateFlinkForm({ mode, targetUrl, editing: !!editing, form });
     if (invalid) {
       setMessage({ ok: false, text: invalid });
       return;
@@ -261,7 +231,19 @@ export default function FlinkApply() {
     // 修改申请：内容和现网完全一致就不让提交
     if (mode === 1 && !editing && targetUrl) {
       const current = existing?.find((item) => item.url === targetUrl);
-      if (current && sameAsCurrent(current)) {
+      if (
+        current &&
+        isSameAsCurrentLink(
+          {
+            name: current.name,
+            url: current.url,
+            avatar: current.avatar,
+            descr: current.descr,
+            color: current.color,
+          },
+          form,
+        )
+      ) {
         setMessage({
           ok: false,
           text: "内容与当前友链完全一致，没有需要修改的地方",

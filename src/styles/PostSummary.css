@@ -46,26 +46,13 @@
   padding: 10px;
   padding-top: 5px;
   background: var(--aria-background);
+  margin-bottom: 10px;
 }
 .post-summary-icon {
   padding: 3px;
   border-radius: 50%;
   background: var(--aria-theme);
   color: white;
-}
-.post-summary-refreshbutton {
-  margin-left: auto;
-  padding: 3px;
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  transition: 0.3s;
-  color: var(--aria-fontcolor);
-  width: 22px;
-  height: 22px;
-}
-.post-summary-refreshbutton:hover {
-  background-color: var(--aria-shadow-color);
 }
 @media screen and (prefers-color-scheme: dark) {
   .post-summary-content {

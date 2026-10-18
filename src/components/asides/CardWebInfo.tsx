@@ -5,7 +5,7 @@ import relativeTime from "utils/reltime";
 import "components/thirdpartyjs/Busuanzi";
 import Busuanzi from "components/thirdpartyjs/Busuanzi";
 import { siteConfigs } from "config";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default async function CardWebInfo() {
   let lastUpdatedTime: number = 0,
@@ -34,13 +34,15 @@ export default async function CardWebInfo() {
     const pi = await resp.json();
     postCount = pi.count;
   }
-  const runDays = moment().diff(
-    moment([
-      siteConfigs.createYear,
-      siteConfigs.createMonth - 1,
-      siteConfigs.createDay,
-    ]),
-    "days",
+  const runDays = dayjs().diff(
+    dayjs(
+      new Date(
+        siteConfigs.createYear,
+        siteConfigs.createMonth - 1,
+        siteConfigs.createDay,
+      ),
+    ),
+    "day",
   );
   return (
     <div className="card-widget card-aside card-webinfo">

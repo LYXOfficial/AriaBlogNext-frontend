@@ -27,7 +27,7 @@ export async function GET() {
     { next: { revalidate: 3600, tags: ["posts"] } },
   );
   if (res.ok) {
-    const data: Post[] = (await res.json()).data;
+    const data: Post[] = (await res.json()).data ?? [];
     for (const post of data) {
       const renderedHTML = cache(renderer)(post.mdContent!);
       feed.item({

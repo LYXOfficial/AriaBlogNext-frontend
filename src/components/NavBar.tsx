@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { MenuItems, siteConfigs } from "config";
 import { useRouter } from "nextjs-toploader/app";
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 import { usePathname } from "next/navigation";
 import SearchBox from "components/SearchBox";
 import { MenuItem, MenuItemChild } from "@/interfaces/menuitem";

@@ -26,7 +26,7 @@ export default async function Page({
   let data: Category[] = [];
   if (res.ok) {
     const Archives = new Map<string, Post[]>();
-    data = (await res.json()).data;
+    data = (await res.json()).data ?? [];
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
     await Promise.all(
       data.map(async (item: Category) => {
@@ -36,7 +36,7 @@ export default async function Page({
             { next: { revalidate: 7200, tags: ["posts"] } },
           );
           if (res.ok) {
-            const posts: Post[] = (await res.json()).data;
+            const posts: Post[] = (await res.json()).data ?? [];
             Archives.set(item.name, [
               ...(Archives.get(item.name) ?? []),
               ...posts,

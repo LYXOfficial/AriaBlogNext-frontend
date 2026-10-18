@@ -1,8 +1,9 @@
 "use client";
 import ansi2html from "ansi2html";
-import hljs from "highlight.js";
+// 只打包常用语言（约 35 种）；未收录的语言会自动回退为纯文本
+import hljs from "highlight.js/lib/common";
 import { Icon } from "@iconify/react";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 const codeIcons = {
   c: (
@@ -579,19 +580,17 @@ export default function HighLightCode({
   lang?: string;
   code: string;
 }) {
-  let language = lang?.toUpperCase() ?? "TEXT";
-  let highlightedCode;
+  const language = lang?.toUpperCase() ?? "TEXT";
 
-  try {
-    highlightedCode = hljs.highlight(code, { language: language }).value;
-  } catch (e) {
-    language = "TEXT";
-    highlightedCode = hljs.highlight(code, { language: language }).value;
-  }
-
-  if (lang?.toUpperCase() === "ANSI") {
-    highlightedCode = ansi2html(highlightedCode);
-  }
+  const highlightedCode = useMemo(() => {
+    let html: string;
+    try {
+      html = hljs.highlight(code, { language }).value;
+    } catch {
+      html = hljs.highlight(code, { language: "TEXT" }).value;
+    }
+    return lang?.toUpperCase() === "ANSI" ? ansi2html(html) : html;
+  }, [code, language, lang]);
 
   const codeRef = useRef<HTMLPreElement>(null);
   const [isWrapped, setIsWrapped] = useState(false);

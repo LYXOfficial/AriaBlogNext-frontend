@@ -1,6 +1,6 @@
 import { Post } from "interfaces/post";
 import { siteConfigs } from "config";
-import moment from "moment";
+import dayjs from "dayjs";
 import "styles/PostEnd.css";
 import ShareJs from "components/thirdpartyjs/ShareJs";
 import Link from "next/link";
@@ -51,7 +51,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             >
               发布于
               <div className="post-copyright-cc-info">
-                {moment.unix(postInfo.publishTime!).format("YYYY-MM-DD")}
+                {dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD")}
               </div>
             </div>
             <div
@@ -60,7 +60,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             >
               更新于
               <div className="post-copyright-cc-info">
-                {moment.unix(postInfo.lastUpdatedTime!).format("YYYY-MM-DD")}
+                {dayjs.unix(postInfo.lastUpdatedTime!).format("YYYY-MM-DD")}
               </div>
             </div>
             <div
@@ -129,7 +129,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
               </span>
               <span className="postend-navigation-date">
                 <Icon icon="fa6-solid:calendar-days" />
-                {moment.unix(previousPost.publishTime!).format("YYYY-MM-DD")}
+                {dayjs.unix(previousPost.publishTime!).format("YYYY-MM-DD")}
               </span>
             </span>
             <span className="postend-navigation-title">
@@ -157,7 +157,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             <span className="postend-navigation-headline">
               <span className="postend-navigation-date">
                 <Icon icon="fa6-solid:calendar-days" />
-                {moment.unix(nextPost.publishTime!).format("YYYY-MM-DD")}
+                {dayjs.unix(nextPost.publishTime!).format("YYYY-MM-DD")}
               </span>
               <span className="postend-navigation-intro">
                 下一篇

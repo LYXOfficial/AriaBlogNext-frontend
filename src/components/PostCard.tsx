@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import moment from "moment";
+import dayjs from "dayjs";
 import "styles/PostCard.css";
 import Link from "next/link";
 import { Post } from "interfaces/post";
@@ -35,9 +35,15 @@ export default async function Posts({ page }: { page: number }) {
     { next: { revalidate: 7200, tags: ["posts"] } },
   );
   if (!resp.ok) return notFound();
-  const posts: Post[] = (await resp.json()).data;
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`);
-  const data: Category[] = (await res.json()).data;
+  const posts: Post[] = (await resp.json()).data ?? [];
+  // 分类栏只是装饰，接口失败时降级为空，避免整页崩溃
+  let data: Category[] = [];
+  try {
+    const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`);
+    if (res.ok) data = (await res.json()).data ?? [];
+  } catch {
+    data = [];
+  }
   return (
     <div id="recent-posts">
       <PostCategoryBar data={data} type="categories" wrap={false} current="" />
@@ -50,10 +56,10 @@ export default async function Posts({ page }: { page: number }) {
             <span className="for-fc post__title">{post.title}</span>
             <div className="for-fc post-meta-date">
               <span className="time for-fc">
-                {moment.unix(post.publishTime!).format("YYYY-MM-DD")}
+                {dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
               </span>
               <span className="time for-fc">
-                {moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}
+                {dayjs.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}
               </span>
             </div>
             <div className="post-banner">
@@ -96,7 +102,7 @@ export default async function Posts({ page }: { page: number }) {
                   <Icon icon="fa6-solid:calendar-days" />
                   <span className="post-meta-content">
                     {"发表于 " +
-                      moment.unix(post.publishTime!).format("YYYY-MM-DD") +
+                      dayjs.unix(post.publishTime!).format("YYYY-MM-DD") +
                       " |"}
                   </span>
                 </div>
@@ -104,7 +110,7 @@ export default async function Posts({ page }: { page: number }) {
                   <Icon icon="fa6-solid:calendar-days" />
                   <span className="post-meta-content">
                     {"更新于 " +
-                      moment.unix(post.lastUpdatedTime!).format("YYYY-MM-DD") +
+                      dayjs.unix(post.lastUpdatedTime!).format("YYYY-MM-DD") +
                       " |"}
                   </span>
                 </div>

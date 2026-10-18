@@ -1,7 +1,7 @@
 import "styles/ASide/List.css";
 import Link from "next/link";
 import { ASideListItem } from "interfaces/asidelistitem";
-import { ImgWithFalldown } from "components/ImageWithFalldown";
+import ImageWithFalldown from "components/ImageWithFalldown";
 
 export default function ASideList({
   items,
@@ -24,10 +24,13 @@ export default function ASideList({
               <></>
             ) : (
               <div className="aside-list-item-pic">
-                <ImgWithFalldown
+                <ImageWithFalldown
                   falldownImg={falldownImg}
                   src={item.pic}
                   className="aside-list-item-pic-img"
+                  sizes="136px"
+                  quality={90}
+                  optimize
                   alt=""
                 />
               </div>

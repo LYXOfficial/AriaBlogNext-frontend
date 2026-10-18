@@ -13,7 +13,7 @@ export default async function Page() {
   });
   let data: Category[] = [];
   if (res.ok) {
-    data = (await res.json()).data;
+    data = (await res.json()).data ?? [];
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
   }
   return (

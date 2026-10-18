@@ -4,7 +4,7 @@ import "styles/SearchBox.css";
 import { useState, useRef, ReactElement } from "react";
 import { siteConfigs } from "@/config";
 import { Post } from "@/interfaces/post";
-import moment from "moment";
+import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 
@@ -59,7 +59,7 @@ export default function SearchBox({
                   />
                   <span className="search-box-result-time">
                     <Icon icon="fa6-solid:calendar" />
-                    {moment.unix(post.publishTime!).format("YYYY-MM-DD")}
+                    {dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
                   </span>
                 </div>
               );

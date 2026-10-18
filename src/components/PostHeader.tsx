@@ -2,19 +2,24 @@ import "styles/PostHeader.css";
 import { Post } from "interfaces/post";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import moment from "moment";
+import dayjs from "dayjs";
 import Busuanzi from "components/thirdpartyjs/Busuanzi";
 import { siteConfigs } from "@/config";
+import ImageWithFalldown from "components/ImageWithFalldown";
 import React from "react";
 
 export default function PostHeader({ postInfo }: { postInfo: Post }) {
   return (
-    <header
-      id="post-banner"
-      style={{
-        backgroundImage: `url(${postInfo.bannerImg ? postInfo.bannerImg : siteConfigs.falldownImg})`,
-      }}
-    >
+    <header id="post-banner">
+      <div className="post-banner-bg">
+        <ImageWithFalldown
+          src={postInfo.bannerImg ? postInfo.bannerImg : siteConfigs.falldownImg}
+          falldownImg={siteConfigs.falldownImg}
+          className="post-banner-bg-img"
+          alt=""
+          objectPosition="center"
+        />
+      </div>
       <div id="post-banner-info">
         <div id="post-banner-title">{postInfo.title}</div>
         <div id="post-banner-meta">
@@ -24,7 +29,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 <Icon icon="fa6-solid:calendar-days" />
                 <span className="post-meta-content">
                   {"发表于 " +
-                    moment.unix(postInfo.publishTime!).format("YYYY-MM-DD") +
+                    dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD") +
                     " |"}
                 </span>
               </div>
@@ -32,7 +37,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 <Icon icon="fa6-solid:calendar-days" />
                 <span className="post-meta-content">
                   {"更新于 " +
-                    moment
+                    dayjs
                       .unix(postInfo.lastUpdatedTime!)
                       .format("YYYY-MM-DD") +
                     " |"}

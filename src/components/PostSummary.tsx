@@ -9,7 +9,6 @@ export default function PostSummary({ slug }: { slug: string }) {
   const [summary, setSummary] = useState("正在加载中...");
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // 添加loading状态
   const isFirstMount = useRef(true);
   const typewriterTimeout = useRef<NodeJS.Timeout>(); // 用于清理打字机效果
 
@@ -31,12 +30,10 @@ export default function PostSummary({ slug }: { slug: string }) {
     }
   };
 
-  // 获取摘要的函数
-  const fetchSummary = async (isRefresh: boolean = false) => {
+  // 获取摘要（后端有缓存；首次访问时才真正生成）
+  const fetchSummary = async () => {
     const res = await fetch(
-      `${siteConfigs.backEndUrl}/get/post/postSummary?slug=${slug}${
-        isRefresh ? "&refresh=true" : ""
-      }`,
+      `${siteConfigs.backEndUrl}/get/post/postSummary?slug=${slug}`,
     );
 
     if (!res.ok) {
@@ -73,36 +70,11 @@ export default function PostSummary({ slug }: { slug: string }) {
     };
   }, [slug]);
 
-  // 刷新按钮点击处理
-  const handleRefresh = async () => {
-    // 防止重复点击
-    if (isLoading || isTyping) return;
-
-    setIsLoading(true);
-    setIsTyping(true);
-    setDisplayText("");
-
-    try {
-      const newSummary = await fetchSummary(true);
-      setSummary(newSummary);
-      typeWriter(newSummary);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="post-summary">
       <span className="post-summary-title">
         <Icon className="post-summary-icon" icon="octicon:dependabot-16" />
-        这是文章摘要！QwQ
-        <button
-          className={`post-summary-refreshbutton ${isLoading ? "loading" : ""}`}
-          onClick={handleRefresh}
-          disabled={isLoading || isTyping}
-        >
-          <Icon icon="octicon:sync-16" />
-        </button>
+        这是文章摘要！
       </span>
       <p
         className={`post-summary-content ${isTyping || displayText === "" ? "typing" : ""}`}

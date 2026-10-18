@@ -2,7 +2,7 @@ import "styles/Archives.css";
 import { siteConfigs } from "@/config";
 import { Post } from "@/interfaces/post";
 import Link from "next/link";
-import moment from "moment";
+import dayjs from "dayjs";
 import ImageWithFalldown from "@/components/ImageWithFalldown";
 import { Icon } from "@iconify/react";
 export default function ArchiveItem({
@@ -42,7 +42,7 @@ export default function ArchiveItem({
       </object>
       <span className="archive-item-date">
         <Icon icon="fa6-solid:calendar-days" />
-        {moment.unix(post.publishTime!).format("YYYY-MM-DD")}
+        {dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
       </span>
     </Link>
   );

@@ -9,6 +9,9 @@ export default function ImageWithFalldown({
   falldownImg,
   dataSrc,
   objectPosition = "center",
+  sizes = "100vw",
+  quality,
+  optimize = false,
 }: {
   className?: string;
   dataSrc?: string;
@@ -16,6 +19,10 @@ export default function ImageWithFalldown({
   alt: string;
   falldownImg?: string;
   objectPosition?: string;
+  sizes?: string;
+  quality?: number;
+  /** 只有小图才设为 true：走 Next 图片优化；大图保持直接引用原图 */
+  optimize?: boolean;
 }) {
   const [srcNow, setSrcNow] = useState(src);
   falldownImg =
@@ -27,6 +34,9 @@ export default function ImageWithFalldown({
       src={srcNow}
       data-src={dataSrc}
       overrideSrc={src}
+      sizes={sizes}
+      quality={quality}
+      unoptimized={!optimize}
       alt={alt}
       onError={() => {
         setSrcNow(falldownImg);

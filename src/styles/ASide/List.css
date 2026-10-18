@@ -1,4 +1,5 @@
 .aside-list-item-pic {
+  position: relative;
   width: 68px;
   min-width: 68px;
   height: 68px;

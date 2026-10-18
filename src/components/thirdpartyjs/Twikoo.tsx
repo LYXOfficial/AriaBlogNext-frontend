@@ -114,14 +114,14 @@ export function TwikooCountPost() {
     const tk = require("twikoo");
     tk.getCommentsCount({
       envId: siteConfigs.twikooEnv,
-      urls: [document.location.pathname, document.location.pathname + "/"],
+      urls: [document.location.pathname],
       includeReply: true,
     }).then((res: { count: number }[]) => {
       const commentCountElement = document.querySelector(
         ".post-commentcount>.post-meta-content",
       );
       if (commentCountElement) {
-        commentCountElement.textContent = `${res[0].count + res[1].count} 条评论`;
+        commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
       }
     });
   }, []);
@@ -136,16 +136,18 @@ export function TwikooCountHome() {
       document.querySelectorAll(".post-info").forEach((el) => {
         const postTitle = el.querySelector(".post-title") as HTMLAnchorElement;
         const hr = "/" + postTitle.href.split("/").slice(3).join("/");
+        // 注意：twikoo 会把 URL 结尾的斜杠归一化，同时传两种写法会返回同一个数，
+        // 相加会导致评论数翻倍，所以这里只查一次。
         tk.getCommentsCount({
           envId: siteConfigs.twikooEnv,
-          urls: [hr, hr + "/"],
+          urls: [hr],
           includeReply: true,
         }).then((res: { count: number }[]) => {
           const commentCountElement = el.querySelector(
             ".post-commentcount>.post-meta-content",
           );
           if (commentCountElement) {
-            commentCountElement.textContent = `${res[0].count + res[1].count} 条评论`;
+            commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
           }
         });
       });

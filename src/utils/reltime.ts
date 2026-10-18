@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default function relativeTime(timestamp: number) {
   let aftertime;
@@ -10,6 +10,6 @@ export default function relativeTime(timestamp: number) {
     aftertime = Math.floor((nowtime - timestamp) / 3600) + "小时前";
   else if (nowtime - timestamp < 604800)
     aftertime = Math.floor((nowtime - timestamp) / 86400) + "天前";
-  else aftertime = moment.unix(timestamp).format("yyyy-MM-DD");
+  else aftertime = dayjs.unix(timestamp).format("YYYY-MM-DD");
   return aftertime;
 }

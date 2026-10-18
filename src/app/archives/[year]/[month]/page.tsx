@@ -24,7 +24,7 @@ export default async function Page({
   });
   if (res.ok) {
     let Archives = new Map<number, Post[]>();
-    const data: ArchiveListItem[] = (await res.json()).data;
+    const data: ArchiveListItem[] = (await res.json()).data ?? [];
     let flag = false;
     await Promise.all(
       data.map(async (item: ArchiveListItem) => {
@@ -37,7 +37,7 @@ export default async function Page({
             { next: { revalidate: 7200, tags: ["posts"] } },
           );
           if (res.ok) {
-            const posts: Post[] = (await res.json()).data;
+            const posts: Post[] = (await res.json()).data ?? [];
             Archives.set(item.year, [
               ...(Archives.get(item.year) ?? []),
               ...posts,

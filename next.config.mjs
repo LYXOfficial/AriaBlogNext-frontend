@@ -16,7 +16,14 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    unoptimized: true,
+    // 只对「小图」开启优化（侧栏 68px 等），大图由组件显式设 unoptimized，
+    // 继续从自建图床直出，避免占用 Vercel 带宽
+    unoptimized: false,
+    formats: ["image/webp"],
+    qualities: [75, 90, 100],
+    imageSizes: [44, 68, 96, 136, 192, 256, 272, 384, 408],
+    minimumCacheTTL: 2678400,
+    dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
   },
   experimental: {
     scrollRestoration: false,

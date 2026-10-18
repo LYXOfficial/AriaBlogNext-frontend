@@ -1,7 +1,7 @@
 import "styles/ASide/global.css";
 import { Icon } from "@iconify/react";
 import ASideList from "components/asides/ASideList";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Post } from "interfaces/post";
 import { ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
@@ -26,7 +26,7 @@ export default async function CardRelatedPosts({ slug }: { slug: string }) {
             posts.map((item: Post) => {
               return {
                 title: item.title,
-                content: moment.unix(item.publishTime!).format("yyyy-MM-DD"),
+                content: dayjs.unix(item.publishTime!).format("YYYY-MM-DD"),
                 pic: item.bannerImg,
                 link: "/posts/" + item.slug,
               };

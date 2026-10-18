@@ -8,7 +8,7 @@ import { siteConfigs } from "@/config";
 import { Category } from "@/interfaces/category";
 import { Post } from "@/interfaces/post";
 import Link from "next/link";
-import moment from "moment";
+import dayjs from "dayjs";
 import ImageWithFalldown from "@/components/ImageWithFalldown";
 import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: Promise<{ tag: string }
   let data: Category[] = [];
   if (res.ok) {
     const Archives = new Map<string, Post[]>();
-    data = (await res.json()).data;
+    data = (await res.json()).data ?? [];
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
     await Promise.all(
       data.map(async (item: Category) => {
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ tag: string }
             { next: { revalidate: 7200, tags: ["posts"] } },
           );
           if (res.ok) {
-            const posts: Post[] = (await res.json()).data;
+            const posts: Post[] = (await res.json()).data ?? [];
             Archives.set(item.name, [
               ...(Archives.get(item.name) ?? []),
               ...posts,

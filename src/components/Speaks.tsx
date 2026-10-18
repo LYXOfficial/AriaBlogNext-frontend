@@ -5,7 +5,7 @@ import relativeTime from "@/utils/reltime";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import "styles/BB.css";
 import { ReactElement, useEffect, useState } from "react";
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";
 

@@ -38,7 +38,7 @@ export default function PostCategoryBar({
         ref={barRef}
         style={{ flexWrap: wrap ? "wrap" : "nowrap", rowGap: wrap ? 3 : 0 }}
       >
-        {data.map((item: Category) => {
+        {(data ?? []).map((item: Category) => {
           return (
             <Link
               className={`posts-categories-bar-item${item.name == current ? " current" : ""}`}
