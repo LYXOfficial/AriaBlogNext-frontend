@@ -249,7 +249,8 @@ html[data-home-manual-scroll] #navbar {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 99;
+  /* 高于文章波浪等正文装饰，低于顶栏和菜单，避免装饰穿透模糊层。 */
+  z-index: 1919809;
   pointer-events: none;
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 0;
