@@ -13,11 +13,7 @@
   -moz-border-radius: 12px !important;
   -ms-border-radius: 12px !important;
   -o-border-radius: 12px !important;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 #cf-state:hover,
@@ -54,7 +50,7 @@
 #cf-container > :nth-child(2) > * {
   margin: 10px 1%;
   font-weight: bolder;
-  transition: all ease-out 0.3s;
+  transition: all var(--ease-out) var(--dur-base);
   position: relative;
 }
 

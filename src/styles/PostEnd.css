@@ -24,7 +24,7 @@
   position: relative;
   margin: 2rem 0 0.5rem;
   padding: 0.5rem 0.8rem;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow var(--dur-base) var(--ease-in-out);
   overflow: hidden;
   border-radius: 12px !important;
   background-color: rgb(239 241 243);
@@ -80,11 +80,7 @@
   -o-border-radius: 20px;
   color: var(--aria-theme);
   border: 1px solid var(--aria-theme);
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
   font-size: 14px;
 }
 
@@ -145,10 +141,6 @@
   filter: blur(3px) saturate(180%);
   z-index: -1;
   -webkit-filter: blur(3px) saturate(180%);
-  -webkit-transition: 0.6s;
-  -moz-transition: 0.6s;
-  -ms-transition: 0.6s;
-  -o-transition: 0.6s;
 }
 
 .postend-navigation-headline {

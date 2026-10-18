@@ -7,10 +7,6 @@
   position: relative;
   background-color: #bebebe;
   transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -ms-transition: all 0.5s;
-  -o-transition: all 0.5s;
   /* mask-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%); */
 }
 
@@ -77,11 +73,7 @@
 }
 
 #post-banner .post-meta-content a {
-  transition: all 0.2s;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 #post-banner .post-meta-content a:hover {

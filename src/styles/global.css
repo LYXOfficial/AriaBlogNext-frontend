@@ -141,11 +141,7 @@ a.normal-a,
   color: var(--aria-fontcolor);
   padding: 4px;
   text-decoration: none;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
   word-wrap: break-word;
   position: relative;
   font-weight: 600;
@@ -184,11 +180,7 @@ a.normal-a,
   margin-bottom: 15px;
   border: var(--aria-border);
   background-color: var(--aria-acrylic2);
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
+  transition: all var(--dur-base) var(--ease-in-out);
 }
 
 .card-widget:hover {
@@ -320,4 +312,13 @@ body {
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
+}
+
+/* ---------- 动效令牌：统一时长与缓动 ---------- */
+:root {
+  --dur-fast: 140ms; /* hover、按下等即时反馈 */
+  --dur-base: 220ms; /* 展开、切换 */
+  --dur-slow: 420ms; /* 大范围位移（原本 >=0.4s 的动画保留原时长，不走此令牌） */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* 起步快、收尾缓 */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* 往返/循环 */
 }

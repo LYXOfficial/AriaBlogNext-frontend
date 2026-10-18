@@ -37,11 +37,7 @@
 }
 
 #twikoo a {
-  transition: 0.2s;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
-  -ms-transition: 0.2s;
-  -o-transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 #twikoo a:hover {

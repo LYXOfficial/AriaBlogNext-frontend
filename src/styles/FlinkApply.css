@@ -48,7 +48,7 @@
   border: var(--aria-border);
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-mode:hover {
@@ -108,8 +108,7 @@
   cursor: pointer;
   outline: none; /* 去掉浏览器默认的黑框 */
   transition:
-    background-color 0.15s,
-    border-color 0.15s;
+    background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
 
 .flink-apply input[type="checkbox"]:focus-visible {
@@ -171,7 +170,7 @@
   border: var(--aria-border);
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-field textarea {
@@ -204,7 +203,7 @@
   -webkit-appearance: none;
   appearance: none;
   overflow: hidden;
-  transition: border-color 0.2s, transform 0.15s;
+  transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
 
 .flink-apply-color input[type="color"]:hover {
@@ -249,7 +248,7 @@
   border-radius: 14px;
   cursor: pointer;
   white-space: nowrap;
-  transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-pick:hover:not(:disabled) {
@@ -277,7 +276,7 @@
   border: var(--aria-border);
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-combo > input:focus {
@@ -346,7 +345,7 @@
   border: 1px solid var(--aria-theme);
   border-radius: 14px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-smart-head button:hover:not(:disabled) {
@@ -370,7 +369,7 @@
   outline: none;
   resize: vertical;
   line-height: 1.5;
-  transition: border-color 0.2s;
+  transition: border-color var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-smart textarea:focus {
@@ -406,7 +405,7 @@
   color: #fff;
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-  transition: background-color 0.25s;
+  transition: background-color var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-card-avatar {
@@ -479,7 +478,7 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-submit:hover:not(:disabled) {
@@ -553,7 +552,7 @@
   border: 1px solid var(--aria-theme);
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-query-row button:hover:not(:disabled) {
@@ -635,7 +634,7 @@
   border: 1px solid var(--aria-theme);
   border-radius: 14px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .flink-apply-record-actions button:hover {

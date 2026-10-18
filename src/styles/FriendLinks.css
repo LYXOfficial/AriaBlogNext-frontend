@@ -22,7 +22,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
 
 .flink-item:hover {

@@ -43,11 +43,7 @@
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
-  transition: 0.2s;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
-  -ms-transition: 0.2s;
-  -o-transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .posts-categories-bar-item:hover,
@@ -65,7 +61,7 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  transition: 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 #posts-categories-bar svg:hover {

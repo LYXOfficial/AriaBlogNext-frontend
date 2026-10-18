@@ -18,10 +18,6 @@
 #post-maincontent h5,
 #post-maincontent h6 {
   transition: transform 0.4s;
-  -webkit-transition: transform 0.4s;
-  -moz-transition: transform 0.4s;
-  -ms-transition: transform 0.4s;
-  -o-transition: transform 0.4s;
   padding-left: 24px;
   position: relative;
   scroll-margin-top: 70px;
@@ -209,11 +205,7 @@ table:not(code table) {
 
   :is(.hljs-copy, .hljs-wrapper) svg path {
     fill: #848484;
-    transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
+    transition: all var(--dur-base) var(--ease-out);
   }
 }
 
@@ -232,7 +224,7 @@ table:not(code table) {
 
   :is(.hljs-wrapper, .hljs-copy) svg path {
     fill: #b7bec9;
-    transition: all 0.3s;
+    transition: all var(--dur-base) var(--ease-out);
   }
 }
 
@@ -292,7 +284,7 @@ table:not(code table) {
   content: "\f105";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
   transform: rotate(180deg);
   position: absolute;
   right: 20px;
@@ -318,11 +310,7 @@ table:not(code table) {
   border: none;
   background-color: transparent;
   font-size: 16px;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .hljs-wrapper {
@@ -407,11 +395,7 @@ table:not(code table) {
   grid-template-columns: 80px calc(100% - 80px);
   height: 100px;
   padding: 5px;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
   position: relative;
 }
 
@@ -533,7 +517,7 @@ table:not(code table) {
   height: 100%;
   background-color: #fff4;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity var(--dur-base) var(--ease-in-out);
 }
 
 .etag-folding-summary:hover::after {
@@ -766,10 +750,6 @@ table:not(code table) {
   color: var(--aria-fontcolor);
   font-size: 16px;
   transition: 0.5s;
-  -webkit-transition: 0.5s;
-  -moz-transition: 0.5s;
-  -ms-transition: 0.5s;
-  -o-transition: 0.5s;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -797,11 +777,7 @@ table:not(code table) {
   height: 2px;
   background-color: var(--aria-theme);
   opacity: 0;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .etag-tab-header.active::before {
@@ -936,11 +912,7 @@ pre.hljs.wrap {
   left: 50%;
   transform: translateX(-50%);
   /* 只过渡透明度：水平/垂直的位置纠偏由 JS 即时设置，跟着动画会滑动 */
-  transition: opacity 0.3s;
-  -webkit-transition: opacity 0.3s;
-  -moz-transition: opacity 0.3s;
-  -ms-transition: opacity 0.3s;
-  -o-transition: opacity 0.3s;
+  transition: opacity var(--dur-base) var(--ease-out);
   width: max-content;
   background-color: #4d4d4d;
   color: white;
@@ -1034,11 +1006,7 @@ span[style="undefined:invert"] {
   background-color: black;
   text-decoration: none;
   color: black;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
   margin: 0 5px;
 }
 

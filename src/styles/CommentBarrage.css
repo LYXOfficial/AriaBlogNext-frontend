@@ -87,15 +87,11 @@
 
 #barrage-container {
   transition: all 0.7s;
-  -webkit-transition: all 0.7s;
-  -moz-transition: all 0.7s;
-  -ms-transition: all 0.7s;
-  -o-transition: all 0.7s;
 }
 
 .comment-barrage-item:hover {
   border: 1px solid var(--aria-theme);
-  transition: all 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 @media screen and (max-width: 768px) {
@@ -105,11 +101,7 @@
 }
 
 .comment-barrage-item a {
-  transition: 0.2s;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
-  -ms-transition: 0.2s;
-  -o-transition: 0.2s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 
 .comment-barrage-item a:hover {
