@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { siteConfigs } from "@/config";
 import { parseFlinkText } from "@/utils/flinkParse";
+import { ensureCardColor, extractThemeColorFromImage } from "@/utils/themeColor";
 import "styles/FlinkApply.css";
 
 // 申请须知：逐条勾选后才能提交
 const RULES = [
   "请先添加本站友链，特殊情况可以宽容",
-  "除非特殊情况千万不要发送评论，这只会给博主陡增麻烦；如果确实无法提交或有特殊诉求请在留言板留言",
-  "确保你的网站内容健康，无不良、违法信息且页面广告不能过多，资源站、推广站审核会更严格",
+  "除非特殊情况不要在留言板发送评论，这只会给博主陡增麻烦；如果确实无法提交或有特殊诉求请在留言板留言",
+  "确保你的网站内容健康，无不良、违法信息，拥护中华人民共和国宪法和法律法规，遵循正确价值观，拥护中国共产党领导，拥护中国特色社会主义制度，严禁煽动国家分裂、民族仇恨、和平演变言论",
+  "页面广告不能过多，资源站、推广站审核会更严格",
   "如果使用 eu.org、freenom、.pp.ua、.github.io、.vercel.app、.netlify.app 等免费域名，审核将会更加严格",
   "确保网站可以在境内正常访问，排版样式没有出现问题",
   "若你的网站长期无法访问，则我有权单方面删除友链",
@@ -80,6 +82,9 @@ export default function FlinkApply() {
   const [linkActive, setLinkActive] = useState(-1);
   // 智能识别
   const [smartText, setSmartText] = useState("");
+  // 取色：用户没手动改过颜色时才自动跟随头像
+  const [colorAuto, setColorAuto] = useState(true);
+  const [picking, setPicking] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(
     null,
@@ -98,6 +103,8 @@ export default function FlinkApply() {
   const allChecked = checked.every(Boolean);
   // 修改已收录友链无需勾选须知；编辑待审申请时也无需重复勾选
   const needCheck = mode === 0 && !editing;
+  // 手动选的颜色原样使用；只有「从头像取色」得到的颜色才会自动压深
+  const previewColor = form.color.trim() || "#888888";
   const filteredLinks = (existing ?? [])
     .filter((item) =>
       !linkQuery.trim() || item.label.toLowerCase().includes(linkQuery.trim().toLowerCase()),
@@ -139,6 +146,85 @@ export default function FlinkApply() {
     };
   }, [mode, existing]);
 
+  // 头像变化后自动提取主题色（用户手动改过颜色就不再覆盖）
+  useEffect(() => {
+    if (!colorAuto) return;
+    const url = form.avatar.trim();
+    if (!/^https?:\/\//i.test(url)) return;
+    let alive = true;
+    const timer = window.setTimeout(async () => {
+      setPicking(true);
+      try {
+        const color = await extractThemeColorFromImage(url);
+        if (alive && color) {
+          setForm((prev) =>
+            prev.avatar.trim() === url ? { ...prev, color: ensureCardColor(color) } : prev,
+          );
+        }
+      } catch {
+        /* 取色失败就保持原色 */
+      } finally {
+        if (alive) setPicking(false);
+      }
+    }, 800);
+    return () => {
+      alive = false;
+      window.clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.avatar, colorAuto]);
+
+  /** 手动改颜色后不再自动覆盖 */
+  const setColorManually = (value: string) => {
+    setColorAuto(false);
+    set("color")(value);
+  };
+
+  /** 手动触发取色 */
+  async function pickColorNow() {
+    const url = form.avatar.trim();
+    if (!/^https?:\/\//i.test(url)) {
+      setMessage({ ok: false, text: "请先填写头像链接，才能从头像取色" });
+      return;
+    }
+    setPicking(true);
+    try {
+      const color = await extractThemeColorFromImage(url);
+      if (color) {
+        setColorAuto(true);
+        set("color")(color);
+        setMessage({ ok: true, text: `已从头像取色：${color}` });
+      } else {
+        setMessage({
+          ok: false,
+          text: "这张头像取不到颜色（可能是黑白线稿，或对方不允许跨域读取像素）",
+        });
+      }
+    } catch {
+      // 图片加载失败/超时：不要让 Promise 泄漏成未捕获异常
+      setMessage({ ok: false, text: "头像图片打不开，无法取色（可检查链接或稍后重试）" });
+    } finally {
+      setPicking(false);
+    }
+  }
+
+  /** 与选中的现网友链相比是否完全没变（修改申请不该提交这种） */
+  function sameAsCurrent(item: ExistingLink): boolean {
+    const text = (v: string) => (v || "").trim();
+    const url = (v: string) => {
+      const s = text(v);
+      return s.endsWith("/") ? s.slice(0, -1) : s;
+    };
+    const color = (v: string) => (text(v) || "#888888").toLowerCase();
+    return (
+      text(item.name) === text(form.name) &&
+      url(item.url) === url(form.link) &&
+      text(item.avatar) === text(form.avatar) &&
+      text(item.descr) === text(form.descr) &&
+      color(item.color) === color(form.color)
+    );
+  }
+
   function localValidate(): string {
     if (mode === 1 && !targetUrl && !editing) return "请先在列表里选择要修改的友链";
     if (!form.name.trim()) return "请填写站点名称";
@@ -171,6 +257,18 @@ export default function FlinkApply() {
       setMessage({ ok: false, text: invalid });
       return;
     }
+
+    // 修改申请：内容和现网完全一致就不让提交
+    if (mode === 1 && !editing && targetUrl) {
+      const current = existing?.find((item) => item.url === targetUrl);
+      if (current && sameAsCurrent(current)) {
+        setMessage({
+          ok: false,
+          text: "内容与当前友链完全一致，没有需要修改的地方",
+        });
+        return;
+      }
+    }
     setBusy(true);
     setMessage(null);
     try {
@@ -199,9 +297,7 @@ export default function FlinkApply() {
       const data = await res.json().catch(() => null);
       if (res.ok) {
         const emailUsed = (editing?.email || form.email).trim();
-        setChecked(new Array(RULES.length).fill(false));
-        setForm({ ...EMPTY_FORM });
-        setTargetUrl("");
+        // 提交成功后保留已填内容，方便继续修改或再次提交
         if (editing) {
           setEditing(null);
           setMessage({ ok: true, text: "修改已保存，仍在等待审核" });
@@ -268,6 +364,7 @@ export default function FlinkApply() {
 
   /** 选中已收录友链：记住目标地址，并把当前信息同步进表单 */
   function chooseExisting(item: ExistingLink) {
+    setColorAuto(false); // 尊重对方已有配色，不自动覆盖
     setTargetUrl(item.url);
     setLinkQuery(item.label);
     setLinkOpen(false);
@@ -278,7 +375,7 @@ export default function FlinkApply() {
       link: item.url,
       avatar: item.avatar || prev.avatar,
       descr: item.descr || "",
-      color: item.color || prev.color,
+      color: item.color || "#888888",
     }));
     setMessage(null);
   }
@@ -302,6 +399,7 @@ export default function FlinkApply() {
   }
 
   function startEdit(record: ApplyRecord) {
+    setColorAuto(false); // 尊重已提交的配色
     setEditing({ id: record.id, email: record.email || queryEmail });
     setMode(record.type === 1 ? 1 : 0);
     setForm({
@@ -557,16 +655,64 @@ export default function FlinkApply() {
                   ? form.color
                   : "#888888"
               }
-              onChange={(e) => set("color")(e.target.value)}
+              onChange={(e) => setColorManually(e.target.value)}
             />
             <input
               type="text"
               placeholder="#ff88aa"
               value={form.color}
-              onChange={(e) => set("color")(e.target.value)}
+              onChange={(e) => setColorManually(e.target.value)}
             />
+            <button
+              type="button"
+              className="flink-apply-pick"
+              onClick={pickColorNow}
+              disabled={picking}
+              title="根据头像自动提取主题色"
+            >
+              {picking ? "取色中…" : "从头像取色"}
+            </button>
           </span>
         </label>
+      </div>
+
+      <div className="flink-apply-preview">
+        <div className="flink-apply-preview-head">
+          <Icon icon="fa6-solid:eye" />
+          效果预览
+        </div>
+        <div
+          className="flink-apply-card"
+          style={{
+            backgroundColor: previewColor,
+            background: `color-mix(in srgb, ${previewColor}, transparent 25%)`,
+          }}
+        >
+          <span className="flink-apply-card-avatar">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={form.avatar.trim() || siteConfigs.falldownAvatar}
+              alt=""
+              onError={(e) => {
+                const img = e.currentTarget;
+                if (!img.src.endsWith(siteConfigs.falldownAvatar)) {
+                  img.src = siteConfigs.falldownAvatar;
+                }
+              }}
+            />
+          </span>
+          <span className="flink-apply-card-body">
+            <span className="flink-apply-card-name">
+              {form.name.trim() || "站点名称"}
+            </span>
+            <span className="flink-apply-card-desc">
+              {form.descr.trim() || "站点描述"}
+            </span>
+          </span>
+          <span className="flink-apply-card-status">
+            <Icon icon="system-uicons:signal-full" />
+          </span>
+        </div>
       </div>
 
       <div className="flink-apply-actions">

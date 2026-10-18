@@ -6,6 +6,7 @@ import { siteConfigs } from "@/config";
 import { LazyImageWithFalldown } from "./ImageWithFalldown";
 
 export function FriendLinkItem({ link }: { link: FriendLink }) {
+  const cardColor = link.color ?? "#888888";
   let latencyIcon: ReactElement = <></>;
   if (link.latency! > 0) {
     if (link.latency! <= 1)
@@ -30,8 +31,8 @@ export function FriendLinkItem({ link }: { link: FriendLink }) {
       <style>
         {`
                     #flink-${link.id}{
-                        background-color:${link.color ?? "#888888"};
-                        background-color:color-mix(in srgb,${link.color ?? "#888888"},transparent 25%);
+                        background-color:${cardColor};
+                        background-color:color-mix(in srgb,${cardColor},transparent 25%);
                         color:white;
                     }
                 `}
