@@ -82,10 +82,14 @@ export function TwikooBaseComment() {
         // twikoo 2.x 新增了前端 i18n，不指定就跟浏览器语言走（1.6 没有这个行为）。
         // 本站界面全中文，固定下来避免英文浏览器看到英文评论框。
         lang: "zh-CN",
+      }).catch((error: unknown) => {
+        // init 返回 Promise，同步 try/catch 接不住网络或跨域失败。
+        console.warn("评论加载失败", error);
+        setTkloadState("评论暂时加载失败，可以刷新页面或稍后再试");
       });
       owoBig();
     } catch (e) {
-      setTkloadState("加载失败，请检查配置");
+      setTkloadState("评论暂时加载失败，可以刷新页面或稍后再试");
     }
 
     return () => {
@@ -116,14 +120,15 @@ export function TwikooCountPost() {
       envId: siteConfigs.twikooEnv,
       urls: [document.location.pathname],
       includeReply: true,
-    }).then((res: { count: number }[]) => {
+    }).then((res: { count: number }[] | undefined) => {
+      if (!Array.isArray(res)) return;
       const commentCountElement = document.querySelector(
         ".post-commentcount>.post-meta-content",
       );
       if (commentCountElement) {
         commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
       }
-    });
+    }).catch((error: unknown) => console.warn("评论计数获取失败", error));
   }, []);
 
   return null;
@@ -142,14 +147,15 @@ export function TwikooCountHome() {
           envId: siteConfigs.twikooEnv,
           urls: [hr],
           includeReply: true,
-        }).then((res: { count: number }[]) => {
+        }).then((res: { count: number }[] | undefined) => {
+          if (!Array.isArray(res)) return;
           const commentCountElement = el.querySelector(
             ".post-commentcount>.post-meta-content",
           );
           if (commentCountElement) {
             commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
           }
-        });
+        }).catch((error: unknown) => console.warn("评论计数获取失败", error));
       });
 
       const rest = await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`, {
@@ -157,36 +163,31 @@ export function TwikooCountHome() {
       });
       const pages = [
         "/messageboard",
-        "/messageboard/",
         "/speaks",
-        "/speaks/",
         "/about",
-        "/about/",
         "/links",
-        "/links/",
       ];
       if (rest.ok) {
         const postSlugs = (await rest.json()).data as string[];
         tk.getCommentsCount({
           envId: siteConfigs.twikooEnv,
-          urls: postSlugs
-            .map((slug) => `/posts/${slug}`)
-            .concat(postSlugs.map((slug) => `/posts/${slug}/`))
-            .concat(pages),
+          // 服务端会归一化尾斜杠，总数也只能对每个页面计数一次。
+          urls: [...new Set(postSlugs.map((slug) => `/posts/${slug}`).concat(pages))],
           includeReply: true,
-        }).then((res: { count: number }[]) => {
+        }).then((res: { count: number }[] | undefined) => {
+          if (!Array.isArray(res)) return;
           const webinfoCommentCountElement = document.querySelector(
             ".card-webinfo-item-right.commentcount",
           );
           if (webinfoCommentCountElement) {
             webinfoCommentCountElement.textContent = res
               .map((r) => r.count)
-              .reduce((a, b) => a + b)
+              .reduce((a, b) => a + b, 0)
               .toString();
           }
-        });
+        }).catch((error: unknown) => console.warn("评论总数获取失败", error));
       }
-    })();
+    })().catch((error: unknown) => console.warn("评论计数加载失败", error));
   }, []);
 
   return null;

@@ -23,7 +23,7 @@ export default function PostSummary({ slug }: { slug: string }) {
       setDisplayText((prev) => prev + text.charAt(index));
       typewriterTimeout.current = setTimeout(
         () => typeWriter(text, index + 1),
-        50,
+        30,
       );
     } else {
       setIsTyping(false);

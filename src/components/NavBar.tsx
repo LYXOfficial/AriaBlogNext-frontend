@@ -8,6 +8,7 @@ import { useRouter } from "nextjs-toploader/app";
 import throttle from "lodash/throttle";
 import { usePathname } from "next/navigation";
 import SearchBox from "components/SearchBox";
+import MenuButtons from "components/MenuButtons";
 import { MenuItem, MenuItemChild } from "@/interfaces/menuitem";
 import React from "react";
 
@@ -18,9 +19,19 @@ export default function NavBar() {
   const [searchBoxShow, setSearchBoxShow] = useState(false);
   const pathName = usePathname();
   const scrollHandler = throttle(() => {
+    if (window.location.pathname === "/") {
+      const banner = document.querySelector("[data-home-banner]");
+      const content = document.getElementById("main-container");
+      setTrans(!!banner && (content
+        ? content.getBoundingClientRect().top > 80
+        : banner.getBoundingClientRect().bottom > 62));
+      setOnTop(!!content && content.getBoundingClientRect().top >= 70);
+      return;
+    }
+    const hasBanner = window.location.pathname.startsWith("/posts/");
     if (window.innerWidth <= 768) {
       setOnTop(true);
-      if (document.location.href.includes("/posts/")) {
+      if (hasBanner) {
         if (document.documentElement.scrollTop < 60) {
           setTrans(true);
         } else {
@@ -31,7 +42,7 @@ export default function NavBar() {
       }
       return;
     }
-    if (document.location.href.includes("/posts/")) {
+    if (hasBanner) {
       setOnTop(false);
       if (document.documentElement.scrollTop < 60) {
         setTrans(true);
@@ -67,9 +78,22 @@ export default function NavBar() {
   useEffect(scrollHandler, [pathName]);
   const [hoveringElement, setHoveringElement] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathName]);
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        setSearchBoxShow(false);
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
   return (
     <>
-      <nav id="navbar" className={trans ? "trans" : onTop ? "ontop" : ""}>
+      <nav id="navbar" data-home={pathName === "/" ? "true" : undefined} className={trans ? "trans" : onTop ? "ontop" : ""}>
         <Link id="site-name" href="/">
           <img
             id="site-name-icon"
@@ -84,7 +108,13 @@ export default function NavBar() {
             className={
               mobileMenuOpen ? "mobile-menu-open" : "mobile-menu-close"
             }
+            onClick={(event) => {
+              if ((event.target as Element).closest("a")) setMobileMenuOpen(false);
+            }}
           >
+            <div className="mobile-menu-heading">
+              <span>去哪里逛逛？</span>
+            </div>
             {MenuItems.map((item) => {
               return (
                 <div
@@ -145,48 +175,17 @@ export default function NavBar() {
           </div>
         </div>
         <div id="menu-buttons">
-          <button
-            className="menu-button"
-            title="搜索"
-            onClick={() => {
-              setSearchBoxShow(!searchBoxShow);
-              setTimeout(() => {
-                document.getElementById("search-box-input")?.focus();
-              }, 10);
-            }}
-          >
-            <Icon icon="fa6-solid:magnifying-glass" />
-          </button>
-          <button
-            className="menu-button"
-            title="随便逛逛"
-            onClick={() => {
-              (window as any).toRandomPost();
-            }}
-          >
-            <Icon icon="fa6-solid:paper-plane" />
-          </button>
-          <button
-            className="menu-button"
-            title="开往"
-            onClick={() => {
-              window.location.href = "https://travellings.cn/go.html";
-            }}
-          >
-            <Icon icon="fa6-solid:train-subway" />
-            <a
-              href="https://www.travellings.cn/go.html"
-              style={{ display: "none" }}
-            ></a>
-          </button>
+          <div id="nav-menu-buttons-slot" aria-hidden="true" />
           <button
             className="menu-button menu-button-mobmenu"
-            title="展开菜单"
+            title={mobileMenuOpen ? "收起菜单" : "展开菜单"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="menu-items"
             onClick={() => {
               setMobileMenuOpen(!mobileMenuOpen);
             }}
           >
-            <Icon icon="fa6-solid:bars" />
+            <Icon icon={mobileMenuOpen ? "fa6-solid:xmark" : "fa6-solid:bars"} />
           </button>
         </div>
       </nav>
@@ -196,6 +195,16 @@ export default function NavBar() {
         onClick={() => {
           setMobileMenuOpen(false);
         }}
+      />
+      <MenuButtons
+        pathname={pathName}
+        transparent={trans}
+        hidden={false}
+        onSearch={() => {
+          setSearchBoxShow(true);
+          setTimeout(() => document.getElementById("search-box-input")?.focus(), 10);
+        }}
+        onRandom={() => (window as any).toRandomPost()}
       />
       <SearchBox show={searchBoxShow} closeFunction={setSearchBoxShow} />
     </>

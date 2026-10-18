@@ -19,12 +19,19 @@ export default function PostCategoryBar({
   const barRef = useRef<HTMLDivElement>(null);
   const currentRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
-    if (!wrap)
-      barRef.current?.addEventListener("wheel", (e: WheelEvent) => {
-        e.stopPropagation();
-        e.preventDefault();
-        barRef.current!.scrollLeft += e.deltaY;
-      });
+    const bar = barRef.current;
+    if (wrap || !bar) return;
+    const onWheel = (event: WheelEvent) => {
+      // 缩放手势交给浏览器；其余滚轮即使到达两端，也不穿透到页面。
+      if (event.ctrlKey || event.metaKey) return;
+      event.stopPropagation();
+      event.preventDefault();
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      const scale = event.deltaMode === 1 ? 20 : event.deltaMode === 2 ? bar.clientWidth : 1;
+      bar.scrollBy({ left: delta * scale, behavior: "instant" });
+    };
+    bar.addEventListener("wheel", onWheel, { passive: false });
+    return () => bar.removeEventListener("wheel", onWheel);
   }, [wrap]);
   return (
     <div id="posts-categories-bar" className="card-widget">

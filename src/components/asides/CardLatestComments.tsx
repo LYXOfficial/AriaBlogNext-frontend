@@ -9,29 +9,31 @@ import { useEffect, useState } from "react";
 
 export default function CardLatestComments() {
   const [comments, setComments] = useState<TwikooCommentItem[]>([]);
+  const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   useEffect(() => {
+    let cancelled = false;
     (async () => {
-      const twikoo = require("twikoo");
-      const res: TwikooCommentItem[] = await new Promise((resolve, reject) => {
-        try {
-          twikoo
-            .getRecentComments({
-              envId: siteConfigs.twikooEnv,
-              region: "",
-              pageSize: 5,
-              includeReply: true,
-            })
-            .then((res: TwikooCommentItem[]) => {
-              resolve(res);
-            });
-        } catch (e) {
-          resolve([{}]);
+      try {
+        const twikoo = require("twikoo");
+        // 网络失败会异步拒绝，不能用只处理 then 的 Promise 包装，否则一直停在加载中。
+        const res = await twikoo.getRecentComments({
+          envId: siteConfigs.twikooEnv,
+          region: "",
+          pageSize: 5,
+          includeReply: true,
+        });
+        if (!Array.isArray(res)) throw new Error("评论数据格式异常");
+        if (!cancelled) {
+          setComments(res);
+          setStatus("success");
         }
-      });
-      setComments(res);
+      } catch (error) {
+        console.warn("最新评论获取失败", error);
+        if (!cancelled) setStatus("error");
+      }
     })();
     return () => {
-      setComments([]);
+      cancelled = true;
     };
   }, []);
   return (
@@ -41,7 +43,11 @@ export default function CardLatestComments() {
         <span className="card-title">最新评论</span>
       </div>
       <div className="card-body">
-        {comments.length == 5 ? (
+        {status === "loading" ? (
+          <center>获取中...</center>
+        ) : status === "error" ? (
+          <center>评论暂时获取失败，可以刷新页面或稍后再试</center>
+        ) : comments.length ? (
           <ASideList
             items={
               comments.map((item: TwikooCommentItem | undefined) => {
@@ -60,10 +66,8 @@ export default function CardLatestComments() {
             }
             falldownImg={siteConfigs.falldownAvatar}
           />
-        ) : comments.length ? (
-          <center>评论获取失败，请检查相关配置是否正确</center>
         ) : (
-          <center>获取中...</center>
+          <center>还没有评论，来留下第一条吧</center>
         )}
       </div>
     </div>

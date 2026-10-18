@@ -4,7 +4,7 @@
 
 .homespeaks-slide {
   line-height: 30px;
-  font-size: 18px;
+  font-size: 15px;
   display: flex;
 }
 
@@ -31,8 +31,9 @@
 #homespeaks-container {
   width: 100%;
   display: flex;
-  padding: 10px 20px;
-  min-height: 30px;
+  box-sizing: border-box;
+  height: 50px;
+  padding: 9px 20px;
   animation: homespeaks-container-animation 0.8s;
   -webkit-animation: homespeaks-container-animation 0.8s;
   -moz-animation: homespeaks-container-animation 1s ease-in-out;
@@ -63,4 +64,64 @@
 
 .homespeaks-item:hover {
   color: var(--aria-theme);
+}
+
+/* 首屏直接透出背景，不沿用正文卡片的不透明底色和入场位移。 */
+#homespeaks-container.homespeaks-glass {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 9px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 22px;
+  color: #fff;
+  background: rgba(23, 31, 45, 0.215);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  backdrop-filter: blur(20px) saturate(130%);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.16), inset 0 1px rgba(255, 255, 255, 0.08);
+  animation: none;
+}
+
+.homespeaks-glass .homespeaks-icon {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.homespeaks-glass .homespeaks-item {
+  color: inherit;
+  /* 阴影单独用慢速对称缓动，避免快速起效的短过渡看起来像瞬间发亮。 */
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0);
+  transition:
+    color var(--dur-base) var(--ease-out),
+    text-shadow var(--dur-slow) var(--ease-in-out);
+  text-align: left;
+  padding-inline: 10px;
+  box-sizing: border-box;
+}
+
+.homespeaks-glass .homespeaks-item:hover {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+.homespeaks-glass .homespeaks-item:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  #homespeaks-container.homespeaks-glass {
+    padding: 9px 14px;
+    border-radius: 18px;
+  }
+
+  .homespeaks-glass .homespeaks-slide {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #homespeaks-container.homespeaks-glass {
+    background: rgba(14, 20, 33, 0.29);
+  }
 }

@@ -9,6 +9,43 @@
   box-sizing: border-box;
   margin-bottom: 0;
   width: 0;
+  /* width: 0 + flex-grow 让正文占满剩余宽度；但 flex 项的默认 min-width: auto
+     会被不可断行的内容撑开，进而把整页顶宽。显式归零才是真正的收缩。 */
+  min-width: 0;
+}
+
+#post-maincontent {
+  /* 长链接、连续英文或数字不能换行时会横向撑开正文 */
+  overflow-wrap: anywhere;
+}
+
+/* 公式不可按普通文字断行；限制公式自身宽度并允许横向滚动，避免盖住侧栏。
+   行内公式也可能很长，不能只处理 .katex-display。 */
+#post-maincontent .katex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+  padding-block: 0.2em;
+  box-sizing: border-box;
+  overflow-wrap: normal;
+}
+
+#post-maincontent .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.2em;
+}
+
+/* 居中只作用于可容纳的公式；超宽时从左端开始，保证开头也能滚动查看。 */
+#post-maincontent .katex-display > .katex {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+  overflow: visible;
 }
 
 #post-maincontent h1,
@@ -903,7 +940,13 @@ pre.hljs.wrap {
   position: relative;
   border-bottom: 2px dashed #a8a8a8;
   cursor: pointer;
-  margin-right: 14px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.etag-prompt:focus-visible {
+  outline: 2px solid var(--aria-theme);
+  outline-offset: 3px;
 }
 
 .etag-prompt-tooltip {
@@ -946,6 +989,7 @@ pre.hljs.wrap {
 
 .etag-prompt-tooltip.hide {
   opacity: 0;
+  visibility: hidden;
 }
 
 .etag-prompt-tooltip.show {
@@ -964,14 +1008,13 @@ pre.hljs.wrap {
   border-color: transparent transparent #4d4d4d transparent;
 }
 
-.etag-prompt::after {
-  content: "\f059";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 12px;
-  position: absolute;
-  top: -6px;
-  right: -15px;
+.etag-prompt-icon {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  margin-left: 0.15em;
+  vertical-align: 0.08em;
+  color: currentColor;
 }
 
 span[style="undefined:invert"] {

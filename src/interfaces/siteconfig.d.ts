@@ -11,6 +11,12 @@ export declare interface SiteConfig {
   createMonth: number;
   twikooEnv: string;
   siteUrl: string;
+  homeBanner: {
+    images: string[];
+    welcome: string;
+    welcomeUrl: string;
+    headline: string[];
+  };
   homeMaxPosts: number;
   pageMaxPosts: number;
   backEndUrl: string;

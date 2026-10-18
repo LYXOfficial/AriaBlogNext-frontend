@@ -12,7 +12,13 @@ import "swiper/css/mousewheel";
 import "styles/HomeSpeaks.css";
 import Link from "next/link";
 
-export default function HomeSpeaks({ speaksContent }: { speaksContent: BB[] }) {
+export default function HomeSpeaks({
+  speaksContent,
+  variant = "card",
+}: {
+  speaksContent: BB[];
+  variant?: "card" | "banner";
+}) {
   const [speaks, setSpeaks] = useState<ReactElement>(<></>);
   useEffect(() => {
     setSpeaks(
@@ -44,7 +50,11 @@ export default function HomeSpeaks({ speaksContent }: { speaksContent: BB[] }) {
     );
   }, []);
   return (
-    <div id="homespeaks-container" className="card-widget">
+    <div
+      id="homespeaks-container"
+      className={variant === "banner" ? "homespeaks-glass" : "card-widget"}
+      aria-label="最新说说"
+    >
       <Icon
         icon="mdi:comment"
         className="homespeaks-icon left"

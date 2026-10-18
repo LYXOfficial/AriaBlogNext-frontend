@@ -5,6 +5,8 @@
   left: 0;
   z-index: 1919810;
   height: 60px;
+  /* 全宽 + 边框在 content-box 下会多出 2px，右侧露出页面外 */
+  box-sizing: border-box;
   background-color: var(--aria-acrylic2);
   backdrop-filter: blur(5px) saturate(180%);
   transition: 0.5s;
@@ -14,6 +16,19 @@
   border: var(--aria-border);
   border-radius: 30px;
   box-shadow: 0 0 20px var(--aria-shadow-color);
+}
+
+/* On the homepage, resizing the navigation must never resize document flow. */
+#navbar[data-home="true"] {
+  box-sizing: border-box;
+  height: 62px;
+  min-height: 62px;
+  transition: background-color 0.35s, box-shadow 0.35s,
+    border-color 0.35s, border-radius 0.35s, transform 0.35s;
+}
+
+html[data-home-manual-scroll] #navbar {
+  transition: none;
 }
 
 #site-name,
@@ -30,7 +45,7 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  transition: all var(--dur-base) var(--ease-out);
+  transition: all var(--dur-slow) var(--ease-out);
   border: none;
   background-color: transparent;
 }
@@ -97,7 +112,7 @@
   margin-right: 20px;
   display: flex;
   border-radius: 12px;
-  transition: all var(--dur-base) var(--ease-out);
+  transition: all var(--dur-slow) var(--ease-out);
   cursor: pointer;
 }
 
@@ -112,7 +127,7 @@
 }
 
 .site-page-childs {
-  transition: all var(--dur-base) var(--ease-out);
+  transition: all var(--dur-slow) var(--ease-out);
   position: absolute;
   display: flex;
   gap: 5px;
@@ -156,7 +171,7 @@
   padding: 8px;
   list-style: none;
   border-radius: 8px;
-  transition: all var(--dur-base) var(--ease-out);
+  transition: all var(--dur-slow) var(--ease-out);
   flex-wrap: nowrap;
   display: flex;
 }
@@ -261,77 +276,293 @@
   }
 }
 
+/* 桌面入口与下拉面板独立于手机浮层，避免断点间互相覆盖。 */
+@media screen and (min-width: 769px) {
+  /* 父级滤镜会建立 backdrop root，令伸出顶栏的子菜单无法模糊页面。
+     将顶栏模糊放到独立背景层，不限制下拉面板的背景采样。 */
+  html #navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  #navbar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(5px) saturate(180%);
+    backdrop-filter: blur(5px) saturate(180%);
+  }
+  #navbar.trans::before { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  #menu-items { gap: 6px; align-items: center; }
+  #menu-items .menu-item { font-size: 18px; }
+  #menu-items .site-page {
+    margin: 0;
+    padding: 7px 12px;
+    gap: 7px;
+    align-items: center;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background-color var(--dur-slow) var(--ease-in-out);
+  }
+  #menu-items .site-page > * { margin: 0; }
+  #menu-items .site-page svg { width: 20px; height: 20px; }
+  #menu-items .menu-item:hover > .site-page,
+  #menu-items .menu-item:focus-within > .site-page {
+    background: rgba(130, 140, 160, 0.22);
+    color: var(--aria-fontcolor);
+    box-shadow: none;
+  }
+  #navbar.trans #menu-items .menu-item:hover > .site-page,
+  #navbar.trans #menu-items .menu-item:focus-within > .site-page {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--aria-white);
+  }
+
+  #menu-items .site-page-childs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    width: 200px;
+    box-sizing: border-box;
+    left: 50%;
+    top: calc(100% + 12px);
+    padding: 8px;
+    border: var(--aria-border);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--aria-background) 65%, transparent);
+    -webkit-backdrop-filter: blur(5px) saturate(140%);
+    backdrop-filter: blur(5px) saturate(140%);
+    box-shadow: var(--aria-shadow);
+    color: var(--aria-fontcolor);
+    transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
+  }
+  /* 填补入口和面板之间的空隙，移动鼠标时不会意外关闭。 */
+  #menu-items .site-page-childs::before {
+    content: "";
+    position: absolute;
+    inset: -14px 0 auto;
+    height: 14px;
+  }
+  #menu-items .site-page-childs.hide {
+    visibility: hidden;
+    transform: translate(-50%, 8px);
+  }
+  #menu-items .site-page-childs.show,
+  #menu-items .menu-item:focus-within > .site-page-childs {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+  #menu-items .site-page-child {
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    gap: 7px;
+    padding: 7px 6px;
+    border-radius: 10px;
+    font-size: 17px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--dur-slow) var(--ease-in-out);
+  }
+  #menu-items .site-page-child svg { width: 17px; height: 17px; margin: 0; flex-shrink: 0; }
+  #menu-items .site-page-child:hover,
+  #menu-items .site-page-child:focus-visible {
+    background: color-mix(in srgb, var(--aria-theme) 32%, transparent);
+    color: var(--aria-fontcolor);
+    box-shadow: none;
+  }
+}
+
+.mobile-menu-heading { display: none; }
+
+@keyframes mobile-menu-reveal {
+  from { opacity: 0; transform: translateY(-12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @media screen and (max-width: 768px) {
+  #navbar,
+  #navbar.trans,
+  #navbar.ontop {
+    position: fixed;
+    inset: 0 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: 62px;
+    min-height: 62px;
+    margin: 0;
+    border-radius: 0;
+    transform: none;
+    animation: none;
+    transition: background-color 0.35s, border-color 0.35s, box-shadow 0.35s;
+  }
+
+  #navbar #site-name {
+    flex: 0 0 90px;
+    min-width: 0;
+    margin: auto 0 auto 8px;
+    padding: 0;
+  }
+
+  #navbar #site-name-icon {
+    max-width: 110px;
+    object-fit: contain;
+  }
+
+  #menu-center {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  #navbar #menu-buttons {
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    margin: 0 8px 0 0;
+  }
+
+  #navbar .menu-button {
+    box-sizing: border-box;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 40px;
+    margin: 0 !important;
+    padding: 11px 13px;
+  }
+
+  /* 和快捷按钮使用同一反馈，展开状态也不再沿用粉色底、发光阴影。 */
+  #navbar .menu-button-mobmenu {
+    border-radius: 999px !important;
+    border-color: transparent;
+    box-shadow: none;
+    transition: background-color var(--dur-slow) var(--ease-in-out);
+  }
+
+  #navbar .menu-button-mobmenu:hover,
+  #navbar .menu-button-mobmenu:focus-visible,
+  #navbar .menu-button-mobmenu[aria-expanded="true"] {
+    color: var(--aria-fontcolor);
+    background-color: rgba(130, 140, 160, 0.22);
+    box-shadow: none;
+  }
+
+  #navbar.trans .menu-button-mobmenu:hover,
+  #navbar.trans .menu-button-mobmenu:focus-visible,
+  #navbar.trans .menu-button-mobmenu[aria-expanded="true"] {
+    color: var(--aria-white);
+  }
+
+  #navbar .menu-button-mobmenu:focus-visible {
+    outline: 2px solid var(--aria-theme);
+    outline-offset: -2px;
+  }
+
   #site-name {
     margin-left: 5px;
   }
 
-  #menu-items {
-    transition: 0.5s;
+  #navbar #menu-items {
+    position: fixed;
+    top: 72px;
+    right: 12px;
+    width: min(360px, calc(100vw - 24px));
+    max-height: calc(100svh - 90px);
+    height: auto;
+    box-sizing: border-box;
+    padding: 22px;
+    gap: 18px;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    z-index: 1;
+    color: var(--aria-fontcolor);
+    background: var(--aria-acrylic1);
+    border: var(--aria-border);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px var(--aria-shadow-color);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    backdrop-filter: blur(24px) saturate(140%);
+  }
+
+  #menu-items.mobile-menu-close { display: none; }
+  #navbar #menu-items.mobile-menu-open {
+    display: flex;
+    animation: mobile-menu-reveal 0.5s var(--ease-out);
+  }
+
+  .menu-button.menu-button-mobmenu { display: block !important; }
+
+  #menu-items .mobile-menu-heading {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    right: 0;
-    top: 60px;
-    width: 250px;
-    background-color: var(--aria-acrylic1);
-    padding: 20px;
-    justify-content: flex-start;
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    backdrop-filter: blur(10px) saturate(180%);
-    overflow-y: scroll;
-    z-index: -3;
-    height: calc(100vh - 60px);
-    height: calc(100dvh - 60px);
-    box-sizing: border-box;
+    gap: 5px;
+    padding: 0 2px 4px;
+  }
+  .mobile-menu-heading > span { font-size: 22px; font-weight: 700; }
+  .mobile-menu-heading small { font-size: 13px; color: var(--aria-light-fontcolor); }
+
+  #menu-items .menu-item { flex-direction: column; gap: 8px; }
+  #navbar #menu-items .menu-item > .site-page {
+    margin: 0;
+    padding: 0 2px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--aria-light-fontcolor);
+    background: transparent;
+    box-shadow: none;
+    align-items: center;
+    gap: 6px;
+  }
+  #navbar #menu-items .menu-item > a.site-page {
+    padding: 12px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--aria-theme) 12%, transparent);
+    color: var(--aria-fontcolor);
+    font-size: 16px;
   }
 
-  #menu-items.mobile-menu-close {
-    display: none;
+  #navbar #menu-items .site-page-childs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    position: static;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
-
-  #menu-items.mobile-menu-open {
-    display: flex !important;
-    animation: mobbar 0.5s;
-    -webkit-animation: mobbar 0.5s;
+  #navbar #menu-items .site-page-child {
+    min-width: 0;
+    margin: 0;
+    padding: 13px 10px;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid color-mix(in srgb, var(--aria-fontcolor) 8%, transparent);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--aria-fontcolor) 4%, transparent);
+    color: var(--aria-fontcolor);
+    font-size: 15px;
+    box-shadow: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--dur-slow) var(--ease-out), border-color var(--dur-slow) var(--ease-out);
   }
-
-  .menu-button.menu-button-mobmenu {
-    display: block !important;
-  }
-
-  .site-page-childs {
-    transform: none !important;
-    opacity: 1 !important;
-    pointer-events: all !important;
-    position: static !important;
-    flex-direction: column !important;
-    box-shadow: none !important;
-    margin: 10px;
-    margin-top: 0;
-    padding: 10px 3px;
-    -webkit-transform: none !important;
-    -moz-transform: none !important;
-    -ms-transform: none !important;
-    -o-transform: none !important;
-  }
-
-  .menu-item {
-    flex-direction: column;
-  }
-
-  .site-page:hover {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    color: var(--aria-fontcolor) !important;
-  }
-
-  .site-page {
-    padding: 10px 8px !important;
-  }
-
-  .site-page-child {
-    margin-right: 5px;
+  #navbar #menu-items .site-page-child svg { width: 17px; height: 17px; flex-shrink: 0; margin: 0; }
+  #navbar #menu-items .site-page-child:hover,
+  #navbar #menu-items .site-page-child:focus-visible,
+  #navbar #menu-items .menu-item > a.site-page:hover {
+    background: color-mix(in srgb, var(--aria-theme) 18%, transparent);
+    border-color: color-mix(in srgb, var(--aria-theme) 50%, transparent);
+    color: var(--aria-fontcolor);
+    box-shadow: none;
   }
 
   #sidebar-mask.active {
@@ -359,8 +590,16 @@
   transform: translateY(0);
 }
 
-#navbar.trans *:not(.site-page-childs *) {
+/* 透明顶栏只把横排入口设为白色，不能把浅色手机抽屉里的一级标题也染白。 */
+#navbar.trans #menu-items > .menu-item > .site-page,
+#navbar.trans .menu-button-mobmenu {
   color: var(--aria-white);
+}
+
+@media screen and (max-width: 768px) {
+  #navbar.trans #menu-items > .menu-item > .site-page {
+    color: var(--aria-fontcolor);
+  }
 }
 
 #navbar.ontop {

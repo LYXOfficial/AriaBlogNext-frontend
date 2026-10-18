@@ -29,7 +29,7 @@
   padding-top: 6px !important;
   padding-bottom: 6px !important;
   border-radius: 12px;
-  transition: all var(--dur-base) var(--ease-out);
+  transition: all var(--dur-slow) var(--ease-out);
   margin: 4px 0;
   border-radius: 12px;
   -webkit-border-radius: 12px;
@@ -56,7 +56,7 @@
 .aside-list-item:hover {
   background: var(--aria-theme);
   color: var(--aria-white);
-  transition: all var(--dur-base) var(--ease-out);
+  transition: all var(--dur-slow) var(--ease-out);
   box-shadow: var(--aria-theme);
   scale: 1.04;
 }

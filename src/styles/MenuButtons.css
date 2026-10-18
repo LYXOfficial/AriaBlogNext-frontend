@@ -1,0 +1,86 @@
+.menu-actions {
+  position: fixed;
+  z-index: 1919811;
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  padding: 4px 6px;
+  gap: 2px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--aria-fontcolor);
+  visibility: hidden;
+  transform-origin: top left;
+  transition:
+    background-color var(--dur-slow) var(--ease-out),
+    border-color var(--dur-slow) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.menu-actions[hidden] { display: none; }
+
+/* 按钮通过 portal 放在 body 下，需显式同步透明顶栏状态，不能依赖导航的后代选择器。 */
+.menu-actions[data-transparent="true"] { color: #fff; }
+
+.menu-actions[data-banner="true"] {
+  color: #fff;
+  background: rgba(20, 27, 39, 0.182);
+  border-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.menu-actions-button {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-slow) var(--ease-in-out);
+}
+
+.menu-actions-button:hover,
+.menu-actions-button:focus-visible {
+  color: inherit;
+  background: rgba(130, 140, 160, 0.22);
+}
+
+.menu-actions[data-banner="true"] .menu-actions-button:hover,
+.menu-actions[data-banner="true"] .menu-actions-button:focus-visible {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.menu-actions-button:focus-visible {
+  outline: 2px solid var(--aria-theme);
+  outline-offset: -2px;
+}
+
+.menu-actions-button svg { width: 18px; height: 18px; flex-shrink: 0; }
+.menu-actions[data-banner="false"] .menu-actions-button span { display: none; }
+.menu-actions[data-banner="false"] .menu-actions-button { padding: 0; }
+
+/* 手机按钮随首屏离开视口，不能浮在固定导航和弹窗上面。 */
+.menu-actions[data-mobile-banner="true"] { z-index: 10; }
+
+#nav-menu-buttons-slot { width: 132px; height: 42px; align-self: center; }
+
+@media screen and (max-width: 768px) {
+  #nav-menu-buttons-slot { width: 138px; height: 44px; }
+  .menu-actions[data-banner="false"] { padding: 1px; gap: 1px; }
+  .menu-actions[data-banner="true"] .menu-actions-button { font-size: 14px; gap: 6px; padding: 0 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-actions, .menu-actions-button { transition: none; }
+}

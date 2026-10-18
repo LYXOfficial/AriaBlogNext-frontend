@@ -60,7 +60,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --aria-background: #552a2a;
+    --aria-background: #2f1717;
     --aria-acrylic1: var(--aria-black-acrylic1) !important;
     --aria-acrylic2: var(--aria-black-acrylic2) !important;
     --aria-fontcolor: var(--aria-whitefont);
@@ -83,6 +83,15 @@ a:focus-visible {
   outline: 2px solid var(--aria-theme);
 }
 
+/* 页面不应出现横向滚动：个别文章内容或浮层越界时，宁可裁掉也不要把整页
+   推宽（横向滚动还会把 sticky 顶栏带走，看起来像顶栏消失）。
+   用 clip 而不是 hidden：hidden 会让 body 变成滚动容器，导致 sticky 顶栏
+   跟着内容一起滚走——那正是“滚动后看不到顶栏”的原因。 */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -90,7 +99,6 @@ body {
   font-family: "HYTMR", "sans-serif";
   color: var(--aria-fontcolor);
   scroll-behavior: smooth;
-  overflow-x: hidden;
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
   /* background-color: transparent; */
@@ -241,7 +249,7 @@ a {
 
 p,
 article {
-  line-height: 1.8;
+  line-height: 1.75;
 }
 
 #main-container {
