@@ -231,7 +231,7 @@ function compose(geo: Geo | null): string {
     10,
   );
   const timeChange = greet(Number.isFinite(hour) ? hour : 12).replace(/[。！!，,]+$/, "");
-  if (!geo) return `QwQ！${timeChange}。`;
+  if (!geo) return `欢迎光临！${timeChange}。`;
   geo = cnify(geo);
 
   const where =
@@ -248,8 +248,9 @@ function compose(geo: Geo | null): string {
   const clean = (v: string) => v.replace(/[。！!，,～~]+$/, "");
   const extra = [tail, desc].map(clean).filter(Boolean).join("，");
   return (
-    `QwQ！欢迎来自 ${where} 的小伙伴，${timeChange}` +
-    (extra ? `。${extra}。` : "。")
+    `欢迎来自 ${where} 的小伙伴，${timeChange}` +
+    // 地区文案可能以问号收尾，不要再追加句号。
+    (extra ? `。${extra}${/[。！？!?]$/.test(extra) ? "" : "。"}` : "。")
   );
 }
 
