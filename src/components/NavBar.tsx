@@ -79,7 +79,9 @@ export default function NavBar() {
   const [hoveringElement, setHoveringElement] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
+    // 顶栏跨路由复用，不能让旧页面的悬浮菜单状态带到新页面。
     setMobileMenuOpen(false);
+    setHoveringElement("");
   }, [pathName]);
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -109,7 +111,11 @@ export default function NavBar() {
               mobileMenuOpen ? "mobile-menu-open" : "mobile-menu-close"
             }
             onClick={(event) => {
-              if ((event.target as Element).closest("a")) setMobileMenuOpen(false);
+              if ((event.target as Element).closest("a")) {
+                // 同路由链接及功能型菜单项也要立即收起，不只依赖 pathname 变化。
+                setMobileMenuOpen(false);
+                setHoveringElement("");
+              }
             }}
           >
             <div className="mobile-menu-heading">
