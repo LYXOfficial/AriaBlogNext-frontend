@@ -111,7 +111,10 @@ export default function NavBar() {
               mobileMenuOpen ? "mobile-menu-open" : "mobile-menu-close"
             }
             onClick={(event) => {
-              if ((event.target as Element).closest("a")) {
+              const link = (event.target as Element).closest("a");
+              if (link) {
+                // 指针点击不保留焦点高亮；键盘激活仍保留可见焦点。
+                if (event.detail > 0) link.blur();
                 // 同路由链接及功能型菜单项也要立即收起，不只依赖 pathname 变化。
                 setMobileMenuOpen(false);
                 setHoveringElement("");
@@ -128,6 +131,12 @@ export default function NavBar() {
                   key={item.name}
                   onMouseEnter={() => setHoveringElement(item.name)}
                   onMouseLeave={() => setHoveringElement("")}
+                  onFocus={() => setHoveringElement(item.name)}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                      setHoveringElement("");
+                    }
+                  }}
                 >
                   {item.link ? (
                     <Link className="site-page" href={item.link}>

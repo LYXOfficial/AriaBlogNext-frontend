@@ -307,13 +307,13 @@ html[data-home-manual-scroll] #navbar {
   #menu-items .site-page > * { margin: 0; }
   #menu-items .site-page svg { width: 20px; height: 20px; }
   #menu-items .menu-item:hover > .site-page,
-  #menu-items .menu-item:focus-within > .site-page {
+  #menu-items .menu-item:has(:focus-visible) > .site-page {
     background: rgba(130, 140, 160, 0.22);
     color: var(--aria-fontcolor);
     box-shadow: none;
   }
   #navbar.trans #menu-items .menu-item:hover > .site-page,
-  #navbar.trans #menu-items .menu-item:focus-within > .site-page {
+  #navbar.trans #menu-items .menu-item:has(:focus-visible) > .site-page {
     background: rgba(255, 255, 255, 0.18);
     color: var(--aria-white);
   }
@@ -347,8 +347,8 @@ html[data-home-manual-scroll] #navbar {
     visibility: hidden;
     transform: translate(-50%, 8px);
   }
-  #menu-items .site-page-childs.show,
-  #menu-items .menu-item:focus-within > .site-page-childs {
+  /* 展开统一由组件状态控制，避免点击后残留焦点覆盖 hide 状态。 */
+  #menu-items .site-page-childs.show {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
@@ -520,7 +520,8 @@ html[data-home-manual-scroll] #navbar {
   #navbar #menu-items .menu-item > a.site-page {
     padding: 12px;
     border-radius: 14px;
-    background: color-mix(in srgb, var(--aria-theme) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--aria-fontcolor) 8%, transparent);
+    background: color-mix(in srgb, var(--aria-fontcolor) 4%, transparent);
     color: var(--aria-fontcolor);
     font-size: 16px;
   }
