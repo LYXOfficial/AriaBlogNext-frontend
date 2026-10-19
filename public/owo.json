@@ -1326,5 +1326,1875 @@
         "icon": "<img src='https://testingcf.jsdelivr.net/gh/2x-ercha/twikoo-magic@master/image/Tsuri-me-ju_mimi/10753815_key@2x.png'>"
       }
     ]
+  },
+  "元祖": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[元祖_快看]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/00.webp'>"
+      },
+      {
+        "text": "[元祖_嗯]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/01.webp'>"
+      },
+      {
+        "text": "[元祖_好吃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/02.webp'>"
+      },
+      {
+        "text": "[元祖_要吃吗？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/03.webp'>"
+      },
+      {
+        "text": "[元祖_脸红]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/04.webp'>"
+      },
+      {
+        "text": "[元祖_呜哇哇哇]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/05.webp'>"
+      },
+      {
+        "text": "[元祖_嘿嘿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/06.webp'>"
+      },
+      {
+        "text": "[元祖_微笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/07.webp'>"
+      },
+      {
+        "text": "[元祖_大吃一惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/08.webp'>"
+      },
+      {
+        "text": "[元祖_来杯咖啡]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/09.webp'>"
+      },
+      {
+        "text": "[元祖_吃瓜]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/10.webp'>"
+      },
+      {
+        "text": "[元祖_期待]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/11.webp'>"
+      },
+      {
+        "text": "[元祖_救命呀]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/12.webp'>"
+      },
+      {
+        "text": "[元祖_圣诞麋鹿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/13.webp'>"
+      },
+      {
+        "text": "[元祖_圣诞老人]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/14.webp'>"
+      },
+      {
+        "text": "[元祖_乖巧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/15.webp'>"
+      },
+      {
+        "text": "[元祖_好的]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/16.webp'>"
+      },
+      {
+        "text": "[元祖_尴尬]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/17.webp'>"
+      },
+      {
+        "text": "[元祖_好耶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/18.webp'>"
+      },
+      {
+        "text": "[元祖_欸？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/19.webp'>"
+      },
+      {
+        "text": "[元祖_让我看看]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/20.webp'>"
+      },
+      {
+        "text": "[元祖_梦幻]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/21.webp'>"
+      },
+      {
+        "text": "[元祖_好嘞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/22.webp'>"
+      },
+      {
+        "text": "[元祖_亚达]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/23.webp'>"
+      },
+      {
+        "text": "[元祖_瘫]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-genesis/24.webp'>"
+      }
+    ]
+  },
+  "邦邦全员": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[全员_香澄-期待]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/00.webp'>"
+      },
+      {
+        "text": "[全员_多惠-震惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/01.webp'>"
+      },
+      {
+        "text": "[全员_里美-害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/02.webp'>"
+      },
+      {
+        "text": "[全员_沙绫-没问题]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/03.webp'>"
+      },
+      {
+        "text": "[全员_有咲-汗]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/04.webp'>"
+      },
+      {
+        "text": "[全员_兰-嫌弃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/05.webp'>"
+      },
+      {
+        "text": "[全员_摩卡-满足]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/06.webp'>"
+      },
+      {
+        "text": "[全员_绯玛丽-宠溺]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/07.webp'>"
+      },
+      {
+        "text": "[全员_巴-尴尬]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/08.webp'>"
+      },
+      {
+        "text": "[全员_鸫-讨厌]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/09.webp'>"
+      },
+      {
+        "text": "[全员_心-好耶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/10.webp'>"
+      },
+      {
+        "text": "[全员_薰-送花]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/11.webp'>"
+      },
+      {
+        "text": "[全员_育美-高兴]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/12.webp'>"
+      },
+      {
+        "text": "[全员_花音-害怕]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/13.webp'>"
+      },
+      {
+        "text": "[全员_米歇尔-DJ]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/14.webp'>"
+      },
+      {
+        "text": "[全员_彩-躲藏]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/15.webp'>"
+      },
+      {
+        "text": "[全员_日菜-挽留]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/16.webp'>"
+      },
+      {
+        "text": "[全员_千圣-暗中观察]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/17.webp'>"
+      },
+      {
+        "text": "[全员_麻弥-紧张]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/18.webp'>"
+      },
+      {
+        "text": "[全员_伊芙-比心]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/19.webp'>"
+      },
+      {
+        "text": "[全员_友希那-满足]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/20.webp'>"
+      },
+      {
+        "text": "[全员_纱夜-不高兴]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/21.webp'>"
+      },
+      {
+        "text": "[全员_莉莎-点赞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/22.webp'>"
+      },
+      {
+        "text": "[全员_亚子-打call]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/23.webp'>"
+      },
+      {
+        "text": "[全员_燐子-懵]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/24.webp'>"
+      },
+      {
+        "text": "[全员_真白-惊慌]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/25.webp'>"
+      },
+      {
+        "text": "[全员_透子-心虚]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/26.webp'>"
+      },
+      {
+        "text": "[全员_七深-安详]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/27.webp'>"
+      },
+      {
+        "text": "[全员_筑紫-不满]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/28.webp'>"
+      },
+      {
+        "text": "[全员_瑠唯-优雅]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/29.webp'>"
+      },
+      {
+        "text": "[全员_LAYER-拽]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/30.webp'>"
+      },
+      {
+        "text": "[全员_LOCK-不可以]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/31.webp'>"
+      },
+      {
+        "text": "[全员_MASKING-来了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/32.webp'>"
+      },
+      {
+        "text": "[全员_PAREO-太好了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/33.webp'>"
+      },
+      {
+        "text": "[全员_CHU²-阴谋]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/34.webp'>"
+      },
+      {
+        "text": "[全员_灯-放松]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/35.webp'>"
+      },
+      {
+        "text": "[全员_爱音-不解]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/36.webp'>"
+      },
+      {
+        "text": "[全员_乐奈-困]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/37.webp'>"
+      },
+      {
+        "text": "[全员_爽世-微笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/38.webp'>"
+      },
+      {
+        "text": "[全员_立希-怒]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-original/39.webp'>"
+      }
+    ]
+  },
+  "Poppin*Party": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[PoppinParty_啊？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/00.webp'>"
+      },
+      {
+        "text": "[PoppinParty_你是？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/01.webp'>"
+      },
+      {
+        "text": "[PoppinParty_诶？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/02.webp'>"
+      },
+      {
+        "text": "[PoppinParty_出击]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/03.webp'>"
+      },
+      {
+        "text": "[PoppinParty_拜托了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/04.webp'>"
+      },
+      {
+        "text": "[PoppinParty_嗯？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/05.webp'>"
+      },
+      {
+        "text": "[PoppinParty_恐惧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/06.webp'>"
+      },
+      {
+        "text": "[PoppinParty_微笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/07.webp'>"
+      },
+      {
+        "text": "[PoppinParty_呵]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/08.webp'>"
+      },
+      {
+        "text": "[PoppinParty_这样]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/09.webp'>"
+      },
+      {
+        "text": "[PoppinParty_呜呜]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/10.webp'>"
+      },
+      {
+        "text": "[PoppinParty_无语]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/11.webp'>"
+      },
+      {
+        "text": "[PoppinParty_好吃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/12.webp'>"
+      },
+      {
+        "text": "[PoppinParty_嫌弃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/13.webp'>"
+      },
+      {
+        "text": "[PoppinParty_冲鸭]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/14.webp'>"
+      },
+      {
+        "text": "[PoppinParty_哦！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/15.webp'>"
+      },
+      {
+        "text": "[PoppinParty_哎呀]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/16.webp'>"
+      },
+      {
+        "text": "[PoppinParty_汗]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/17.webp'>"
+      },
+      {
+        "text": "[PoppinParty_困惑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/18.webp'>"
+      },
+      {
+        "text": "[PoppinParty_机智]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/19.webp'>"
+      },
+      {
+        "text": "[PoppinParty_讨厌]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/20.webp'>"
+      },
+      {
+        "text": "[PoppinParty_冲]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/21.webp'>"
+      },
+      {
+        "text": "[PoppinParty_啊啊？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/22.webp'>"
+      },
+      {
+        "text": "[PoppinParty_干嘛]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/23.webp'>"
+      },
+      {
+        "text": "[PoppinParty_生气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/poppin-party/24.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_不要啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/00.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_葱之狂舞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/01.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_嘿嘿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/02.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_葱包煎饼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/03.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_扑倒]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/04.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_空气弹奏]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/05.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_来人！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/06.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_被冻到了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/07.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_震撼美味]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/08.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_让我摸摸]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/09.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/10.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_水饺]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/11.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_崇拜]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/12.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_吃一口]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/13.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_投喂]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/14.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_咋这样]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/15.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_飞饼？！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/16.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_稳稳接住]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/17.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_料理大王]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/18.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_吃大饼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/19.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_好家伙]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/20.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_嗯...]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/21.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_不愧是]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/22.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_上菜啦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/23.webp'>"
+      },
+      {
+        "text": "[Popipa食彩_揍揍]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/popipa-shokuzai/24.webp'>"
+      }
+    ]
+  },
+  "Afterglow": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[Afterglow_狂风]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/00.webp'>"
+      },
+      {
+        "text": "[Afterglow_饮茶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/01.webp'>"
+      },
+      {
+        "text": "[Afterglow_被迫下线]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/02.webp'>"
+      },
+      {
+        "text": "[Afterglow_唔...]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/03.webp'>"
+      },
+      {
+        "text": "[Afterglow_冲啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/04.webp'>"
+      },
+      {
+        "text": "[Afterglow_...]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/05.webp'>"
+      },
+      {
+        "text": "[Afterglow_悄悄话]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/06.webp'>"
+      },
+      {
+        "text": "[Afterglow_满足]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/07.webp'>"
+      },
+      {
+        "text": "[Afterglow_叹气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/08.webp'>"
+      },
+      {
+        "text": "[Afterglow_吃吃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/09.webp'>"
+      },
+      {
+        "text": "[Afterglow_欸嘿！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/10.webp'>"
+      },
+      {
+        "text": "[Afterglow_不要啦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/11.webp'>"
+      },
+      {
+        "text": "[Afterglow_委屈]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/12.webp'>"
+      },
+      {
+        "text": "[Afterglow_没火]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/13.webp'>"
+      },
+      {
+        "text": "[Afterglow_上热搜了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/14.webp'>"
+      },
+      {
+        "text": "[Afterglow_是她！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/15.webp'>"
+      },
+      {
+        "text": "[Afterglow_打起来！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/16.webp'>"
+      },
+      {
+        "text": "[Afterglow_不是吧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/17.webp'>"
+      },
+      {
+        "text": "[Afterglow_疑惑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/18.webp'>"
+      },
+      {
+        "text": "[Afterglow_是吧！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/19.webp'>"
+      },
+      {
+        "text": "[Afterglow_诶？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/20.webp'>"
+      },
+      {
+        "text": "[Afterglow_是我！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/21.webp'>"
+      },
+      {
+        "text": "[Afterglow_嘿嘿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/22.webp'>"
+      },
+      {
+        "text": "[Afterglow_我来！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/23.webp'>"
+      },
+      {
+        "text": "[Afterglow_别这样]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/afterglow/24.webp'>"
+      }
+    ]
+  },
+  "Pastel*Palettes": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[PastelPalettes_修哇修哇]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/00.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_好耶！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/01.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_哇啊！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/02.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_哭哭]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/03.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_欸？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/04.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_真的吗]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/05.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_记下了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/06.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_好吧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/07.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_吃土]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/08.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_打咩]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/09.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_冲啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/10.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_抱大腿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/11.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_诶？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/12.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_星星眼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/13.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_呃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/14.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_无语了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/15.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_我不听]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/16.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_汗]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/17.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_可以！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/18.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_哦？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/19.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_啊啊啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/20.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_不要哇]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/21.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_唔]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/22.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_啊？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/23.webp'>"
+      },
+      {
+        "text": "[PastelPalettes_害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/pastel-palettes/24.webp'>"
+      }
+    ]
+  },
+  "Roselia": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[Roselia_请展示]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/00.webp'>"
+      },
+      {
+        "text": "[Roselia_降临]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/01.webp'>"
+      },
+      {
+        "text": "[Roselia_出击]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/02.webp'>"
+      },
+      {
+        "text": "[Roselia_郁闷]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/03.webp'>"
+      },
+      {
+        "text": "[Roselia_约定]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/04.webp'>"
+      },
+      {
+        "text": "[Roselia_你是？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/05.webp'>"
+      },
+      {
+        "text": "[Roselia_不中了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/06.webp'>"
+      },
+      {
+        "text": "[Roselia_咳哼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/07.webp'>"
+      },
+      {
+        "text": "[Roselia_猛吃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/08.webp'>"
+      },
+      {
+        "text": "[Roselia_开心]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/09.webp'>"
+      },
+      {
+        "text": "[Roselia_完全胜利]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/10.webp'>"
+      },
+      {
+        "text": "[Roselia_喵呀]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/11.webp'>"
+      },
+      {
+        "text": "[Roselia_无语]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/12.webp'>"
+      },
+      {
+        "text": "[Roselia_诶...]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/13.webp'>"
+      },
+      {
+        "text": "[Roselia_原来如此]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/14.webp'>"
+      },
+      {
+        "text": "[Roselia_要我说]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/15.webp'>"
+      },
+      {
+        "text": "[Roselia_好耶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/16.webp'>"
+      },
+      {
+        "text": "[Roselia_冲呀]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/17.webp'>"
+      },
+      {
+        "text": "[Roselia_就是你]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/18.webp'>"
+      },
+      {
+        "text": "[Roselia_寝了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/19.webp'>"
+      },
+      {
+        "text": "[Roselia_难道说]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/20.webp'>"
+      },
+      {
+        "text": "[Roselia_震惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/21.webp'>"
+      },
+      {
+        "text": "[Roselia_惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/22.webp'>"
+      },
+      {
+        "text": "[Roselia_燃尽]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/23.webp'>"
+      },
+      {
+        "text": "[Roselia_死机]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/roselia/24.webp'>"
+      }
+    ]
+  },
+  "HHW": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[HHW_登场]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/00.webp'>"
+      },
+      {
+        "text": "[HHW_好耶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/01.webp'>"
+      },
+      {
+        "text": "[HHW_展露笑容]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/02.webp'>"
+      },
+      {
+        "text": "[HHW_嘘]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/03.webp'>"
+      },
+      {
+        "text": "[HHW_什么？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/04.webp'>"
+      },
+      {
+        "text": "[HHW_惊讶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/05.webp'>"
+      },
+      {
+        "text": "[HHW_哈卡乃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/06.webp'>"
+      },
+      {
+        "text": "[HHW_真正音乐]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/07.webp'>"
+      },
+      {
+        "text": "[HHW_啾啾]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/08.webp'>"
+      },
+      {
+        "text": "[HHW_干杯]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/09.webp'>"
+      },
+      {
+        "text": "[HHW_惬意]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/10.webp'>"
+      },
+      {
+        "text": "[HHW_出现？！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/11.webp'>"
+      },
+      {
+        "text": "[HHW_再看一眼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/12.webp'>"
+      },
+      {
+        "text": "[HHW_委屈]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/13.webp'>"
+      },
+      {
+        "text": "[HHW_让我看看]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/14.webp'>"
+      },
+      {
+        "text": "[HHW_寝了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/15.webp'>"
+      },
+      {
+        "text": "[HHW_气鼓鼓]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/16.webp'>"
+      },
+      {
+        "text": "[HHW_品味中]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/17.webp'>"
+      },
+      {
+        "text": "[HHW_在那！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/18.webp'>"
+      },
+      {
+        "text": "[HHW_求救]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/19.webp'>"
+      },
+      {
+        "text": "[HHW_冲啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/20.webp'>"
+      },
+      {
+        "text": "[HHW_惊！！！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/21.webp'>"
+      },
+      {
+        "text": "[HHW_出现！？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/22.webp'>"
+      },
+      {
+        "text": "[HHW_无]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/23.webp'>"
+      },
+      {
+        "text": "[HHW_其实...]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/hhw/24.webp'>"
+      }
+    ]
+  },
+  "Morfonica": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[Morfonica_不是的]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/00.webp'>"
+      },
+      {
+        "text": "[Morfonica_啊啊啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/01.webp'>"
+      },
+      {
+        "text": "[Morfonica_骗人]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/02.webp'>"
+      },
+      {
+        "text": "[Morfonica_呼叫中]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/03.webp'>"
+      },
+      {
+        "text": "[Morfonica_害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/04.webp'>"
+      },
+      {
+        "text": "[Morfonica_有意思]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/05.webp'>"
+      },
+      {
+        "text": "[Morfonica_失望]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/06.webp'>"
+      },
+      {
+        "text": "[Morfonica_错误的]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/07.webp'>"
+      },
+      {
+        "text": "[Morfonica_这是蝶吗]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/08.webp'>"
+      },
+      {
+        "text": "[Morfonica_有罪]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/09.webp'>"
+      },
+      {
+        "text": "[Morfonica_先走一步]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/10.webp'>"
+      },
+      {
+        "text": "[Morfonica_嘿诶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/11.webp'>"
+      },
+      {
+        "text": "[Morfonica_敲敲]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/12.webp'>"
+      },
+      {
+        "text": "[Morfonica_很难说]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/13.webp'>"
+      },
+      {
+        "text": "[Morfonica_厉害吧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/14.webp'>"
+      },
+      {
+        "text": "[Morfonica_搜索]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/15.webp'>"
+      },
+      {
+        "text": "[Morfonica_冲啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/16.webp'>"
+      },
+      {
+        "text": "[Morfonica_正确的]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/17.webp'>"
+      },
+      {
+        "text": "[Morfonica_痛击]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/18.webp'>"
+      },
+      {
+        "text": "[Morfonica_合影吧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/19.webp'>"
+      },
+      {
+        "text": "[Morfonica_晕晕]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/20.webp'>"
+      },
+      {
+        "text": "[Morfonica_生气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/21.webp'>"
+      },
+      {
+        "text": "[Morfonica_叠鼠鼠]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/22.webp'>"
+      },
+      {
+        "text": "[Morfonica_气鼓鼓]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/23.webp'>"
+      },
+      {
+        "text": "[Morfonica_请带上]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/morfonica/24.webp'>"
+      }
+    ]
+  },
+  "RAS": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[RAS_哎？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/00.webp'>"
+      },
+      {
+        "text": "[RAS_没办法]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/01.webp'>"
+      },
+      {
+        "text": "[RAS_闪亮]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/02.webp'>"
+      },
+      {
+        "text": "[RAS_BANG！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/03.webp'>"
+      },
+      {
+        "text": "[RAS_登场]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/04.webp'>"
+      },
+      {
+        "text": "[RAS_你这家伙]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/05.webp'>"
+      },
+      {
+        "text": "[RAS_哈？！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/06.webp'>"
+      },
+      {
+        "text": "[RAS_无语]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/07.webp'>"
+      },
+      {
+        "text": "[RAS_唔...]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/08.webp'>"
+      },
+      {
+        "text": "[RAS_不行！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/09.webp'>"
+      },
+      {
+        "text": "[RAS_突然出现]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/10.webp'>"
+      },
+      {
+        "text": "[RAS_按捺不住]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/11.webp'>"
+      },
+      {
+        "text": "[RAS_石化]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/12.webp'>"
+      },
+      {
+        "text": "[RAS_晕了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/13.webp'>"
+      },
+      {
+        "text": "[RAS_这可不行]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/14.webp'>"
+      },
+      {
+        "text": "[RAS_嘿嘿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/15.webp'>"
+      },
+      {
+        "text": "[RAS_嗷呜！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/16.webp'>"
+      },
+      {
+        "text": "[RAS_整点]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/17.webp'>"
+      },
+      {
+        "text": "[RAS_你说什么]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/18.webp'>"
+      },
+      {
+        "text": "[RAS_站住！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/19.webp'>"
+      },
+      {
+        "text": "[RAS_好耶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/20.webp'>"
+      },
+      {
+        "text": "[RAS_什么]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/21.webp'>"
+      },
+      {
+        "text": "[RAS_不错]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/22.webp'>"
+      },
+      {
+        "text": "[RAS_冲呀]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/23.webp'>"
+      },
+      {
+        "text": "[RAS_咦惹]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ras/24.webp'>"
+      }
+    ]
+  },
+  "MyGO": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[MyGO1_害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/00.webp'>"
+      },
+      {
+        "text": "[MyGO1_生气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/01.webp'>"
+      },
+      {
+        "text": "[MyGO1_发送消息]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/02.webp'>"
+      },
+      {
+        "text": "[MyGO1_抹茶芭菲]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/03.webp'>"
+      },
+      {
+        "text": "[MyGO1_请点单]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/04.webp'>"
+      },
+      {
+        "text": "[MyGO1_不要吵架]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/05.webp'>"
+      },
+      {
+        "text": "[MyGO1_Love]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/06.webp'>"
+      },
+      {
+        "text": "[MyGO1_让我看看]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/07.webp'>"
+      },
+      {
+        "text": "[MyGO1_溜了溜了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/08.webp'>"
+      },
+      {
+        "text": "[MyGO1_那我呢？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/09.webp'>"
+      },
+      {
+        "text": "[MyGO1_创作中]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/10.webp'>"
+      },
+      {
+        "text": "[MyGO1_探头]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/11.webp'>"
+      },
+      {
+        "text": "[MyGO1_为什么！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/12.webp'>"
+      },
+      {
+        "text": "[MyGO1_刚睡醒]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/13.webp'>"
+      },
+      {
+        "text": "[MyGO1_哈？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/14.webp'>"
+      },
+      {
+        "text": "[MyGO1_忧郁]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/15.webp'>"
+      },
+      {
+        "text": "[MyGO1_不会吧？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/16.webp'>"
+      },
+      {
+        "text": "[MyGO1_大哭]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/17.webp'>"
+      },
+      {
+        "text": "[MyGO1_有趣的女人]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/18.webp'>"
+      },
+      {
+        "text": "[MyGO1_Block!]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-1/19.webp'>"
+      },
+      {
+        "text": "[MyGO2_喜欢抹茶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/00.webp'>"
+      },
+      {
+        "text": "[MyGO2_开唱]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/01.webp'>"
+      },
+      {
+        "text": "[MyGO2_啧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/02.webp'>"
+      },
+      {
+        "text": "[MyGO2_想到了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/03.webp'>"
+      },
+      {
+        "text": "[MyGO2_爱音东京]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/04.webp'>"
+      },
+      {
+        "text": "[MyGO2_发现猎物]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/05.webp'>"
+      },
+      {
+        "text": "[MyGO2_我需要你]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/06.webp'>"
+      },
+      {
+        "text": "[MyGO2_突然出现]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/07.webp'>"
+      },
+      {
+        "text": "[MyGO2_注视]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/08.webp'>"
+      },
+      {
+        "text": "[MyGO2_哈？！]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/09.webp'>"
+      },
+      {
+        "text": "[MyGO2_被猫环绕]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/10.webp'>"
+      },
+      {
+        "text": "[MyGO2_哎呀]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/11.webp'>"
+      },
+      {
+        "text": "[MyGO2_生气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/12.webp'>"
+      },
+      {
+        "text": "[MyGO2_服了]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/13.webp'>"
+      },
+      {
+        "text": "[MyGO2_抢到票啦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/14.webp'>"
+      },
+      {
+        "text": "[MyGO2_捕猎状态]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/15.webp'>"
+      },
+      {
+        "text": "[MyGO2_迷茫]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/16.webp'>"
+      },
+      {
+        "text": "[MyGO2_不是的]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/17.webp'>"
+      },
+      {
+        "text": "[MyGO2_认真]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/18.webp'>"
+      },
+      {
+        "text": "[MyGO2_SNS见]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/19.webp'>"
+      },
+      {
+        "text": "[MyGO2_M]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/20.webp'>"
+      },
+      {
+        "text": "[MyGO2_Y]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/21.webp'>"
+      },
+      {
+        "text": "[MyGO2_G]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/22.webp'>"
+      },
+      {
+        "text": "[MyGO2_O]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/23.webp'>"
+      },
+      {
+        "text": "[MyGO2_!]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-2/24.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_泪目]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/00.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_端详]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/01.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_疑惑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/02.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/03.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_开心]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/04.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_快看]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/05.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_快说吧]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/06.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_天呐]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/07.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_怎么办]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/08.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_累瘫]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/09.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_我吗]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/10.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_无聊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/11.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_比三]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/12.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_来玩乐队]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/13.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_我剪]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/14.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_微笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/15.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_是朋友哦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/16.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_细品]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/17.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_干嘛]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/18.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_黑脸]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/19.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_惊讶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/20.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_忧郁]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/21.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_盯]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/22.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_睡觉]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/23.webp'>"
+      },
+      {
+        "text": "[MyGO晴空_我做不到]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/mygo-sunny/24.webp'>"
+      }
+    ]
+  },
+  "Ave Mujica": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[AveMujica1_挺好]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/00.webp'>"
+      },
+      {
+        "text": "[AveMujica1_再等一下]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/01.webp'>"
+      },
+      {
+        "text": "[AveMujica1_震惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/02.webp'>"
+      },
+      {
+        "text": "[AveMujica1_比叉叉]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/03.webp'>"
+      },
+      {
+        "text": "[AveMujica1_开心]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/04.webp'>"
+      },
+      {
+        "text": "[AveMujica1_哼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/05.webp'>"
+      },
+      {
+        "text": "[AveMujica1_怎么突然]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/06.webp'>"
+      },
+      {
+        "text": "[AveMujica1_诶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/07.webp'>"
+      },
+      {
+        "text": "[AveMujica1_一次买够]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/08.webp'>"
+      },
+      {
+        "text": "[AveMujica1_难道？]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/09.webp'>"
+      },
+      {
+        "text": "[AveMujica1_睡觉]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/10.webp'>"
+      },
+      {
+        "text": "[AveMujica1_我要告你]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/11.webp'>"
+      },
+      {
+        "text": "[AveMujica1_赌气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/12.webp'>"
+      },
+      {
+        "text": "[AveMujica1_记得微笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/13.webp'>"
+      },
+      {
+        "text": "[AveMujica1_委屈]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/14.webp'>"
+      },
+      {
+        "text": "[AveMujica1_不行]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/15.webp'>"
+      },
+      {
+        "text": "[AveMujica1_美味]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/16.webp'>"
+      },
+      {
+        "text": "[AveMujica1_我有话说]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/17.webp'>"
+      },
+      {
+        "text": "[AveMujica1_害怕]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/18.webp'>"
+      },
+      {
+        "text": "[AveMujica1_愉快]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-1/19.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_呐喊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/00.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_思考]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/01.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_撩发]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/02.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_小祥]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/03.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/04.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_没收]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/05.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_点赞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/06.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_接电话]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/07.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_唱歌]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/08.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_雨天]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/09.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_是秘密哦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/10.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_抱抱]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/11.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_加个好友]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/12.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_难道说]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/13.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_坏坏]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/14.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_哦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/15.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_开门]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/16.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_真谄媚啊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/17.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_哟豁]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/18.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_恭敬]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/19.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_伸懒腰]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/20.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_分你一半]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/21.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_wink]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/22.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_五冠王]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/23.webp'>"
+      },
+      {
+        "text": "[AveMujica夜_哭哭]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/ave-mujica-night/24.webp'>"
+      }
+    ]
+  },
+  "梦限大": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[梦限大_阿拉蕾呜哇]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/00.webp'>"
+      },
+      {
+        "text": "[梦限大_阿拉蕾嘿嘿]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/01.webp'>"
+      },
+      {
+        "text": "[梦限大_阿拉蕾耶]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/02.webp'>"
+      },
+      {
+        "text": "[梦限大_阿拉蕾哭哭]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/03.webp'>"
+      },
+      {
+        "text": "[梦限大_律包子]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/04.webp'>"
+      },
+      {
+        "text": "[梦限大_律敬礼]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/05.webp'>"
+      },
+      {
+        "text": "[梦限大_律88]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/06.webp'>"
+      },
+      {
+        "text": "[梦限大_律好吃]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/07.webp'>"
+      },
+      {
+        "text": "[梦限大_野乃花得意]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/08.webp'>"
+      },
+      {
+        "text": "[梦限大_野乃花来啦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/09.webp'>"
+      },
+      {
+        "text": "[梦限大_野乃花问号]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/10.webp'>"
+      },
+      {
+        "text": "[梦限大_野乃花晚安]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/11.webp'>"
+      },
+      {
+        "text": "[梦限大_都子期待]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/12.webp'>"
+      },
+      {
+        "text": "[梦限大_都子生气]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/13.webp'>"
+      },
+      {
+        "text": "[梦限大_都子大惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/14.webp'>"
+      },
+      {
+        "text": "[梦限大_都子晚安]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/15.webp'>"
+      },
+      {
+        "text": "[梦限大_由乃黑线]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/16.webp'>"
+      },
+      {
+        "text": "[梦限大_由乃坏笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/17.webp'>"
+      },
+      {
+        "text": "[梦限大_由乃睡觉]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/18.webp'>"
+      },
+      {
+        "text": "[梦限大_由乃听不见]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/yumemita/19.webp'>"
+      }
+    ]
+  },
+  "邦邦x小豆泥": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[邦邦豆泥_泥来啦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/00.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_喵喵出击]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/01.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_爆星石啦]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/02.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_震惊]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/03.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_别样插花]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/04.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_猫爪在上]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/05.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_吓]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/06.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_现出原形]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/07.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_彩喵驾到]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/08.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_败]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/09.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_被画猫脸]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/10.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_干嘛]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/11.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_炸毛]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/12.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_心的力量]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/13.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_喵呜~]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/14.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_弹射起飞]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/15.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_幸福]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/16.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_无辜]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/17.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_美味魔法]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/18.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_安心]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/19.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_上菜]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/20.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_燃尽]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/21.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_大收获]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/22.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_猫猫光波]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/23.webp'>"
+      },
+      {
+        "text": "[邦邦豆泥_收下]",
+        "icon": "<img src='https://img.0v0.my/emoji/bangdream/bangdream-douni/24.webp'>"
+      }
+    ]
+  },
+  "GBC": {
+    "type": "image",
+    "container": [
+      {
+        "text": "[GBC_摇滚]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/00.webp'>"
+      },
+      {
+        "text": "[GBC_倔]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/01.webp'>"
+      },
+      {
+        "text": "[GBC_生气]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/02.webp'>"
+      },
+      {
+        "text": "[GBC_坏笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/03.webp'>"
+      },
+      {
+        "text": "[GBC_愣住]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/04.webp'>"
+      },
+      {
+        "text": "[GBC_哭泣]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/05.webp'>"
+      },
+      {
+        "text": "[GBC_噫]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/06.webp'>"
+      },
+      {
+        "text": "[GBC_开车]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/07.webp'>"
+      },
+      {
+        "text": "[GBC_哈哈]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/08.webp'>"
+      },
+      {
+        "text": "[GBC_哈？]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/09.webp'>"
+      },
+      {
+        "text": "[GBC_吐舌]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/10.webp'>"
+      },
+      {
+        "text": "[GBC_献花]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/11.webp'>"
+      },
+      {
+        "text": "[GBC_沉默]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/12.webp'>"
+      },
+      {
+        "text": "[GBC_wink]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/13.webp'>"
+      },
+      {
+        "text": "[GBC_乐]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/14.webp'>"
+      },
+      {
+        "text": "[GBC_害羞]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/15.webp'>"
+      },
+      {
+        "text": "[GBC_泪目]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/16.webp'>"
+      },
+      {
+        "text": "[GBC_不行]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/17.webp'>"
+      },
+      {
+        "text": "[GBC_郁闷]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/18.webp'>"
+      },
+      {
+        "text": "[GBC_咬牙切齿]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/19.webp'>"
+      },
+      {
+        "text": "[GBC_胸有成竹]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/20.webp'>"
+      },
+      {
+        "text": "[GBC_比心]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/21.webp'>"
+      },
+      {
+        "text": "[GBC_拜托]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/22.webp'>"
+      },
+      {
+        "text": "[GBC_嘲笑]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/23.webp'>"
+      },
+      {
+        "text": "[GBC_拜拜]",
+        "icon": "<img src='https://img.0v0.my/emoji/gbc/24.webp'>"
+      }
+    ]
   }
 }

@@ -5,6 +5,8 @@
   border: 1px #aaa solid;
   border-radius: 10px;
   z-index: 9999;
+  /* 大图不能挡住鼠标，否则 hover 会被自己打断 */
+  pointer-events: none;
   display: none;
   transform: translate(0, -105%);
   overflow: hidden;

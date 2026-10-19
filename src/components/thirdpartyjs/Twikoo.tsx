@@ -12,69 +12,139 @@ export function TwikooBaseComment() {
   const [tkloadState, setTkloadState] = useState<string>("加载中...");
 
   useEffect(() => {
+    // 悬浮放大。原来靠 MutationObserver 逐个给 .OwO-body/.tk-comment 挂
+    // onmouseover，twikoo 2.x 的 DOM 插入方式变了以后匹配不上，放大就失效了；
+    // 改成在评论容器上做事件委托，面板怎么重建都不用重新绑定。
     function owoBig() {
-      let flag = 1,
-        owo_time: NodeJS.Timeout | null = null,
-        m = 3;
-      const div = document.createElement("div"),
-        body = document.querySelector("body") as HTMLElement;
+      const m = 3;
+      // 同一页面重复挂载时先清掉旧容器，避免出现多个 #owo-big 互相盖住
+      document.querySelectorAll("#owo-big").forEach((el) => el.remove());
+      const div = document.createElement("div");
       div.id = "owo-big";
-      body.appendChild(div);
+      document.body.appendChild(div);
 
-      const observer = new MutationObserver((mutations) => {
-        for (let i = 0; i < mutations.length; i++) {
-          let dom = mutations[i].addedNodes,
-            owo_body: HTMLElement | null = null;
-          if (
-            dom.length == 2 &&
-            (dom[1] as HTMLElement).className == "OwO-body"
-          )
-            owo_body = dom[1] as HTMLElement;
-          else if (
-            dom.length == 1 &&
-            (dom[0] as HTMLElement).className == "tk-comment"
-          )
-            owo_body = dom[0] as HTMLElement;
-          else continue;
+      let owo_time: ReturnType<typeof setTimeout> | null = null;
+      let lastTarget: HTMLImageElement | null = null;
 
-          if (document.body.clientWidth <= 768)
-            owo_body.addEventListener("contextmenu", (e) => e.preventDefault());
+      const hide = () => {
+        div.style.display = "none";
+        div.innerHTML = "";
+        if (owo_time) clearTimeout(owo_time);
+        owo_time = null;
+        lastTarget = null;
+      };
 
-          owo_body.onmouseover = (e: MouseEvent) => {
-            const target = e.target as HTMLImageElement;
-            if (flag && target.tagName === "IMG") {
-              flag = 0;
-              owo_time = setTimeout(() => {
-                let height = target.clientHeight * m,
-                  width = target.clientWidth * m,
-                  left = e.x - e.offsetX - (width - target.clientWidth) / 2,
-                  top = e.y - e.offsetY;
+      const onMouseOver = (e: MouseEvent) => {
+        const target = e.target;
+        if (!(target instanceof HTMLImageElement) || target === lastTarget)
+          return;
+        hide();
+        lastTarget = target;
+        owo_time = setTimeout(() => {
+          const rect = target.getBoundingClientRect();
+          const height = rect.height * m,
+            width = rect.width * m;
+          let left = rect.left - (width - rect.width) / 2,
+            top = rect.top;
 
-                if (left + width > body.clientWidth)
-                  left -= left + width - body.clientWidth + 10;
-                if (left < 0) left = 10;
+          if (left + width > window.innerWidth)
+            left = window.innerWidth - width - 10;
+          if (left < 0) left = 10;
+          // 上方放不下就翻到图片下面（#owo-big 自己有 -105% 的位移）
+          if (top - height * 1.05 < 0) top = rect.bottom + height * 1.05;
 
-                div.style.cssText = `display:flex; height:${height}px; width:${width}px; left:${left}px; top:${top}px;`;
-                div.innerHTML = `<img src="${target.src}">`;
-              }, 300);
-            }
-          };
+          div.style.cssText = `display:flex; height:${height}px; width:${width}px; left:${left}px; top:${top}px;`;
+          div.innerHTML = `<img src="${target.currentSrc || target.src}">`;
+          owo_time = null;
+        }, 300);
+      };
 
-          owo_body.onmouseout = () => {
-            div.style.display = "none";
-            flag = 1;
-            if (owo_time) clearTimeout(owo_time);
-          };
+      const onMouseOut = (e: MouseEvent) => {
+        const target = e.target;
+        if (!(target instanceof HTMLImageElement)) return;
+        if (e.relatedTarget instanceof Node && target.contains(e.relatedTarget))
+          return;
+        hide();
+      };
+
+      // 手机端长按图片不要弹系统菜单（原来只给表情面板和评论挂了）
+      const onContextMenu = (e: MouseEvent) => {
+        if (window.innerWidth <= 768) e.preventDefault();
+      };
+
+      const root =
+        document.getElementById("post-comment-container") ?? document.body;
+      root.addEventListener("mouseover", onMouseOver);
+      root.addEventListener("mouseout", onMouseOut);
+      root.addEventListener("contextmenu", onContextMenu);
+
+      return () => {
+        root.removeEventListener("mouseover", onMouseOver);
+        root.removeEventListener("mouseout", onMouseOut);
+        root.removeEventListener("contextmenu", onContextMenu);
+        hide();
+        div.remove();
+      };
+    }
+
+    // 劫持表情点击：默认点击表情后 twikoo 会立即 toggle() 关闭 OwO 面板，
+    // 这里在捕获阶段拦截 .OwO-item 的点击，直接把表情 code 插入光标处并保留面板打开状态。
+    function keepOwOOpen() {
+      const root =
+        document.getElementById("post-comment-container") ?? document.body;
+
+      const handleItemClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+        const item = target.closest(".OwO-item") as HTMLElement | null;
+        if (!item) return;
+
+        // 阻止冒泡到 twikoo 原生 onItemClick（原生会在插入后执行 this.toggle() 关闭面板）
+        e.stopPropagation();
+        e.preventDefault();
+
+        const container = item.closest(".OwO");
+        const textarea =
+          (container?.closest(".tk-submit")?.querySelector("textarea") as HTMLTextAreaElement | null) ??
+          (document.querySelector(".tk-input textarea, textarea.tk-input__inner") as HTMLTextAreaElement | null);
+
+        if (!textarea) return;
+
+        let insertText = item.textContent ?? "";
+        const img = item.querySelector("img");
+        if (img) {
+          if (item.title) {
+            insertText = `:${item.title}: `;
+          } else {
+            const src = img.getAttribute("src");
+            insertText = src
+              ? `![](<${src.replace(/</g, "%3C").replace(/>/g, "%3E")}>)`
+              : "";
+          }
         }
-      });
 
-      const twikooElement = document.getElementById("twikoo");
-      if (twikooElement) {
-        observer.observe(twikooElement, { subtree: true, childList: true });
-      }
+        const start = textarea.selectionStart ?? textarea.value.length;
+        const end = textarea.selectionEnd ?? textarea.value.length;
+        const val = textarea.value;
+
+        textarea.value = val.slice(0, start) + insertText + val.slice(end);
+        const nextPos = start + insertText.length;
+        textarea.selectionStart = nextPos;
+        textarea.selectionEnd = nextPos;
+        textarea.dispatchEvent(new Event("input", { bubbles: true }));
+        textarea.focus();
+      };
+
+      root.addEventListener("click", handleItemClick, true);
+
+      return () => {
+        root.removeEventListener("click", handleItemClick, true);
+      };
     }
 
     const tk = require("twikoo");
+    let cleanupOwoBig: (() => void) | null = null;
+    let cleanupKeepOwOOpen: (() => void) | null = null;
     try {
       tk.init({
         envId: siteConfigs.twikooEnv,
@@ -87,12 +157,15 @@ export function TwikooBaseComment() {
         console.warn("评论加载失败", error);
         setTkloadState("评论暂时加载失败，可以刷新页面或稍后再试");
       });
-      owoBig();
+      cleanupOwoBig = owoBig();
+      cleanupKeepOwOOpen = keepOwOOpen();
     } catch (e) {
       setTkloadState("评论暂时加载失败，可以刷新页面或稍后再试");
     }
 
     return () => {
+      cleanupOwoBig?.();
+      cleanupKeepOwOOpen?.();
       const tkel = document.querySelector("#twikoo");
       if (tkel) {
         tkel.innerHTML = "";
