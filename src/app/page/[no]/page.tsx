@@ -2,6 +2,7 @@ import Posts from "components/PostCard";
 import { HomeASides } from "components/ASides";
 import { HomeRightSide } from "components/RightSide";
 import { notFound } from "next/navigation";
+import PostPageStart from "@/components/PostPageStart";
 
 export default async function Page({ params }: { params: Promise<{ no: string }> }) {
   const { no } = await params;
@@ -9,6 +10,7 @@ export default async function Page({ params }: { params: Promise<{ no: string }>
     return (
       <div id="main-container">
         <Posts page={parseInt(no)} />
+        <PostPageStart />
         <HomeASides />
         <HomeRightSide />
       </div>

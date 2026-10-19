@@ -136,3 +136,17 @@
 :root {
   --lmm-hover: var(--aria-theme) !important;
 }
+
+/* 第三方提示框挂在 body 下，继承不到朋友圈容器的主题设置。 */
+body:has(#hexo-circle-of-friends-root) .el-popper.is-light,
+body:has(#hexo-circle-of-friends-root) .el-popper.is-light .el-popper__arrow::before {
+  background: var(--aria-background) !important;
+  color: var(--aria-fontcolor) !important;
+  border: var(--aria-border) !important;
+}
+body:has(#hexo-circle-of-friends-root) .cf-summary-popover {
+  --el-text-color-primary: var(--aria-fontcolor);
+  --el-text-color-regular: var(--aria-fontcolor);
+  --el-fill-color-blank: var(--aria-background);
+  --el-bg-color: var(--aria-background);
+}

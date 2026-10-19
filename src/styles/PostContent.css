@@ -73,9 +73,9 @@
   -o-transform: translateX(10px);
 }
 
-#post-maincontent h1:not(.page h1)::before{
-  padding-left: 24px;
-  margin: 0;
+/* H1 图标仅占自身尺寸，不能再给伪元素加标题缩进，否则会覆盖文字。 */
+#post-maincontent h1:not(.page h1) {
+  padding-left: 34px;
 }
 
 @keyframes rotate {

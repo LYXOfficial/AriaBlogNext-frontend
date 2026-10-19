@@ -57,7 +57,8 @@ export default async function Posts({ page }: { page: number }) {
     else if (i && n - previous > 2) pagination.push(`gap-${previous}`);
     pagination.push(n);
   });
-  const pageHref = (n: number) => n === 1 ? "/" : `/page/${n}`;
+  // 分页连续浏览返回文章区；顶栏与 Logo 的首页入口仍保留 Banner。
+  const pageHref = (n: number) => `/page/${n}`;
   return (
     <div id="recent-posts">
       <PostCategoryBar data={data} type="categories" wrap={false} current="" />
