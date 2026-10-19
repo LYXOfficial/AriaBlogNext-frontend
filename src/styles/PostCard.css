@@ -29,7 +29,7 @@
 
 #recent-posts .post-card:hover {
   transform: translate(var(--card-parallax-x, 0px), var(--card-parallax-y, 0px));
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--aria-theme) 8%, transparent);
+  box-shadow: 0 0 3px var(--aria-theme);
 }
 
 #recent-posts .post-banner {

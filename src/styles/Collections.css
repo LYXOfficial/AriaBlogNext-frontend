@@ -302,21 +302,13 @@
 #post-maincontent .flink-section-divider {
   display: flex;
   align-items: center;
-  gap: 10px;
   margin: 38px 0 30px;
   height: 2px;
-}
-/* 呼应索引标题的短粉线，不另加一套装饰图案。 */
-.flink-section-divider::before {
-  content: "";
-  width: 28px;
-  flex-shrink: 0;
-  border-top: 2px solid var(--aria-theme);
 }
 .flink-section-divider::after {
   content: "";
   flex: 1;
-  border-top: 1px dashed color-mix(in srgb, var(--aria-fontcolor) 22%, transparent);
+  border-top: 2px dashed color-mix(in srgb, var(--aria-fontcolor) 22%, transparent);
 }
 .flink-section-divider > span { display: none; }
 @media (prefers-reduced-motion: reduce) {

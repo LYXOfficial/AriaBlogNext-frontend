@@ -22,7 +22,7 @@ export default function InitialLoader() {
     <div className={`initial-loader${leaving ? " initial-loader-leaving" : ""}`} aria-hidden="true">
       <div className="initial-loader-content">
         <span className="initial-loader-ring" />
-        <span className="initial-loader-label">加载小窝中…</span>
+        <span className="initial-loader-label">奋力加载中…</span>
       </div>
     </div>
   );

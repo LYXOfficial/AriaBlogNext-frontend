@@ -36,6 +36,7 @@
   -moz-border-radius: 12px;
   -ms-border-radius: 12px;
   -o-border-radius: 12px;
+  border: 1px solid transparent;
 }
 
 .aside-list-item-content {
@@ -54,15 +55,16 @@
 }
 
 .aside-list-item:hover {
-  background: var(--aria-theme);
+  background-color: color-mix(in srgb, var(--aria-theme) 10%, transparent 25%);
   color: var(--aria-white);
   transition: all var(--dur-slow) var(--ease-out);
   box-shadow: var(--aria-theme);
-  scale: 1.04;
+  scale: 1.03;
+  border: 1px solid color-mix(in srgb, var(--aria-theme) 50%, transparent 50%);
 }
 
-.aside-list-item:hover .aside-list-item-content-text {
-  color: var(--aria-white);
+.aside-list-item:hover .aside-list-item-content-text, .aside-list-item:hover .aside-list-item-content-title {
+  color: var(--aria-theme);
 }
 
 .aside-list-item-content-title {
@@ -72,12 +74,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
+  line-height: 1.5;
 }
 
 .aside-list-item-content {
   overflow: hidden;
-}
-
-.aside-list-item-content-title {
-  line-height: 1.5;
 }

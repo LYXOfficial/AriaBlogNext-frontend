@@ -1047,16 +1047,20 @@ span[style="undefined:invert"] {
   margin-top: 0 !important;
 }
 
+/* 黑幕默认模糊不可读，悬停或键盘聚焦后恢复，模糊半径与文字大小绑定以免影响行高。 */
 #post-maincontent del:not(#post-maincontent del.noheimu) {
-  background-color: black;
+  color: var(--aria-fontcolor);
   text-decoration: none;
-  color: black;
-  transition: all var(--dur-base) var(--ease-out);
-  margin: 0 5px;
+  filter: blur(0.25em);
+  background-color: color-mix(in srgb, var(--aria-fontcolor) 10%, transparent);
+  border-radius: 4px;
+  transition: filter var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+  margin: 0 2px;
 }
 
-#post-maincontent del:not(#post-maincontent del.noheimu):hover {
-  color: white;
+#post-maincontent del:not(#post-maincontent del.noheimu):is(:hover, :focus-visible) {
+  filter: none;
+  background-color: transparent;
 }
 
 #post-maincontent code:not(#post-maincontent pre.hljs code) {

@@ -4,14 +4,15 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 5px 10px;
+  padding: 4px 12px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--aria-theme) 4%, transparent), transparent 58%), var(--aria-acrylic2);
   box-sizing: border-box;
-  min-height: 36px;
+  min-height: 24px;
 }
 
 #posts-categories-bar-container {
   display: flex;
-  margin-left: 10px !important;
   min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -35,7 +36,9 @@
 }
 
 .posts-categories-bar-item {
-  padding: 3px 5px;
+  padding: 3px 7px;
+  align-items: center;
+  gap: 5px;
   margin-right: 5px;
   white-space: nowrap;
 }
@@ -43,25 +46,26 @@
 .posts-categories-bar-item-count {
   color: var(--aria-light-fontcolor);
   font-size: 12px;
-  margin-bottom: auto;
+  line-height: 1;
+  align-self: center;
 }
 
 .posts-categories-bar-item {
   display: flex;
-  border-radius: 20px;
+  border-radius: 15px;
   transition: all var(--dur-base) var(--ease-out);
 }
 
 .posts-categories-bar-item:hover,
 .posts-categories-bar-item.current {
-  background-color: var(--aria-theme);
+  background-color: color-mix(in srgb, var(--aria-theme) 12%, transparent);
   cursor: pointer;
-  box-shadow: 0 0 4px var(--aria-theme);
+  box-shadow: none;
 }
 
 .posts-categories-bar-item:hover > *,
 .posts-categories-bar-item.current > * {
-  color: white !important;
+  color: var(--aria-theme) !important;
 }
 
 #posts-categories-bar svg {
@@ -77,6 +81,21 @@
 
 .post-categories-bar-icon-link {
   display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 5px 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: color var(--dur-slow) var(--ease-out), background var(--dur-slow) var(--ease-out);
+}
+.post-categories-bar-icon-link:hover {
+  color: var(--aria-theme);
+  background: color-mix(in srgb, var(--aria-theme) 12%, transparent);
+}
+#posts-categories-bar a:focus-visible { outline: 2px solid var(--aria-theme); outline-offset: 2px; }
+@media screen and (max-width: 680px) {
+  #posts-categories-bar { padding: 8px; }
 }
 
 .post-categories-bar-icon-link > svg {

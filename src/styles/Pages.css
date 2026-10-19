@@ -31,3 +31,10 @@
   max-width: 1500px;
   margin: 0 auto;
 }
+
+/* 独立页面原本没有评论区分隔；文章页自带分隔，这里只补 page 场景。 */
+#post-maincontent.page + #post-comment-container {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 2px dashed var(--aria-gray);
+}

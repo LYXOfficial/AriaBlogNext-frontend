@@ -23,11 +23,7 @@
   line-height: 2;
   margin: 4px 0;
   padding: 1px 6px;
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
+  border-radius: 12px;
   transition: all var(--dur-base) var(--ease-out);
   box-sizing: border-box;
   margin-left: 4px;
@@ -53,9 +49,8 @@
 }
 
 .toc-link.active {
-  background-color: var(--aria-theme);
-  color: white;
-  box-shadow: 0 0 5px 1px var(--aria-theme);
+  background-color: color-mix(in srgb, var(--aria-theme) 20%, transparent 25%);
+  color: var(--aria-theme);
 }
 
 /* 锚点在页面上不存在（JSX 块内部的伪标题）时不显示 */

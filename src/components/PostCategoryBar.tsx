@@ -35,7 +35,7 @@ export default function PostCategoryBar({
   }, [wrap]);
   return (
     <div id="posts-categories-bar" className="card-widget">
-      <Link className="post-categories-bar-icon-link" href={`/${type}`}>
+      <Link className="post-categories-bar-icon-link" href="/page/1" aria-label="全部文章">
         <Icon
           icon={type == "categories" ? "fa6-solid:list-ul" : "fa6-solid:tags"}
         />
@@ -50,7 +50,8 @@ export default function PostCategoryBar({
             <Link
               className={`posts-categories-bar-item${item.name == current ? " current" : ""}`}
               key={item.name}
-              href={`/${type}/${item.name}`}
+              href={`/${type}/${encodeURIComponent(item.name)}`}
+              aria-current={item.name === current ? "page" : undefined}
               ref={item.name == current ? currentRef : null}
             >
               <span className="posts-categories-bar-item-name">
