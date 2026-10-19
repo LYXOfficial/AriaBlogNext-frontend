@@ -1,10 +1,71 @@
+/* 统计值作为主体、标签退后；沿用侧栏卡片的底色与圆角。 */
+.card-webinfo .card-body {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-top: 4px;
+  border-top: var(--aria-border);
+}
+
+/* 前四项各占三列、两行构成 2×2。 */
 .card-webinfo-item {
   display: flex;
-  line-height: 2;
-  padding: 2px 10px 0;
+  flex-direction: column-reverse;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px;
+  grid-column: span 3;
+}
+
+.card-webinfo-item:nth-child(-n + 4) {
+  border-bottom: var(--aria-border);
+}
+
+.card-webinfo-item:nth-child(1),
+.card-webinfo-item:nth-child(3) {
+  border-right: var(--aria-border);
+}
+
+.card-webinfo-item-left {
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .card-webinfo-item-right {
-  flex-grow: 1;
-  text-align: right;
+  color: var(--aria-fontcolor);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 后三项并排挤在一行，每项两列；标签在上、数字在下。 */
+.card-webinfo-item:nth-child(n + 5) {
+  grid-row: 3;
+  grid-column: span 2;
+  align-items: center;
+  padding: 9px 2px;
+  text-align: center;
+}
+
+.card-webinfo-item:nth-child(5),
+.card-webinfo-item:nth-child(6) {
+  border-right: var(--aria-border);
+}
+
+.card-webinfo-item:nth-child(n + 5) .card-webinfo-item-left {
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+}
+
+.card-webinfo-item:nth-child(n + 5) .card-webinfo-item-right {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.card-webinfo-item:last-child .card-webinfo-item-right:empty::before {
+  content: "加载中";
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
 }

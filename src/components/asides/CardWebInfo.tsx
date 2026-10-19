@@ -52,41 +52,41 @@ export default async function CardWebInfo() {
       </div>
       <div className="card-body">
         <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">文章数目 :</span>
+          <span className="card-webinfo-item-left">文章数目</span>
           <span className="card-webinfo-item-right">{postCount}</span>
         </div>
         <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">运行天数 :</span>
-          <span className="card-webinfo-item-right">{runDays} 天</span>
-        </div>
-        <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">文章字数 :</span>
+          <span className="card-webinfo-item-left">文章字数</span>
           <span className="card-webinfo-item-right">
             {Math.floor(wordCount / 100) / 100}w
           </span>
         </div>
         <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">总访客数 :</span>
-          <span
-            className="card-webinfo-item-right"
-            id="busuanzi_value_site_uv"
-          ></span>
+          <span className="card-webinfo-item-left">运行天数</span>
+          <span className="card-webinfo-item-right">{runDays} 天</span>
         </div>
         <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">总浏览量 :</span>
+          <span className="card-webinfo-item-left">上次更新</span>
+          <span className="card-webinfo-item-right">
+            {relativeTime(lastUpdatedTime)}
+          </span>
+        </div>
+        <div className="card-webinfo-item">
+          <span className="card-webinfo-item-left">总浏览量</span>
           <span
             className="card-webinfo-item-right"
             id="busuanzi_value_site_pv"
           ></span>
         </div>
         <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">上次更新 :</span>
-          <span className="card-webinfo-item-right">
-            {relativeTime(lastUpdatedTime)}
-          </span>
+          <span className="card-webinfo-item-left">总访客数</span>
+          <span
+            className="card-webinfo-item-right"
+            id="busuanzi_value_site_uv"
+          ></span>
         </div>
         <div className="card-webinfo-item">
-          <span className="card-webinfo-item-left">评论总数 :</span>
+          <span className="card-webinfo-item-left">评论总数</span>
           <span className="card-webinfo-item-right commentcount"></span>
         </div>
       </div>
