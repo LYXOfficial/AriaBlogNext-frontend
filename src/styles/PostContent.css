@@ -837,17 +837,39 @@ table:not(code table) {
   position: relative;
 }
 
+/* 移动浏览器可能分别放大代码与行号；局部统一排版，不禁用页面缩放。 */
+#post-maincontent pre.hljs {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-left: 10px;
+}
+
+#post-maincontent pre.hljs :is(code, table, tbody, tr, td, div, span) {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+#post-maincontent .hljs-ln { border-collapse: collapse; border-spacing: 0; }
+#post-maincontent .hljs-ln td { vertical-align: top; }
+
 .hljs-ln-numbers {
-  position: absolute;
-  width: 34px;
-  padding-right: 10px;
-  left: 0;
+  /* 保持同一表格行内排版，代码折行时行号仍与首行对齐。 */
+  position: static;
+  /* 按最大行号自然撑开，避免两位数字前仍留一大块空位。 */
+  width: 1%;
+  min-width: 0;
+  padding-right: 8px !important;
   text-align: right;
+  white-space: nowrap;
+  user-select: none;
   background-color: #fafafa;
 }
 
 .hljs-ln-code {
-  padding-left: 28px !important;
+  padding-left: 6px !important;
 }
 
 @media (prefers-color-scheme: dark) {

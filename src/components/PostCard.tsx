@@ -10,6 +10,7 @@ import PostCategoryBar from "components/PostCategoryBar";
 import ImageWithFalldown from "./ImageWithFalldown";
 import { Category } from "@/interfaces/category";
 import React from "react";
+import PostCardParallax from "./PostCardParallax";
 
 export default async function Posts({ page }: { page: number }) {
   if (page < 1) return notFound();
@@ -44,6 +45,19 @@ export default async function Posts({ page }: { page: number }) {
   } catch {
     data = [];
   }
+  // 首尾页固定保留；较短的缺口直接补齐，避免出现只省略一页的跳跃。
+  const visiblePages = new Set([1, maxPage, page - 1, page, page + 1]);
+  if (page <= 3) [2, 3, 4].forEach((n) => visiblePages.add(n));
+  if (page >= maxPage - 2) [maxPage - 3, maxPage - 2, maxPage - 1].forEach((n) => visiblePages.add(n));
+  const pageNumbers = [...visiblePages].filter((n) => n >= 1 && n <= maxPage).sort((a, b) => a - b);
+  const pagination: (number | string)[] = [];
+  pageNumbers.forEach((n, i) => {
+    const previous = pageNumbers[i - 1];
+    if (i && n - previous === 2) pagination.push(previous + 1);
+    else if (i && n - previous > 2) pagination.push(`gap-${previous}`);
+    pagination.push(n);
+  });
+  const pageHref = (n: number) => n === 1 ? "/" : `/page/${n}`;
   return (
     <div id="recent-posts">
       <PostCategoryBar data={data} type="categories" wrap={false} current="" />
@@ -137,45 +151,35 @@ export default async function Posts({ page }: { page: number }) {
           </div>
         );
       })}
-      <nav className="post-card-pgwrap">
-        {page - 2 > 0 ? (
-          <Link className="post-card-pgbtn" href="/page/1">
-            1
-          </Link>
-        ) : (
-          <></>
-        )}
-        {page - 3 > 0 ? <span className="post-card-spec">...</span> : <></>}
-        {page - 1 > 0 ? (
-          <Link className="post-card-pgbtn" href={`/page/${page - 1}`}>
-            {page - 1}
-          </Link>
-        ) : (
-          <></>
-        )}
-        <Link className="post-card-pgbtn current" href={`/page/${page}`}>
-          {page}
-        </Link>
-        {page + 1 <= maxPage ? (
-          <Link className="post-card-pgbtn" href={`/page/${page + 1}`}>
-            {page + 1}
-          </Link>
-        ) : (
-          <></>
-        )}
-        {page + 3 <= maxPage ? (
-          <span className="post-card-spec">...</span>
-        ) : (
-          <></>
-        )}
-        {page + 2 <= maxPage ? (
-          <Link className="post-card-pgbtn" href={`/page/${maxPage}`}>
-            {maxPage}
-          </Link>
-        ) : (
-          <></>
-        )}
+      <nav className="post-card-pgwrap" aria-label="文章列表分页">
+        <div className="post-card-pgsummary">第 <strong>{page}</strong> / {maxPage} 页 · 共 {postTotal} 篇文章</div>
+        <div className="post-card-pgcontrols">
+          {page > 1 ? (
+            <Link className="post-card-pgbtn post-card-pgstep" href={pageHref(page - 1)} rel="prev" aria-label="上一页">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+            </Link>
+          ) : (
+            <span className="post-card-pgbtn post-card-pgstep disabled" aria-disabled="true" aria-label="上一页"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg></span>
+          )}
+          <div className="post-card-pgpages">
+            {pagination.map((n) => typeof n === "string" ? (
+              <span className="post-card-pgellipsis" key={n} aria-label="省略的页码">…</span>
+            ) : n === page ? (
+              <span className="post-card-pgbtn current" key={n} aria-current="page" aria-label={`第 ${n} 页，当前页`}>{n}</span>
+            ) : (
+              <Link className="post-card-pgbtn" key={n} href={pageHref(n)} aria-label={`第 ${n} 页`}>{n}</Link>
+            ))}
+          </div>
+          {page < maxPage ? (
+            <Link className="post-card-pgbtn post-card-pgstep" href={pageHref(page + 1)} rel="next" aria-label="下一页">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
+            </Link>
+          ) : (
+            <span className="post-card-pgbtn post-card-pgstep disabled" aria-disabled="true" aria-label="下一页"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg></span>
+          )}
+        </div>
       </nav>
+      <PostCardParallax />
       <TwikooCountHome />
     </div>
   );

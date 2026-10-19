@@ -19,6 +19,13 @@
   scrollbar-width: none;
 }
 
+/* 横向滚动不能同时让纵向溢出可见；在滚动区内给发光留空间，
+   再抵消外侧间距，避免增加分类栏高度。 */
+#posts-categories-bar #posts-categories-bar-container {
+  padding: 5px;
+  margin-block: -5px;
+}
+
 #posts-categories-bar-container::-webkit-scrollbar {
   height: 0px;
 }
@@ -41,11 +48,7 @@
 
 .posts-categories-bar-item {
   display: flex;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
+  border-radius: 20px;
   transition: all var(--dur-base) var(--ease-out);
 }
 
@@ -53,6 +56,7 @@
 .posts-categories-bar-item.current {
   background-color: var(--aria-theme);
   cursor: pointer;
+  box-shadow: 0 0 4px var(--aria-theme);
 }
 
 .posts-categories-bar-item:hover > *,

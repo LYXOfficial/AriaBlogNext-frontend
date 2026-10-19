@@ -22,7 +22,13 @@
 .rightbutton {
   width: 35px;
   height: 35px;
+  display: grid;
   place-items: center;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 1;
+  -webkit-appearance: none;
+  appearance: none;
   margin-bottom: 6px;
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -51,6 +57,6 @@
 
 @media screen and (max-width: 900px) {
   .rightbutton.rightbutton-toc {
-    display: block !important;
+    display: grid !important;
   }
 }
