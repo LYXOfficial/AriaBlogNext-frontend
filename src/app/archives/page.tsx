@@ -9,8 +9,10 @@ import { ArchiveListItem } from "@/interfaces/asidelistitem";
 import { Post } from "@/interfaces/post";
 import Link from "next/link";
 import ArchiveItem from "@/components/Archives";
+import CollectionHeader from "@/components/CollectionHeader";
 export default async function Page() {
   const ArchiveContent: ReactElement[] = [];
+  let total = 0;
   const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, {
     next: { revalidate: 7200, tags: ["posts"] },
   });
@@ -40,10 +42,12 @@ export default async function Page() {
       );
     });
     Archives.forEach((value, key) => {
+      total += value.length;
       ArchiveContent.push(
         <div key={key} className="archive-year">
           <h2 className="archive-year-title">
             <Link href={`/archives/${key}`}>{key}</Link>
+            <span className="archive-year-count">{value.length} 篇</span>
           </h2>
           {value.map((post) => (
             <ArchiveItem key={post.slug} post={post} type="archives" />
@@ -57,9 +61,7 @@ export default async function Page() {
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <h1>
-            <Link href="/archives">归档</Link>
-          </h1>
+          <CollectionHeader eyebrow="这里是时间线上的所有文章" title="归档" extra={<span className="collection-stat"><b>{total}</b> 篇文章</span>} />
           <div id="archives-container">{ArchiveContent}</div>
         </div>
       </div>

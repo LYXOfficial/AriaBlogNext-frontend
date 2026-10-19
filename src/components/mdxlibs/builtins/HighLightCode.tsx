@@ -1,4 +1,5 @@
 "use client";
+import AnimatedDetails from "./AnimatedDetails";
 import ansi2html from "ansi2html";
 // 只打包常用语言（约 35 种）；未收录的语言会自动回退为纯文本
 import hljs from "highlight.js/lib/common";
@@ -612,8 +613,7 @@ export default function HighLightCode({
   };
 
   return (
-    <details className="hljs-folder" open>
-      <summary>
+    <AnimatedDetails className="hljs-folder" defaultOpen summary={<>
         <span className="hljs-lang-icon">
           {codeIcons[language.toLowerCase() as keyof typeof codeIcons] ??
             codeIcons["text"]}
@@ -633,7 +633,7 @@ export default function HighLightCode({
         >
           <Icon icon="fa6-solid:copy" />
         </button>
-      </summary>
+      </>}>
       <pre
         ref={codeRef}
         className={`hljs language-${language} ${isWrapped ? "wrap" : ""}`}
@@ -641,6 +641,6 @@ export default function HighLightCode({
       >
         <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
       </pre>
-    </details>
+    </AnimatedDetails>
   );
 }

@@ -12,7 +12,9 @@ import dayjs from "dayjs";
 import ImageWithFalldown from "@/components/ImageWithFalldown";
 import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
-import PostCategoryBar from "@/components/PostCategoryBar";
+import CollectionHeader from "@/components/CollectionHeader";
+import TagIndex from "@/components/TagIndex";
+import CollectionSwitcher from "@/components/CollectionSwitcher";
 import ArchiveItem from "@/components/Archives";
 export default async function Page({ params }: { params: Promise<{ tag: string }> }) {
   const { tag } = await params;
@@ -57,9 +59,6 @@ export default async function Page({ params }: { params: Promise<{ tag: string }
     Archives.forEach((value, key) => {
       ArchiveContent.push(
         <div key={key} className="archive-year">
-          <h2 className="archive-year-title">
-            <Link href={`/tags/${key}`}>{key}</Link>
-          </h2>
           {value.map((post) => (
             <ArchiveItem key={post.slug} post={post} type="tags" />
           ))}
@@ -72,15 +71,11 @@ export default async function Page({ params }: { params: Promise<{ tag: string }
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <h1 style={{ marginBottom: 20 }}>
-            <Link href="/tags">标签</Link>
-          </h1>
-          <PostCategoryBar
-            data={data}
-            type="tags"
-            current={decodedTag}
-            wrap={true}
-          />
+          <Link className="collection-back" href="/tags"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m14 6-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg><span>全部标签</span></Link>
+          <CollectionHeader eyebrow="标签里的文章" title={decodedTag} extra={<span className="collection-stat"><b>{data.find(item => item.name === decodedTag)?.count ?? 0}</b> 篇文章</span>} />
+          <CollectionSwitcher label="切换标签">
+            <TagIndex tags={data} type="tags" current={decodedTag} />
+          </CollectionSwitcher>
           <div id="archives-container">{ArchiveContent}</div>
         </div>
       </div>

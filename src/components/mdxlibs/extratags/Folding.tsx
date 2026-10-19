@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import colorName from "color-name";
+import AnimatedDetails from "../builtins/AnimatedDetails";
 
 export default function FoldingTag({
   children,
@@ -14,21 +15,23 @@ export default function FoldingTag({
 }) {
   color = color ?? "gray";
   return (
-    <details
-      className={`etag-folding${open ? " open" : ""}`}
+    <AnimatedDetails
+      className="etag-folding"
+      defaultOpen={open}
       style={{
         border: `2px solid rgba(${colorName[color as keyof typeof colorName]},.3)`,
       }}
-    >
-      <summary
+      summary={<span
         className="etag-folding-summary"
         style={{
           backgroundColor: `rgba(${colorName[color as keyof typeof colorName]},.15)`,
         }}
       >
+        <svg className="etag-folding-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
         {summary}
-      </summary>
+      </span>}
+    >
       <div className="etag-folding-content">{children}</div>
-    </details>
+    </AnimatedDetails>
   );
 }

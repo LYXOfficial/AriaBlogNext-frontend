@@ -7,8 +7,8 @@ import { FriendLinkItem } from "./FriendLinkItem";
 export function FriendLinkGroupItem({ group }: { group: FriendLinkGroup }) {
   return (
     <div className="flink-group">
-      <h2>{group.name}</h2>
-      <span>{group.description}</span>
+      <h2 className="flink-group-heading">{group.name}<span className="flink-group-count">{group.links.length} 位朋友</span></h2>
+      <span className="flink-group-description">{group.description}</span>
       <div className="flink-group-item">
         {group.links.map((link) => (
           <FriendLinkItem key={link.url} link={link} />

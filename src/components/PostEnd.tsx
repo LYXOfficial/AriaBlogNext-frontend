@@ -94,7 +94,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
       </div>
       <div id="postend-tagbar">
         <div id="postend-tags">
-          {postInfo.tags!.map((tag, index) => {
+          {Array.from(new Set(postInfo.tags ?? [])).map((tag) => {
             return (
               <a
                 className="postend-tag"

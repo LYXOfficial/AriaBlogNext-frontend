@@ -5,8 +5,8 @@ import "styles/Archives.css";
 import { HomeRightSide } from "@/components/RightSide";
 import { siteConfigs } from "@/config";
 import { Category } from "@/interfaces/category";
-import Link from "next/link";
-import PostCategoryBar from "@/components/PostCategoryBar";
+import CollectionHeader from "@/components/CollectionHeader";
+import TagIndex from "@/components/TagIndex";
 export default async function Page() {
   const res = await fetch(`${siteConfigs.backEndUrl}/get/tag/tags`, {
     next: { revalidate: 7200, tags: ["posts"] },
@@ -21,10 +21,8 @@ export default async function Page() {
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <h1 style={{ marginBottom: 20 }}>
-            <Link href="/tags">标签</Link>
-          </h1>
-          <PostCategoryBar data={data} type="tags" wrap={true} current="" />
+          <CollectionHeader eyebrow="话题索引" title="标签" extra={<span className="collection-stat"><b>{data.length}</b> 个话题</span>} />
+          <TagIndex tags={data} />
         </div>
       </div>
       <HomeRightSide />

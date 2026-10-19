@@ -19,17 +19,22 @@
   overflow-wrap: anywhere;
 }
 
-/* 公式不可按普通文字断行；限制公式自身宽度并允许横向滚动，避免盖住侧栏。
-   行内公式也可能很长，不能只处理 .katex-display。 */
+/* 滚动交给外层，KaTeX 保持自然宽度，避免短公式的内部舍入溢出。 */
 #post-maincontent .katex {
+  overflow-wrap: normal;
+}
+#post-maincontent .aria-math-inline {
   display: inline-block;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   vertical-align: middle;
-  padding-block: 0.2em;
+  padding: 0.2em 2px;
   box-sizing: border-box;
-  overflow-wrap: normal;
+}
+#post-maincontent .aria-math-inline > .katex {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 #post-maincontent .katex-display {
@@ -38,6 +43,17 @@
   overflow-y: hidden;
   padding-block: 0.2em;
 }
+
+#post-maincontent :is(.aria-math-inline, .katex-display) {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--aria-fontcolor) 25%, transparent) transparent;
+}
+#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar { height: 4px; }
+#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--aria-fontcolor) 25%, transparent);
+  border-radius: 4px;
+}
+#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar-track { background: transparent; }
 
 /* 居中只作用于可容纳的公式；超宽时从左端开始，保证开头也能滚动查看。 */
 #post-maincontent .katex-display > .katex {
@@ -275,24 +291,6 @@ table:not(code table) {
   margin: 2px 5px;
 }
 
-@keyframes code-expand {
-  0% {
-    max-height: 2.5em;
-  }
-  100% {
-    max-height: 1000px;
-  }
-}
-
-.hljs-folder:not([open]) {
-  max-height: 2.5em;
-  overflow: hidden;
-}
-
-.hljs-folder[open] {
-  animation: code-expand 0.8s;
-}
-
 .hljs-folder {
   border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -329,7 +327,7 @@ table:not(code table) {
   margin-top: -10px;
 }
 
-.hljs-folder[open] summary::after {
+.hljs-folder[data-expanded="true"] summary::after {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -507,24 +505,6 @@ table:not(code table) {
   .etag-link {
     background: #2c2c2c;
   }
-}
-
-@keyframes folding-expand {
-  0% {
-    max-height: 3em;
-  }
-  100% {
-    max-height: 1000px;
-  }
-}
-
-.etag-folding:not([open]) {
-  max-height: 3em;
-  overflow: hidden;
-}
-
-.etag-folding[open] {
-  animation: folding-expand 0.8s;
 }
 
 .etag-folding {
@@ -1100,4 +1080,15 @@ span[style="undefined:invert"] {
 .fancybox-img-a > .lazy-load-image-background {
   margin: 0 auto;
   max-width: min(400px, 100%);
+}
+
+/* summary 的原生三角与旧 max-height 动画由统一的可逆折叠取代。 */
+.etag-folding > summary { list-style: none; padding: 0; }
+.etag-folding > summary::-webkit-details-marker { display: none; }
+.etag-folding-summary { display: flex; align-items: center; gap: 8px; }
+.etag-folding-arrow { display: block; flex-shrink: 0; transition: transform 0.8s var(--ease-out); }
+.etag-folding[data-expanded="true"] .etag-folding-arrow { transform: rotate(90deg); }
+.hljs-folder summary::after { transition: transform 0.8s var(--ease-out); }
+@media (prefers-reduced-motion: reduce) {
+  .etag-folding-arrow, .hljs-folder summary::after { transition: none; }
 }

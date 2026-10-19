@@ -100,8 +100,8 @@
 }
 
 .archive-item-category:hover {
-  background-color: var(--aria-theme);
-  color: white;
+  background-color: color-mix(in srgb, var(--aria-theme) 30%, transparent);
+  border-color: var(--aria-theme);
 }
 
 #post-maincontent.archives {
