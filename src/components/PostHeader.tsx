@@ -26,21 +26,19 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
           <div className="post-metas">
             <div className="post-metas-firstline">
               <div className="post-meta post-publishdate">
-                <Icon icon="solar:calendar-date-bold" />
+                <Icon icon="fa6-solid:calendar-days" />
                 <span className="post-meta-content">
                   {"发表于 " +
-                    dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD") +
-                    " |"}
+                    dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD")}
                 </span>
               </div>
               <div className="post-meta post-lastupdatedate">
-                <Icon icon="solar:calendar-date-bold" />
+                <Icon icon="fa6-solid:calendar-days" />
                 <span className="post-meta-content">
                   {"更新于 " +
                     dayjs
                       .unix(postInfo.lastUpdatedTime!)
-                      .format("YYYY-MM-DD") +
-                    " |"}
+                      .format("YYYY-MM-DD")}
                 </span>
               </div>
               <div className="post-meta post-category">
@@ -49,18 +47,14 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                   <a href={"/categories/" + postInfo.category}>
                     {postInfo.category}
                   </a>
-                  <span>&nbsp;| </span>
                 </span>
               </div>
               <div className="post-meta post-tags">
                 <Icon icon="solar:tag-bold" />
                 <span className="post-meta-content">
-                  {postInfo.tags?.slice(0, 5).map((tag, index) => {
+                  {[...new Set(postInfo.tags ?? [])].slice(0, 5).map((tag) => {
                     return (
-                      <div key={tag}>
-                        {index ? <span>·</span> : <></>}
-                        <Link href={"/tags/" + tag}>{tag}</Link>
-                      </div>
+                      <Link key={tag} href={"/tags/" + encodeURIComponent(tag)}>{tag}</Link>
                     );
                   })}
                 </span>
@@ -70,7 +64,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
               <div className="post-meta post-wordcount">
                 <Icon icon="solar:document-text-bold" />
                 <span className="post-meta-content">
-                  {`字数总计: ${(postInfo.wordCount as number) >= 1000 ? ((postInfo.wordCount as number) / 1000).toFixed(1) + "k" : (postInfo.wordCount as number)} |`}
+                  {`字数总计: ${(postInfo.wordCount as number) >= 1000 ? ((postInfo.wordCount as number) / 1000).toFixed(1) + "k" : (postInfo.wordCount as number)}`}
                 </span>
               </div>
               <div className="post-meta post-wordcount">
@@ -78,14 +72,13 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 <span className="post-meta-content">
                   {`阅读量:`}&nbsp;
                   <span id="busuanzi_value_page_pv" />
-                  &nbsp;{` |`}
                 </span>
                 <Busuanzi />
               </div>
               <div className="post-meta post-wordcount">
                 <Icon icon="solar:clock-circle-bold" />
                 <span className="post-meta-content">
-                  {`阅读用时: ${Math.floor((postInfo.wordCount as number) / 300)} 分钟 |`}
+                  {`阅读用时: ${Math.floor((postInfo.wordCount as number) / 300)} 分钟`}
                 </span>
               </div>
               <div className="post-meta post-commentcount">

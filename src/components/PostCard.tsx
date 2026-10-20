@@ -115,36 +115,30 @@ export default async function Posts({ page }: { page: number }) {
                 </Link>
                 <div className="post-meta post-publishdate">
                   <Icon
-                    icon="solar:calendar-date-bold"
+                    icon="fa6-solid:calendar-days"
                   />
                   <span className="post-meta-content">
                     {"发表于 " +
-                      dayjs.unix(post.publishTime!).format("YYYY-MM-DD") +
-                      " |"}
+                      dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
                   </span>
                 </div>
                 <div className="post-meta post-lastupdatedate">
                   <Icon
-                    icon="solar:calendar-date-bold"
+                    icon="fa6-solid:calendar-days"
                   />
                   <span className="post-meta-content">
                     {"更新于 " +
-                      dayjs.unix(post.lastUpdatedTime!).format("YYYY-MM-DD") +
-                      " |"}
+                      dayjs.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}
                   </span>
                 </div>
                 <div className="post-meta post-tags">
                   <Icon icon="solar:tag-bold" />
                   <span className="post-meta-content">
-                    {post.tags?.slice(0, 5).map((tag, index) => {
+                    {[...new Set(post.tags ?? [])].slice(0, 5).map((tag) => {
                       return (
-                        <div key={tag}>
-                          {index ? <span>·</span> : <></>}
-                          <Link href={"/tags/" + tag}>{tag}</Link>
-                        </div>
+                        <Link key={tag} href={"/tags/" + encodeURIComponent(tag)}>{tag}</Link>
                       );
                     })}
-                    <span> |</span>
                   </span>
                 </div>
                 <div className="post-meta post-commentcount">

@@ -82,6 +82,7 @@
   line-height: 1.3;
   text-decoration: none;
   transition: color var(--dur-base) var(--ease-out);
+  margin-bottom: 1px;
 }
 
 #recent-posts .post-title:hover {
@@ -97,7 +98,7 @@
   overflow-wrap: anywhere;
   color: var(--aria-fontcolor);
   opacity: 0.85;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.85;
 }
 
@@ -105,13 +106,17 @@
 #recent-posts .post-metas {
   /* 分类相对整张卡片定位，页脚不能成为它的定位祖先。 */
   position: static;
-  /* 与标题、摘要共同居中，不用自动外边距撑开短摘要下方的空白。 */
+  /* 整组换行，避免评论数、日期和图标被拆开。 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
   margin-top: 0;
   padding-top: 12px;
   min-height: 0;
   color: var(--aria-light-fontcolor);
   font-size: 14px;
-  line-height: 1.9;
+  line-height: 1.6;
   overflow-wrap: anywhere;
 }
 
@@ -119,35 +124,51 @@
   content: "";
   display: block;
   margin-top: 0;
-  margin-bottom: 12px;
-  width: 34px;
-  /* 用边框画等粗实线，不让圆角和小数坐标的背景栅格化削弱线条。 */
-  height: 0;
-  border-top: 3px solid color-mix(in srgb, var(--aria-theme) 60%, transparent);
+  margin-bottom: 6px;
+  flex-basis: 100%;
+  /* 占独立一行，但装饰线仍只画 34px，不拉成整条横线。 */
+  height: 3px;
+  background: linear-gradient(color-mix(in srgb, var(--aria-theme) 60%, transparent), color-mix(in srgb, var(--aria-theme) 60%, transparent)) left / 34px 3px no-repeat;
 }
 
 #recent-posts .post-meta {
-  display: inline;
-  margin-right: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
 }
 
-#recent-posts .post-card .post-meta svg {
-  width: 12px;
-  height: 12px;
-  vertical-align: -1px;
+#recent-posts .post-card .post-meta > svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.8;
 }
 
 #recent-posts .post-meta-content {
-  margin-left: 3px;
+  min-width: 0;
 }
 
-#recent-posts .post-tags * {
-  display: inline;
+#recent-posts .post-meta:not(.post-tags) .post-meta-content {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+#recent-posts .post-tags {
+  flex: 0 1 auto;
+}
+
+#recent-posts .post-tags .post-meta-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
 }
 
 #recent-posts .post-tags a {
   color: inherit;
-  margin: 0 2px;
+  text-decoration: none;
+  transition: color var(--dur-base) var(--ease-out);
 }
 
 #recent-posts .post-tags a:hover {
@@ -172,6 +193,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+#recent-posts .post-card.first-page:nth-child(2) .post-category:hover::after {
+  border-left-color: var(--aria-theme);
+}
+
+#recent-posts .post-category:hover {
+  color: var(--aria-theme);
 }
 
 #recent-posts .post-card.first-page:nth-child(2) .post-category::after {

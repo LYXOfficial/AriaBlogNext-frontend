@@ -48,6 +48,7 @@
 
 .card-viewmore {
   transition: all var(--dur-base) var(--ease-out);
+  line-height: 0;
 }
 
 .card-viewmore:hover {

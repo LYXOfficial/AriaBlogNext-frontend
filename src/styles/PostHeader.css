@@ -62,18 +62,65 @@
   backdrop-filter: blur(8px);
 }
 
-#post-banner .post-meta-content,
-#post-banner .post-meta {
+/* 页头和列表使用相同的整组换行规则，不再依赖内联空格与竖线。 */
+#post-banner .post-metas {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-#post-banner .post-meta > * {
-  margin: auto 0;
-  margin-left: 5px;
+#post-banner .post-metas-firstline,
+#post-banner .post-metas-secondline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+
+#post-banner .post-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 14px;
+}
+
+#post-banner .post-meta > svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  align-self: center;
+  flex-shrink: 0;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+#post-banner .post-meta-content {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+
+#post-banner .post-meta-content > * {
+  line-height: inherit;
+}
+
+#post-banner .post-meta:not(.post-tags) .post-meta-content {
+  white-space: nowrap;
+}
+
+#post-banner .post-tags .post-meta-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
 }
 
 #post-banner .post-meta-content a {
-  transition: all var(--dur-base) var(--ease-out);
+  text-decoration: none;
+  transition: color var(--dur-base) var(--ease-out);
 }
 
 #post-banner .post-meta-content a:hover {
@@ -81,35 +128,23 @@
   color: var(--aria-theme);
 }
 
-#post-banner-meta .post-tags {
-  white-space: nowrap;
-}
-
-.post-metas-firstline,
-.post-metas-secondline {
-  display: flex;
-}
-
-@media screen and (max-width: 1000px) {
-  #post-banner .post-meta svg {
-    transform: translateY(2px);
-  }
-
-  #post-banner-meta .post-meta.post-tags {
-    display: none !important;
-  }
-
-  #post-banner .post-meta,
-  #post-banner .post-meta-content {
-    display: inline !important;
-  }
-}
-
 @media screen and (max-width: 768px) {
-  #post-banner .post-metas,
-  .post-metas-firstline,
-  .post-metas-secondline {
-    display: inline !important;
+  #post-banner .post-metas-firstline,
+  #post-banner .post-metas-secondline {
+    gap: 6px 12px;
+  }
+
+  #post-banner .post-meta {
+    font-size: 13px;
+  }
+
+  #post-banner .post-meta > svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  #post-banner .post-tags {
+    display: none;
   }
 }
 
