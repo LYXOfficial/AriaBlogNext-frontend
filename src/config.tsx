@@ -137,7 +137,7 @@ export const MenuItems: MenuItem[] = [
       {
         name: "留言板",
         link: "/messageboard",
-        icon: <Icon icon="solar:chat-square-line-bold" />,
+        icon: <Icon icon="solar:tablet-bold" />,
       },
     ],
   },

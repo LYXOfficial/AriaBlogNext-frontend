@@ -47,7 +47,7 @@ export default async function CardWebInfo() {
   return (
     <div className="card-widget card-aside card-webinfo">
       <div className="card-headline">
-        <Icon icon="solar:graph-up-bold" />
+        <Icon icon="solar:graph-up-linear" />
         <span className="card-title">网站统计</span>
       </div>
       <div className="card-body">

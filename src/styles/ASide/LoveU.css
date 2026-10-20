@@ -55,14 +55,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff8;
-    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.678);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
     z-index: 0;
     pointer-events: none;
 }
 @media (prefers-color-scheme: dark) {
     .card-loveu::before{
-        background-color: #0008;
+        background-color: rgba(0, 0, 0, 0.703);
     }
 }

@@ -31,7 +31,7 @@ export default function CardLoveU() {
         <div className="loveu-text">
           <span className="loveu-text-line">
             <b>
-              {LoveUContent.myName} ♥️ {LoveUContent.yourName}
+              {LoveUContent.myName}&nbsp;&nbsp;&&nbsp;&nbsp;{LoveUContent.yourName}
             </b>
           </span>
           <span className="loveu-text-line">

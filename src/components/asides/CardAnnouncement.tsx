@@ -29,7 +29,7 @@ export default function CardAnnouncement({ content }: { content: ReactElement })
   return (
     <div className="card-widget card-aside card-announcement">
       <div className="card-headline">
-        <Icon icon="fa6-solid:bullhorn" />
+        <Icon icon="solar:notification-unread-lines-bold" />
         <span className="card-title">公告</span>
       </div>
       <div className="card-body">

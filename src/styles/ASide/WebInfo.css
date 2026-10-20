@@ -69,3 +69,7 @@
   color: var(--aria-light-fontcolor);
   font-size: 12px;
 }
+
+.card-webinfo > .card-headline > svg > g {
+  stroke-width: 2px;
+}

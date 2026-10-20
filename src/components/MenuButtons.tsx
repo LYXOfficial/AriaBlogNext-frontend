@@ -32,20 +32,22 @@ export default function MenuButtons({ pathname, onSearch, onRandom, hidden, tran
     let bannerRect: { left: number; top: number; width: number; height: number } | null = null;
     let dockRect: DOMRect | null = null;
     let lastGeometry = "";
+    const navTransitions = new Set<string>();
     const mobileQuery = matchMedia("(max-width: 768px)");
     const position = () => {
       frame = 0;
       if (!dock) return;
       const mobile = mobileQuery.matches;
+      // sticky 位移与 transform 动画不会触发 ResizeObserver，停靠点必须读取当前帧。
+      dockRect = dock.getBoundingClientRect();
       if (dirty) {
-        dockRect = dock.getBoundingClientRect();
         const rect = bannerSlot?.getBoundingClientRect();
         bannerRect = rect ? { left: rect.left, top: rect.top + window.scrollY, width: rect.width, height: rect.height } : null;
         bannerBottom = (document.querySelector("[data-home-banner]")?.getBoundingClientRect().bottom ?? 0) + window.scrollY;
         dirty = false;
       }
       // 留一点回程余量，滚动边界附近不会反复起飞；不写入任何滚动位置。
-      // 手机只切换位置，不飞行；停靠后只读取滚动位置，不再测量 DOM。
+      // 手机只切换位置，不飞行；不缓存会随导航移动的视口坐标。
       const inBanner = !!bannerRect && (mobile
         ? bannerBottom - window.scrollY > dockRect!.bottom + 16
         : window.scrollY < (previousMode === true ? 100 : 40));
@@ -78,6 +80,7 @@ export default function MenuButtons({ pathname, onSearch, onRandom, hidden, tran
         }
       }
       previousMode = inBanner;
+      if (navTransitions.size && !disposed) schedule();
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(position);
@@ -102,13 +105,28 @@ export default function MenuButtons({ pathname, onSearch, onRandom, hidden, tran
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", invalidate);
     const nav = document.getElementById("navbar");
-    nav?.addEventListener("transitionend", invalidate);
-    position();
+    // 只跟踪导航本身，避免菜单子元素的 hover 动画启动持续测量。
+    const trackTransition = (event: TransitionEvent) => {
+      if (event.target !== nav) return;
+      if (event.type === "transitionrun") navTransitions.add(event.propertyName);
+      else navTransitions.delete(event.propertyName);
+      invalidate();
+    };
+    const navMutation = new MutationObserver(invalidate);
+    if (nav) navMutation.observe(nav, { attributes: true, attributeFilter: ["class"] });
+    nav?.addEventListener("transitionrun", trackTransition);
+    nav?.addEventListener("transitionend", trackTransition);
+    nav?.addEventListener("transitioncancel", trackTransition);
+    schedule();
     return () => {
       disposed = true;
       cancelAnimationFrame(frame);
       flight?.cancel();
-      nav?.removeEventListener("transitionend", invalidate);
+      nav?.removeEventListener("transitionrun", trackTransition);
+      nav?.removeEventListener("transitionend", trackTransition);
+      nav?.removeEventListener("transitioncancel", trackTransition);
+      navMutation.disconnect();
+      navTransitions.clear();
       observer.disconnect();
       mutation.disconnect();
       window.removeEventListener("scroll", schedule);
