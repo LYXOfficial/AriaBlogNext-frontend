@@ -35,7 +35,11 @@ export default function ArchiveItem({
           title={type == "categories" ? post.tags?.[0] : post.category}
         >
           <Icon
-            icon={type == "categories" ? "solar:tag-horizontal-bold" : "solar:list-bold"}
+            icon={
+              type == "categories"
+                ? "solar:tag-horizontal-bold"
+                : "solar:list-bold"
+            }
           />
           {type == "categories" ? post.tags?.[0] : post.category}
         </Link>

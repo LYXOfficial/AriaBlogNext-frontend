@@ -613,27 +613,33 @@ export default function HighLightCode({
   };
 
   return (
-    <AnimatedDetails className="hljs-folder" defaultOpen summary={<>
-        <span className="hljs-lang-icon">
-          {codeIcons[language.toLowerCase() as keyof typeof codeIcons] ??
-            codeIcons["text"]}
-        </span>
-        <span className="hljs-lang">{language.toUpperCase()}</span>
-        <button
-          className={`hljs-wrapper ${isWrapped ? "wrap" : ""}`}
-          title="自动换行"
-          onClick={handleWrapperClick}
-        >
-          <Icon icon="solar:arrow-to-down-left-bold" />
-        </button>
-        <button
-          className="hljs-copy"
-          title="复制代码"
-          onClick={handleCopyClick}
-        >
-          <Icon icon="solar:copy-bold" />
-        </button>
-      </>}>
+    <AnimatedDetails
+      className="hljs-folder"
+      defaultOpen
+      summary={
+        <>
+          <span className="hljs-lang-icon">
+            {codeIcons[language.toLowerCase() as keyof typeof codeIcons] ??
+              codeIcons["text"]}
+          </span>
+          <span className="hljs-lang">{language.toUpperCase()}</span>
+          <button
+            className={`hljs-wrapper ${isWrapped ? "wrap" : ""}`}
+            title="自动换行"
+            onClick={handleWrapperClick}
+          >
+            <Icon icon="solar:arrow-to-down-left-bold" />
+          </button>
+          <button
+            className="hljs-copy"
+            title="复制代码"
+            onClick={handleCopyClick}
+          >
+            <Icon icon="solar:copy-bold" />
+          </button>
+        </>
+      }
+    >
       <pre
         ref={codeRef}
         className={`hljs language-${language} ${isWrapped ? "wrap" : ""}`}

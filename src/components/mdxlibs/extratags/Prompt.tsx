@@ -36,7 +36,10 @@ export default function PromptTag({
   useEffect(() => {
     if (!open) return;
     const outside = (event: PointerEvent) => {
-      if (event.target instanceof Node && !triggerRef.current?.contains(event.target))
+      if (
+        event.target instanceof Node &&
+        !triggerRef.current?.contains(event.target)
+      )
         setOpen(false);
     };
     const escape = (event: KeyboardEvent) => {
@@ -61,10 +64,18 @@ export default function PromptTag({
       tabIndex={0}
       aria-expanded={open}
       aria-describedby={open ? tooltipId : undefined}
-      onPointerDown={(event) => { pointerType.current = event.pointerType; }}
-      onPointerEnter={(event) => { if (event.pointerType === "mouse") setOpen(true); }}
-      onPointerLeave={(event) => { if (event.pointerType === "mouse") setOpen(false); }}
-      onClick={() => setOpen((value) => pointerType.current === "mouse" ? true : !value)}
+      onPointerDown={(event) => {
+        pointerType.current = event.pointerType;
+      }}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setOpen(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") setOpen(false);
+      }}
+      onClick={() =>
+        setOpen((value) => (pointerType.current === "mouse" ? true : !value))
+      }
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
@@ -74,12 +85,30 @@ export default function PromptTag({
       onBlur={() => setOpen(false)}
     >
       {children}
-      <svg className="etag-prompt-icon" aria-hidden="true" viewBox="0 0 20 20" width="14" height="14">
+      <svg
+        className="etag-prompt-icon"
+        aria-hidden="true"
+        viewBox="0 0 20 20"
+        width="14"
+        height="14"
+      >
         <circle cx="10" cy="10" r="9" fill="currentColor" />
-        <path d="M7.5 7a2.5 2.5 0 0 1 5 0c0 1.7-2.5 1.8-2.5 3.5" fill="none" stroke="var(--aria-background, white)" strokeWidth="1.6" strokeLinecap="round" />
+        <path
+          d="M7.5 7a2.5 2.5 0 0 1 5 0c0 1.7-2.5 1.8-2.5 3.5"
+          fill="none"
+          stroke="var(--aria-background, white)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
         <circle cx="10" cy="14" r="1" fill="var(--aria-background, white)" />
       </svg>
-      <span id={tooltipId} role="tooltip" aria-hidden={!open} className={`etag-prompt-tooltip ${open ? "show" : "hide"}`} ref={tooltipRef}>
+      <span
+        id={tooltipId}
+        role="tooltip"
+        aria-hidden={!open}
+        className={`etag-prompt-tooltip ${open ? "show" : "hide"}`}
+        ref={tooltipRef}
+      >
         {tip}
       </span>
     </span>

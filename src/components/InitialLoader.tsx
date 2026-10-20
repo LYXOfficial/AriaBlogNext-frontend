@@ -19,7 +19,10 @@ export default function InitialLoader() {
 
   if (finished) return null;
   return (
-    <div className={`initial-loader${leaving ? " initial-loader-leaving" : ""}`} aria-hidden="true">
+    <div
+      className={`initial-loader${leaving ? " initial-loader-leaving" : ""}`}
+      aria-hidden="true"
+    >
       <div className="initial-loader-content">
         <span className="initial-loader-ring" />
         <span className="initial-loader-label">奋力加载中…</span>

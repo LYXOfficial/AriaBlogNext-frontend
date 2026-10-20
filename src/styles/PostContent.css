@@ -46,14 +46,21 @@
 
 #post-maincontent :is(.aria-math-inline, .katex-display) {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--aria-fontcolor) 25%, transparent) transparent;
+  scrollbar-color: color-mix(in srgb, var(--aria-fontcolor) 25%, transparent)
+    transparent;
 }
-#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar { height: 4px; }
-#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar-thumb {
+#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar {
+  height: 4px;
+}
+#post-maincontent
+  :is(.aria-math-inline, .katex-display)::-webkit-scrollbar-thumb {
   background: color-mix(in srgb, var(--aria-fontcolor) 25%, transparent);
   border-radius: 4px;
 }
-#post-maincontent :is(.aria-math-inline, .katex-display)::-webkit-scrollbar-track { background: transparent; }
+#post-maincontent
+  :is(.aria-math-inline, .katex-display)::-webkit-scrollbar-track {
+  background: transparent;
+}
 
 /* 居中只作用于可容纳的公式；超宽时从左端开始，保证开头也能滚动查看。 */
 #post-maincontent .katex-display > .katex {
@@ -832,8 +839,13 @@ table:not(code table) {
   line-height: inherit;
 }
 
-#post-maincontent .hljs-ln { border-collapse: collapse; border-spacing: 0; }
-#post-maincontent .hljs-ln td { vertical-align: top; }
+#post-maincontent .hljs-ln {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+#post-maincontent .hljs-ln td {
+  vertical-align: top;
+}
 
 .hljs-ln-numbers {
   /* 保持同一表格行内排版，代码折行时行号仍与首行对齐。 */
@@ -1054,11 +1066,14 @@ span[style="undefined:invert"] {
   filter: blur(0.25em);
   background-color: color-mix(in srgb, var(--aria-fontcolor) 10%, transparent);
   border-radius: 4px;
-  transition: filter var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+  transition:
+    filter var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
   margin: 0 2px;
 }
 
-#post-maincontent del:not(#post-maincontent del.noheimu):is(:hover, :focus-visible) {
+#post-maincontent
+  del:not(#post-maincontent del.noheimu):is(:hover, :focus-visible) {
   filter: none;
   background-color: transparent;
 }
@@ -1087,12 +1102,32 @@ span[style="undefined:invert"] {
 }
 
 /* summary 的原生三角与旧 max-height 动画由统一的可逆折叠取代。 */
-.etag-folding > summary { list-style: none; padding: 0; }
-.etag-folding > summary::-webkit-details-marker { display: none; }
-.etag-folding-summary { display: flex; align-items: center; gap: 8px; }
-.etag-folding-arrow { display: block; flex-shrink: 0; transition: transform 0.8s var(--ease-out); }
-.etag-folding[data-expanded="true"] .etag-folding-arrow { transform: rotate(90deg); }
-.hljs-folder summary::after { transition: transform 0.8s var(--ease-out); }
+.etag-folding > summary {
+  list-style: none;
+  padding: 0;
+}
+.etag-folding > summary::-webkit-details-marker {
+  display: none;
+}
+.etag-folding-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.etag-folding-arrow {
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.8s var(--ease-out);
+}
+.etag-folding[data-expanded="true"] .etag-folding-arrow {
+  transform: rotate(90deg);
+}
+.hljs-folder summary::after {
+  transition: transform 0.8s var(--ease-out);
+}
 @media (prefers-reduced-motion: reduce) {
-  .etag-folding-arrow, .hljs-folder summary::after { transition: none; }
+  .etag-folding-arrow,
+  .hljs-folder summary::after {
+    transition: none;
+  }
 }

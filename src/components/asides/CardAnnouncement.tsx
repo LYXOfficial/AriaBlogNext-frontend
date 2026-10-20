@@ -4,8 +4,14 @@ import { Icon } from "@iconify/react";
 import "styles/ASide/Announcement.css";
 import { ReactElement, useEffect, useState } from "react";
 
-export default function CardAnnouncement({ content }: { content: ReactElement }) {
-  const [annoContent, setAnnoContent] = useState<ReactElement | string>(content);
+export default function CardAnnouncement({
+  content,
+}: {
+  content: ReactElement;
+}) {
+  const [annoContent, setAnnoContent] = useState<ReactElement | string>(
+    content,
+  );
 
   useEffect(() => {
     let alive = true;

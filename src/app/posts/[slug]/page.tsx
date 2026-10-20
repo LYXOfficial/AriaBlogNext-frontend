@@ -19,7 +19,11 @@ async function getPostInfo(slug: string): Promise<Post> {
     });
   });
 }
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   let currentPost: Post;
   try {

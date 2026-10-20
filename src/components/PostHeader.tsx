@@ -13,7 +13,9 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
     <header id="post-banner">
       <div className="post-banner-bg">
         <ImageWithFalldown
-          src={postInfo.bannerImg ? postInfo.bannerImg : siteConfigs.falldownImg}
+          src={
+            postInfo.bannerImg ? postInfo.bannerImg : siteConfigs.falldownImg
+          }
           falldownImg={siteConfigs.falldownImg}
           className="post-banner-bg-img"
           alt=""
@@ -26,19 +28,17 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
           <div className="post-metas">
             <div className="post-metas-firstline">
               <div className="post-meta post-publishdate">
-                <Icon icon="fa6-solid:calendar-days" />
+                <Icon icon="solar:calendar-bold" />
                 <span className="post-meta-content">
                   {"发表于 " +
                     dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD")}
                 </span>
               </div>
               <div className="post-meta post-lastupdatedate">
-                <Icon icon="fa6-solid:calendar-days" />
+                <Icon icon="solar:calendar-bold" />
                 <span className="post-meta-content">
                   {"更新于 " +
-                    dayjs
-                      .unix(postInfo.lastUpdatedTime!)
-                      .format("YYYY-MM-DD")}
+                    dayjs.unix(postInfo.lastUpdatedTime!).format("YYYY-MM-DD")}
                 </span>
               </div>
               <div className="post-meta post-category">
@@ -54,7 +54,9 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 <span className="post-meta-content">
                   {[...new Set(postInfo.tags ?? [])].slice(0, 5).map((tag) => {
                     return (
-                      <Link key={tag} href={"/tags/" + encodeURIComponent(tag)}>{tag}</Link>
+                      <Link key={tag} href={"/tags/" + encodeURIComponent(tag)}>
+                        {tag}
+                      </Link>
                     );
                   })}
                 </span>

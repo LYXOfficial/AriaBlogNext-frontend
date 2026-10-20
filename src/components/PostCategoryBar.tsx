@@ -26,8 +26,16 @@ export default function PostCategoryBar({
       if (event.ctrlKey || event.metaKey) return;
       event.stopPropagation();
       event.preventDefault();
-      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-      const scale = event.deltaMode === 1 ? 20 : event.deltaMode === 2 ? bar.clientWidth : 1;
+      const delta =
+        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+      const scale =
+        event.deltaMode === 1
+          ? 20
+          : event.deltaMode === 2
+            ? bar.clientWidth
+            : 1;
       bar.scrollBy({ left: delta * scale, behavior: "instant" });
     };
     bar.addEventListener("wheel", onWheel, { passive: false });
@@ -35,9 +43,17 @@ export default function PostCategoryBar({
   }, [wrap]);
   return (
     <div id="posts-categories-bar" className="card-widget">
-      <Link className="post-categories-bar-icon-link" href="/page/1" aria-label="全部文章">
+      <Link
+        className="post-categories-bar-icon-link"
+        href="/page/1"
+        aria-label="全部文章"
+      >
         <Icon
-          icon={type == "categories" ? "solar:list-bold" : "solar:tag-horizontal-bold"}
+          icon={
+            type == "categories"
+              ? "solar:list-bold"
+              : "solar:tag-horizontal-bold"
+          }
         />
       </Link>
       <div

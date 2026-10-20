@@ -66,8 +66,14 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       // Keep movement inside the background's overscan, including on wide screens.
       const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * -2;
       const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -2;
-      banner.style.setProperty("--banner-x", `${x * Math.min(18, bounds.width * 0.02)}px`);
-      banner.style.setProperty("--banner-y", `${y * Math.min(18, bounds.height * 0.02)}px`);
+      banner.style.setProperty(
+        "--banner-x",
+        `${x * Math.min(18, bounds.width * 0.02)}px`,
+      );
+      banner.style.setProperty(
+        "--banner-y",
+        `${y * Math.min(18, bounds.height * 0.02)}px`,
+      );
     };
 
     /* ---------------- whole-block snap scrolling ---------------- */
@@ -114,7 +120,10 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
         document.getElementById("navbar")?.getBoundingClientRect().height ?? 62;
       return Math.max(
         0,
-        content.getBoundingClientRect().top + window.scrollY - navHeight - CONTENT_GAP,
+        content.getBoundingClientRect().top +
+          window.scrollY -
+          navHeight -
+          CONTENT_GAP,
       );
     };
 
@@ -241,7 +250,10 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       }
       for (let el = target; el && el !== document.body; el = el.parentElement) {
         const overflow = getComputedStyle(el).overflowY;
-        if (/(auto|scroll)/.test(overflow) && el.scrollHeight > el.clientHeight + 1) {
+        if (
+          /(auto|scroll)/.test(overflow) &&
+          el.scrollHeight > el.clientHeight + 1
+        ) {
           return;
         }
       }
@@ -267,7 +279,10 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       }
       // The landing guard only prevents another upward section transition.
       // Scrolling down into the content must always remain available.
-      if ((animating || now < quietUntil) && !(event.deltaY > 0 && current >= top - 2)) {
+      if (
+        (animating || now < quietUntil) &&
+        !(event.deltaY > 0 && current >= top - 2)
+      ) {
         event.preventDefault();
         return;
       }
@@ -275,7 +290,11 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
 
       const delta =
         event.deltaY *
-        (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
+        (event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? window.innerHeight
+            : 1);
 
       let destination: number | null = null;
       if (event.deltaY > 0) {
@@ -283,7 +302,8 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
         if (current < top - 2) destination = top;
       } else if (current > top + 2) {
         // Upwards from inside the content: approach, then land on the content top.
-        if (current - top <= Math.max(160, Math.abs(delta) * 1.5)) destination = top;
+        if (current - top <= Math.max(160, Math.abs(delta) * 1.5))
+          destination = top;
       } else if (current > 0) {
         // Already at the content top: the next gesture returns to the banner.
         destination = 0;
@@ -326,9 +346,18 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       const point = event.touches[0];
       touchEligible = event.touches.length === 1 && !!point;
       const target = event.target instanceof Element ? event.target : null;
-      if (target?.closest("input, textarea, select, [contenteditable], [role='dialog'], #navbar, #search-box, #homespeaks-container")) touchEligible = false;
+      if (
+        target?.closest(
+          "input, textarea, select, [contenteditable], [role='dialog'], #navbar, #search-box, #homespeaks-container",
+        )
+      )
+        touchEligible = false;
       for (let el = target; el && el !== document.body; el = el.parentElement) {
-        if (/(auto|scroll)/.test(getComputedStyle(el).overflowY) && el.scrollHeight > el.clientHeight + 1) touchEligible = false;
+        if (
+          /(auto|scroll)/.test(getComputedStyle(el).overflowY) &&
+          el.scrollHeight > el.clientHeight + 1
+        )
+          touchEligible = false;
       }
       if (!touchEligible || !point) return;
       touchX = point.clientX;
@@ -407,7 +436,13 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
     };
 
     const onScrollEnd = () => {
-      if (nativeContentGesture && !touching && !manual && !animating && !nativeBoundarySettled)
+      if (
+        nativeContentGesture &&
+        !touching &&
+        !manual &&
+        !animating &&
+        !nativeBoundarySettled
+      )
         settle();
     };
 
@@ -418,7 +453,10 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     window.addEventListener("pointerup", onPointerUp, true);
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false, capture: true });
+    window.addEventListener("touchmove", onTouchMove, {
+      passive: false,
+      capture: true,
+    });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("touchcancel", onTouchCancel, { passive: true });
     window.addEventListener("keydown", cancelAnimation);
@@ -453,14 +491,26 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
   }, []);
 
   return (
-    <section ref={bannerRef} className="home-banner" data-home-banner aria-label="首页欢迎">
+    <section
+      ref={bannerRef}
+      className="home-banner"
+      data-home-banner
+      aria-label="首页欢迎"
+    >
       <div
         className="home-banner-background"
-        style={{ backgroundImage: backgroundImage ? `url(${JSON.stringify(backgroundImage)})` : undefined }}
+        style={{
+          backgroundImage: backgroundImage
+            ? `url(${JSON.stringify(backgroundImage)})`
+            : undefined,
+        }}
         aria-hidden="true"
       />
       <div className="home-banner-intro">
-        <a className="home-banner-welcome" href={siteConfigs.homeBanner.welcomeUrl}>
+        <a
+          className="home-banner-welcome"
+          href={siteConfigs.homeBanner.welcomeUrl}
+        >
           {siteConfigs.homeBanner.welcome}
         </a>
         <h1 className="home-banner-headline">
@@ -472,8 +522,20 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       </div>
       <div className="home-banner-bottom">
         <span className="home-banner-scroll-hint" aria-label="向下滚动查看文章">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
-            <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="m6 9 6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </span>
         {children}

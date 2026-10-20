@@ -40,7 +40,9 @@ export default async function Posts({ page }: { page: number }) {
   // 分类栏只是装饰，接口失败时降级为空，避免整页崩溃
   let data: Category[] = [];
   try {
-    const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`);
+    const res = await fetch(
+      `${siteConfigs.backEndUrl}/get/category/categories`,
+    );
     if (res.ok) data = (await res.json()).data ?? [];
   } catch {
     data = [];
@@ -48,8 +50,11 @@ export default async function Posts({ page }: { page: number }) {
   // 首尾页固定保留；较短的缺口直接补齐，避免出现只省略一页的跳跃。
   const visiblePages = new Set([1, maxPage, page - 1, page, page + 1]);
   if (page <= 3) [2, 3, 4].forEach((n) => visiblePages.add(n));
-  if (page >= maxPage - 2) [maxPage - 3, maxPage - 2, maxPage - 1].forEach((n) => visiblePages.add(n));
-  const pageNumbers = [...visiblePages].filter((n) => n >= 1 && n <= maxPage).sort((a, b) => a - b);
+  if (page >= maxPage - 2)
+    [maxPage - 3, maxPage - 2, maxPage - 1].forEach((n) => visiblePages.add(n));
+  const pageNumbers = [...visiblePages]
+    .filter((n) => n >= 1 && n <= maxPage)
+    .sort((a, b) => a - b);
   const pagination: (number | string)[] = [];
   pageNumbers.forEach((n, i) => {
     const previous = pageNumbers[i - 1];
@@ -114,18 +119,14 @@ export default async function Posts({ page }: { page: number }) {
                   {post.category}
                 </Link>
                 <div className="post-meta post-publishdate">
-                  <Icon
-                    icon="fa6-solid:calendar-days"
-                  />
+                  <Icon icon="solar:calendar-bold" />
                   <span className="post-meta-content">
                     {"发表于 " +
                       dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
                   </span>
                 </div>
                 <div className="post-meta post-lastupdatedate">
-                  <Icon
-                    icon="fa6-solid:calendar-days"
-                  />
+                  <Icon icon="solar:calendar-bold" />
                   <span className="post-meta-content">
                     {"更新于 " +
                       dayjs.unix(post.lastUpdatedTime!).format("YYYY-MM-DD")}
@@ -136,7 +137,12 @@ export default async function Posts({ page }: { page: number }) {
                   <span className="post-meta-content">
                     {[...new Set(post.tags ?? [])].slice(0, 5).map((tag) => {
                       return (
-                        <Link key={tag} href={"/tags/" + encodeURIComponent(tag)}>{tag}</Link>
+                        <Link
+                          key={tag}
+                          href={"/tags/" + encodeURIComponent(tag)}
+                        >
+                          {tag}
+                        </Link>
                       );
                     })}
                   </span>
@@ -151,30 +157,124 @@ export default async function Posts({ page }: { page: number }) {
         );
       })}
       <nav className="post-card-pgwrap" aria-label="文章列表分页">
-        <div className="post-card-pgsummary">第 <strong>{page}</strong> / {maxPage} 页 · 共 {postTotal} 篇文章</div>
+        <div className="post-card-pgsummary">
+          第 <strong>{page}</strong> / {maxPage} 页 · 共 {postTotal} 篇文章
+        </div>
         <div className="post-card-pgcontrols">
           {page > 1 ? (
-            <Link className="post-card-pgbtn post-card-pgstep" href={pageHref(page - 1)} rel="prev" aria-label="上一页">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+            <Link
+              className="post-card-pgbtn post-card-pgstep"
+              href={pageHref(page - 1)}
+              rel="prev"
+              aria-label="上一页"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m14 6-6 6 6 6" />
+              </svg>
             </Link>
           ) : (
-            <span className="post-card-pgbtn post-card-pgstep disabled" aria-disabled="true" aria-label="上一页"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg></span>
+            <span
+              className="post-card-pgbtn post-card-pgstep disabled"
+              aria-disabled="true"
+              aria-label="上一页"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m14 6-6 6 6 6" />
+              </svg>
+            </span>
           )}
           <div className="post-card-pgpages">
-            {pagination.map((n) => typeof n === "string" ? (
-              <span className="post-card-pgellipsis" key={n} aria-label="省略的页码">…</span>
-            ) : n === page ? (
-              <span className="post-card-pgbtn current" key={n} aria-current="page" aria-label={`第 ${n} 页，当前页`}>{n}</span>
-            ) : (
-              <Link className="post-card-pgbtn" key={n} href={pageHref(n)} aria-label={`第 ${n} 页`}>{n}</Link>
-            ))}
+            {pagination.map((n) =>
+              typeof n === "string" ? (
+                <span
+                  className="post-card-pgellipsis"
+                  key={n}
+                  aria-label="省略的页码"
+                >
+                  …
+                </span>
+              ) : n === page ? (
+                <span
+                  className="post-card-pgbtn current"
+                  key={n}
+                  aria-current="page"
+                  aria-label={`第 ${n} 页，当前页`}
+                >
+                  {n}
+                </span>
+              ) : (
+                <Link
+                  className="post-card-pgbtn"
+                  key={n}
+                  href={pageHref(n)}
+                  aria-label={`第 ${n} 页`}
+                >
+                  {n}
+                </Link>
+              ),
+            )}
           </div>
           {page < maxPage ? (
-            <Link className="post-card-pgbtn post-card-pgstep" href={pageHref(page + 1)} rel="next" aria-label="下一页">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
+            <Link
+              className="post-card-pgbtn post-card-pgstep"
+              href={pageHref(page + 1)}
+              rel="next"
+              aria-label="下一页"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m10 6 6 6-6 6" />
+              </svg>
             </Link>
           ) : (
-            <span className="post-card-pgbtn post-card-pgstep disabled" aria-disabled="true" aria-label="下一页"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg></span>
+            <span
+              className="post-card-pgbtn post-card-pgstep disabled"
+              aria-disabled="true"
+              aria-label="下一页"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m10 6 6 6-6 6" />
+              </svg>
+            </span>
           )}
         </div>
       </nav>

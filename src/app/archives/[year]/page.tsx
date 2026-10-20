@@ -10,7 +10,11 @@ import { Post } from "@/interfaces/post";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArchiveItem from "@/components/Archives";
-export default async function Page({ params }: { params: Promise<{ year: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ year: string }>;
+}) {
   const { year } = await params;
   const yearNum = Number(year);
   const ArchiveContent: ReactElement[] = [];

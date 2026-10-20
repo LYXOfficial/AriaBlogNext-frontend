@@ -7,7 +7,9 @@
   background: var(--aria-background);
   color: var(--aria-fontcolor);
   pointer-events: none;
-  transition: opacity var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    visibility var(--dur-slow);
   /* 即使脚本未执行或水合失败，也不能一直遮住正文。 */
   animation: initial-loader-failsafe 0s 4s forwards;
 }
@@ -29,13 +31,32 @@
   animation: initial-loader-spin 1s linear infinite;
 }
 
-.initial-loader-label { font-size: 14px; opacity: 0.7; }
-.initial-loader-leaving { opacity: 0; visibility: hidden; }
+.initial-loader-label {
+  font-size: 14px;
+  opacity: 0.7;
+}
+.initial-loader-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
 
-@keyframes initial-loader-spin { to { transform: rotate(360deg); } }
-@keyframes initial-loader-failsafe { to { opacity: 0; visibility: hidden; } }
+@keyframes initial-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes initial-loader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .initial-loader-ring { animation: none; }
-  .initial-loader { transition: none; }
+  .initial-loader-ring {
+    animation: none;
+  }
+  .initial-loader {
+    transition: none;
+  }
 }

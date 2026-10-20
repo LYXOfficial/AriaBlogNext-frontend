@@ -11,13 +11,18 @@ function useFallbackImage(src?: string | null, falldownImg?: string | null) {
   const fallback = falldownImg?.trim() || TRANSPARENT_IMAGE;
   const [failure, setFailure] = useState({ primary, fallback, stage: 0 });
   // 地址变化后立即重试新图；不能等 onError 才兜底空地址，React/Next 会先报错。
-  const sourceChanged = failure.primary !== primary || failure.fallback !== fallback;
+  const sourceChanged =
+    failure.primary !== primary || failure.fallback !== fallback;
   if (sourceChanged) {
     setFailure({ primary, fallback, stage: 0 });
   }
   const stage = sourceChanged ? 0 : failure.stage;
   const srcNow =
-    stage >= 2 ? TRANSPARENT_IMAGE : primary && stage === 0 ? primary : fallback;
+    stage >= 2
+      ? TRANSPARENT_IMAGE
+      : primary && stage === 0
+        ? primary
+        : fallback;
 
   return {
     srcNow,

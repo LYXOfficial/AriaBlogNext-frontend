@@ -22,9 +22,12 @@ export default function NavBar() {
     if (window.location.pathname === "/") {
       const banner = document.querySelector("[data-home-banner]");
       const content = document.getElementById("main-container");
-      setTrans(!!banner && (content
-        ? content.getBoundingClientRect().top > 80
-        : banner.getBoundingClientRect().bottom > 62));
+      setTrans(
+        !!banner &&
+          (content
+            ? content.getBoundingClientRect().top > 80
+            : banner.getBoundingClientRect().bottom > 62),
+      );
       setOnTop(!!content && content.getBoundingClientRect().top >= 70);
       return;
     }
@@ -95,7 +98,11 @@ export default function NavBar() {
   }, []);
   return (
     <>
-      <nav id="navbar" data-home={pathName === "/" ? "true" : undefined} className={trans ? "trans" : onTop ? "ontop" : ""}>
+      <nav
+        id="navbar"
+        data-home={pathName === "/" ? "true" : undefined}
+        className={trans ? "trans" : onTop ? "ontop" : ""}
+      >
         <Link id="site-name" href="/">
           <img
             id="site-name-icon"
@@ -133,7 +140,11 @@ export default function NavBar() {
                   onMouseLeave={() => setHoveringElement("")}
                   onFocus={() => setHoveringElement(item.name)}
                   onBlur={(event) => {
-                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                    if (
+                      !event.currentTarget.contains(
+                        event.relatedTarget as Node | null,
+                      )
+                    ) {
                       setHoveringElement("");
                     }
                   }}
@@ -217,7 +228,10 @@ export default function NavBar() {
         hidden={false}
         onSearch={() => {
           setSearchBoxShow(true);
-          setTimeout(() => document.getElementById("search-box-input")?.focus(), 10);
+          setTimeout(
+            () => document.getElementById("search-box-input")?.focus(),
+            10,
+          );
         }}
         onRandom={() => (window as any).toRandomPost()}
       />

@@ -17,10 +17,14 @@
     color var(--dur-base) var(--ease-out);
 }
 
-.menu-actions[hidden] { display: none; }
+.menu-actions[hidden] {
+  display: none;
+}
 
 /* 按钮通过 portal 放在 body 下，需显式同步透明顶栏状态，不能依赖导航的后代选择器。 */
-.menu-actions[data-transparent="true"] { color: #fff; }
+.menu-actions[data-transparent="true"] {
+  color: #fff;
+}
 
 .menu-actions[data-banner="true"] {
   color: #fff;
@@ -66,23 +70,52 @@
   outline-offset: -2px;
 }
 
-.menu-actions-button svg { width: 18px; height: 18px; flex-shrink: 0; }
+.menu-actions-button svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
 /* 保留空心造型，补足小尺寸下的线条分量。 */
-.menu-actions-button svg [stroke-width] { stroke-width: 2.5; }
-.menu-actions[data-banner="false"] .menu-actions-button span { display: none; }
-.menu-actions[data-banner="false"] .menu-actions-button { padding: 0; }
+.menu-actions-button svg [stroke-width] {
+  stroke-width: 2.5;
+}
+.menu-actions[data-banner="false"] .menu-actions-button span {
+  display: none;
+}
+.menu-actions[data-banner="false"] .menu-actions-button {
+  padding: 0;
+}
 
 /* 手机按钮随首屏离开视口，不能浮在固定导航和弹窗上面。 */
-.menu-actions[data-mobile-banner="true"] { z-index: 10; }
+.menu-actions[data-mobile-banner="true"] {
+  z-index: 10;
+}
 
-#nav-menu-buttons-slot { width: 132px; height: 42px; align-self: center; }
+#nav-menu-buttons-slot {
+  width: 132px;
+  height: 42px;
+  align-self: center;
+}
 
 @media screen and (max-width: 768px) {
-  #nav-menu-buttons-slot { width: 138px; height: 44px; }
-  .menu-actions[data-banner="false"] { padding: 1px; gap: 1px; }
-  .menu-actions[data-banner="true"] .menu-actions-button { font-size: 14px; gap: 6px; padding: 0 8px; }
+  #nav-menu-buttons-slot {
+    width: 138px;
+    height: 44px;
+  }
+  .menu-actions[data-banner="false"] {
+    padding: 1px;
+    gap: 1px;
+  }
+  .menu-actions[data-banner="true"] .menu-actions-button {
+    font-size: 14px;
+    gap: 6px;
+    padding: 0 8px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .menu-actions, .menu-actions-button { transition: none; }
+  .menu-actions,
+  .menu-actions-button {
+    transition: none;
+  }
 }

@@ -105,8 +105,12 @@ export function TwikooBaseComment() {
 
         const container = item.closest(".OwO");
         const textarea =
-          (container?.closest(".tk-submit")?.querySelector("textarea") as HTMLTextAreaElement | null) ??
-          (document.querySelector(".tk-input textarea, textarea.tk-input__inner") as HTMLTextAreaElement | null);
+          (container
+            ?.closest(".tk-submit")
+            ?.querySelector("textarea") as HTMLTextAreaElement | null) ??
+          (document.querySelector(
+            ".tk-input textarea, textarea.tk-input__inner",
+          ) as HTMLTextAreaElement | null);
 
         if (!textarea) return;
 
@@ -193,15 +197,17 @@ export function TwikooCountPost() {
       envId: siteConfigs.twikooEnv,
       urls: [document.location.pathname],
       includeReply: true,
-    }).then((res: { count: number }[] | undefined) => {
-      if (!Array.isArray(res)) return;
-      const commentCountElement = document.querySelector(
-        ".post-commentcount>.post-meta-content",
-      );
-      if (commentCountElement) {
-        commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
-      }
-    }).catch((error: unknown) => console.warn("评论计数获取失败", error));
+    })
+      .then((res: { count: number }[] | undefined) => {
+        if (!Array.isArray(res)) return;
+        const commentCountElement = document.querySelector(
+          ".post-commentcount>.post-meta-content",
+        );
+        if (commentCountElement) {
+          commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
+        }
+      })
+      .catch((error: unknown) => console.warn("评论计数获取失败", error));
   }, []);
 
   return null;
@@ -220,45 +226,46 @@ export function TwikooCountHome() {
           envId: siteConfigs.twikooEnv,
           urls: [hr],
           includeReply: true,
-        }).then((res: { count: number }[] | undefined) => {
-          if (!Array.isArray(res)) return;
-          const commentCountElement = el.querySelector(
-            ".post-commentcount>.post-meta-content",
-          );
-          if (commentCountElement) {
-            commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
-          }
-        }).catch((error: unknown) => console.warn("评论计数获取失败", error));
+        })
+          .then((res: { count: number }[] | undefined) => {
+            if (!Array.isArray(res)) return;
+            const commentCountElement = el.querySelector(
+              ".post-commentcount>.post-meta-content",
+            );
+            if (commentCountElement) {
+              commentCountElement.textContent = `${res[0]?.count ?? 0} 条评论`;
+            }
+          })
+          .catch((error: unknown) => console.warn("评论计数获取失败", error));
       });
 
       const rest = await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`, {
         next: { tags: ["posts"] },
       });
-      const pages = [
-        "/messageboard",
-        "/speaks",
-        "/about",
-        "/links",
-      ];
+      const pages = ["/messageboard", "/speaks", "/about", "/links"];
       if (rest.ok) {
         const postSlugs = (await rest.json()).data as string[];
         tk.getCommentsCount({
           envId: siteConfigs.twikooEnv,
           // 服务端会归一化尾斜杠，总数也只能对每个页面计数一次。
-          urls: [...new Set(postSlugs.map((slug) => `/posts/${slug}`).concat(pages))],
+          urls: [
+            ...new Set(postSlugs.map((slug) => `/posts/${slug}`).concat(pages)),
+          ],
           includeReply: true,
-        }).then((res: { count: number }[] | undefined) => {
-          if (!Array.isArray(res)) return;
-          const webinfoCommentCountElement = document.querySelector(
-            ".card-webinfo-item-right.commentcount",
-          );
-          if (webinfoCommentCountElement) {
-            webinfoCommentCountElement.textContent = res
-              .map((r) => r.count)
-              .reduce((a, b) => a + b, 0)
-              .toString();
-          }
-        }).catch((error: unknown) => console.warn("评论总数获取失败", error));
+        })
+          .then((res: { count: number }[] | undefined) => {
+            if (!Array.isArray(res)) return;
+            const webinfoCommentCountElement = document.querySelector(
+              ".card-webinfo-item-right.commentcount",
+            );
+            if (webinfoCommentCountElement) {
+              webinfoCommentCountElement.textContent = res
+                .map((r) => r.count)
+                .reduce((a, b) => a + b, 0)
+                .toString();
+            }
+          })
+          .catch((error: unknown) => console.warn("评论总数获取失败", error));
       }
     })().catch((error: unknown) => console.warn("评论计数加载失败", error));
   }, []);

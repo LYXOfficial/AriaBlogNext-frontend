@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,24 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "components/*": [
-        "./src/components/*"
-      ],
-      "styles/*": [
-        "./src/styles/*"
-      ],
-      "interfaces/*": [
-        "./src/interfaces/*"
-      ],
-      "utils/*": [
-        "./src/utils/*"
-      ],
-      "config": [
-        "./src/config.tsx"
-      ]
+      "@/*": ["./src/*"],
+      "components/*": ["./src/components/*"],
+      "styles/*": ["./src/styles/*"],
+      "interfaces/*": ["./src/interfaces/*"],
+      "utils/*": ["./src/utils/*"],
+      "config": ["./src/config.tsx"]
     }
   },
   "include": [
@@ -52,7 +36,5 @@
     "src/components/HLJSNum.jsx",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

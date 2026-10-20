@@ -17,7 +17,15 @@ export default async function Page() {
       <div id="main-container" className="page">
         <div id="article-container" className="page flink">
           <div id="post-maincontent" className="page flink">
-            <CollectionHeader eyebrow="朋友名录" title="友链" extra={<a className="collection-action" href="#friend-apply">申请友链 ↗</a>} />
+            <CollectionHeader
+              eyebrow="朋友名录"
+              title="友链"
+              extra={
+                <a className="collection-action" href="#friend-apply">
+                  申请友链 ↗
+                </a>
+              }
+            />
             <Content />
           </div>
         </div>

@@ -24,10 +24,16 @@ export default function PostCardParallax() {
       rect = null;
     };
     const move = (event: PointerEvent) => {
-      if (!pointer.matches || motion.matches || event.pointerType !== "mouse") return;
-      const card = event.target instanceof Element
-        ? event.target.closest<HTMLElement>(".post-card") : null;
-      if (!card || !root.contains(card)) { reset(); return; }
+      if (!pointer.matches || motion.matches || event.pointerType !== "mouse")
+        return;
+      const card =
+        event.target instanceof Element
+          ? event.target.closest<HTMLElement>(".post-card")
+          : null;
+      if (!card || !root.contains(card)) {
+        reset();
+        return;
+      }
       if (card !== active) {
         reset();
         active = card;
@@ -35,14 +41,22 @@ export default function PostCardParallax() {
         rect = card.getBoundingClientRect();
       }
       if (!rect) return;
-      x = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1)) * 2;
-      y = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1)) * 1.5;
-      if (!frame) frame = requestAnimationFrame(() => {
-        frame = 0;
-        active?.style.setProperty("--card-parallax-x", `${x.toFixed(2)}px`);
-        active?.style.setProperty("--card-parallax-y", `${y.toFixed(2)}px`);
-
-      });
+      x =
+        Math.max(
+          -1,
+          Math.min(1, ((event.clientX - rect.left) / rect.width) * 2 - 1),
+        ) * 2;
+      y =
+        Math.max(
+          -1,
+          Math.min(1, ((event.clientY - rect.top) / rect.height) * 2 - 1),
+        ) * 1.5;
+      if (!frame)
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          active?.style.setProperty("--card-parallax-x", `${x.toFixed(2)}px`);
+          active?.style.setProperty("--card-parallax-y", `${y.toFixed(2)}px`);
+        });
     };
     root.addEventListener("pointermove", move, { passive: true });
     root.addEventListener("pointerleave", reset);

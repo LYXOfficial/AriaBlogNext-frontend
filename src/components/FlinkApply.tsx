@@ -9,7 +9,10 @@ import {
   validateFlinkForm,
 } from "@/utils/flinkForm";
 import { parseFlinkText } from "@/utils/flinkParse";
-import { ensureCardColor, extractThemeColorFromImage } from "@/utils/themeColor";
+import {
+  ensureCardColor,
+  extractThemeColorFromImage,
+} from "@/utils/themeColor";
 import "styles/FlinkApply.css";
 
 // 申请须知：逐条勾选后才能提交
@@ -107,8 +110,10 @@ export default function FlinkApply() {
   // 手动选的颜色原样使用；只有「从头像取色」得到的颜色才会自动压深
   const previewColor = form.color.trim() || "#888888";
   const filteredLinks = (existing ?? [])
-    .filter((item) =>
-      !linkQuery.trim() || item.label.toLowerCase().includes(linkQuery.trim().toLowerCase()),
+    .filter(
+      (item) =>
+        !linkQuery.trim() ||
+        item.label.toLowerCase().includes(linkQuery.trim().toLowerCase()),
     )
     .slice(0, 50);
   const set = (key: keyof typeof form) => (value: string) =>
@@ -159,7 +164,9 @@ export default function FlinkApply() {
         const color = await extractThemeColorFromImage(url);
         if (alive && color) {
           setForm((prev) =>
-            prev.avatar.trim() === url ? { ...prev, color: ensureCardColor(color) } : prev,
+            prev.avatar.trim() === url
+              ? { ...prev, color: ensureCardColor(color) }
+              : prev,
           );
         }
       } catch {
@@ -203,7 +210,10 @@ export default function FlinkApply() {
       }
     } catch {
       // 图片加载失败/超时：不要让 Promise 泄漏成未捕获异常
-      setMessage({ ok: false, text: "头像图片打不开，无法取色（可检查链接或稍后重试）" });
+      setMessage({
+        ok: false,
+        text: "头像图片打不开，无法取色（可检查链接或稍后重试）",
+      });
     } finally {
       setPicking(false);
     }
@@ -222,7 +232,12 @@ export default function FlinkApply() {
       setMessage({ ok: false, text: "请先逐条阅读并勾选上方的申请须知" });
       return;
     }
-    const invalid = validateFlinkForm({ mode, targetUrl, editing: !!editing, form });
+    const invalid = validateFlinkForm({
+      mode,
+      targetUrl,
+      editing: !!editing,
+      form,
+    });
     if (invalid) {
       setMessage({ ok: false, text: invalid });
       return;
@@ -367,11 +382,26 @@ export default function FlinkApply() {
     const parsed = parseFlinkText(text);
     const found: string[] = [];
     const next = { ...form };
-    if (parsed.name) { next.name = parsed.name; found.push("名称"); }
-    if (parsed.link) { next.link = parsed.link; found.push("网址"); }
-    if (parsed.avatar) { next.avatar = parsed.avatar; found.push("头像"); }
-    if (parsed.descr) { next.descr = parsed.descr; found.push("描述"); }
-    if (parsed.color) { next.color = parsed.color; found.push("颜色"); }
+    if (parsed.name) {
+      next.name = parsed.name;
+      found.push("名称");
+    }
+    if (parsed.link) {
+      next.link = parsed.link;
+      found.push("网址");
+    }
+    if (parsed.avatar) {
+      next.avatar = parsed.avatar;
+      found.push("头像");
+    }
+    if (parsed.descr) {
+      next.descr = parsed.descr;
+      found.push("描述");
+    }
+    if (parsed.color) {
+      next.color = parsed.color;
+      found.push("颜色");
+    }
     setForm(next);
     setMessage(
       found.length
@@ -407,14 +437,17 @@ export default function FlinkApply() {
   async function doWithdraw(record: ApplyRecord) {
     setBusy(true);
     try {
-      const res = await fetch(`${siteConfigs.backEndUrl}/flink/apply/withdraw`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: record.id,
-          email: record.email || queryEmail,
-        }),
-      });
+      const res = await fetch(
+        `${siteConfigs.backEndUrl}/flink/apply/withdraw`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: record.id,
+            email: record.email || queryEmail,
+          }),
+        },
+      );
       const data = await res.json().catch(() => null);
       if (res.ok) {
         setMessage({ ok: true, text: "申请已撤销" });
@@ -479,7 +512,9 @@ export default function FlinkApply() {
           <textarea
             rows={3}
             value={smartText}
-            placeholder={"把你自己的友链信息直接粘到这里，自动识别名称/网址/头像/描述/颜色。例如：\n网站名称：Ariasakaの小窝\n网站链接：https://blog.yaria.top\n头像地址：https://blog.yaria.top/avatar.png\n描述：一个碎碎念的博客"}
+            placeholder={
+              "把你自己的友链信息直接粘到这里，自动识别名称/网址/头像/描述/颜色。例如：\n网站名称：Ariasakaの小窝\n网站链接：https://blog.yaria.top\n头像地址：https://blog.yaria.top/avatar.png\n描述：一个碎碎念的博客"
+            }
             onChange={(e) => setSmartText(e.target.value)}
             onPaste={(e) => {
               const text = e.clipboardData.getData("text");
@@ -493,25 +528,25 @@ export default function FlinkApply() {
       )}
 
       {mode === 0 && (
-      <ul className="flink-apply-rules">
-        {RULES.map((rule, i) => (
-          <li key={i}>
-            <label>
-              <input
-                type="checkbox"
-                checked={checked[i] || !!editing}
-                disabled={!!editing}
-                onChange={(e) =>
-                  setChecked((prev) =>
-                    prev.map((v, idx) => (idx === i ? e.target.checked : v)),
-                  )
-                }
-              />
-              <span>{rule}</span>
-            </label>
-          </li>
-        ))}
-      </ul>
+        <ul className="flink-apply-rules">
+          {RULES.map((rule, i) => (
+            <li key={i}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={checked[i] || !!editing}
+                  disabled={!!editing}
+                  onChange={(e) =>
+                    setChecked((prev) =>
+                      prev.map((v, idx) => (idx === i ? e.target.checked : v)),
+                    )
+                  }
+                />
+                <span>{rule}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
       )}
 
       <div className="flink-apply-form">
@@ -539,7 +574,9 @@ export default function FlinkApply() {
                   if (!linkOpen) return;
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
-                    setLinkActive((i) => Math.min(i + 1, filteredLinks.length - 1));
+                    setLinkActive((i) =>
+                      Math.min(i + 1, filteredLinks.length - 1),
+                    );
                   } else if (e.key === "ArrowUp") {
                     e.preventDefault();
                     setLinkActive((i) => Math.max(i - 1, 0));
@@ -553,8 +590,12 @@ export default function FlinkApply() {
               />
               {linkOpen && (
                 <ul className="flink-apply-combo-list" role="listbox">
-                  {existing === null && <li className="empty">正在加载已收录友链…</li>}
-                  {existing?.length === 0 && <li className="empty">暂时没有读取到已收录的友链</li>}
+                  {existing === null && (
+                    <li className="empty">正在加载已收录友链…</li>
+                  )}
+                  {existing?.length === 0 && (
+                    <li className="empty">暂时没有读取到已收录的友链</li>
+                  )}
                   {filteredLinks.length === 0 && existing?.length !== 0 && (
                     <li className="empty">没有匹配的友链</li>
                   )}
@@ -716,7 +757,11 @@ export default function FlinkApply() {
           {busy ? "提交中..." : editing ? "保存修改" : "提交申请"}
         </button>
         {editing ? (
-          <button type="button" className="flink-apply-cancel" onClick={resetEdit}>
+          <button
+            type="button"
+            className="flink-apply-cancel"
+            onClick={resetEdit}
+          >
             取消修改
           </button>
         ) : (
@@ -752,7 +797,11 @@ export default function FlinkApply() {
             value={queryEmail}
             onChange={(e) => setQueryEmail(e.target.value)}
           />
-          <button type="button" onClick={() => queryStatus()} disabled={querying}>
+          <button
+            type="button"
+            onClick={() => queryStatus()}
+            disabled={querying}
+          >
             {querying ? "查询中..." : "查询"}
           </button>
         </div>
@@ -779,7 +828,11 @@ export default function FlinkApply() {
                     <div className="flink-apply-record-body">
                       <span>
                         网址：
-                        <a href={item.link} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {item.link}
                         </a>
                       </span>
@@ -842,7 +895,9 @@ export default function FlinkApply() {
                   )}
 
                   {item.status === "rejected" && item.reason && (
-                    <div className="flink-apply-reason">理由：{item.reason}</div>
+                    <div className="flink-apply-reason">
+                      理由：{item.reason}
+                    </div>
                   )}
                 </li>
               ))}

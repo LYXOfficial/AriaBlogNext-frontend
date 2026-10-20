@@ -12,7 +12,13 @@ const HOME = { lng: 107.38779, lat: 29.70239 };
 const CACHE_TTL = 30 * 60 * 1000;
 const MAX_CACHE = 500;
 
-type Geo = { nation: string; province: string; city: string; lng?: number; lat?: number };
+type Geo = {
+  nation: string;
+  province: string;
+  city: string;
+  lng?: number;
+  lat?: number;
+};
 type Entry = { text: string; at: number };
 
 const cache = new Map<string, Entry>();
@@ -32,7 +38,12 @@ function remember(ip: string, text: string) {
   cache.set(ip, { text, at: Date.now() });
 }
 
-function distanceKm(aLng: number, aLat: number, bLng: number, bLat: number): number {
+function distanceKm(
+  aLng: number,
+  aLat: number,
+  bLng: number,
+  bLat: number,
+): number {
   const R = 6371;
   const { sin, cos, asin, PI, hypot } = Math;
   const point = (lng: number, lat: number) => {
@@ -43,7 +54,7 @@ function distanceKm(aLng: number, aLat: number, bLng: number, bLat: number): num
   const a = point(aLng, aLat);
   const b = point(bLng, bLat);
   const c = hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-  return Math.round((asin(c / 2) * 2 * R));
+  return Math.round(asin(c / 2) * 2 * R);
 }
 
 async function lookupTencent(ip?: string): Promise<Geo | null> {
@@ -94,22 +105,59 @@ async function lookupFallback(ip?: string): Promise<Geo | null> {
 }
 
 const COUNTRY_CN: Record<string, string> = {
-  China: "中国", Japan: "日本", "United States": "美国", "United Kingdom": "英国",
-  Russia: "俄罗斯", France: "法国", Germany: "德国", Australia: "澳大利亚",
-  Canada: "加拿大", Singapore: "新加坡", "South Korea": "韩国", Taiwan: "台湾省",
-  "Hong Kong": "香港特别行政区", Macao: "澳门特别行政区", "New Zealand": "新西兰",
-  Malaysia: "马来西亚", Thailand: "泰国", India: "印度", Brazil: "巴西",
+  China: "中国",
+  Japan: "日本",
+  "United States": "美国",
+  "United Kingdom": "英国",
+  Russia: "俄罗斯",
+  France: "法国",
+  Germany: "德国",
+  Australia: "澳大利亚",
+  Canada: "加拿大",
+  Singapore: "新加坡",
+  "South Korea": "韩国",
+  Taiwan: "台湾省",
+  "Hong Kong": "香港特别行政区",
+  Macao: "澳门特别行政区",
+  "New Zealand": "新西兰",
+  Malaysia: "马来西亚",
+  Thailand: "泰国",
+  India: "印度",
+  Brazil: "巴西",
 };
 
 const REGION_CN: Record<string, string> = {
-  Beijing: "北京市", Tianjin: "天津市", Chongqing: "重庆市", Hebei: "河北省",
-  Henan: "河南省", Shanxi: "山西省", "Inner Mongolia": "内蒙古自治区", Liaoning: "辽宁省",
-  Jilin: "吉林省", Heilongjiang: "黑龙江省", Shanghai: "上海市", Jiangsu: "江苏省",
-  Zhejiang: "浙江省", Anhui: "安徽省", Fujian: "福建省", Jiangxi: "江西省",
-  Shandong: "山东省", Hubei: "湖北省", Hunan: "湖南省", Guangdong: "广东省",
-  Guangxi: "广西壮族自治区", Hainan: "海南省", Sichuan: "四川省", Guizhou: "贵州省",
-  Yunnan: "云南省", Tibet: "西藏自治区", Shaanxi: "陕西省", Gansu: "甘肃省",
-  Qinghai: "青海省", Ningxia: "宁夏回族自治区", Xinjiang: "新疆维吾尔自治区",
+  Beijing: "北京市",
+  Tianjin: "天津市",
+  Chongqing: "重庆市",
+  Hebei: "河北省",
+  Henan: "河南省",
+  Shanxi: "山西省",
+  "Inner Mongolia": "内蒙古自治区",
+  Liaoning: "辽宁省",
+  Jilin: "吉林省",
+  Heilongjiang: "黑龙江省",
+  Shanghai: "上海市",
+  Jiangsu: "江苏省",
+  Zhejiang: "浙江省",
+  Anhui: "安徽省",
+  Fujian: "福建省",
+  Jiangxi: "江西省",
+  Shandong: "山东省",
+  Hubei: "湖北省",
+  Hunan: "湖南省",
+  Guangdong: "广东省",
+  Guangxi: "广西壮族自治区",
+  Hainan: "海南省",
+  Sichuan: "四川省",
+  Guizhou: "贵州省",
+  Yunnan: "云南省",
+  Tibet: "西藏自治区",
+  Shaanxi: "陕西省",
+  Gansu: "甘肃省",
+  Qinghai: "青海省",
+  Ningxia: "宁夏回族自治区",
+  Xinjiang: "新疆维吾尔自治区",
 };
 
 function cnify(geo: Geo): Geo {
@@ -146,15 +194,46 @@ function posDesc(geo: Geo): string {
   const province = geo.province;
   const city = geo.city;
   const known = new Set([
-    "北京市","天津市","重庆市","河北省","河南省","山西省","内蒙古自治区","辽宁省",
-    "吉林省","黑龙江省","上海市","江苏省","浙江省","安徽省","福建省","江西省",
-    "山东省","湖北省","湖南省","广东省","广西壮族自治区","海南省","四川省","贵州省",
-    "云南省","西藏自治区","陕西省","甘肃省","青海省","宁夏回族自治区","新疆维吾尔自治区",
-    "台湾省","香港特别行政区","澳门特别行政区",
+    "北京市",
+    "天津市",
+    "重庆市",
+    "河北省",
+    "河南省",
+    "山西省",
+    "内蒙古自治区",
+    "辽宁省",
+    "吉林省",
+    "黑龙江省",
+    "上海市",
+    "江苏省",
+    "浙江省",
+    "安徽省",
+    "福建省",
+    "江西省",
+    "山东省",
+    "湖北省",
+    "湖南省",
+    "广东省",
+    "广西壮族自治区",
+    "海南省",
+    "四川省",
+    "贵州省",
+    "云南省",
+    "西藏自治区",
+    "陕西省",
+    "甘肃省",
+    "青海省",
+    "宁夏回族自治区",
+    "新疆维吾尔自治区",
+    "台湾省",
+    "香港特别行政区",
+    "澳门特别行政区",
   ]);
   if (!known.has(province)) return "";
-  if (province === "江苏省" && city === "南京市") return "欢迎来自安徽省南京市的小伙伴。";
-  if (province === "江苏省" && city === "苏州市") return "苏州梅友机场，苏州享耀机场。";
+  if (province === "江苏省" && city === "南京市")
+    return "欢迎来自安徽省南京市的小伙伴。";
+  if (province === "江苏省" && city === "苏州市")
+    return "苏州梅友机场，苏州享耀机场。";
   if (province === "江苏省") return "散装是必须要散装的。";
   if (province === "四川省") {
     switch (city) {
@@ -230,7 +309,10 @@ function compose(geo: Geo | null): string {
     }).format(new Date()),
     10,
   );
-  const timeChange = greet(Number.isFinite(hour) ? hour : 12).replace(/[。！!，,]+$/, "");
+  const timeChange = greet(Number.isFinite(hour) ? hour : 12).replace(
+    /[。！!，,]+$/,
+    "",
+  );
   if (!geo) return `欢迎光临！${timeChange}。`;
   geo = cnify(geo);
 
@@ -256,16 +338,25 @@ function compose(geo: Geo | null): string {
 
 export async function GET(req: NextRequest) {
   const forwarded = req.headers.get("x-forwarded-for") ?? "";
-  const ip = forwarded.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
+  const ip =
+    forwarded.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
   const cacheKey = ip || "anon";
 
   const hit = cached(cacheKey);
   if (hit) {
-    return Response.json({ text: hit }, { headers: { "Cache-Control": "public, max-age=1800" } });
+    return Response.json(
+      { text: hit },
+      { headers: { "Cache-Control": "public, max-age=1800" } },
+    );
   }
 
-  const geo = (await lookupTencent(ip || undefined)) ?? (await lookupFallback(ip || undefined));
+  const geo =
+    (await lookupTencent(ip || undefined)) ??
+    (await lookupFallback(ip || undefined));
   const text = compose(geo);
   remember(cacheKey, text);
-  return Response.json({ text }, { headers: { "Cache-Control": "public, max-age=1800" } });
+  return Response.json(
+    { text },
+    { headers: { "Cache-Control": "public, max-age=1800" } },
+  );
 }

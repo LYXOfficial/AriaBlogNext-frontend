@@ -52,7 +52,7 @@
 @media (prefers-color-scheme: dark) {
   .home-banner::after {
     background:
-      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0,0.4)),
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       linear-gradient(
         rgba(0, 0, 0, 0.64) 0%,
         rgba(0, 0, 0, 0.28) 9%,
@@ -69,7 +69,7 @@
 
 .home-banner-intro {
   position: absolute;
-  z-index: 2;        
+  z-index: 2;
   top: 43%;
   transform: translate(-50%, -25%);
   left: 50%;
@@ -138,12 +138,19 @@
 }
 
 @keyframes home-banner-scroll-bounce {
-  0%, 100% { transform: translateY(-3px); }
-  50% { transform: translateY(5px); }
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-banner-scroll-hint svg { animation: none; }
+  .home-banner-scroll-hint svg {
+    animation: none;
+  }
 }
 
 .home-banner-bottom {
@@ -180,7 +187,6 @@
 }
 
 @media screen and (max-height: 600px) and (min-width: 769px) {
-
   .home-banner-headline {
     font-size: clamp(44px, calc(20px + 2.5vw), 56px);
   }

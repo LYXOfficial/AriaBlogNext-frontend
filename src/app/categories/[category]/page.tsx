@@ -72,8 +72,32 @@ export default async function Page({
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <Link className="collection-back" href="/categories"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m14 6-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg><span>全部分类</span></Link>
-          <CollectionHeader eyebrow="分类里的文章" title={decodedCategory} extra={<span className="collection-stat"><b>{data.find(item => item.name === decodedCategory)?.count ?? 0}</b> 篇文章</span>} />
+          <Link className="collection-back" href="/categories">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path
+                d="m14 6-6 6 6 6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>全部分类</span>
+          </Link>
+          <CollectionHeader
+            eyebrow="分类里的文章"
+            title={decodedCategory}
+            extra={
+              <span className="collection-stat">
+                <b>
+                  {data.find((item) => item.name === decodedCategory)?.count ??
+                    0}
+                </b>{" "}
+                篇文章
+              </span>
+            }
+          />
           <CollectionSwitcher label="切换分类">
             <TagIndex tags={data} type="categories" current={decodedCategory} />
           </CollectionSwitcher>

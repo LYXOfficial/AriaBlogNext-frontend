@@ -61,7 +61,15 @@ export default async function Page() {
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <CollectionHeader eyebrow="这里是时间线上的所有文章" title="归档" extra={<span className="collection-stat"><b>{total}</b> 篇文章</span>} />
+          <CollectionHeader
+            eyebrow="这里是时间线上的所有文章"
+            title="归档"
+            extra={
+              <span className="collection-stat">
+                <b>{total}</b> 篇文章
+              </span>
+            }
+          />
           <div id="archives-container">{ArchiveContent}</div>
         </div>
       </div>

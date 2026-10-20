@@ -21,7 +21,15 @@ export default async function Page() {
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <CollectionHeader eyebrow="标签索引" title="标签" extra={<span className="collection-stat"><b>{data.length}</b> 个标签</span>} />
+          <CollectionHeader
+            eyebrow="标签索引"
+            title="标签"
+            extra={
+              <span className="collection-stat">
+                <b>{data.length}</b> 个标签
+              </span>
+            }
+          />
           <TagIndex tags={data} />
         </div>
       </div>

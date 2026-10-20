@@ -28,10 +28,7 @@ export default async function Page({
     let flag = false;
     await Promise.all(
       data.map(async (item: ArchiveListItem) => {
-        if (
-          item.year === yearNum &&
-          item.month === monthNum
-        ) {
+        if (item.year === yearNum && item.month === monthNum) {
           const res = await fetch(
             `${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,
             { next: { revalidate: 7200, tags: ["posts"] } },
@@ -62,9 +59,7 @@ export default async function Page({
         <div key={key} className="archive-year">
           <h2 className="archive-year-title">
             <Link href={`/archives/${key}`}>{key}</Link> -{" "}
-            <Link href={`/archives/${key}/${month}`}>
-              {month}
-            </Link>
+            <Link href={`/archives/${key}/${month}`}>{month}</Link>
           </h2>
           {value.map((post) => (
             <ArchiveItem key={post.slug} post={post} type="archives" />

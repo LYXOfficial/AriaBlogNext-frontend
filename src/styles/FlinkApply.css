@@ -108,7 +108,8 @@
   cursor: pointer;
   outline: none; /* 去掉浏览器默认的黑框 */
   transition:
-    background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
 }
 
 .flink-apply input[type="checkbox"]:focus-visible {
@@ -203,7 +204,9 @@
   -webkit-appearance: none;
   appearance: none;
   overflow: hidden;
-  transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 
 .flink-apply-color input[type="color"]:hover {

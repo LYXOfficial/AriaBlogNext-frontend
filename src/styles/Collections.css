@@ -308,11 +308,20 @@
 .flink-section-divider::after {
   content: "";
   flex: 1;
-  border-top: 2px dashed color-mix(in srgb, var(--aria-fontcolor) 22%, transparent);
+  border-top: 2px dashed
+    color-mix(in srgb, var(--aria-fontcolor) 22%, transparent);
 }
-.flink-section-divider > span { display: none; }
+.flink-section-divider > span {
+  display: none;
+}
 @media (prefers-reduced-motion: reduce) {
-  .collection-back, .collection-back svg, .collection-switcher-toggle, .collection-switcher-toggle svg, .collection-switcher-panel { transition: none; }
+  .collection-back,
+  .collection-back svg,
+  .collection-switcher-toggle,
+  .collection-switcher-toggle svg,
+  .collection-switcher-panel {
+    transition: none;
+  }
 }
 @media screen and (max-width: 680px) {
   #post-maincontent .collection-header {

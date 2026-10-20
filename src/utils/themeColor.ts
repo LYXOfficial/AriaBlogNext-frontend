@@ -28,7 +28,7 @@ function rgbToHsl(r: number, g: number, b: number): Hsl {
 
 function hslToRgb({ h, s, l }: Hsl): [number, number, number] {
   const c = (1 - Math.abs(2 * l - 1)) * s;
-  const hp = ((h % 360) + 360) % 360 / 60;
+  const hp = (((h % 360) + 360) % 360) / 60;
   const x = c * (1 - Math.abs((hp % 2) - 1));
   let rgb: [number, number, number];
   if (hp < 1) rgb = [c, x, 0];
@@ -67,7 +67,10 @@ function loadImage(url: string, timeoutMs = 8000): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
-    const timer = setTimeout(() => reject(new Error("图片加载超时")), timeoutMs);
+    const timer = setTimeout(
+      () => reject(new Error("图片加载超时")),
+      timeoutMs,
+    );
     img.onload = () => {
       clearTimeout(timer);
       resolve(img);
@@ -141,13 +144,23 @@ export async function extractThemeColorFromImage(url: string): Promise<string> {
 
   if (buckets.size === 0) {
     // 整张图都是极浅/极深像素：退化成平均色
-    let r = 0, g = 0, b = 0, n = 0;
+    let r = 0,
+      g = 0,
+      b = 0,
+      n = 0;
     for (let i = 0; i < data.length; i += 4) {
       if (data[i + 3] < 128) continue;
-      r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
+      r += data[i];
+      g += data[i + 1];
+      b += data[i + 2];
+      n++;
     }
     if (!n) return "";
-    const avg = rgbToHsl(Math.round(r / n), Math.round(g / n), Math.round(b / n));
+    const avg = rgbToHsl(
+      Math.round(r / n),
+      Math.round(g / n),
+      Math.round(b / n),
+    );
     return toHex(hslToRgb(normalizeForCard(avg)));
   }
 
@@ -210,7 +223,8 @@ export function ensureCardColor(hex: string, minContrast = 3): string {
     l -= 0.02;
     if (l <= 0.04) break;
     const candidate = hslToRgb({ ...hsl, l });
-    if (contrastWithWhite(toHex(candidate)) >= minContrast) return toHex(candidate);
+    if (contrastWithWhite(toHex(candidate)) >= minContrast)
+      return toHex(candidate);
   }
   // 极端情况（比如纯白）：给一个深灰
   return "#3a3a3a";

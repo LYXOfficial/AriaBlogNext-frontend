@@ -51,6 +51,9 @@
 #post-banner-title {
   font-weight: 400;
   font-size: 3em;
+  -webkit-text-stroke: 0.6px currentColor;
+  line-height: 1.2;
+  margin-bottom: 16px;
 }
 
 #post-banner-meta {
@@ -66,7 +69,7 @@
 #post-banner .post-metas {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 #post-banner .post-metas-firstline,
@@ -74,7 +77,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 18px;
+  gap: 2px 10px;
 }
 
 #post-banner .post-meta {
@@ -96,9 +99,9 @@
   opacity: 0.85;
 }
 
+/* 纯文本和链接统一走普通行盒，避免嵌套 flex 使字体基线产生视觉偏差。 */
 #post-banner .post-meta-content {
-  display: inline-flex;
-  align-items: center;
+  display: block;
   min-width: 0;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
@@ -113,9 +116,15 @@
 }
 
 #post-banner .post-tags .post-meta-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
+  display: block;
+}
+
+#post-banner .post-tags .post-meta-content a {
+  display: inline-block;
+}
+
+#post-banner .post-tags .post-meta-content a + a {
+  margin-left: 10px;
 }
 
 #post-banner .post-meta-content a {
@@ -131,7 +140,7 @@
 @media screen and (max-width: 768px) {
   #post-banner .post-metas-firstline,
   #post-banner .post-metas-secondline {
-    gap: 6px 12px;
+    gap: 2px 10px;
   }
 
   #post-banner .post-meta {
@@ -151,7 +160,7 @@
 @media screen and (max-width: 600px) {
   #post-banner-title {
     font-size: 36px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 
   #post-banner-info {

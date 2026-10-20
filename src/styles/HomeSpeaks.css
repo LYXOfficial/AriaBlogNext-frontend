@@ -77,7 +77,9 @@
   background: rgba(23, 31, 45, 0.215);
   -webkit-backdrop-filter: blur(20px) saturate(130%);
   backdrop-filter: blur(20px) saturate(130%);
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.16), inset 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 10px 36px rgba(0, 0, 0, 0.16),
+    inset 0 1px rgba(255, 255, 255, 0.08);
   animation: none;
 }
 

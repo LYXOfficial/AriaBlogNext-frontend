@@ -50,7 +50,10 @@ export function Speaks() {
         setSpeakContent(
           speaksContent.map((item, index) => {
             return (
-              <div key={`${item.time}-${index}`} className="bb-item card-widget">
+              <div
+                key={`${item.time}-${index}`}
+                className="bb-item card-widget"
+              >
                 <div
                   className="bb-content"
                   dangerouslySetInnerHTML={{ __html: item.content }}

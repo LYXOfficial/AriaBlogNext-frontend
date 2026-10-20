@@ -89,10 +89,12 @@ export default function Footer() {
                 title={item.name}
                 rel="noopener external nofollow noreferrer"
                 href={item.link}
-                style={{
-                  "--footer-link-color": item.color,
-                  "--footer-link-dark-color": item.darkColor,
-                } as CSSProperties}
+                style={
+                  {
+                    "--footer-link-color": item.color,
+                    "--footer-link-dark-color": item.darkColor,
+                  } as CSSProperties
+                }
               >
                 <Icon icon={item.icon} aria-hidden="true" />
                 <span>{item.name}</span>

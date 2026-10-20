@@ -30,7 +30,8 @@ const URL_TEST_RE = /https?:\/\//i;
 const URL_RE = /^https?:\/\/[^\s<>"'）)】\]]+$/i;
 const URL_GLOBAL_RE = /https?:\/\/[^\s<>"'）)】\]]+/gi;
 const IMAGE_EXT_RE = /\.(png|jpe?g|webp|gif|svg|ico|avif|bmp)(\?|#|$)/i;
-const IMAGE_HINT_RE = /(avatar|icon|logo|favicon|gravatar|head|portrait|头像|图标)/i;
+const IMAGE_HINT_RE =
+  /(avatar|icon|logo|favicon|gravatar|head|portrait|头像|图标)/i;
 const COLOR_RE =
   /^(#[0-9a-fA-F]{3,8}|rgba?\([0-9.,%\s]+\)|hsla?\([0-9.,%\s]+\)|[a-zA-Z]{3,20})$/;
 const HAS_WORD_RE =
@@ -140,8 +141,8 @@ const SYNONYMS: Array<{ field: Field; words: string[] }> = [
   },
 ];
 
-const ALL_SYNONYMS: Array<{ field: Field; word: string }> = SYNONYMS.flatMap((g) =>
-  g.words.map((word) => ({ field: g.field, word })),
+const ALL_SYNONYMS: Array<{ field: Field; word: string }> = SYNONYMS.flatMap(
+  (g) => g.words.map((word) => ({ field: g.field, word })),
 ).sort((a, b) => b.word.length - a.word.length);
 
 /** 预计算归一化结果（normalize 是函数声明，会被提升，可用于此处初始化） */
@@ -272,7 +273,9 @@ function labelOnly(line: string): Field | null {
 /** 整段文字就是个标签（例如「名称:」被误当站名的场景） */
 function isBareLabel(text: string): boolean {
   const norm = normalize(text);
-  return norm.length > 0 && ALL_SYNONYMS_NORM.some((item) => item.norm === norm);
+  return (
+    norm.length > 0 && ALL_SYNONYMS_NORM.some((item) => item.norm === norm)
+  );
 }
 
 /** 像一句话而不是站名：含句末标点或常见口语词，或没有任何文字 */
@@ -294,12 +297,7 @@ function looksLikeName(text: string): boolean {
 function looksLikeImage(url: string): boolean {
   if (IMAGE_EXT_RE.test(url)) return true;
   const last =
-    url
-      .split("?")[0]
-      .split("#")[0]
-      .split("/")
-      .filter(Boolean)
-      .pop() ?? "";
+    url.split("?")[0].split("#")[0].split("/").filter(Boolean).pop() ?? "";
   return IMAGE_HINT_RE.test(last) && (last.includes(".") || url.includes("?"));
 }
 
@@ -341,7 +339,11 @@ function assignByContent(line: string, result: ParsedFlink) {
   }
 }
 
-function assignField(field: Field, rawValue: string, result: ParsedFlink): boolean {
+function assignField(
+  field: Field,
+  rawValue: string,
+  result: ParsedFlink,
+): boolean {
   const value = cleanValue(rawValue);
   if (!value) return false;
 

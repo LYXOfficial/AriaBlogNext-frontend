@@ -32,21 +32,21 @@ const nextConfig = {
   // Turbopack 配置
   turbopack: {
     rules: {
-      '*.mdx': {
-        loaders: ['raw-loader'],
-        as: '*.js',
+      "*.mdx": {
+        loaders: ["raw-loader"],
+        as: "*.js",
       },
-      '*.md': {
-        loaders: ['raw-loader'],
-        as: '*.js',
+      "*.md": {
+        loaders: ["raw-loader"],
+        as: "*.js",
       },
     },
     resolveAlias: {
-      'components': './src/components',
-      'styles': './src/styles',
-      'interfaces': './src/interfaces',
-      'utils': './src/utils',
-      'config': './src/config.tsx',
+      components: "./src/components",
+      styles: "./src/styles",
+      interfaces: "./src/interfaces",
+      utils: "./src/utils",
+      config: "./src/config.tsx",
     },
   },
   webpack: (config) => {

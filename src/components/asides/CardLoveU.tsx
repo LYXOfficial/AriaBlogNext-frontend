@@ -31,7 +31,8 @@ export default function CardLoveU() {
         <div className="loveu-text">
           <span className="loveu-text-line">
             <b>
-              {LoveUContent.myName}&nbsp;&nbsp;&&nbsp;&nbsp;{LoveUContent.yourName}
+              {LoveUContent.myName}&nbsp;&nbsp;&&nbsp;&nbsp;
+              {LoveUContent.yourName}
             </b>
           </span>
           <span className="loveu-text-line">
@@ -44,7 +45,7 @@ export default function CardLoveU() {
               {Math.floor(
                 (new Date().getTime() -
                   new Date(LoveUContent.startDate.join("-")).getTime()) /
-                  (1000 * 60 * 60 * 24)
+                  (1000 * 60 * 60 * 24),
               )}{" "}
               天
             </b>

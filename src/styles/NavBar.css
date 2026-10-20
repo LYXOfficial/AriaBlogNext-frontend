@@ -23,8 +23,12 @@
   box-sizing: border-box;
   height: 62px;
   min-height: 62px;
-  transition: background-color 0.35s, box-shadow 0.35s,
-    border-color 0.35s, border-radius 0.35s, transform 0.35s;
+  transition:
+    background-color 0.35s,
+    box-shadow 0.35s,
+    border-color 0.35s,
+    border-radius 0.35s,
+    transform 0.35s;
 }
 
 html[data-home-manual-scroll] #navbar {
@@ -281,7 +285,10 @@ html[data-home-manual-scroll] #navbar {
 @media screen and (min-width: 769px) {
   /* 父级滤镜会建立 backdrop root，令伸出顶栏的子菜单无法模糊页面。
      将顶栏模糊放到独立背景层，不限制下拉面板的背景采样。 */
-  html #navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  html #navbar {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
   #navbar::before {
     content: "";
     position: absolute;
@@ -292,9 +299,17 @@ html[data-home-manual-scroll] #navbar {
     -webkit-backdrop-filter: blur(5px) saturate(180%);
     backdrop-filter: blur(5px) saturate(180%);
   }
-  #navbar.trans::before { -webkit-backdrop-filter: none; backdrop-filter: none; }
-  #menu-items { gap: 6px; align-items: center; }
-  #menu-items .menu-item { font-size: 18px; }
+  #navbar.trans::before {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  #menu-items {
+    gap: 6px;
+    align-items: center;
+  }
+  #menu-items .menu-item {
+    font-size: 18px;
+  }
   #menu-items .site-page {
     margin: 0;
     padding: 7px 12px;
@@ -304,8 +319,13 @@ html[data-home-manual-scroll] #navbar {
     white-space: nowrap;
     transition: background-color var(--dur-slow) var(--ease-in-out);
   }
-  #menu-items .site-page > * { margin: 0; }
-  #menu-items .site-page svg { width: 20px; height: 20px; }
+  #menu-items .site-page > * {
+    margin: 0;
+  }
+  #menu-items .site-page svg {
+    width: 20px;
+    height: 20px;
+  }
   #menu-items .menu-item:hover > .site-page,
   #menu-items .menu-item:has(:focus-visible) > .site-page {
     background: rgba(130, 140, 160, 0.22);
@@ -334,7 +354,10 @@ html[data-home-manual-scroll] #navbar {
     backdrop-filter: blur(5px) saturate(140%);
     box-shadow: var(--aria-shadow);
     color: var(--aria-fontcolor);
-    transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out),
+      visibility var(--dur-slow);
   }
   /* 填补入口和面板之间的空隙，移动鼠标时不会意外关闭。 */
   #menu-items .site-page-childs::before {
@@ -366,7 +389,12 @@ html[data-home-manual-scroll] #navbar {
     cursor: pointer;
     transition: background-color var(--dur-slow) var(--ease-in-out);
   }
-  #menu-items .site-page-child svg { width: 17px; height: 17px; margin: 0; flex-shrink: 0; }
+  #menu-items .site-page-child svg {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    flex-shrink: 0;
+  }
   #menu-items .site-page-child:hover,
   #menu-items .site-page-child:focus-visible {
     background: color-mix(in srgb, var(--aria-theme) 32%, transparent);
@@ -375,11 +403,19 @@ html[data-home-manual-scroll] #navbar {
   }
 }
 
-.mobile-menu-heading { display: none; }
+.mobile-menu-heading {
+  display: none;
+}
 
 @keyframes mobile-menu-reveal {
-  from { opacity: 0; transform: translateY(-12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -397,7 +433,10 @@ html[data-home-manual-scroll] #navbar {
     border-radius: 0;
     transform: none;
     animation: none;
-    transition: background-color 0.35s, border-color 0.35s, box-shadow 0.35s;
+    transition:
+      background-color 0.35s,
+      border-color 0.35s,
+      box-shadow 0.35s;
   }
 
   #navbar #site-name {
@@ -488,13 +527,17 @@ html[data-home-manual-scroll] #navbar {
     backdrop-filter: blur(24px) saturate(140%);
   }
 
-  #menu-items.mobile-menu-close { display: none; }
+  #menu-items.mobile-menu-close {
+    display: none;
+  }
   #navbar #menu-items.mobile-menu-open {
     display: flex;
     animation: mobile-menu-reveal 0.5s var(--ease-out);
   }
 
-  .menu-button.menu-button-mobmenu { display: block !important; }
+  .menu-button.menu-button-mobmenu {
+    display: block !important;
+  }
 
   #menu-items .mobile-menu-heading {
     display: flex;
@@ -502,10 +545,19 @@ html[data-home-manual-scroll] #navbar {
     gap: 5px;
     padding: 0 2px 4px;
   }
-  .mobile-menu-heading > span { font-size: 22px; font-weight: 700; }
-  .mobile-menu-heading small { font-size: 13px; color: var(--aria-light-fontcolor); }
+  .mobile-menu-heading > span {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .mobile-menu-heading small {
+    font-size: 13px;
+    color: var(--aria-light-fontcolor);
+  }
 
-  #menu-items .menu-item { flex-direction: column; gap: 8px; }
+  #menu-items .menu-item {
+    flex-direction: column;
+    gap: 8px;
+  }
   #navbar #menu-items .menu-item > .site-page {
     margin: 0;
     padding: 0 2px;
@@ -555,9 +607,16 @@ html[data-home-manual-scroll] #navbar {
     box-shadow: none;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color var(--dur-slow) var(--ease-out), border-color var(--dur-slow) var(--ease-out);
+    transition:
+      background-color var(--dur-slow) var(--ease-out),
+      border-color var(--dur-slow) var(--ease-out);
   }
-  #navbar #menu-items .site-page-child svg { width: 17px; height: 17px; flex-shrink: 0; margin: 0; }
+  #navbar #menu-items .site-page-child svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    margin: 0;
+  }
   #navbar #menu-items .site-page-child:hover,
   #navbar #menu-items .site-page-child:focus-visible,
   #navbar #menu-items .menu-item > a.site-page:hover {

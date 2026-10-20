@@ -20,15 +20,29 @@
   padding: 4px 8px;
   border-radius: 6px;
   --footer-link-current-color: var(--footer-link-color);
-  --footer-link-text: color-mix(in srgb, var(--footer-link-current-color) 65%, #888);
-  --footer-link-hover-text: color-mix(in srgb, var(--footer-link-current-color) 90%, #111);
+  --footer-link-text: color-mix(
+    in srgb,
+    var(--footer-link-current-color) 65%,
+    #888
+  );
+  --footer-link-hover-text: color-mix(
+    in srgb,
+    var(--footer-link-current-color) 90%,
+    #111
+  );
   color: var(--footer-link-text);
-  background-color: color-mix(in srgb, var(--footer-link-current-color) 5%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--footer-link-current-color) 5%,
+    transparent
+  );
   font-size: 13px;
   line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
-  transition: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+  transition:
+    color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
 }
 
 #footer-framework-info > a > svg {
@@ -40,7 +54,11 @@
 #footer-framework-info > a:hover,
 #footer-framework-info > a:focus-visible {
   color: var(--footer-link-hover-text);
-  background-color: color-mix(in srgb, var(--footer-link-current-color) 16%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--footer-link-current-color) 16%,
+    transparent
+  );
 }
 
 #footer-framework-info > a:focus-visible {
@@ -75,12 +93,24 @@
 @media (prefers-color-scheme: dark) {
   #footer-framework-info > a {
     --footer-link-current-color: var(--footer-link-dark-color);
-    --footer-link-hover-text: color-mix(in srgb, var(--footer-link-current-color) 65%, #555);
-    background-color: color-mix(in srgb, var(--footer-link-current-color) 12%, #171717);
+    --footer-link-hover-text: color-mix(
+      in srgb,
+      var(--footer-link-current-color) 65%,
+      #555
+    );
+    background-color: color-mix(
+      in srgb,
+      var(--footer-link-current-color) 12%,
+      #171717
+    );
   }
 
   #footer-framework-info > a:hover,
   #footer-framework-info > a:focus-visible {
-    background-color: color-mix(in srgb, var(--footer-link-current-color) 8%, #111);
+    background-color: color-mix(
+      in srgb,
+      var(--footer-link-current-color) 8%,
+      #111
+    );
   }
 }

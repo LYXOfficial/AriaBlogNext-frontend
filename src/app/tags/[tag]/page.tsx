@@ -16,7 +16,11 @@ import CollectionHeader from "@/components/CollectionHeader";
 import TagIndex from "@/components/TagIndex";
 import CollectionSwitcher from "@/components/CollectionSwitcher";
 import ArchiveItem from "@/components/Archives";
-export default async function Page({ params }: { params: Promise<{ tag: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ tag: string }>;
+}) {
   const { tag } = await params;
   const decodedTag = decodeURI(tag);
   let ArchiveContent: ReactElement[] = [],
@@ -71,8 +75,31 @@ export default async function Page({ params }: { params: Promise<{ tag: string }
       <style>{`#navbar{position:fixed}`}</style>
       <div id="article-container" className="page archives">
         <div id="post-maincontent" className="page archives">
-          <Link className="collection-back" href="/tags"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m14 6-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg><span>全部标签</span></Link>
-          <CollectionHeader eyebrow="标签里的文章" title={decodedTag} extra={<span className="collection-stat"><b>{data.find(item => item.name === decodedTag)?.count ?? 0}</b> 篇文章</span>} />
+          <Link className="collection-back" href="/tags">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path
+                d="m14 6-6 6 6 6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>全部标签</span>
+          </Link>
+          <CollectionHeader
+            eyebrow="标签里的文章"
+            title={decodedTag}
+            extra={
+              <span className="collection-stat">
+                <b>
+                  {data.find((item) => item.name === decodedTag)?.count ?? 0}
+                </b>{" "}
+                篇文章
+              </span>
+            }
+          />
           <CollectionSwitcher label="切换标签">
             <TagIndex tags={data} type="tags" current={decodedTag} />
           </CollectionSwitcher>
