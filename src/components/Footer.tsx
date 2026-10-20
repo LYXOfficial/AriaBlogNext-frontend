@@ -1,7 +1,8 @@
 "use client";
 import "styles/Footer.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { FooterBadges, siteConfigs } from "config";
+import { Icon } from "@iconify/react";
 
 export default function Footer() {
   const [footerRunDaysContent, setFooterRunDaysContent] = useState(
@@ -85,11 +86,16 @@ export default function Footer() {
               <a
                 target="_blank"
                 key={item.link}
-                title={item.link}
+                title={item.name}
                 rel="noopener external nofollow noreferrer"
                 href={item.link}
+                style={{
+                  "--footer-link-color": item.color,
+                  "--footer-link-dark-color": item.darkColor,
+                } as CSSProperties}
               >
-                <img src={item.badgeUrl} alt="" />
+                <Icon icon={item.icon} aria-hidden="true" />
+                <span>{item.name}</span>
               </a>
             );
           })}

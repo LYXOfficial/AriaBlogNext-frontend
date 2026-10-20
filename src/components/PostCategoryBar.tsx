@@ -37,7 +37,7 @@ export default function PostCategoryBar({
     <div id="posts-categories-bar" className="card-widget">
       <Link className="post-categories-bar-icon-link" href="/page/1" aria-label="全部文章">
         <Icon
-          icon={type == "categories" ? "fa6-solid:list-ul" : "fa6-solid:tags"}
+          icon={type == "categories" ? "solar:list-bold" : "solar:tag-horizontal-bold"}
         />
       </Link>
       <div

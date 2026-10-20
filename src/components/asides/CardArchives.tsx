@@ -29,7 +29,7 @@ export default async function ASideList() {
   return (
     <div className="card-widget card-aside card-latest-comments">
       <div className="card-headline">
-        <Icon icon="fa6-solid:box-archive" />
+        <Icon icon="solar:archive-bold" />
         <span className="card-title">归档</span>
         <Link className="card-viewmore" title="查看更多" href="/archives">
           <Icon icon="fa6-solid:angle-right" />

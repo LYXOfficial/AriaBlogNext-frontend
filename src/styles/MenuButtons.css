@@ -67,6 +67,8 @@
 }
 
 .menu-actions-button svg { width: 18px; height: 18px; flex-shrink: 0; }
+/* 保留空心造型，补足小尺寸下的线条分量。 */
+.menu-actions-button svg [stroke-width] { stroke-width: 2.5; }
 .menu-actions[data-banner="false"] .menu-actions-button span { display: none; }
 .menu-actions[data-banner="false"] .menu-actions-button { padding: 0; }
 

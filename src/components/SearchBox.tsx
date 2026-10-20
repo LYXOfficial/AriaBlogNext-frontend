@@ -58,7 +58,7 @@ export default function SearchBox({
                     }}
                   />
                   <span className="search-box-result-time">
-                    <Icon icon="fa6-solid:calendar" />
+                    <Icon icon="solar:calendar-bold" />
                     {dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
                   </span>
                 </div>
@@ -79,7 +79,7 @@ export default function SearchBox({
       <div id="search-box" className={`card-widget${show ? " show" : " hide"}`}>
         <div id="search-box-header">
           <button id="search-box-searchbtn" onClick={processResults}>
-            <Icon icon="fa6-solid:magnifying-glass" width="20" height="20" />
+            <Icon icon="solar:magnifer-bold" width="20" height="20" />
           </button>
           <input
             autoComplete="off"
@@ -95,7 +95,7 @@ export default function SearchBox({
               closeFunction(!show);
             }}
           >
-            <Icon icon="fa6-solid:xmark" width="20" height="20" />
+            <Icon icon="solar:close-circle-bold" width="20" height="20" />
           </button>
         </div>
         {results}

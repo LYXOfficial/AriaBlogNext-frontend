@@ -23,7 +23,7 @@ export default function CardToc({ mdContent }: { mdContent: string }) {
   return (
     <div className="card-widget card-aside card-toc">
       <div className="card-headline">
-        <Icon icon="fa6-solid:align-left" />
+        <Icon icon="solar:list-bold" />
         <span className="card-title">目录</span>
       </div>
       <div className="card-body">

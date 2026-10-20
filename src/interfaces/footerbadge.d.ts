@@ -1,4 +1,7 @@
 export declare interface FooterBadge {
-  badgeUrl: string;
+  name: string;
+  icon: string;
+  color: string;
+  darkColor: string;
   link: string;
 }

@@ -200,7 +200,7 @@ export default function NavBar() {
               setMobileMenuOpen(!mobileMenuOpen);
             }}
           >
-            <Icon icon={mobileMenuOpen ? "fa6-solid:xmark" : "fa6-solid:bars"} />
+            <Icon icon="fa6-solid:bars" />
           </button>
         </div>
       </nav>

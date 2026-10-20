@@ -17,7 +17,7 @@ export default async function CardRelatedPosts({ slug }: { slug: string }) {
   return (
     <div className="card-widget card-aside card-latest-posts">
       <div className="card-headline">
-        <Icon icon="fa6-solid:thumbs-up" />
+        <Icon icon="solar:like-bold" />
         <span className="card-title">相关推荐</span>
       </div>
       <div className="card-body">

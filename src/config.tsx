@@ -69,75 +69,75 @@ export const MenuItems: MenuItem[] = [
   {
     name: "首页",
     link: "/",
-    icon: <Icon icon="fa6-solid:house" />,
+    icon: <Icon icon="solar:home-smile-bold" />,
     childs: [],
   },
   {
     name: "文章",
     link: "",
-    icon: <Icon icon="fa6-solid:newspaper" />,
+    icon: <Icon icon="solar:documents-bold" />,
     childs: [
       {
         name: "归档",
         link: "/archives",
-        icon: <Icon icon="fa6-solid:box-archive" />,
+        icon: <Icon icon="solar:archive-bold" />,
       },
       {
         name: "标签",
         link: "/tags",
-        icon: <Icon icon="fa6-solid:tags" />,
+        icon: <Icon icon="solar:tag-horizontal-bold" />,
       },
       {
         name: "分类",
         link: "/categories",
-        icon: <Icon icon="fa6-solid:folder-open" />,
+        icon: <Icon icon="solar:folder-open-bold" />,
       },
       {
         name: "哔哔",
         link: "/speaks",
-        icon: <Icon icon="fa6-solid:comment" />,
+        icon: <Icon icon="solar:chat-round-bold" />,
       },
       {
         name: "声明",
         link: "/license",
-        icon: <Icon icon="fa6-solid:bell" />,
+        icon: <Icon icon="solar:bell-bold" />,
       },
     ],
   },
   {
     name: "本站",
     link: "",
-    icon: <Icon icon="fa6-solid:sitemap" />,
+    icon: <Icon icon="solar:widget-2-bold" />,
     childs: [
       {
         name: "个人页",
         link: "https://yaria.top",
-        icon: <Icon icon="fa6-solid:house-chimney" />,
+        icon: <Icon icon="solar:user-circle-bold" />,
       },
       {
         name: "友链",
         link: "/links",
-        icon: <Icon icon="fa6-solid:link" />,
+        icon: <Icon icon="solar:link-bold" />,
       },
       {
         name: "朋友圈",
         link: "/fcircle",
-        icon: <Icon icon="fa6-solid:circle-nodes" />,
+        icon: <Icon icon="solar:structure-bold" />,
       },
       {
         name: "关于我",
         link: "/about",
-        icon: <Icon icon="fa6-solid:circle-info" />,
+        icon: <Icon icon="solar:info-circle-bold" />,
       },
       {
         name: "日志",
         link: "https://github.com/LYXOfficial/AriaBlogNext-frontend/commits/main/",
-        icon: <Icon icon="fa6-solid:calendar" />,
+        icon: <Icon icon="solar:calendar-bold" />,
       },
       {
         name: "留言板",
         link: "/messageboard",
-        icon: <Icon icon="fa6-solid:chalkboard" />,
+        icon: <Icon icon="solar:chat-square-line-bold" />,
       },
     ],
   },
@@ -145,33 +145,52 @@ export const MenuItems: MenuItem[] = [
 
 export const FooterBadges: FooterBadge[] = [
   {
-    badgeUrl: "https://img.shields.io/badge/Framework-Next.js-black?style=flat",
+    name: "Next.js",
+    icon: "simple-icons:nextdotjs",
+    color: "#171717",
+    darkColor: "#f5f5f5",
     link: "https://nextjs.org",
   },
   {
-    badgeUrl: "https://img.shields.io/badge/Hosted-Vercel-success?style=flat",
+    name: "Vercel",
+    icon: "simple-icons:vercel",
+    color: "#171717",
+    darkColor: "#f5f5f5",
     link: "https://vercel.app",
   },
   {
-    badgeUrl: "https://img.shields.io/badge/CDN-ChuqiCDN-006CFF?style=flat",
-    link: "https://www.chuqiyun.com",
+    name: "FastAPI",
+    icon: "bxl:fastapi",
+    color: "#009688",
+    darkColor: "#53d3c3",
+    link: "https://fastapi.tiangolo.com",
   },
   {
-    badgeUrl: "https://img.shields.io/badge/CC-BY--NC--SA4.0-red?style=flat",
+    name: "BY-NC-SA 4.0",
+    icon: "fa6-brands:creative-commons",
+    color: "#ADFF00",
+    darkColor: "#ADFF00",
     link: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
   },
-  //{
-  //  badgeUrl:
-  //    "https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20250810-ff69b4?style=flat",
-  //  link: "https://icp.gov.moe/?keyword=20250810",
-  //},
   {
-    badgeUrl:
-      "https://img.shields.io/badge/%E5%8D%81%E5%B9%B4%E4%B9%8B%E7%BA%A6-63D3C9",
+    name: "十年之约",
+    icon: "solar:infinity-bold",
+    color: "#ff6200",
+    darkColor: "#ff6200",
     link: "https://foreverblog.cn",
   },
   {
-    badgeUrl: "https://img.shields.io/badge/%E5%BC%80%E5%BE%80-lightgray",
+    name: "虫洞",
+    icon: "solar:planet-bold",
+    color: "#a77d63",
+    darkColor: "#a77d63",
+    link: "https://www.foreverblog.cn/go.html",
+  },
+  {
+    name: "开往",
+    icon: "solar:tram-bold",
+    color: "#337bb5",
+    darkColor: "#7cb8e8",
     link: "https://www.travellings.cn/",
   },
 ];

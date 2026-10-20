@@ -2,7 +2,9 @@
   background-color: var(--aria-acrylic2);
   display: flex;
   flex-wrap: wrap;
-  padding: 30px 20px 20px;
+  align-items: center;
+  row-gap: 5px;padding: 20.3px 20.2px 20.5px;
+  --kyzhyz: "坐好咯～所以325是什么意思呢🤔？难道是出自明日方舟up主魔法ZC目录2024年3月11日的直播，彼时由龙哥哥今天又鸽了主办的明日方舟集成战略民间赛事仙术杯第五届正在如火如荼地展开中，本届仙术杯采取团队赛的形式，ZC 代表冠军厨小队的第二位出战，使用科学分队焰影苇草开但由于临场过于紧张运气Maybe和肉鸽基础不够扎实等原因在第三层关底利刃所指暴毙，局内结算325分吗？";
 }
 
 #footer-copyright,
@@ -11,7 +13,38 @@
 }
 
 #footer-framework-info > a {
-  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  --footer-link-current-color: var(--footer-link-color);
+  --footer-link-text: color-mix(in srgb, var(--footer-link-current-color) 65%, #888);
+  --footer-link-hover-text: color-mix(in srgb, var(--footer-link-current-color) 90%, #111);
+  color: var(--footer-link-text);
+  background-color: color-mix(in srgb, var(--footer-link-current-color) 5%, transparent);
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+
+#footer-framework-info > a > svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+#footer-framework-info > a:hover,
+#footer-framework-info > a:focus-visible {
+  color: var(--footer-link-hover-text);
+  background-color: color-mix(in srgb, var(--footer-link-current-color) 16%, transparent);
+}
+
+#footer-framework-info > a:focus-visible {
+  outline: 2px solid var(--footer-link-current-color);
+  outline-offset: 2px;
 }
 
 #footer-rundays {
@@ -19,17 +52,34 @@
   text-align: right;
   margin-left: 5px;
   white-space: wrap;
+  font-size: 14px;
 }
 
 #footer-copyright {
   margin-right: 20px;
-  margin-bottom: 5px;
+  font-weight: 600;
 }
 
 #footer-framework-info {
-  margin-bottom: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
 }
 
 #footer {
   margin-top: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  #footer-framework-info > a {
+    --footer-link-current-color: var(--footer-link-dark-color);
+    --footer-link-hover-text: color-mix(in srgb, var(--footer-link-current-color) 65%, #555);
+    background-color: color-mix(in srgb, var(--footer-link-current-color) 12%, #171717);
+  }
+
+  #footer-framework-info > a:hover,
+  #footer-framework-info > a:focus-visible {
+    background-color: color-mix(in srgb, var(--footer-link-current-color) 8%, #111);
+  }
 }

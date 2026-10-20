@@ -57,13 +57,13 @@ export function Speaks() {
                 />
                 <div className="bb-bottombar">
                   <span className="bb-time">
-                    <Icon icon="fa6-solid:clock" />
+                    <Icon icon="solar:clock-circle-bold" />
                     <span className="bb-time-text">
                       {relativeTime(item.time)}
                     </span>
                   </span>
                   <button className="bb-comment-button" onClick={bbClickHandle}>
-                    <Icon icon="fa6-solid:comment" />
+                    <Icon icon="solar:chat-round-bold" />
                   </button>
                 </div>
               </div>

@@ -39,7 +39,7 @@ export default function CardLatestComments() {
   return (
     <div className="card-widget card-aside card-latest-comments">
       <div className="card-headline">
-        <Icon icon="fa6-solid:comment-dots" />
+        <Icon icon="solar:chat-round-dots-bold" />
         <span className="card-title">最新评论</span>
       </div>
       <div className="card-body">

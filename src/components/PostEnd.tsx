@@ -128,7 +128,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
                 上一篇
               </span>
               <span className="postend-navigation-date">
-                <Icon icon="fa6-solid:calendar-days" />
+                <Icon icon="solar:calendar-date-bold" />
                 {dayjs.unix(previousPost.publishTime!).format("YYYY-MM-DD")}
               </span>
             </span>
@@ -156,7 +156,7 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
             />
             <span className="postend-navigation-headline">
               <span className="postend-navigation-date">
-                <Icon icon="fa6-solid:calendar-days" />
+                <Icon icon="solar:calendar-date-bold" />
                 {dayjs.unix(nextPost.publishTime!).format("YYYY-MM-DD")}
               </span>
               <span className="postend-navigation-intro">

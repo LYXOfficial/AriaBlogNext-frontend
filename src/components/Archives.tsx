@@ -35,13 +35,13 @@ export default function ArchiveItem({
           title={type == "categories" ? post.tags?.[0] : post.category}
         >
           <Icon
-            icon={`fa6-solid:${type == "categories" ? "tags" : "list-ul"}`}
+            icon={type == "categories" ? "solar:tag-horizontal-bold" : "solar:list-bold"}
           />
           {type == "categories" ? post.tags?.[0] : post.category}
         </Link>
       </object>
       <span className="archive-item-date">
-        <Icon icon="fa6-solid:calendar-days" />
+        <Icon icon="solar:calendar-date-bold" />
         {dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
       </span>
     </Link>

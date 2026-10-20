@@ -447,7 +447,7 @@ export default function FlinkApply() {
               setMessage(null);
             }}
           >
-            <Icon icon={m === 0 ? "fa6-solid:plus" : "fa6-solid:pen"} />
+            <Icon icon={m === 0 ? "solar:add-bold" : "solar:pen-bold"} />
             {m === 0 ? "申请友链" : "修改我的友链"}
           </button>
         ))}
@@ -455,7 +455,7 @@ export default function FlinkApply() {
 
       {editing && (
         <div className="flink-apply-editing">
-          <Icon icon="fa6-solid:pen-to-square" />
+          <Icon icon="solar:pen-new-square-bold" />
           正在修改一条待审申请，保存后仍保持原来的排队位置。
           <button type="button" onClick={resetEdit}>
             取消修改
@@ -466,7 +466,7 @@ export default function FlinkApply() {
       {mode === 0 && (
         <div className="flink-apply-smart">
           <div className="flink-apply-smart-head">
-            <Icon icon="fa6-solid:wand-magic-sparkles" />
+            <Icon icon="solar:magic-stick-3-bold" />
             <span>智能识别填入</span>
             <button
               type="button"
@@ -660,7 +660,7 @@ export default function FlinkApply() {
 
       <div className="flink-apply-preview">
         <div className="flink-apply-preview-head">
-          <Icon icon="fa6-solid:eye" />
+          <Icon icon="solar:eye-bold" />
           效果预览
         </div>
         <div
@@ -707,10 +707,10 @@ export default function FlinkApply() {
           <Icon
             icon={
               busy
-                ? "fa6-solid:spinner"
+                ? "solar:refresh-bold"
                 : editing
-                  ? "fa6-solid:floppy-disk"
-                  : "fa6-solid:paper-plane"
+                  ? "solar:diskette-bold"
+                  : "solar:plain-2-bold"
             }
           />
           {busy ? "提交中..." : editing ? "保存修改" : "提交申请"}
@@ -735,8 +735,8 @@ export default function FlinkApply() {
           <Icon
             icon={
               message.ok
-                ? "fa6-solid:circle-check"
-                : "fa6-solid:circle-exclamation"
+                ? "solar:check-circle-bold"
+                : "solar:danger-circle-bold"
             }
           />
           {message.text}
@@ -808,7 +808,7 @@ export default function FlinkApply() {
                       )}
                       <div className="flink-apply-record-actions">
                         <button type="button" onClick={() => startEdit(item)}>
-                          <Icon icon="fa6-solid:pen-to-square" />
+                          <Icon icon="solar:pen-new-square-bold" />
                           修改
                         </button>
                         {withdrawId === item.id ? (
@@ -833,7 +833,7 @@ export default function FlinkApply() {
                             className="danger"
                             onClick={() => setWithdrawId(item.id)}
                           >
-                            <Icon icon="fa6-solid:trash-can" />
+                            <Icon icon="solar:trash-bin-trash-bold" />
                             撤销申请
                           </button>
                         )}

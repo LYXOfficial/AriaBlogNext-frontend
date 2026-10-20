@@ -624,14 +624,14 @@ export default function HighLightCode({
           title="自动换行"
           onClick={handleWrapperClick}
         >
-          <Icon icon="fa6-solid:arrow-turn-down" />
+          <Icon icon="solar:arrow-to-down-left-bold" />
         </button>
         <button
           className="hljs-copy"
           title="复制代码"
           onClick={handleCopyClick}
         >
-          <Icon icon="fa6-solid:copy" />
+          <Icon icon="solar:copy-bold" />
         </button>
       </>}>
       <pre

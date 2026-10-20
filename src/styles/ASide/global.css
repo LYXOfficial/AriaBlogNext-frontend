@@ -18,6 +18,12 @@
   margin: auto 0;
 }
 
+.card-aside .card-headline > svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
 .card-title {
   margin-left: 5px;
 }

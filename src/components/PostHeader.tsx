@@ -26,7 +26,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
           <div className="post-metas">
             <div className="post-metas-firstline">
               <div className="post-meta post-publishdate">
-                <Icon icon="fa6-solid:calendar-days" />
+                <Icon icon="solar:calendar-date-bold" />
                 <span className="post-meta-content">
                   {"发表于 " +
                     dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD") +
@@ -34,7 +34,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 </span>
               </div>
               <div className="post-meta post-lastupdatedate">
-                <Icon icon="fa6-solid:calendar-days" />
+                <Icon icon="solar:calendar-date-bold" />
                 <span className="post-meta-content">
                   {"更新于 " +
                     dayjs
@@ -44,7 +44,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 </span>
               </div>
               <div className="post-meta post-category">
-                <Icon icon="fa6-solid:inbox" />
+                <Icon icon="solar:inbox-bold" />
                 <span className="post-meta-content">
                   <a href={"/categories/" + postInfo.category}>
                     {postInfo.category}
@@ -53,7 +53,7 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 </span>
               </div>
               <div className="post-meta post-tags">
-                <Icon icon="fa6-solid:tag" />
+                <Icon icon="solar:tag-bold" />
                 <span className="post-meta-content">
                   {postInfo.tags?.slice(0, 5).map((tag, index) => {
                     return (
@@ -68,13 +68,13 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
             </div>
             <div className="post-metas-secondline">
               <div className="post-meta post-wordcount">
-                <Icon icon="fa6-regular:file-word" />
+                <Icon icon="solar:document-text-bold" />
                 <span className="post-meta-content">
                   {`字数总计: ${(postInfo.wordCount as number) >= 1000 ? ((postInfo.wordCount as number) / 1000).toFixed(1) + "k" : (postInfo.wordCount as number)} |`}
                 </span>
               </div>
               <div className="post-meta post-wordcount">
-                <Icon icon="fa6-regular:eye" />
+                <Icon icon="solar:eye-bold" />
                 <span className="post-meta-content">
                   {`阅读量:`}&nbsp;
                   <span id="busuanzi_value_page_pv" />
@@ -83,13 +83,13 @@ export default function PostHeader({ postInfo }: { postInfo: Post }) {
                 <Busuanzi />
               </div>
               <div className="post-meta post-wordcount">
-                <Icon icon="fa6-regular:clock" />
+                <Icon icon="solar:clock-circle-bold" />
                 <span className="post-meta-content">
                   {`阅读用时: ${Math.floor((postInfo.wordCount as number) / 300)} 分钟 |`}
                 </span>
               </div>
               <div className="post-meta post-commentcount">
-                <Icon icon="fa6-solid:comments" />
+                <Icon icon="solar:chat-square-dots-bold" />
                 <span className="post-meta-content">{"条评论"}</span>
               </div>
             </div>

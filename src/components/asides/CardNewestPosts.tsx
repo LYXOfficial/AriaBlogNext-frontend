@@ -16,7 +16,7 @@ export default async function CardNewestPosts() {
   return (
     <div className="card-widget card-aside card-latest-posts">
       <div className="card-headline">
-        <Icon icon="fa6-solid:clock-rotate-left" />
+        <Icon icon="solar:history-bold" />
         <span className="card-title">最新文章</span>
       </div>
       <div className="card-body">

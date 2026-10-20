@@ -120,13 +120,13 @@ export default function MenuButtons({ pathname, onSearch, onRandom, hidden, tran
   return createPortal(
     <div ref={groupRef} className="menu-actions" data-transparent={transparent} aria-label="快捷操作" hidden={hidden}>
       <button className="menu-actions-button" title="搜索" onClick={onSearch}>
-        <Icon icon="fa6-solid:magnifying-glass" /><span>搜索</span>
+        <Icon icon="solar:magnifer-linear" /><span>搜索</span>
       </button>
       <button className="menu-actions-button" title="随便逛逛" onClick={onRandom}>
-        <Icon icon="fa6-solid:paper-plane" /><span>随便逛逛</span>
+        <Icon icon="solar:plain-2-linear" /><span>随便逛逛</span>
       </button>
       <a className="menu-actions-button" title="开往" href="https://travellings.cn/go.html">
-        <Icon icon="fa6-solid:train-subway" /><span>开往</span>
+        <Icon icon="solar:tram-linear" /><span>开往</span>
       </a>
     </div>, document.body,
   );
