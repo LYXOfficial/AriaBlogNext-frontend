@@ -1,0 +1,154 @@
+# 外挂标签示例
+
+## 提示块
+
+用 `type` 选择提示样式，也可以在里面写 Markdown。
+
+<Note type="info">这是一条普通提示，适合补充 **阅读说明**。</Note>
+
+<Note type="warning">操作前先备份，重要的东西要好好保管。</Note>
+
+<Note type="bell">小提醒：今天也要记得休息一下。</Note>
+
+<Note type="critical">这是重要提示，请先确认操作的影响。</Note>
+
+<Note type="error">出了点小问题，可以检查后再试一次。</Note>
+
+```html
+<Note type="info"> 这是一条普通提示，支持 **Markdown**。 </Note>
+
+<!-- type 可选：info、warning、bell、critical、error -->
+```
+
+## 折叠内容
+
+适合放补充说明、答案或者比较长的内容。点击标题试试看。
+
+<Folding summary="点开看看里面有什么" color="pink">
+### 藏起来的小段落
+
+折叠里面也能正常写 **加粗** 和列表：
+
+- 不打断正文的阅读
+- 需要时再展开查看
+  </Folding>
+
+<Folding summary="这一段默认展开" color="skyblue" open>
+  给标签加上 `open`，就可以让内容在进入页面时展开。
+</Folding>
+
+```html
+<Folding summary="点开看看里面有什么" color="pink">
+  这里写折叠内容，支持 **Markdown**。
+  <!-- 可选参数：summary、color、open -->
+</Folding>
+
+<Folding summary="默认展开" color="skyblue" open>
+  这一段一开始就能看到。
+</Folding>
+```
+
+## 选项卡
+
+把相关内容放到同一组里，点击标题切换。
+
+<Tabs>
+<Tab title="第一格">
+这里是第一格，可以放一段简短的介绍。
+</Tab>
+<Tab title="第二格">
+这里是第二格，也支持 **加粗**、列表和代码。
+
+- 一杯茶
+- 一本书
+- 一个悠闲的下午
+    </Tab>
+  <Tab title="第三格">
+切换不会跳转页面，可以随时回到前面。
+</Tab>
+</Tabs>
+
+```html
+<Tabs>
+  <Tab title="第一格"> 这里是第一格的内容。 </Tab>
+  <Tab title="第二格"> 这里是第二格的内容。 </Tab>
+</Tabs>
+```
+
+## 气泡提示
+
+遇到需要解释的词，可以用 <Prompt tip="外挂标签是在正文中使用的小组件，让文章的表达更丰富。">外挂标签</Prompt> 补充说明。鼠标悬停、触屏点击或键盘聚焦都可以查看提示，按 Escape 关闭。
+
+```html
+用 <Prompt tip="这里写补充说明">这个词</Prompt> 展示解释。
+```
+
+## 彩色文字
+
+给句子加一点 <ColorText color="#e77998">温柔的粉色</ColorText>，或者用 <ColorText color="#38a89d">清新的绿色</ColorText> 标出重点。
+
+```html
+<ColorText color="#e77998">温柔的粉色</ColorText>
+<ColorText color="#38a89d">清新的绿色</ColorText>
+```
+
+## 勾选项
+
+适合记录进度。这是正文里的静态展示，不会被读者更改。
+
+<CheckBox checked>已经完成的小目标</CheckBox>
+
+<CheckBox>留给明天的小计划</CheckBox>
+
+```html
+<CheckBox checked>已经完成的小目标</CheckBox>
+<CheckBox>留给明天的小计划</CheckBox>
+```
+
+## 对话气泡
+
+用左右气泡记录一小段对话。
+
+<Chat position="left" author="访客">
+  这些标签可以用在文章里吗？
+</Chat>
+
+<Chat position="right" author="Aria">
+  当然可以，复制喜欢的写法就好啦。
+</Chat>
+
+```html
+<Chat position="left" author="访客"> 这些标签可以用在文章里吗？ </Chat>
+
+<Chat position="right" author="Aria"> 当然可以，复制喜欢的写法就好啦。 </Chat>
+```
+
+## 链接卡片
+
+除了普通的文字链接，还可以用卡片介绍一个网站。
+
+<Link
+  link="https://blog.yaria.top"
+  title="Ariasakaの小窝"
+  subtitle="回到首页，继续逛逛文章"
+/>
+
+```html
+<link
+  link="https://blog.yaria.top"
+  title="Ariasakaの小窝"
+  subtitle="回到首页，继续逛逛文章"
+/>
+```
+
+## 行内图片
+
+小图片也能放进句子里：<InlineImage src="https://img.0v0.my/2024/12/05/67517ba094506.png" alt="Aria 的头像" width="48px" />，点击可以查看大图。
+
+```html
+<InlineImage
+  src="https://img.0v0.my/2024/12/05/67517ba094506.png"
+  alt="头像"
+  width="48px"
+/>
+```

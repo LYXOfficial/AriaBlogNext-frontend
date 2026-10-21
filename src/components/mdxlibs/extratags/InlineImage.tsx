@@ -15,13 +15,14 @@ export default function MarkdownImage({
       className="fancybox-img-a inline-image"
       title="点击查看大图"
       data-fancybox="gallery"
+      style={{ width }}
     >
       <LazyImageWithFalldown
         alt={alt ?? ""}
         dataSrc={src}
         src={src}
         className="fancybox-img"
-        style={{ width: width }}
+        style={{ width: "100%" }}
       />
       <span className="normal-img-descr">{alt}</span>
     </a>

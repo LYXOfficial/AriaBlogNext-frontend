@@ -556,6 +556,7 @@ table:not(code table) {
   width: 14px;
   height: 14px;
   position: relative;
+  transform: translateY(2px);
 }
 
 .etag-checkbox > input::after {
@@ -830,7 +831,8 @@ table:not(code table) {
   text-size-adjust: 100%;
   font-size: 14px;
   line-height: 1.6;
-  padding-left: 10px;
+  /* 留白放到行号单元格内，让 sticky 背景完整覆盖滚动区域左边缘。 */
+  padding-left: 0;
 }
 
 #post-maincontent pre.hljs :is(code, table, tbody, tr, td, div, span) {
@@ -848,11 +850,14 @@ table:not(code table) {
 }
 
 .hljs-ln-numbers {
-  /* 保持同一表格行内排版，代码折行时行号仍与首行对齐。 */
-  position: static;
+  /* sticky 保留表格行内对齐，同时让横向滚动的代码从行号下方经过。 */
+  position: sticky;
+  left: 0;
+  z-index: 1;
   /* 按最大行号自然撑开，避免两位数字前仍留一大块空位。 */
   width: 1%;
   min-width: 0;
+  padding-left: 10px !important;
   padding-right: 8px !important;
   text-align: right;
   white-space: nowrap;
@@ -1042,12 +1047,47 @@ span[style="undefined:invert"] {
   }
 }
 
+/* 行内图的宽度约束整个盒子，避免图注落到右边、链接命中区只剩文字行高。 */
+a.inline-image {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  max-width: 100%;
+  line-height: 1.4;
+}
+
+a.inline-image > .lazy-load-image-background {
+  display: block !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+a.inline-image .fancybox-img {
+  display: block;
+  height: auto;
+}
+
+a.inline-image > .normal-img-descr {
+  display: block;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
 .normal-img-descr {
   margin: 0 auto;
   margin-top: 5px;
   color: var(--aria-light-fontcolor);
   font-size: 15px;
   text-align: center;
+}
+
+.inline-image .normal-img-descr {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
 }
 
 #post-maincontent ul,

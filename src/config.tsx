@@ -102,6 +102,11 @@ export const MenuItems: MenuItem[] = [
         link: "/license",
         icon: <Icon icon="solar:bell-bold" />,
       },
+      {
+        name: "示例",
+        link: "/examples",
+        icon: <Icon icon="solar:code-square-bold" />,
+      },
     ],
   },
   {
