@@ -8,6 +8,7 @@ import "styles/HomeBanner.css";
 const CONTENT_GAP = 16;
 /** How long a snap animation takes, in milliseconds. */
 const SNAP_DURATION = 420;
+const HOME_REGION_KEY = "aria:home-region";
 
 export default function HomeBanner({ children }: { children?: ReactNode }) {
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -126,6 +127,62 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
           CONTENT_GAP,
       );
     };
+
+    // 只记区域，不沿用浏览器返回时的正文深处坐标；存储受限时仍能正常浏览。
+    let restoring = !window.location.hash;
+    let restoreFrame = 0;
+    const rememberRegion = () => {
+      if (restoring || window.location.pathname !== "/") return;
+      const top = contentTop();
+      if (top === null) return;
+      try {
+        sessionStorage.setItem(
+          HOME_REGION_KEY,
+          window.scrollY >= top - 2 ? "content" : "banner",
+        );
+      } catch {
+        // 隐私模式可能禁用存储，不影响滚动。
+      }
+    };
+    if (restoring) {
+      let region = "banner";
+      try {
+        region = sessionStorage.getItem(HOME_REGION_KEY) || region;
+      } catch {}
+      // 等 App Router 完成导航滚动和首页布局，再恢复一次；不持续锁定视口。
+      restoreFrame = requestAnimationFrame(() => {
+        restoreFrame = requestAnimationFrame(() => {
+          const destination = region === "content" ? contentTop() : 0;
+          if (destination !== null) {
+            window.scrollTo({ top: destination, behavior: "instant" });
+            lastScrollY = window.scrollY;
+          }
+          restoring = false;
+          banner.closest<HTMLElement>("[data-home-restoring]")?.style.removeProperty("visibility");
+          window.dispatchEvent(new Event("scroll"));
+        });
+      });
+    }
+    if (!restoring) {
+      banner.closest<HTMLElement>("[data-home-restoring]")?.style.removeProperty("visibility");
+    }
+    window.addEventListener("scroll", rememberRegion, { passive: true });
+    // 在站内导航改变布局前读取位置，避免卸载时把文章页的坐标记成首页坐标。
+    const rememberBeforeNavigation = (event: MouseEvent) => {
+      const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]");
+      if (
+        !link || event.defaultPrevented || event.button !== 0 ||
+        event.ctrlKey || event.metaKey || event.shiftKey || event.altKey ||
+        link.target === "_blank" || link.hasAttribute("download")
+      ) return;
+      const url = new URL(link.href);
+      if (url.origin !== location.origin || url.pathname === location.pathname) return;
+      rememberRegion();
+      // App Router 可能先重置滚动、后卸载首页，不能把导航产生的 scroll 写回存储。
+      restoring = true;
+    };
+    document.addEventListener("click", rememberBeforeNavigation, true);
+    window.addEventListener("pagehide", rememberRegion);
 
     function enterManual() {
       cancelAnimationFrame(frame);
@@ -467,6 +524,10 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
     motion.addEventListener("change", resetParallax);
 
     return () => {
+      cancelAnimationFrame(restoreFrame);
+      window.removeEventListener("scroll", rememberRegion);
+      document.removeEventListener("click", rememberBeforeNavigation, true);
+      window.removeEventListener("pagehide", rememberRegion);
       cancelAnimation();
       window.clearTimeout(settleTimer);
       window.clearTimeout(releaseTimer);

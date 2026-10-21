@@ -16,7 +16,7 @@ export default async function Page() {
     speaks = (await res.json()).data;
   } else speaks = [];
   return (
-    <div>
+    <div data-home-restoring style={{ visibility: "hidden" }}>
       <HomeBanner>
         <HomeSpeaks speaksContent={speaks} variant="banner" />
       </HomeBanner>
