@@ -22,76 +22,45 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
   }
   return (
     <>
-      <div className="post-copyright">
-        <div className="post-copyright__title">
-          <span className="post-copyright-info">{postInfo.title}</span>
+      <section className="post-copyright" aria-label="文章版权信息">
+        <div className="post-copyright-heading">
+          <span className="post-copyright-eyebrow">本文信息</span>
+          <span className="post-copyright-license">CC BY-NC-SA 4.0</span>
         </div>
-        <div className="post-copyright__type">
-          <span className="post-copyright-info">
-            <a
-              className="normal-a"
-              href={`${siteConfigs.siteUrl}/posts/${postInfo.slug}/`}
-            >
-              {`${siteConfigs.siteUrl}/posts/${postInfo.slug}/`}
-            </a>
-          </span>
-        </div>
-        <div className="post-copyright-m">
-          <div className="post-copyright-m-info">
-            <div
-              className="post-copyright-a"
-              style={{ display: "inline-block", width: 120 }}
-            >
-              作者
-              <div className="post-copyright-cc-info">{siteConfigs.author}</div>
-            </div>
-            <div
-              className="post-copyright-c"
-              style={{ display: "inline-block", width: 120 }}
-            >
-              发布于
-              <div className="post-copyright-cc-info">
-                {dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD")}
-              </div>
-            </div>
-            <div
-              className="post-copyright-u"
-              style={{ display: "inline-block", width: 120 }}
-            >
-              更新于
-              <div className="post-copyright-cc-info">
-                {dayjs.unix(postInfo.lastUpdatedTime!).format("YYYY-MM-DD")}
-              </div>
-            </div>
-            <div
-              className="post-copyright-c"
-              style={{ display: "inline-block", width: 180 }}
-            >
-              许可协议
-              <div className="post-copyright-cc-info">
-                <a
-                  className="icon"
-                  rel="noopener external nofollow noreferrer"
-                  target="_blank"
-                  title="Creative Commons"
-                  href="https://creativecommons.org/"
-                >
-                  <i className="fab fa-creative-commons"></i>
-                </a>
-                <a
-                  className="normal-a"
-                  rel="noopener external nofollow noreferrer"
-                  target="_blank"
-                  title="CC BY-NC-SA 4.0"
-                  href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
-                >
-                  CC BY-NC-SA 4.0
-                </a>
-              </div>
-            </div>
+        <div className="post-copyright-title">{postInfo.title}</div>
+        <a
+          className="post-copyright-url"
+          href={`${siteConfigs.siteUrl}/posts/${postInfo.slug}/`}
+        >
+          {`${siteConfigs.siteUrl}/posts/${postInfo.slug}/`}
+        </a>
+        <dl className="post-copyright-details">
+          <div>
+            <dt>作者</dt>
+            <dd>{siteConfigs.author}</dd>
           </div>
-        </div>
-      </div>
+          <div>
+            <dt>发布于</dt>
+            <dd>{dayjs.unix(postInfo.publishTime!).format("YYYY-MM-DD")}</dd>
+          </div>
+          <div>
+            <dt>更新于</dt>
+            <dd>{dayjs.unix(postInfo.lastUpdatedTime!).format("YYYY-MM-DD")}</dd>
+          </div>
+          <div>
+            <dt>许可协议</dt>
+            <dd>
+              <a
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                署名 · 非商业性 · 相同方式共享
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </section>
       <div id="postend-tagbar">
         <div id="postend-tags">
           {Array.from(new Set(postInfo.tags ?? [])).map((tag) => {

@@ -38,7 +38,7 @@ const calcProgress = () => {
   const postContent = document.querySelector<HTMLElement>(
     "#post-maincontent:not(#article-container.page #post-maincontent)",
   );
-  const tocCounter = document.querySelector<HTMLElement>(".toc-counter");
+  const tocCounter = document.querySelector<HTMLElement>(".toc-counter-value");
   if (postContent && tocCounter) {
     const postContentRect = postContent.getBoundingClientRect();
     const windowHeight = window.innerHeight - 60;
@@ -51,6 +51,10 @@ const calcProgress = () => {
       100,
     );
     tocCounter.innerText = boundedScrollPercentage.toFixed(0);
+    tocCounter.closest<HTMLElement>(".card-toc")?.style.setProperty(
+      "--toc-progress",
+      String(boundedScrollPercentage / 100),
+    );
   }
 };
 

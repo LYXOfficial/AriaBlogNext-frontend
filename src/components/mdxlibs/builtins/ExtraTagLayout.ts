@@ -44,13 +44,17 @@ const containerTagAtLineEnd = new RegExp(
 // 标记每一行是否处于围栏代码块内（围栏行本身也算）
 function fenceMask(lines: string[]): boolean[] {
   const mask: boolean[] = [];
-  let fence: string | null = null;
+  let fence: { char: string; length: number } | null = null;
   for (const line of lines) {
-    const match = line.match(/^\s*(`{3,}|~{3,})/);
+    const match = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
     if (match) {
-      const char = match[1][0];
-      if (fence === null) fence = char;
-      else if (fence === char) fence = null;
+      const marker = match[1];
+      if (fence === null) fence = { char: marker[0], length: marker.length };
+      else if (
+        fence.char === marker[0] &&
+        marker.length >= fence.length &&
+        !match[2].trim()
+      ) fence = null;
       mask.push(true);
       continue;
     }
@@ -60,7 +64,27 @@ function fenceMask(lines: string[]): boolean[] {
 }
 
 export default function normalizeExtraTagLayout(mdContent: string): string {
-  const lines = mdContent.split("\n");
+  // 解析器不支持围栏直接打断段落；补空行，否则 Note 内的 diff 会变成行内代码。
+  // 只处理开围栏，按字符和长度识别闭围栏，避免改写代码本身。
+  const lines: string[] = [];
+  let fence: { char: string; length: number } | null = null;
+  for (const line of mdContent.split("\n")) {
+    const match = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (match) {
+      const marker = match[1];
+      if (!fence) {
+        if (lines.length && lines[lines.length - 1].trim()) lines.push("");
+        fence = { char: marker[0], length: marker.length };
+      } else if (
+        marker[0] === fence.char &&
+        marker.length >= fence.length &&
+        !match[2].trim()
+      ) {
+        fence = null;
+      }
+    }
+    lines.push(line);
+  }
 
   // 第一步：块级标签独占一行时，前面补一个空行
   const separated: string[] = [];

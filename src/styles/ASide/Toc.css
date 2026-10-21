@@ -64,13 +64,42 @@
   overflow-x: hidden;
 }
 
+.card-toc .card-headline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .toc-counter {
-  position: absolute;
-  right: 30px;
-  top: 15px;
-  font-size: 30px;
-  font-style: italic;
-  color: #a9a9a9;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-left: auto;
+  padding-left: 12px;
+  white-space: nowrap;
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  font-weight: 400;
+}
+.toc-counter-value {
+  min-width: 2ch;
+  text-align: right;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  color: var(--aria-fontcolor);
+}
+.toc-progress {
+  height: 2px;
+  margin: 12px 0 14px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--aria-fontcolor) 12%, transparent);
+}
+.toc-progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--aria-theme);
+  transform: scaleX(var(--toc-progress, 0));
+  transform-origin: left;
 }
 
 @media screen and (max-width: 900px) {
@@ -97,6 +126,7 @@
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
     opacity: 1;
+    background-color: var(--aria-acrylic1);
   }
 
   .card-toc .toc-content {

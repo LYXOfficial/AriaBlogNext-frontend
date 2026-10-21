@@ -147,13 +147,12 @@ a.normal-a,
 :is(.tk-content, .bb-content) a {
   border-bottom: 2px dotted var(--aria-theme);
   color: var(--aria-fontcolor);
-  padding: 4px;
+  padding: 4px 8px;
   text-decoration: none;
   transition: all var(--dur-base) var(--ease-out);
   word-wrap: break-word;
   position: relative;
   font-weight: 600;
-  padding-right: 4px;
 }
 
 :is(a.normal-a, :is(.tk-content, .bb-content) a):hover {
@@ -161,7 +160,6 @@ a.normal-a,
   text-decoration: none !important;
   color: var(--aria-white) !important;
   border: none;
-  box-shadow: var(--aria-shadow);
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;

@@ -25,12 +25,17 @@ export default function CardToc({ mdContent }: { mdContent: string }) {
       <div className="card-headline">
         <Icon icon="solar:list-bold" />
         <span className="card-title">目录</span>
+        <span className="toc-counter" aria-label="阅读进度">
+          已读 <span className="toc-counter-value">0</span><span>%</span>
+        </span>
+      </div>
+      <div className="toc-progress" aria-hidden="true">
+        <span className="toc-progress-fill" />
       </div>
       <div className="card-body">
         <div className="toc-content">
           <TocBody toc={tocTree} />
         </div>
-        <span className="toc-counter">0</span>
       </div>
       <TocUpdater tocTree={tocTree} />
     </div>
