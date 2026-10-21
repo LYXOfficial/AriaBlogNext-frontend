@@ -79,6 +79,14 @@
   border-color: var(--aria-theme) !important;
 }
 
+/* 背景图由 Twikoo 内联写入，只覆盖图片层，不降低输入文字的对比度。 */
+#twikoo .tk-textarea__inner[style*="/img/comment.png"] {
+  --comment-image-veil: color-mix(in srgb, var(--aria-background) 55%, transparent);
+  background-image:
+    linear-gradient(var(--comment-image-veil), var(--comment-image-veil)),
+    url("/img/comment.png") !important;
+}
+
 .twikoo .tk-textarea .tk-input__inner:focus {
   box-shadow: 0 0 8px var(--aria-theme) !important;
 }
