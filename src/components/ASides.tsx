@@ -7,6 +7,7 @@ import CardNewestPosts from "components/asides/CardNewestPosts";
 import CardToc from "components/asides/CardToc";
 import CardRelatedPosts from "components/asides/CardRelatedPosts";
 import CardLoveU from "components/asides/CardLoveU";
+import HomeAsidePanels from "components/asides/HomeAsidePanels";
 import { Post } from "@/interfaces/post";
 
 export function HomeASides() {
@@ -15,11 +16,11 @@ export function HomeASides() {
       <CardInfo />
       <CardLoveU />
       <CardAnnouncement content={<>欢迎光临Ariaの博客QwQ~</>} />
-      <div className="aside-sticky-container">
+      <HomeAsidePanels>
         <CardLatestComments />
         <CardArchives />
         <CardWebInfo />
-      </div>
+      </HomeAsidePanels>
     </div>
   );
 }

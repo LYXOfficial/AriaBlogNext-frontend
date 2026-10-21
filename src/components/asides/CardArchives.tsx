@@ -27,7 +27,7 @@ export default async function ASideList() {
   });
   if (res.ok) items = (await res.json()).data.slice(0, 8);
   return (
-    <div className="card-widget card-aside card-latest-comments">
+    <div className="card-widget card-aside card-archives">
       <div className="card-headline">
         <Icon icon="solar:archive-bold" />
         <span className="card-title">归档</span>

@@ -56,6 +56,9 @@
 }
 
 @media screen and (max-width: 900px) {
+  .rightbutton.rightbutton-barrageShow {
+    display: none;
+  }
   .rightbutton.rightbutton-toc {
     display: grid !important;
   }

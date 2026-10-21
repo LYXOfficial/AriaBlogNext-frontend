@@ -116,7 +116,14 @@ export default function MenuButtons({
         }
       }
       previousMode = inBanner;
-      if (navTransitions.size && !disposed) schedule();
+      // 手机切回桌面会重新播放顶栏的 0.8s 入场动画；transform 不触发
+      // ResizeObserver，必须跟到最后一帧，否则 portal 按钮会停在中途坐标。
+      if (
+        !disposed &&
+        (navTransitions.size || nav?.getAnimations().some((animation) =>
+          animation.playState === "running" || animation.pending,
+        ))
+      ) schedule();
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(position);
@@ -149,8 +156,20 @@ export default function MenuButtons({
     document.fonts.ready.then(() => {
       if (!disposed) invalidate();
     });
+    // 设备模拟器切换还会改变可视视口和缩放，不一定派发 window.resize。
+    // 布局切换不应续播 Banner 的 FLIP；取消后按新占位坐标直接停靠。
+    const viewportChanged = () => {
+      flight?.cancel();
+      flight = null;
+      previousMode = null;
+      lastGeometry = "";
+      invalidate();
+    };
     window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", invalidate);
+    window.addEventListener("resize", viewportChanged);
+    window.visualViewport?.addEventListener("resize", viewportChanged);
+    window.visualViewport?.addEventListener("scroll", viewportChanged);
+    mobileQuery.addEventListener("change", viewportChanged);
     const nav = document.getElementById("navbar");
     // 只跟踪导航本身，避免菜单子元素的 hover 动画启动持续测量。
     const trackTransition = (event: TransitionEvent) => {
@@ -166,6 +185,9 @@ export default function MenuButtons({
         attributes: true,
         attributeFilter: ["class"],
       });
+    nav?.addEventListener("animationstart", invalidate);
+    nav?.addEventListener("animationend", invalidate);
+    nav?.addEventListener("animationcancel", invalidate);
     nav?.addEventListener("transitionrun", trackTransition);
     nav?.addEventListener("transitionend", trackTransition);
     nav?.addEventListener("transitioncancel", trackTransition);
@@ -174,6 +196,9 @@ export default function MenuButtons({
       disposed = true;
       cancelAnimationFrame(frame);
       flight?.cancel();
+      nav?.removeEventListener("animationstart", invalidate);
+      nav?.removeEventListener("animationend", invalidate);
+      nav?.removeEventListener("animationcancel", invalidate);
       nav?.removeEventListener("transitionrun", trackTransition);
       nav?.removeEventListener("transitionend", trackTransition);
       nav?.removeEventListener("transitioncancel", trackTransition);
@@ -182,7 +207,10 @@ export default function MenuButtons({
       observer.disconnect();
       mutation.disconnect();
       window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", invalidate);
+      window.removeEventListener("resize", viewportChanged);
+      window.visualViewport?.removeEventListener("resize", viewportChanged);
+      window.visualViewport?.removeEventListener("scroll", viewportChanged);
+      mobileQuery.removeEventListener("change", viewportChanged);
     };
   }, [mounted, pathname]);
 

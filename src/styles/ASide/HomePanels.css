@@ -1,0 +1,51 @@
+.rightbutton.rightbutton-home-panel {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .rightbutton.rightbutton-home-panel {
+    display: grid;
+  }
+  #aside-container .home-aside-panels {
+    position: static;
+  }
+  /* 仅定位与动画跟随目录；卡片保留自己的宽度和内部排版。 */
+  #aside-container .home-aside-panels > :is(.card-latest-comments, .card-webinfo) {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 75px;
+    box-sizing: border-box;
+    width: min(320px, calc(100vw - 84px));
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    z-index: 100;
+    /* 与目录一样仅保留标准声明；此前成对声明在当前编译产物中被移除。 */
+    backdrop-filter: blur(10px) saturate(180%);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(600px);
+    transition: 0.5s;
+  }
+  #aside-container .home-aside-panels[data-panel="comments"] > .card-latest-comments,
+  #aside-container .home-aside-panels[data-panel="stats"] > .card-webinfo {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    background-color: var(--aria-acrylic1);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #aside-container .home-aside-panels[data-panel="comments"] > .card-latest-comments,
+  #aside-container .home-aside-panels[data-panel="stats"] > .card-webinfo {
+    right: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #aside-container .home-aside-panels > :is(.card-latest-comments, .card-webinfo) {
+    transition: none;
+  }
+}

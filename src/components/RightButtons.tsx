@@ -136,21 +136,33 @@ export function RightButtonsPages({
 }
 export function RightButtonsHome() {
   const [rbHide, setRbHide] = useState(false);
+  const togglePanel = (name: string) => window.dispatchEvent(
+    new CustomEvent("home-aside-panel", { detail: name }),
+  );
   useEffect(() => {
     const scrollHandler = () => {
       if (document.documentElement.scrollTop > 100) setRbHide(false);
       else setRbHide(true);
     };
     document.addEventListener("scroll", scrollHandler);
+    scrollHandler();
     return () => {
       document.removeEventListener("scroll", scrollHandler);
     };
-  });
+  }, []);
   function scrollToTop() {
     document.documentElement.scroll({ behavior: "smooth", top: 0 });
   }
   return (
     <div id="rightbuttons" className={rbHide ? "rb-hide" : "rb-show"}>
+      <button className="rightbutton rightbutton-home-panel" data-home-panel="comments"
+        title="最新评论" aria-label="最新评论" aria-expanded={false} onClick={() => togglePanel("comments")}>
+        <Icon icon="solar:chat-round-dots-bold" />
+      </button>
+      <button className="rightbutton rightbutton-home-panel" data-home-panel="stats"
+        title="网站统计" aria-label="网站统计" aria-expanded={false} onClick={() => togglePanel("stats")}>
+        <Icon icon="solar:chart-bold" />
+      </button>
       <button
         className="rightbutton rightbutton-toTop"
         title="回到顶部"
