@@ -7,6 +7,41 @@ import { siteConfigs } from "config";
 import relativeTime from "@/utils/reltime";
 import { useEffect, useState } from "react";
 
+// 只提取文本与图片地址，再交给 React 输出；不注入访客的 HTML 或事件属性。
+function commentPreview(item: TwikooCommentItem) {
+  if (!item.comment || typeof DOMParser === "undefined") return undefined;
+  const doc = new DOMParser().parseFromString(item.comment, "text/html");
+  const parts: React.ReactNode[] = [];
+  let images = 0;
+  const visit = (node: Node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      parts.push(node.textContent);
+      return;
+    }
+    if (!(node instanceof Element)) return;
+    if (["SCRIPT", "STYLE", "IFRAME", "OBJECT"].includes(node.tagName)) return;
+    if (node.tagName === "IMG") {
+      const src = node.getAttribute("src") || "";
+      try {
+        const url = new URL(src, siteConfigs.siteUrl);
+        if (!["https:", "http:"].includes(url.protocol) || images >= 3) return;
+        images++;
+        parts.push(
+          <img key={`image-${images}`} className="latest-comment-emoji"
+            src={url.href} alt={node.getAttribute("alt") || "[表情]"}
+            loading="lazy" referrerPolicy="no-referrer" />,
+        );
+      } catch {}
+      return;
+    }
+    if (node.tagName === "BR") parts.push(" ");
+    node.childNodes.forEach(visit);
+    if (["P", "DIV", "LI"].includes(node.tagName)) parts.push(" ");
+  };
+  doc.body.childNodes.forEach(visit);
+  return images ? <>{parts}</> : undefined;
+}
+
 export default function CardLatestComments() {
   const [comments, setComments] = useState<TwikooCommentItem[]>([]);
   const [status, setStatus] = useState<"loading" | "success" | "error">(
@@ -54,7 +89,8 @@ export default function CardLatestComments() {
             items={
               comments.map((item: TwikooCommentItem | undefined) => {
                 return {
-                  title: item!.commentText!.replace("\n", " "),
+                  title: item?.commentText?.replace(/\s+/g, " ").trim() || "[表情]",
+                  titlePreview: item ? commentPreview(item) : undefined,
                   // 不用 twikoo 2.x 的 relativeTime：它由客户端 i18n 生成，
                   // 而这个卡片所在的页面不会调用 init，语言会停在默认的 en。
                   // 这里用站点自己的中文相对时间工具（与 Speaks 保持一致）。

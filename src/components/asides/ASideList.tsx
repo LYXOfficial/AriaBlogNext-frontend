@@ -18,7 +18,7 @@ export default function ASideList({
             className="aside-list-item"
             title={item.title.substring(0, 50)}
             href={item.link}
-            key={item.title}
+            key={item.link}
           >
             {item.pic == "" ? (
               <></>
@@ -37,7 +37,7 @@ export default function ASideList({
             )}
             <div className="aside-list-item-content">
               <span className="aside-list-item-content-title">
-                {item.title}
+                {item.titlePreview ?? item.title}
               </span>
               <span className="aside-list-item-content-text">
                 {item.content}

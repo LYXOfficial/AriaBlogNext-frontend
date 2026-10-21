@@ -1,6 +1,7 @@
 export declare interface ASideListItem {
   link: string;
   title: string;
+  titlePreview?: import("react").ReactNode;
   content: string;
   pic: string;
 }

@@ -82,3 +82,12 @@
 .aside-list-item-content {
   overflow: hidden;
 }
+
+.card-latest-comments .latest-comment-emoji {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 1px 2px;
+  object-fit: contain;
+  vertical-align: middle;
+}
