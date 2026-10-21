@@ -158,3 +158,12 @@
 .twikoo .tk-actions button {
   color: var(--aria-theme) !important;
 }
+
+.twikoo .tk-icon.__comments.__active {
+  background: var(--aria-theme) !important;
+  box-shadow: 0 0 0 0.2rem var(--aria-theme) !important;
+}
+
+.twikoo .tk-icon.__comments.__active path {
+  fill: var(--aria-white) !important;
+}
