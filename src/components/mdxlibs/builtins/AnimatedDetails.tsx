@@ -41,11 +41,16 @@ export default function AnimatedDetails({
       el.open = target.current;
       return;
     }
-    // 使用真实高度而不是 1000px 上限，让长短内容都完整播放原有的 0.8 秒。
+    // 使用真实高度，让长短内容都在同一时长内完成；与箭头共用时长令牌。
+    const durationValue = getComputedStyle(el)
+      .getPropertyValue("--details-duration")
+      .trim();
+    const duration =
+      parseFloat(durationValue) * (durationValue.endsWith("ms") ? 1 : 1000) || 300;
     const current = el.animate(
       { height: [`${start}px`, `${end}px`] },
       {
-        duration: 800,
+        duration,
         easing:
           getComputedStyle(el).getPropertyValue("--ease-in-out").trim() ||
           "ease-in-out",
