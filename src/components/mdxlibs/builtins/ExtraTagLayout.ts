@@ -63,12 +63,53 @@ function fenceMask(lines: string[]): boolean[] {
   return mask;
 }
 
+// markdown-to-jsx 只要在代码内容里遇到与开围栏同长的围栏字符（即使不在行首），
+// 就会提前闭合代码块，把后半个代码块当正文渲染（例如正则里出现 ``` 时）。
+// 这里按内容中最长的连续围栏字符把外层围栏加长，代码内容保持不变。
+function escalateFences(mdContent: string): string {
+  const lines = mdContent.split("\n");
+  const openFence = /^( {0,3})(`{3,}|~{3,})(.*)$/;
+  const closeFence = /^( {0,3})(`{3,}|~{3,})\s*$/;
+  for (let i = 0; i < lines.length; i++) {
+    const open = lines[i].match(openFence);
+    if (!open) continue;
+    const [, indent, marker, rest] = open;
+    const char = marker[0];
+    const length = marker.length;
+    let close = -1;
+    for (let j = i + 1; j < lines.length; j++) {
+      const m = lines[j].match(closeFence);
+      if (m && m[2][0] === char && m[2].length >= length) {
+        close = j;
+        break;
+      }
+    }
+    // 未闭合的围栏交给解析器处理，不在这里补结束标记。
+    if (close === -1) break;
+    const runs = char === "`" ? /`{3,}/g : /~{3,}/g;
+    let longest = 0;
+    for (let j = i + 1; j < close; j++) {
+      for (const run of lines[j].match(runs) ?? []) {
+        longest = Math.max(longest, run.length);
+      }
+    }
+    if (longest >= length) {
+      const fence = char.repeat(longest + 1);
+      lines[i] = `${indent}${fence}${rest}`;
+      lines[close] = `${lines[close].match(closeFence)?.[1] ?? ""}${fence}`;
+    }
+    i = close;
+  }
+  return lines.join("\n");
+}
+
 export default function normalizeExtraTagLayout(mdContent: string): string {
+  const content = escalateFences(mdContent);
   // 解析器不支持围栏直接打断段落；补空行，否则 Note 内的 diff 会变成行内代码。
   // 只处理开围栏，按字符和长度识别闭围栏，避免改写代码本身。
   const lines: string[] = [];
   let fence: { char: string; length: number } | null = null;
-  for (const line of mdContent.split("\n")) {
+  for (const line of content.split("\n")) {
     const match = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
     if (match) {
       const marker = match[1];
