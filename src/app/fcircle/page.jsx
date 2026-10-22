@@ -5,6 +5,7 @@ import "styles/FriendCircle.css";
 import { useEffect } from "react";
 import { HomeRightSide } from "@/components/RightSide";
 import { siteConfigs } from "@/config";
+import CollectionHeader from "@/components/CollectionHeader";
 
 // fcircle 主题脚本在全局执行一次 createApp().mount("#hexo-circle-of-friends-root")，
 // Vue 实例和它渲染出的 DOM 从此绑定。Next 客户端路由离开本页会连 DOM 一起卸载；
@@ -22,6 +23,16 @@ export default function Page() {
       sort_rule: "created",
       expire_days: 1,
     };
+    // 主题脚本给“日志”统计项绑了“清空缓存并 location.reload()”，点一下整页
+    // 刷新， Vue 挂载复用机制也会被打断。在捕获阶段拦下这个点击即可，
+    // 其余两个统计项（随机文章、摘要开关）不受影响。
+    const blockReload = (event) => {
+      if (event.target.closest?.(".cf-data-article")) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+      }
+    };
+    document.addEventListener("click", blockReload, true);
     const root = document.getElementById("hexo-circle-of-friends-root");
     const saved = (window.__fcircleSavedRoot ||= {});
     const stored = saved.root;
@@ -31,6 +42,7 @@ export default function Page() {
       root.appendChild(stored);
       // Vue 的引用已随元素回归，无需任何重挂载调用。
       return () => {
+        document.removeEventListener("click", blockReload, true);
         // 离开页面时 Next 会移除整个容器；先摘出应用元素暂存，避免被销毁。
         if (saved.root.isConnected) saved.root.remove();
       };
@@ -44,6 +56,7 @@ export default function Page() {
     });
     return () => {
       cancelled = true;
+      document.removeEventListener("click", blockReload, true);
       if (saved.root && saved.root.isConnected) saved.root.remove();
     };
   }, []);
@@ -53,7 +66,10 @@ export default function Page() {
       <title>{`朋友圈 | ${siteConfigs.title}`}</title>
       <div id="article-container" className="page flink">
         <div id="post-maincontent" className="page flink">
-          <h1>朋友圈</h1>
+          <CollectionHeader
+            title="朋友圈"
+            eyebrow="看看朋友们都更新了什么（？）"
+          />
           <div id="hexo-circle-of-friends-root" />
         </div>
       </div>

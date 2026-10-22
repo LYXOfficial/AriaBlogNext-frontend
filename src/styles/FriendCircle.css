@@ -1,128 +1,324 @@
+/* 朋友圈页整体对齐站点扁平风格：细边框、亚克力底、小圆角、
+   短粉色强调；去掉大水印、粗投影和厚底色。 */
+
 #hexo-circle-of-friends-root {
   margin-top: 20px;
 }
 
-#cf-state,
-.cf-overshow,
-.cf-article {
+/* ---------- 顶部统计区（无卡片：与页面同底，仅下方细分隔线） ---------- */
+
+.cf-overshow {
   background-color: var(--aria-acrylic1) !important;
-  padding: 20px !important;
   border: var(--aria-border);
-  border-radius: 12px !important;
-  -webkit-border-radius: 12px !important;
-  -moz-border-radius: 12px !important;
-  -ms-border-radius: 12px !important;
-  -o-border-radius: 12px !important;
-  transition: all var(--dur-base) var(--ease-out);
+  border-radius: 14px !important;
+  padding: 18px 24px 14px !important;
+  transition: border-color var(--dur-slow) var(--ease-out);
+}
+.cf-overshow:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--aria-theme) 55%,
+    transparent
+  ) !important;
 }
 
-#cf-state:hover,
-.cf-overshow:hover,
+/* 统计区：三个独立小方块，整体居中；不再套通栏卡片 */
+#cf-state {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 2px 0 14px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#cf-state:hover {
+  box-shadow: none !important;
+}
+
+.cf-state-data {
+  width: 100% !important;
+  max-width: 420px;
+  margin: auto auto 10px;
+  justify-content: center;
+}
+
+.cf-state-data > * {
+  flex-direction: row !important;
+  height: 30px !important;
+  min-width: 0;
+  justify-content: center;
+  padding: 0 clamp(6px, 3vw, 26px) !important;
+}
+
+.cf-data-active:hover {
+  transform: none !important;
+}
+
+#cf-state .cf-label {
+  font-size: 12px !important;
+  color: var(--aria-light-fontcolor) !important;
+  letter-spacing: 0.08em;
+  height: 13px !important;
+  display: flex;
+  width: 30px;
+}
+#cf-state .cf-message,
+#cf-state .cf-message > span {
+  order: 1;
+  display: inline-block;
+  font-size: 24px !important;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  color: var(--aria-fontcolor) !important;
+  white-space: nowrap;
+}
+@media screen and (max-width: 600px) {
+  #cf-state .cf-message,
+  #cf-state .cf-message > span {
+    font-size: 19px !important;
+  }
+}
+
+/* Created | Updated 排序切换：短粉线选中小胶囊 */
+#cf-change {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto !important;
+  font-size: 13px;
+  color: var(--aria-light-fontcolor) !important;
+}
+
+#cf-change > span {
+  cursor: pointer;
+  padding: 2px 12px;
+  border-radius: 999px;
+  transition:
+    color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+#cf-change > span:hover {
+  color: var(--aria-theme) !important;
+}
+#cf-change > .cf-change-now {
+  color: var(--aria-theme) !important;
+  background: color-mix(in srgb, var(--aria-theme) 14%, transparent);
+}
+
+/* ---------- 文章卡片 ---------- */
+
+#cf-container {
+  gap: 20px !important;
+}
+
+.cf-article {
+  background-color: var(--aria-acrylic2) !important;
+  padding: 16px 18px 14px !important;
+  border: var(--aria-border);
+  border-radius: 14px !important;
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+  margin: 0 1% !important;
+  gap: 5px;
+}
 .cf-article:hover {
-  border: 1px solid var(--aria-theme) !important;
-  box-shadow: 0 0 3px var(--aria-theme) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--aria-theme) 55%,
+    transparent
+  ) !important;
+  box-shadow: none !important;
+  transform: translateY(-2px);
+  -webkit-transform: scale(1.02) !important;
+  transform: scale(1.02) !important;
 }
 
+/* 标题：两行截断，hover 着主题色 */
+.cf-article-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0 !important;
+  font-size: 16px !important;
+  font-weight: 600;
+  line-height: 1.55 !important;
+  color: var(--aria-fontcolor) !important;
+  transition: color var(--dur-base) var(--ease-out);
+  max-width: 92%;
+  letter-spacing: 0.5px !important;
+}
+.cf-article:hover .cf-article-title {
+  color: var(--aria-theme) !important;
+}
+.cf-article .cf-article-title:hover {
+  letter-spacing: 0.5px !important;
+}
+
+.el-popper {
+  display: none;
+}
+
+/* 右上角小圆点表示排名（替代原来的超大数字水印） */
+.cf-article-floor {
+  position: absolute !important;
+  top: 17px !important;
+  right: 14px !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  min-width: 22px;
+  height: 22px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px !important;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--aria-theme) 10%, transparent);
+  color: var(--aria-theme) !important;
+  font-weight: 700 !important;
+  opacity: 1;
+  font-variant-numeric: tabular-nums;
+  font-style: normal !important;
+}
+/* 前三名用主题色实心底，白字 */
+.cf-article-floor[data-v]:not(:empty) {
+}
+.cf-article:nth-child(2) .cf-article-floor,
+.cf-article:nth-child(3) .cf-article-floor,
+.cf-article:nth-child(4) .cf-article-floor {
+  background: var(--aria-theme);
+  color: #fff !important;
+}
+
+/* 底部作者/时间行 */
+.cf-article-avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 头像改为正常小头像（不再当超大水印） */
+.cf-img-avatar.avatar {
+  position: static !important;
+  opacity: 1 !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.cf-article-author {
+  font-size: 13px !important;
+  color: var(--aria-light-fontcolor) !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 13px !important;
+  line-height: 1 !important;
+  transform: translateY(2px);
+}
+.cf-time-created,
+.cf-time-updated {
+  transform: translateY(2px);
+}
+
+.cf-article-time {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.cf-time-created,
+.cf-time-updated {
+  font-size: 12.5px !important;
+  color: var(--aria-light-fontcolor) !important;
+  font-variant-numeric: tabular-nums;
+}
 .cf-time-created i,
 .cf-time-updated i {
   font-family: "HYTMR", sans-serif;
+  font-size: 13px;
+  font-style: normal;
 }
-
+.cf-time-updated i.fas,
+.cf-time-created i.far {
+  padding-right: 6px !important;
+}
 .cf-time-created i::before,
 .cf-time-updated i::before {
   font-family: "Font Awesome 5 Free";
 }
 
-.cf-img-avatar.avatar {
-  opacity: 0.3;
-  position: absolute;
-  height: 100px !important;
-  width: 100px !important;
-  right: -10px;
-  bottom: -10px;
-  border-radius: 50% !important;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  -ms-border-radius: 50% !important;
-  -o-border-radius: 50% !important;
-}
-
-#cf-container > :nth-child(2) > * {
-  margin: 10px 1%;
-  font-weight: bolder;
-  transition: all var(--ease-out) var(--dur-base);
-  position: relative;
-}
+/* ---------- 卡片网格 ---------- */
 
 #cf-container {
   display: flex;
   flex-wrap: wrap;
   max-width: none !important;
   justify-content: space-around;
+  gap: 14px;
 }
-
-@media screen and (min-width: 0px) {
-  #cf-container > :nth-child(2) > * {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  #cf-container > :nth-child(2) > * {
-    width: 48%;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  #cf-container > :nth-child(2) > * {
-    width: 31%;
-  }
-}
-
 #cf-container > :nth-child(2) {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 10px;
+  gap: 14px;
+  justify-content: flex-start;
+  margin-top: 2px;
 }
-
-.cf-article {
+#cf-container > :nth-child(2) > * {
   margin: 0 !important;
-  padding: 0.5rem 1rem !important;
+  box-sizing: border-box;
+  position: relative;
 }
-
+@media screen and (max-width: 767.5px) {
+  #cf-container > :nth-child(2) > * {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  #cf-container > :nth-child(2) > * {
+    width: calc(50% - 7px);
+  }
+}
+@media screen and (min-width: 1200px) {
+  #cf-container > :nth-child(2) > * {
+    width: calc(33.333% - 10px);
+  }
+}
+/* 最后一行左对齐：取消原先靠 space-between + margin-right:auto 的补位 */
 #cf-container > :nth-child(2) > :nth-last-child(2) {
-  margin-right: auto;
+  margin-right: 0 !important;
 }
 
 #cf-container > :nth-child(2) > :last-child {
   width: 100% !important;
 }
 
-.cf-article-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#panel-btn.el-button.is-circle {
-  border: none !important;
-  background-color: transparent !important;
-}
+/* ---------- 加载更多 ---------- */
 
 #cf-more {
   background-color: var(--aria-acrylic1) !important;
   border: var(--aria-border);
+  border-radius: 12px !important;
+  color: var(--aria-fontcolor) !important;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
 }
-
 #cf-more:hover {
   background-color: var(--aria-theme) !important;
+  border-color: var(--aria-theme) !important;
+}
+#cf-more:hover i {
+  color: #fff !important;
 }
 
-#cf-more:hover i {
-  color: white !important;
-}
+/* ---------- 弹层与全局变量 ---------- */
 
 .cf-label,
 .cf-message,
@@ -151,4 +347,29 @@ body:has(#hexo-circle-of-friends-root) .cf-summary-popover {
   --el-text-color-regular: var(--aria-fontcolor);
   --el-fill-color-blank: var(--aria-background);
   --el-bg-color: var(--aria-background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-article,
+  #cf-state,
+  .cf-overshow,
+  .cf-img-avatar.avatar,
+  .cf-article-title,
+  #cf-change > span {
+    transition: none;
+  }
+}
+
+.cf-overshow .cf-overshow-content[data-v-4ed12e48] {
+  padding: 2px 3px 12px !important;
+  border-bottom: 1px dashed var(--aria-gray);
+}
+
+.cf-overshow .cf-overshow-content:hover,
+.cf-overshow .cf-overshow-content-tail:hover {
+  background-color: transparent !important;
+}
+
+.cf-overshow-head:hover img.cf-img-avatar {
+  transform: rotate(-360deg) !important;
 }
