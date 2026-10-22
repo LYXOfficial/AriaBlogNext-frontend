@@ -1025,7 +1025,11 @@ pre.hljs.wrap {
 }
 
 .etag-chat-message {
-  padding: 5px 10px;
+  padding: 10px 15px;
+  max-width: 80%;
+}
+.etag-chat-message > p {
+  line-height: 1.6;
 }
 
 .etag-chat.right > * > .etag-chat-message {
