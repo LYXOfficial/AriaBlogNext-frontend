@@ -92,6 +92,14 @@ body {
   overflow-x: clip;
 }
 
+/* iOS Safari 会对“内容较窄”的文本块做自动放大，同一页的两个代码块字号
+   因此可能不一致（行号插件把代码变成表格，单元格宽度由内容决定）。
+   100% 只关闭自动放大，不影响用户双指缩放。 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;

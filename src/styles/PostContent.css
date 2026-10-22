@@ -893,9 +893,14 @@ table:not(code table) {
 #post-maincontent .hljs-ln {
   border-collapse: collapse;
   border-spacing: 0;
+  /* 表格宽度由代码内容决定；不单独声明时 iOS 会按各表宽度分别放大字号。 */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 #post-maincontent .hljs-ln td {
   vertical-align: top;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .hljs-ln-numbers {
