@@ -68,6 +68,11 @@
   display: none;
 }
 
+.comment-barrage-item .barrageContent .tk-owo-emotion {
+  width: 40px;
+  height: 40px;
+}
+
 .barrageContent:not(.barrageContent:hover),
 .barrageNick:not(.barrageNick:hover) {
   color: var(--aria-fontcolor) !important;

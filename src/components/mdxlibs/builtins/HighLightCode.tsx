@@ -644,8 +644,15 @@ export default function HighLightCode({
         ref={codeRef}
         className={`hljs language-${language} ${isWrapped ? "wrap" : ""}`}
         data-language={language}
+        // 构建过程会把 CSS 里的 -webkit-text-size-adjust 前缀去掉，只剩 iOS
+        // 不认的无前缀版本，手机就会按块宽度放大个别代码块。内联样式不经过
+        // 这层处理，能确保带前缀的声明真正下发。
+        style={{ WebkitTextSizeAdjust: "100%" }}
       >
-        <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+        <code
+          style={{ WebkitTextSizeAdjust: "100%" }}
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
       </pre>
     </AnimatedDetails>
   );
