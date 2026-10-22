@@ -598,36 +598,68 @@ table:not(code table) {
 }
 
 .etag-checkbox {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
 }
 
+/* iOS 上原生勾选框无法稳定覆盖 ::after，这里视觉隐藏输入框后自绘方框。 */
 .etag-checkbox > input {
-  width: 14px;
-  height: 14px;
-  position: relative;
-  transform: translateY(2px);
-}
-
-.etag-checkbox > input::after {
   position: absolute;
-  top: 0;
-  color: #000;
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  visibility: visible;
-  padding-left: 0px;
-  text-align: center;
-  content: " ";
-  border-radius: 3px;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.etag-checkbox > input:checked::after {
-  content: "✔";
-  color: #fff;
-  font-size: 12px;
-  line-height: 16px;
+.etag-checkbox-box {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  /* 按当前行高把方框垂直居中到首行；不支持 lh 单位时退回近似值。 */
+  margin-top: 0.38em;
+  margin-top: calc((1lh - 16px) / 2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1.5px solid color-mix(in srgb, var(--aria-fontcolor) 32%, transparent);
+  border-radius: 4px;
+  background-color: transparent;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+.etag-checkbox-box svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.etag-checkbox-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.etag-checkbox > input:checked + .etag-checkbox-box {
   background-color: var(--aria-theme);
+  border-color: var(--aria-theme);
+}
+
+.etag-checkbox > input:checked + .etag-checkbox-box svg {
+  opacity: 1;
+  transform: scale(1);
 }
 
 #article-container ul,
