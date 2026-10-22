@@ -25,7 +25,13 @@ export default async function PostEnd({ postInfo }: { postInfo: Post }) {
       <section className="post-copyright" aria-label="文章版权信息">
         <div className="post-copyright-heading">
           <span className="post-copyright-eyebrow">本文信息</span>
-          <span className="post-copyright-license">CC BY-NC-SA 4.0</span>
+          <span className="post-copyright-license-group">
+            {/* 含 AIGC 标签（不分大小写）时，在许可协议右侧标注 AI 生成内容 */}
+            {(postInfo.tags ?? []).some((tag) =>
+              /^aigc$/i.test(tag.trim()),
+            ) && <span className="post-copyright-aigc">AIGC</span>}
+            <span className="post-copyright-license">CC BY-NC-SA 4.0</span>
+          </span>
         </div>
         <div className="post-copyright-title">{postInfo.title}</div>
         <a
