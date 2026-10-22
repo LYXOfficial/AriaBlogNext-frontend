@@ -1026,6 +1026,9 @@ pre.hljs.wrap {
 
 .etag-chat-message {
   padding: 10px 15px;
+}
+
+.etag-chat-message:not(#post-maincontent.page .etag-chat-message) {
   max-width: 80%;
 }
 .etag-chat-message > p {
