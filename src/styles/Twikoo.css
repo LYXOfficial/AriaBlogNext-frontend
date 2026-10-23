@@ -81,14 +81,14 @@
 
 /* 背景图由 Twikoo 内联写入，只覆盖图片层，不降低输入文字的对比度。 */
 #twikoo .tk-textarea__inner[style*="/img/comment.png"] {
-  --comment-image-veil: color-mix(in srgb, var(--aria-background) 55%, transparent);
+  --comment-image-veil: color-mix(
+    in srgb,
+    var(--aria-background) 55%,
+    transparent
+  );
   background-image:
     linear-gradient(var(--comment-image-veil), var(--comment-image-veil)),
     url("/img/comment.png") !important;
-}
-
-.twikoo .tk-textarea .tk-input__inner:focus {
-  box-shadow: 0 0 8px var(--aria-theme) !important;
 }
 
 .tk-expand {
@@ -174,4 +174,83 @@
 
 .twikoo .tk-icon.__comments.__active path {
   fill: var(--aria-white) !important;
+}
+
+/* ===== 提交表单区：此前只统一过评论气泡和图标，输入区和按钮还是
+   twikoo 默认的 3~4px 直角，和站点「圆角 + 令牌」的卡片语言不一致 ===== */
+
+/* 昵称/邮箱/网址：边框收到外层容器上统一做圆角，inner 不再自带边框，
+   避免出现双重描边；overflow 裁掉前置标签溢出的直角 */
+#twikoo .tk-meta-input .tk-input--group {
+  border: var(--aria-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+
+#twikoo .tk-meta-input .tk-input--group:focus-within {
+  border-color: var(--aria-theme);
+}
+
+#twikoo .tk-meta-input .tk-input--group .tk-input-group__prepend {
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+#twikoo .tk-meta-input .tk-input--group:focus-within .tk-input-group__prepend {
+  background-color: #fff1f7 !important;
+}
+
+#twikoo .tk-meta-input .tk-input--group .tk-input__inner {
+  border: none !important;
+}
+
+/* 前置标签（昵称/邮箱/网址）底色跟随浅灰令牌，不用 twikoo 默认的固定灰 */
+#twikoo .tk-meta-input .tk-input-group__prepend {
+  background-color: var(--aria-whitegray) !important;
+  border: none !important;
+}
+
+/* 正文输入框与评论气泡同为 12px 圆角，过渡走动效令牌 */
+#twikoo .tk-input.tk-textarea .tk-input__inner {
+  border: var(--aria-border) !important;
+  border-radius: 12px;
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+
+#twikoo .tk-input.tk-textarea .tk-input__inner:focus {
+  border: 1px solid var(--aria-theme) !important;
+}
+
+/* 预览/发送按钮统一圆角与过渡，跟 tk-expand 的圆角语言靠近 */
+#twikoo .tk-button {
+  border-radius: 10px;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+/* ===== 评论列表 ===== */
+
+/* 顶层评论之间用站点同款虚线分隔（与留言板页首、归档页的分隔线一致），
+   只作用于顶层，嵌套回复内部不受影响 */
+#twikoo .tk-comments-container > .tk-comment:not(:first-child) {
+  border-top: 1px dashed var(--aria-gray);
+  padding-top: 16px;
+}
+
+/* 时间戳降为次级灰，让昵称保持视觉主层级 */
+#twikoo .tk-time {
+  color: var(--aria-light-fontcolor);
+}
+
+/* 地区/系统/浏览器元信息整体降为次级灰；图标是 fill="currentColor"，
+   会跟着文字一起变淡，不用单独处理 */
+#twikoo .tk-comment .tk-extra {
+  color: var(--aria-light-fontcolor);
+  font-size: 13px;
+}
+
+/* 深色模式下前置标签不能留白底，跟评论气泡的深色取值保持一致 */
+@media (prefers-color-scheme: dark) {
+  #twikoo .tk-meta-input .tk-input-group__prepend {
+    background-color: #303030 !important;
+  }
 }
