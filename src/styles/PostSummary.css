@@ -9,7 +9,7 @@
   padding: 8px;
   border: var(--aria-border);
   border-radius: 8px;
-  background: var(--aria-white)
+  background: var(--aria-white);
   min-height: 20px;
   box-sizing: border-box;
   margin-top: 2px;

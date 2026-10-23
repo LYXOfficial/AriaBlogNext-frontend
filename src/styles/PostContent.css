@@ -1077,7 +1077,7 @@ pre.hljs.wrap {
   transition: opacity var(--dur-base) var(--ease-out);
   width: max-content;
   background-color: #4d4d4d;
-  color: var(--aria-white)
+  color: var(--aria-white);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -1137,7 +1137,7 @@ pre.hljs.wrap {
 }
 
 span[style="undefined:invert"] {
-  color: var(--aria-white)
+  color: var(--aria-white);
   background-color: var(--aria-fontcolor);
 }
 

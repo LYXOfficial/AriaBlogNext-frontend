@@ -330,7 +330,10 @@ article {
   }
 }
 
-#post-maincontent img:not(.inline-image) {
+/* 只限文章正文里的插图宽度；归档/分类/标签等 page 页的列表也渲染在
+   #post-maincontent 里，不加 :not(.page) 会把列表卡的 banner 背景图
+   一起钳到 400px，导致卡片右侧露出一段没有图的底色。 */
+#post-maincontent:not(.page) img:not(.inline-image) {
   max-width: min(400px, 100%);
 }
 

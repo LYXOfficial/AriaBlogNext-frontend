@@ -139,7 +139,7 @@
 }
 
 .postend-tag:hover {
-  color: var(--aria-white)
+  color: var(--aria-white);
   background-color: var(--aria-theme);
 }
 
@@ -298,7 +298,8 @@
 #postend-share .icon-wechat .wechat-qrcode h4 {
   border-bottom: var(--aria-border);
 }
-#postend-share .icon-wechat .wechat-qrcode h4, #postend-share .icon-wechat .wechat-qrcode p{
+#postend-share .icon-wechat .wechat-qrcode h4,
+#postend-share .icon-wechat .wechat-qrcode p {
   font-family: "HYTMR", sans-serif !important;
 }
 #postend-share .icon-wechat .wechat-qrcode .help {
@@ -307,7 +308,7 @@
 @media (prefers-color-scheme: dark) {
   #postend-share .icon-wechat .wechat-qrcode {
     background-color: #303030;
-    color: #aaa
+    color: #aaa;
   }
   #postend-share .icon-wechat .wechat-qrcode h4 {
     background-color: #383838;
