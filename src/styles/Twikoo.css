@@ -70,7 +70,7 @@
 }
 
 .tk-main > .tk-content {
-  background-color: var(--aria-whitegray);
+  background-color: #f5f5f5;
   padding: 5px 20px;
   border-radius: 12px;
 }
@@ -92,15 +92,24 @@
 }
 
 .tk-expand {
-  box-shadow: 0 0 3px var(--aria-black-acrylic2);
-  border-radius: 12px;
+  border-radius: 20px;
   background-color: var(--aria-acrylic1) !important;
   margin-top: 20px;
+  border: var(--aria-border);
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em;
 }
 
 .tk-expand:hover {
-  background-color: var(--aria-theme) !important;
-  color: #fff;
+  background-color: color-mix(
+    in srgb,
+    var(--aria-theme) 12%,
+    transparent
+  ) !important;
+  color: var(--aria-theme) !important;
+  border-color: var(--aria-theme) !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -206,7 +215,7 @@
 
 /* 前置标签（昵称/邮箱/网址）底色跟随浅灰令牌，不用 twikoo 默认的固定灰 */
 #twikoo .tk-meta-input .tk-input-group__prepend {
-  background-color: var(--aria-whitegray) !important;
+  background-color: #f2f6f7 !important;
   border: none !important;
 }
 
@@ -215,6 +224,7 @@
   border: var(--aria-border) !important;
   border-radius: 12px;
   transition: border-color var(--dur-base) var(--ease-out);
+  padding: 12px 18px;
 }
 
 #twikoo .tk-input.tk-textarea .tk-input__inner:focus {
