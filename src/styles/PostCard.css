@@ -89,13 +89,19 @@
   line-clamp: 2;
   overflow: hidden;
   overflow-wrap: anywhere;
-  color: var(--aria-highlight);
+  color: #1f2d3d;
   font-size: 25px;
   font-weight: 500;
   line-height: 1.3;
   text-decoration: none;
   transition: color var(--dur-base) var(--ease-out);
   margin-bottom: 1px;
+}
+
+@media (prefers-color-scheme: dark) {
+  #recent-posts .post-title {
+    color: #d8d8d8;
+  }
 }
 
 #recent-posts .post-title:hover {
@@ -203,7 +209,7 @@
   border: 1px solid rgba(255, 255, 255, 0.23);
   border-radius: 10px;
   background: rgba(20, 25, 34, 0.62);
-  color: #fff;
+  color: var(--aria-white);
   font-size: 12px;
   line-height: 1.3;
   white-space: nowrap;
@@ -294,7 +300,7 @@
   outline-offset: 3px;
 }
 .post-card-pgbtn.current {
-  color: #fff;
+  color: var(--aria-white);
   background: var(--aria-theme);
 }
 .post-card-pgstep {

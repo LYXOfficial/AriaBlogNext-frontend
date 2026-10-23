@@ -57,7 +57,7 @@
 }
 
 .flink-apply-mode.active {
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-theme);
   border-color: var(--aria-theme);
 }
@@ -129,7 +129,7 @@
   top: 1px;
   width: 5px;
   height: 9px;
-  border: solid #fff;
+  border: solid var(--aria-white);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -255,7 +255,7 @@
 }
 
 .flink-apply-pick:hover:not(:disabled) {
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-theme);
 }
 
@@ -352,7 +352,7 @@
 }
 
 .flink-apply-smart-head button:hover:not(:disabled) {
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-theme);
 }
 
@@ -405,7 +405,7 @@
   padding: 12px 16px;
   min-height: 76px;
   max-width: 320px;
-  color: #fff;
+  color: var(--aria-white);
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
   transition: background-color var(--dur-base) var(--ease-out);
@@ -476,7 +476,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 24px;
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-theme);
   border: none;
   border-radius: 20px;
@@ -559,7 +559,7 @@
 }
 
 .flink-apply-query-row button:hover:not(:disabled) {
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-theme);
 }
 
@@ -641,7 +641,7 @@
 }
 
 .flink-apply-record-actions button:hover {
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-theme);
 }
 
@@ -651,7 +651,7 @@
 }
 
 .flink-apply-record-actions button.danger:hover {
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-red);
 }
 
@@ -696,7 +696,7 @@
 .flink-apply-tag {
   padding: 2px 8px;
   font-size: 12px;
-  color: #fff;
+  color: var(--aria-white);
   background-color: var(--aria-green);
   border-radius: 10px;
 }

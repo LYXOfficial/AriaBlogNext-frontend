@@ -73,7 +73,7 @@
   padding: 9px 22px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 22px;
-  color: #fff;
+  color: var(--aria-white);
   background: rgba(23, 31, 45, 0.215);
   -webkit-backdrop-filter: blur(20px) saturate(130%);
   backdrop-filter: blur(20px) saturate(130%);
@@ -101,12 +101,12 @@
 }
 
 .homespeaks-glass .homespeaks-item:hover {
-  color: #fff;
+  color: var(--aria-white);
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
 }
 
 .homespeaks-glass .homespeaks-item:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid var(--aria-white);
   outline-offset: -2px;
   border-radius: 6px;
 }

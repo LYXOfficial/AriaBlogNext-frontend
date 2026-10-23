@@ -146,10 +146,98 @@ export function TwikooBaseComment() {
       };
     }
 
+    // twikoo 标题上的「N 条评论」读的是列表接口 COMMENT_GET 响应里的 count 字段
+    // （服务端只数顶层；「查看更多」按钮由响应里的 more 字段驱动，别碰），
+    // 和文章卡片、侧栏（都用 includeReply: true 的总数）对不上。
+    // twikoo 没有站点级开关：渲染后覆写会和它自己的渲染赛跑（实测数字会闪），
+    // 给 GET_COMMENTS_COUNT 补参也没用（标题不读它）。所以在 fetch 层改写
+    // COMMENT_GET 的响应：列表请求照发，并行查一次含楼中楼的总数，把响应里
+    // 的 count 替换掉再交给 twikoo 渲染。搜索请求（带 keyword）不改，
+    // 「找到 N 条评论」保持搜索结果的语义。
+    function patchCommentListCount() {
+      const originalFetch = window.fetch.bind(window);
+      window.fetch = async function (
+        input: RequestInfo | URL,
+        init?: RequestInit,
+      ): Promise<Response> {
+        try {
+          const url =
+            typeof input === "string"
+              ? input
+              : input instanceof URL
+                ? input.toString()
+                : input.url;
+          const body = init?.body;
+          if (typeof body !== "string" || !url.startsWith(siteConfigs.twikooEnv))
+            return originalFetch(input, init);
+
+          const payload = JSON.parse(body) as {
+            event?: string;
+            url?: string;
+            keyword?: string;
+          };
+          if (payload.event !== "COMMENT_GET" || !payload.url || payload.keyword)
+            return originalFetch(input, init);
+
+          const [listRes, countRes] = await Promise.all([
+            originalFetch(input, init),
+            originalFetch(siteConfigs.twikooEnv, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                event: "GET_COMMENTS_COUNT",
+                urls: [payload.url],
+                includeReply: true,
+              }),
+            }).catch(() => null),
+          ]);
+          const text = await listRes.text();
+          let data: unknown;
+          try {
+            data = JSON.parse(text);
+          } catch {
+            return new Response(text, {
+              status: listRes.status,
+              statusText: listRes.statusText,
+              headers: listRes.headers,
+            });
+          }
+          if (countRes && data && typeof data === "object" && "count" in data) {
+            try {
+              const cj = (await countRes.json()) as {
+                data?: { count?: number }[];
+              };
+              const total = cj?.data?.[0]?.count;
+              if (typeof total === "number")
+                (data as { count: number }).count = total;
+            } catch {
+              // 总数查不到就保留列表自带的顶层数，别让评论区因此挂掉
+            }
+          }
+          // body 长度变了，content-length 不能透传，否则浏览器会挂起
+          const headers = new Headers(listRes.headers);
+          headers.delete("content-length");
+          return new Response(JSON.stringify(data), {
+            status: listRes.status,
+            statusText: listRes.statusText,
+            headers,
+          });
+        } catch {
+          // 任何解析/改写异常都原样放行，不能因为补丁弄挂评论加载
+          return originalFetch(input, init);
+        }
+      };
+      return () => {
+        window.fetch = originalFetch;
+      };
+    }
+
     const tk = require("twikoo");
     let cleanupOwoBig: (() => void) | null = null;
     let cleanupKeepOwOOpen: (() => void) | null = null;
+    let cleanupCountPatch: (() => void) | null = null;
     try {
+      cleanupCountPatch = patchCommentListCount();
       tk.init({
         envId: siteConfigs.twikooEnv,
         el: "#post-comment",
@@ -170,6 +258,7 @@ export function TwikooBaseComment() {
     return () => {
       cleanupOwoBig?.();
       cleanupKeepOwOOpen?.();
+      cleanupCountPatch?.();
       const tkel = document.querySelector("#twikoo");
       if (tkel) {
         tkel.innerHTML = "";

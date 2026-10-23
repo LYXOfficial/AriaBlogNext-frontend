@@ -37,12 +37,22 @@
   -o-border-radius: 50%;
   border: none;
   background-color: var(--aria-theme);
-  color: white;
+  color: var(--aria-white);
   transition: all var(--dur-base) var(--ease-out);
 }
 
 .rightbutton:hover {
-  background-color: #f9acc7;
+  background-color: color-mix(
+    in srgb,
+    var(--aria-theme) 80%,
+    var(--aria-white) 20%
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  .rightbutton {
+    color: #dddddd;
+  }
 }
 
 .rightbutton > svg {

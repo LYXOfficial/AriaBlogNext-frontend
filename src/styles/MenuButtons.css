@@ -23,11 +23,11 @@
 
 /* 按钮通过 portal 放在 body 下，需显式同步透明顶栏状态，不能依赖导航的后代选择器。 */
 .menu-actions[data-transparent="true"] {
-  color: #fff;
+  color: var(--aria-white);
 }
 
 .menu-actions[data-banner="true"] {
-  color: #fff;
+  color: var(--aria-white);
   background: rgba(20, 27, 39, 0.182);
   border-color: rgba(255, 255, 255, 0.2);
   -webkit-backdrop-filter: blur(16px);

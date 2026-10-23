@@ -47,7 +47,7 @@
   height: 17px;
   border-radius: 999px;
   background: var(--aria-theme);
-  color: #fff;
+  color: var(--aria-white);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -139,7 +139,7 @@
 }
 
 .postend-tag:hover {
-  color: white;
+  color: var(--aria-white)
   background-color: var(--aria-theme);
 }
 
@@ -179,6 +179,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  border: var(--aria-border);
 }
 
 .postend-navigation-item:hover .postend-navigation-image {
@@ -191,6 +192,7 @@
   filter: blur(3px) saturate(180%);
   z-index: -1;
   -webkit-filter: blur(3px) saturate(180%);
+  scale: 1.05;
 }
 
 .postend-navigation-headline {
@@ -255,6 +257,60 @@
   --share-color: #33b045;
 }
 #postend-share.social-share .social-share-icon:hover {
-  color: white;
+  color: var(--aria-white);
   background: color-mix(in srgb, var(--share-color, #666) 70%, transparent);
+}
+
+/* 微信二维码弹层对齐站点卡片语言：圆角 + 细边框 + 令牌阴影（sharejs 默认直角白框）。
+   二维码保持白底黑码（扫码依赖对比度），给码图垫白底加圆角，让它看起来是有意的小白卡。
+   深色下 sharejs 的白底浅字在暗背景刺眼，取值跟评论区深色气泡(#303030)一致。 */
+#postend-share .icon-wechat .wechat-qrcode {
+  border-radius: 12px;
+  box-shadow: var(--aria-shadow);
+  color: var(--aria-fontcolor);
+  border: var(--aria-border);
+}
+
+#postend-share .icon-wechat .wechat-qrcode::after {
+  display: none;
+}
+#postend-share .icon-wechat .wechat-qrcode h4 {
+  border-radius: 11px 11px 0 0;
+  background-color: var(--aria-whitegray);
+  color: var(--aria-light-fontcolor);
+}
+#postend-share .icon-wechat .wechat-qrcode .qrcode img,
+#postend-share .icon-wechat .wechat-qrcode .qrcode canvas {
+  background-color: var(--aria-white);
+  border-radius: 6px;
+  padding: 6px;
+  box-sizing: border-box;
+}
+@media (prefers-color-scheme: dark) {
+  #postend-share .icon-wechat .wechat-qrcode .qrcode img,
+  #postend-share .icon-wechat .wechat-qrcode .qrcode canvas {
+    filter: brightness(0.7);
+  }
+}
+#postend-share .icon-wechat .wechat-qrcode {
+  height: 200px;
+}
+#postend-share .icon-wechat .wechat-qrcode h4 {
+  border-bottom: var(--aria-border);
+}
+#postend-share .icon-wechat .wechat-qrcode h4, #postend-share .icon-wechat .wechat-qrcode p{
+  font-family: "HYTMR", sans-serif !important;
+}
+#postend-share .icon-wechat .wechat-qrcode .help {
+  padding: 5px;
+}
+@media (prefers-color-scheme: dark) {
+  #postend-share .icon-wechat .wechat-qrcode {
+    background-color: #303030;
+    color: #aaa
+  }
+  #postend-share .icon-wechat .wechat-qrcode h4 {
+    background-color: #383838;
+    color: #ddd;
+  }
 }

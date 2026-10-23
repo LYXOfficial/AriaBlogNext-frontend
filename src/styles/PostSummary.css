@@ -9,7 +9,7 @@
   padding: 8px;
   border: var(--aria-border);
   border-radius: 8px;
-  background: white;
+  background: var(--aria-white)
   min-height: 20px;
   box-sizing: border-box;
   margin-top: 2px;
@@ -53,13 +53,13 @@
   padding: 3px;
   border-radius: 50%;
   background: var(--aria-theme);
-  color: white;
+  color: var(--aria-white);
 }
 @media screen and (prefers-color-scheme: dark) {
   .post-summary-content {
-    background: black;
+    background: var(--aria-black);
   }
   .post-summary {
-    background: #383232;
+    background: #0a0a0a;
   }
 }

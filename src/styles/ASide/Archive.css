@@ -10,6 +10,12 @@
   flex: 0 0 39%;
 }
 
+@media (prefers-color-scheme: dark) {
+  .archives-list-item {
+    border: 1px solid #4a4c51;
+  }
+}
+
 .archives-list-item:hover {
   background-color: color-mix(in srgb, var(--aria-theme) 10%, transparent 25%);
   transform: scale(1.03);

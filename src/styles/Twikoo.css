@@ -73,6 +73,13 @@
   background-color: #f5f5f5;
   padding: 5px 20px;
   border-radius: 12px;
+  border: 1px solid #00000011;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tk-main > .tk-content {
+    border: 1px solid #ffffff2c !important;
+  }
 }
 
 .twikoo .tk-input__inner:focus {
@@ -114,7 +121,7 @@
 
 @media (prefers-color-scheme: dark) {
   .tk-main > .tk-content {
-    background-color: #303030 !important;
+    background-color: #19191981 !important;
   }
 }
 
@@ -244,6 +251,12 @@
 #twikoo .tk-comments-container > .tk-comment:not(:first-child) {
   border-top: 1px dashed var(--aria-gray);
   padding-top: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  #twikoo .tk-comments-container > .tk-comment:not(:first-child) {
+    border-top: 1px dashed #646464;
+  }
 }
 
 /* 时间戳降为次级灰，让昵称保持视觉主层级 */

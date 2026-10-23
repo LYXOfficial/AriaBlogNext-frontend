@@ -74,7 +74,7 @@
   transform: translate(-50%, -25%);
   left: 50%;
   width: min(92%, 960px);
-  color: #fff;
+  color: var(--aria-white);
   text-align: center;
   text-shadow: 0 2px 18px rgba(10, 16, 28, 0.35);
 }
@@ -128,7 +128,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 12px;
-  color: #fff;
+  color: var(--aria-white);
   opacity: 0.85;
   pointer-events: none;
 }

@@ -37,11 +37,10 @@
   --aria-yellow: rgb(209, 205, 17);
   --aria-purple: rgb(159, 76, 208);
   --aria-pink: #f79dbc;
+  --aria-darkpink: #8d5468;
   --aria-heoblue: #0098db;
   --aria-darkblue: #61649f;
   --aria-blackfont: #4c4948;
-  --aria-highlight-black: #1f2d3d;
-  --aria-highlight-white: #ffffff;
   --aria-light-fontcolor: #828282;
   --heo-main: var(--aria-theme) !important;
   --heo-fontcolor: var(--aria-fontcolor) !important;
@@ -52,7 +51,6 @@
   --aria-acrylic1: var(--aria-white-acrylic1);
   --aria-acrylic2: var(--aria-white-acrylic2);
   --aria-fontcolor: var(--aria-blackfont);
-  --aria-highlight: var(--aria-highlight-black);
   --aria-shadow: 0 0 10px 3px #9595953b;
   --aria-shadow-color: #9595953b;
   --style-border-always: var(--aria-border) !important;
@@ -64,18 +62,45 @@
     --aria-acrylic1: var(--aria-black-acrylic1) !important;
     --aria-acrylic2: var(--aria-black-acrylic2) !important;
     --aria-fontcolor: var(--aria-whitefont);
-    --aria-highlight: var(--aria-highlight-white);
-    --aria-shadow: 0 0 10px 3px #1c1c1c;
-    --aria-shadow-color: #1c1c1c;
+    --aria-shadow: 0 0 10px 3px #00000066;
+    --aria-shadow-color: #00000066;
     --heo-secondbg: #2f3031 !important;
     --heo-card-bg: #000 !important;
-    --aria-border: 1px solid rgb(138, 138, 138);
+    --aria-border: 1px solid #414141;
+    --aria-theme: var(--aria-darkpink);
+    --aria-scrollbar: #514f4fdd;
   }
 }
 
 .fancybox__container {
   --fancybox-bg: rgba(24, 24, 27, 0.8) !important;
   z-index: 191981011 !important;
+}
+
+/* 深色模式下给全站内容图叠一层暗色遮罩，亮图在暗背景上太刺眼。
+   覆盖清单：侧栏评论配图(aside-list-item-pic) / 文章卡片封面(post-banner-img) /
+   恋爱卡片头像(loveu-avatar) / 作者头像(card-info-avatar-img) /
+   文章头图(post-banner-bg) / 评论头像(tk-avatar-img) /
+   正文插图(fancybox-img) / 行内链接图标(etag-link-img)。
+   img 上挂不了 ::after，brightness 压暗和半透明灰遮罩视觉等效，统一走 filter。 */
+@media (prefers-color-scheme: dark) {
+  .aside-list-item-pic,
+  .post-banner-img,
+  .loveu-avatar,
+  .card-info-avatar-img,
+  .post-banner-bg,
+  .tk-avatar-img,
+  .fancybox-img,
+  .latest-comment-emoji,
+  .tk-owo-emotion,
+  .etag-link-img {
+    filter: brightness(0.7);
+  }
+
+  /* 灯箱里看的就是原图，保持正常亮度；宽选择器兜底克隆节点带不带 fancybox-img 都能覆盖 */
+  .fancybox__container img {
+    filter: none;
+  }
 }
 
 button:focus-visible,

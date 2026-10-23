@@ -2,7 +2,7 @@
   position: fixed;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  border: 1px #aaa solid;
+  border: var(--aria-border);
   border-radius: 10px;
   z-index: 9999;
   /* 大图不能挡住鼠标，否则 hover 会被自己打断 */
