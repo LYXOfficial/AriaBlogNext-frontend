@@ -21,7 +21,9 @@ export default function Page() {
       page_turning_number: 10,
       error_img: siteConfigs.falldownAvatar,
       sort_rule: "created",
-      expire_days: 1,
+      // 主题按整天数判断缓存过期（floor(天数) >= expire_days 才重新拉取），
+      // 填 1 访客端最旧会看到前天的列表；后端 4 小时一更，这里填 0 每次进页拉最新
+      expire_days: 0,
     };
     // 主题脚本给“日志”统计项绑了“清空缓存并 location.reload()”，点一下整页
     // 刷新， Vue 挂载复用机制也会被打断。在捕获阶段拦下这个点击即可，
