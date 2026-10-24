@@ -27,6 +27,12 @@
     box-shadow var(--dur-base) var(--ease-out);
 }
 
+@media (prefers-color-scheme: dark) {
+  .flink-item {
+    filter: brightness(0.8);
+  }
+}
+
 .flink-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
