@@ -39,12 +39,10 @@ const color = (value?: string) => (text(value) || "#888888").toLowerCase();
 export function validateFlinkForm(options: {
   mode: 0 | 1;
   targetUrl: string;
-  editing: boolean;
   form: FlinkFormValues;
 }): string {
-  const { mode, targetUrl, editing, form } = options;
-  if (mode === 1 && !targetUrl && !editing)
-    return "请先在列表里选择要修改的友链";
+  const { mode, targetUrl, form } = options;
+  if (mode === 1 && !targetUrl) return "请先在列表里选择要修改的友链";
   if (!text(form.name)) return "请填写站点名称";
   if (!URL_RE.test(text(form.link))) return "网址格式不正确";
   if (!URL_RE.test(text(form.avatar))) return "头像格式不正确";

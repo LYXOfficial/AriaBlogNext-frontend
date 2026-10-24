@@ -27,7 +27,7 @@ const RULES = [
   "网站和头像链接必须是 http 或 https 开头的，头像、名称和链接必填",
   "背景色可选，填写 CSS 值如 #ff88aa、rgb(255,136,170) 等，不支持透明色；不建议过浅的颜色，会导致字体不清",
   "建议填写博客主页，方便友链朋友圈获取内容",
-  "建议填写正确的邮箱：用于接收申请回执与审核结果，也可以用来自助查询进度、修改或撤销申请",
+  "建议填写正确的邮箱：用于接收申请回执与审核结果，也可以用来自助查询进度",
   "建议网站头像不要有防盗链，否则无法正常显示",
   "审核未通过时，若博主填写了理由会通过邮件告知，可修改后重新提交",
 ];
@@ -50,9 +50,6 @@ interface ApplyRecord {
   descr?: string;
   color?: string;
   targetUrl?: string;
-  email?: string;
-  // 服务端不下发邮箱，只标记这条申请有没有留邮箱（影响能否修改/撤销）
-  hasEmail?: boolean;
   status: "pending" | "approved" | "rejected";
   reason?: string;
   createdAt?: string;
@@ -96,21 +93,13 @@ export default function FlinkApply() {
     null,
   );
   const [queryInput, setQueryInput] = useState("");
-  // 上一次查询用的凭据类型：邮箱查询才能修改/撤销，站名查询只展示进度
-  const [queryByEmail, setQueryByEmail] = useState(true);
   const [querying, setQuerying] = useState(false);
   const [queryResult, setQueryResult] = useState<ApplyRecord[] | null>(null);
   const [queryError, setQueryError] = useState("");
-  // 正在编辑的待审申请（修改申请内容）
-  const [editing, setEditing] = useState<{ id: string; email: string } | null>(
-    null,
-  );
-  // 待确认撤销的申请 id
-  const [withdrawId, setWithdrawId] = useState("");
 
   const allChecked = checked.every(Boolean);
-  // 修改已收录友链无需勾选须知；编辑待审申请时也无需重复勾选
-  const needCheck = mode === 0 && !editing;
+  // 修改已收录友链无需勾选须知
+  const needCheck = mode === 0;
   // 手动选的颜色原样使用；只有「从头像取色」得到的颜色才会自动压深
   const previewColor = form.color.trim() || "#888888";
   const filteredLinks = (existing ?? [])
@@ -226,15 +215,7 @@ export default function FlinkApply() {
     }
   }
 
-  function resetEdit() {
-    setEditing(null);
-    setForm({ ...EMPTY_FORM });
-    setChecked(new Array(RULES.length).fill(false));
-    setMessage(null);
-  }
-
   async function submit() {
-    // 修改已有申请/修改友链时不必勾选须知
     if (needCheck && !allChecked) {
       setMessage({ ok: false, text: "请先逐条阅读并勾选上方的申请须知" });
       return;
@@ -242,7 +223,6 @@ export default function FlinkApply() {
     const invalid = validateFlinkForm({
       mode,
       targetUrl,
-      editing: !!editing,
       form,
     });
     if (invalid) {
@@ -251,7 +231,7 @@ export default function FlinkApply() {
     }
 
     // 修改申请：内容和现网完全一致就不让提交
-    if (mode === 1 && !editing && targetUrl) {
+    if (mode === 1 && targetUrl) {
       const current = existing?.find((item) => item.url === targetUrl);
       if (
         current &&
@@ -282,41 +262,29 @@ export default function FlinkApply() {
         avatar: form.avatar.trim(),
         descr: form.descr.trim(),
         color: form.color.trim(),
-        email: (editing?.email || form.email).trim(),
+        email: form.email.trim(),
         type: mode,
         targetUrl: mode === 1 ? targetUrl : "",
       };
-      const res = await fetch(
-        editing
-          ? `${siteConfigs.backEndUrl}/flink/apply/update`
-          : `${siteConfigs.backEndUrl}/flink/apply`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(
-            editing ? { ...payload, id: editing.id } : payload,
-          ),
-        },
-      );
+      const res = await fetch(`${siteConfigs.backEndUrl}/flink/apply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
       const data = await res.json().catch(() => null);
       if (res.ok) {
-        const emailUsed = (editing?.email || form.email).trim();
+        const emailUsed = form.email.trim();
         // 提交成功后保留已填内容，方便继续修改或再次提交
-        if (editing) {
-          setEditing(null);
-          setMessage({ ok: true, text: "修改已保存，仍在等待审核" });
-        } else {
-          const kind = mode === 1 ? "修改申请" : "申请";
-          const mailSent = data?.mailSent === true;
-          setMessage({
-            ok: true,
-            text: !emailUsed
-              ? `${kind}已提交（未填写邮箱，不会发送邮件通知）`
-              : mailSent
-                ? `${kind}已提交，审核结果会发送到你的邮箱`
-                : `${kind}已提交，但通知邮件发送失败，请用下方邮箱自查进度`,
-          });
-        }
+        const kind = mode === 1 ? "修改申请" : "申请";
+        const mailSent = data?.mailSent === true;
+        setMessage({
+          ok: true,
+          text: !emailUsed
+            ? `${kind}已提交（未填写邮箱，不会发送邮件通知）`
+            : mailSent
+              ? `${kind}已提交，审核结果会发送到你的邮箱`
+              : `${kind}已提交，但通知邮件发送失败，请用下方邮箱自查进度`,
+        });
         if (emailUsed) {
           await queryStatus(emailUsed);
         }
@@ -357,14 +325,7 @@ export default function FlinkApply() {
       );
       const data = await res.json().catch(() => null);
       if (res.ok) {
-        setQueryResult(
-          (data?.data ?? []).map((item: ApplyRecord) => ({
-            ...item,
-            // 只有邮箱查询时才带得上和服务端核对用的邮箱
-            email: byEmail ? target : undefined,
-          })),
-        );
-        setQueryByEmail(byEmail);
+        setQueryResult(data?.data ?? []);
         setQueryInput(target);
       } else setQueryError("查询失败，请稍后再试");
     } catch {
@@ -425,62 +386,6 @@ export default function FlinkApply() {
     );
   }
 
-  function startEdit(record: ApplyRecord) {
-    setColorAuto(false); // 尊重已提交的配色
-    setEditing({ id: record.id, email: record.email || queryInput });
-    setMode(record.type === 1 ? 1 : 0);
-    setForm({
-      name: record.name || "",
-      link: record.link || "",
-      avatar: record.avatar || "",
-      descr: record.descr || "",
-      color: record.color || "#888888",
-      email: record.email || queryInput,
-    });
-    if (record.type === 1) {
-      const target = record.targetUrl || "";
-      setTargetUrl(target);
-      const matched = existing?.find((item) => item.url === target);
-      setLinkQuery(matched ? matched.label : target);
-    }
-    setMessage(null);
-    document
-      .querySelector(".flink-apply")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  async function doWithdraw(record: ApplyRecord) {
-    setBusy(true);
-    try {
-      const res = await fetch(
-        `${siteConfigs.backEndUrl}/flink/apply/withdraw`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id: record.id,
-            email: record.email || queryInput,
-          }),
-        },
-      );
-      const data = await res.json().catch(() => null);
-      if (res.ok) {
-        setMessage({ ok: true, text: "申请已撤销" });
-        await queryStatus(record.email || queryInput);
-      } else {
-        setMessage({
-          ok: false,
-          text: data?.detail?.error || "撤销失败，请稍后再试",
-        });
-      }
-    } catch {
-      setMessage({ ok: false, text: "撤销失败，请检查网络后重试" });
-    } finally {
-      setWithdrawId("");
-      setBusy(false);
-    }
-  }
-
   return (
     <div className="flink-apply">
       <div className="flink-apply-modes">
@@ -491,7 +396,6 @@ export default function FlinkApply() {
             className={`flink-apply-mode${mode === m ? " active" : ""}`}
             onClick={() => {
               setMode(m);
-              setEditing(null);
               setMessage(null);
             }}
           >
@@ -500,16 +404,6 @@ export default function FlinkApply() {
           </button>
         ))}
       </div>
-
-      {editing && (
-        <div className="flink-apply-editing">
-          <Icon icon="solar:pen-new-square-bold" />
-          正在修改一条待审申请，保存后仍保持原来的排队位置。
-          <button type="button" onClick={resetEdit}>
-            取消修改
-          </button>
-        </div>
-      )}
 
       {mode === 0 && (
         <div className="flink-apply-smart">
@@ -549,8 +443,7 @@ export default function FlinkApply() {
               <label>
                 <input
                   type="checkbox"
-                  checked={checked[i] || !!editing}
-                  disabled={!!editing}
+                  checked={checked[i]}
                   onChange={(e) =>
                     setChecked((prev) =>
                       prev.map((v, idx) => (idx === i ? e.target.checked : v)),
@@ -576,7 +469,6 @@ export default function FlinkApply() {
                 aria-autocomplete="list"
                 placeholder="输入站名或网址搜索，选中后会自动填好下面的信息"
                 value={linkQuery}
-                disabled={!!editing}
                 onChange={(e) => {
                   setLinkQuery(e.target.value);
                   setLinkOpen(true);
@@ -669,7 +561,6 @@ export default function FlinkApply() {
             type="email"
             placeholder="you@example.com"
             value={form.email}
-            disabled={!!editing}
             onChange={(e) => set("email")(e.target.value)}
           />
         </label>
@@ -760,33 +651,14 @@ export default function FlinkApply() {
           disabled={busy || (needCheck && !allChecked)}
           onClick={submit}
         >
-          <Icon
-            icon={
-              busy
-                ? "solar:refresh-bold"
-                : editing
-                  ? "solar:diskette-bold"
-                  : "solar:plain-2-bold"
-            }
-          />
-          {busy ? "提交中..." : editing ? "保存修改" : "提交申请"}
+          <Icon icon={busy ? "solar:refresh-bold" : "solar:plain-2-bold"} />
+          {busy ? "提交中..." : "提交申请"}
         </button>
-        {editing ? (
-          <button
-            type="button"
-            className="flink-apply-cancel"
-            onClick={resetEdit}
-          >
-            取消修改
-          </button>
-        ) : (
-          needCheck &&
-          !allChecked && (
-            <span className="flink-apply-hint">
-              请先勾选全部 {RULES.length} 条须知（已勾选{" "}
-              {checked.filter(Boolean).length} 条）
-            </span>
-          )
+        {needCheck && !allChecked && (
+          <span className="flink-apply-hint">
+            请先勾选全部 {RULES.length} 条须知（已勾选{" "}
+            {checked.filter(Boolean).length} 条）
+          </span>
         )}
       </div>
 
@@ -874,53 +746,6 @@ export default function FlinkApply() {
                       {item.type === 1 && item.targetUrl && (
                         <span>修改对象：{item.targetUrl}</span>
                       )}
-                      <div className="flink-apply-record-actions">
-                        {/* 修改/撤销要和服务端核对申请时的邮箱，
-                            站名查询拿不到邮箱，只展示进度 */}
-                        {queryByEmail ? (
-                          <>
-                            <button
-                              type="button"
-                              onClick={() => startEdit(item)}
-                            >
-                              <Icon icon="solar:pen-new-square-bold" />
-                              修改
-                            </button>
-                            {withdrawId === item.id ? (
-                              <>
-                                <button
-                                  type="button"
-                                  className="danger"
-                                  onClick={() => doWithdraw(item)}
-                                >
-                                  确认撤销
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => setWithdrawId("")}
-                                >
-                                  再想想
-                                </button>
-                              </>
-                            ) : (
-                              <button
-                                type="button"
-                                className="danger"
-                                onClick={() => setWithdrawId(item.id)}
-                              >
-                                <Icon icon="solar:trash-bin-trash-bold" />
-                                撤销申请
-                              </button>
-                            )}
-                          </>
-                        ) : (
-                          <span className="flink-apply-hint">
-                            {item.hasEmail === false
-                              ? "该申请提交时未填写邮箱，无法修改或撤销"
-                              : "如需修改或撤销，请用申请时的邮箱查询"}
-                          </span>
-                        )}
-                      </div>
                     </div>
                   )}
 
