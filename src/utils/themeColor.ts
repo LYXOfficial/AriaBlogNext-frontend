@@ -1,7 +1,11 @@
 /**
- * 从头像图片里提取一个「适合当友链卡片背景」的主题色。
- * 纯前端实现：crossOrigin + canvas 读像素，不经过后端。
+ * 友链头像主题色。
+ * 提取在服务端完成（GET /get/flink/themeColor，分桶算法与权重和原来逐行
+ * 一致，见后端 get/flink/main.py）：原先是纯前端 canvas 读像素，要求图床
+ * 返回 CORS 头，QQ 头像（qlogo.cn）等国内常用源不带，浏览器里必然加载失败。
+ * ensureCardColor 的对比度调节仍留在前端，逻辑不变。
  */
+import { siteConfigs } from "@/config";
 
 interface Hsl {
   h: number; // 0-360
@@ -50,127 +54,32 @@ export function toHex([r, g, b]: [number, number, number]): string {
   );
 }
 
-/** 调整成适合做卡片背景的颜色：保证白字可读、颜色不过灰 */
-function normalizeForCard(hsl: Hsl): Hsl {
-  let { h, s, l } = hsl;
-  // 太亮 -> 压暗，保证白字对比度
-  if (l > 0.58) l = 0.58;
-  // 太暗 -> 提亮一点，避免糊成黑块
-  if (l < 0.28) l = 0.28 + (l - 0.28) * 0.3;
-  // 灰扑扑的图（比如线稿、黑白头像）补一点饱和度
-  if (s < 0.22) s = 0.22;
-  if (s > 0.75) s = 0.75;
-  return { h, s, l };
-}
-
-function loadImage(url: string, timeoutMs = 8000): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    const timer = setTimeout(
-      () => reject(new Error("图片加载超时")),
-      timeoutMs,
-    );
-    img.onload = () => {
-      clearTimeout(timer);
-      resolve(img);
-    };
-    img.onerror = () => {
-      clearTimeout(timer);
-      reject(new Error("图片加载失败"));
-    };
-    img.src = url;
-  });
-}
-
 /**
  * 提取主题色。
- * - 跳过透明像素、接近纯白/纯黑的像素（头像背景常是白底，会把颜色带偏）
- * - 按色相/明度分桶，取「最有存在感」的那一桶
- * - 最后压到适合白字卡片的明度/饱和度区间
+ * 链接非法返回 ""；图片下载/解析失败时抛错，message 是可直接展示的中文。
+ * 返回空字符串只剩一种情况：图片所有像素都透明（极端情况，与原版行为一致）。
  */
 export async function extractThemeColorFromImage(url: string): Promise<string> {
-  if (!url || !/^https?:\/\//i.test(url.trim())) return "";
-  const img = await loadImage(url.trim());
-
-  const size = 64;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return "";
-  ctx.drawImage(img, 0, 0, size, size);
-
-  let data: Uint8ClampedArray;
+  const trimmed = (url || "").trim();
+  if (!/^https?:\/\//i.test(trimmed)) return "";
+  let res: Response;
   try {
-    data = ctx.getImageData(0, 0, size, size).data;
-  } catch {
-    // 对方图片没给 CORS 头，canvas 被污染
-    return "";
-  }
-
-  const buckets = new Map<
-    string,
-    { weight: number; r: number; g: number; b: number; count: number }
-  >();
-
-  for (let i = 0; i < data.length; i += 4) {
-    const a = data[i + 3];
-    if (a < 128) continue;
-    const r = data[i];
-    const g = data[i + 1];
-    const b = data[i + 2];
-    const hsl = rgbToHsl(r, g, b);
-    // 跳过白底 / 黑边 / 极浅极深像素
-    if (hsl.l > 0.92 || hsl.l < 0.06) continue;
-
-    // 量化到 8 级色相 + 4 级明度，避免同一颜色被拆散
-    const hKey = Math.round(hsl.h / 16);
-    const lKey = Math.round(hsl.l * 8);
-    const key = `${hKey}-${lKey}`;
-    // 有彩度的像素权重更高（大面积白底/灰底不吃香）
-    const weight = 1 + hsl.s * 3;
-    const cur = buckets.get(key);
-    if (cur) {
-      cur.weight += weight;
-      cur.r += r;
-      cur.g += g;
-      cur.b += b;
-      cur.count += 1;
-    } else {
-      buckets.set(key, { weight, r, g, b, count: 1 });
-    }
-  }
-
-  if (buckets.size === 0) {
-    // 整张图都是极浅/极深像素：退化成平均色
-    let r = 0,
-      g = 0,
-      b = 0,
-      n = 0;
-    for (let i = 0; i < data.length; i += 4) {
-      if (data[i + 3] < 128) continue;
-      r += data[i];
-      g += data[i + 1];
-      b += data[i + 2];
-      n++;
-    }
-    if (!n) return "";
-    const avg = rgbToHsl(
-      Math.round(r / n),
-      Math.round(g / n),
-      Math.round(b / n),
+    res = await fetch(
+      `${siteConfigs.backEndUrl}/get/flink/themeColor?url=${encodeURIComponent(trimmed)}`,
     );
-    return toHex(hslToRgb(normalizeForCard(avg)));
+  } catch {
+    // 网络层失败（断网/后端不可达）：浏览器给的是英文 TypeError，别透传
+    throw new Error("取色服务暂时不可用，请稍后再试");
   }
-
-  let best = [...buckets.values()].sort((a, b) => b.weight - a.weight)[0];
-  const avg: Hsl = rgbToHsl(
-    Math.round(best.r / best.count),
-    Math.round(best.g / best.count),
-    Math.round(best.b / best.count),
-  );
-  return toHex(hslToRgb(normalizeForCard(avg)));
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    // 后端 detail.error 是面向用户的中文（域名解析不了/不是图片/超时等）；
+    // 其余情况（网关 404、平台错误页）统一走兜底文案，不外泄内部信息
+    const detail = data?.detail;
+    const msg = typeof detail === "object" && detail !== null ? detail.error : "";
+    throw new Error(msg || "取色服务暂时不可用，请稍后再试");
+  }
+  return typeof data?.data === "string" ? data.data : "";
 }
 
 /* ---------- 卡片底色可读性 ---------- */

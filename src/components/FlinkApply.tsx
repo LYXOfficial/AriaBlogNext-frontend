@@ -51,6 +51,8 @@ interface ApplyRecord {
   color?: string;
   targetUrl?: string;
   email?: string;
+  // 服务端不下发邮箱，只标记这条申请有没有留邮箱（影响能否修改/撤销）
+  hasEmail?: boolean;
   status: "pending" | "approved" | "rejected";
   reason?: string;
   createdAt?: string;
@@ -93,7 +95,9 @@ export default function FlinkApply() {
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(
     null,
   );
-  const [queryEmail, setQueryEmail] = useState("");
+  const [queryInput, setQueryInput] = useState("");
+  // 上一次查询用的凭据类型：邮箱查询才能修改/撤销，站名查询只展示进度
+  const [queryByEmail, setQueryByEmail] = useState(true);
   const [querying, setQuerying] = useState(false);
   const [queryResult, setQueryResult] = useState<ApplyRecord[] | null>(null);
   const [queryError, setQueryError] = useState("");
@@ -205,14 +209,17 @@ export default function FlinkApply() {
       } else {
         setMessage({
           ok: false,
-          text: "这张头像取不到颜色（可能是黑白线稿，或对方不允许跨域读取像素）",
+          text: "这张头像取不到颜色（图片可能是全透明的）",
         });
       }
-    } catch {
-      // 图片加载失败/超时：不要让 Promise 泄漏成未捕获异常
+    } catch (e) {
+      // 失败时后端会给出具体中文原因（域名解析不了/不是图片/超时等），直接展示
       setMessage({
         ok: false,
-        text: "头像图片打不开，无法取色（可检查链接或稍后重试）",
+        text:
+          e instanceof Error && e.message
+            ? e.message
+            : "头像图片打不开，无法取色（可检查链接或稍后重试）",
       });
     } finally {
       setPicking(false);
@@ -311,7 +318,6 @@ export default function FlinkApply() {
           });
         }
         if (emailUsed) {
-          setQueryEmail(emailUsed);
           await queryStatus(emailUsed);
         }
       } else {
@@ -329,10 +335,17 @@ export default function FlinkApply() {
     }
   }
 
-  async function queryStatus(email = queryEmail) {
-    const target = email.trim();
-    if (!EMAIL_RE.test(target)) {
-      setQueryError("邮箱格式不正确");
+  async function queryStatus(value = queryInput) {
+    const target = value.trim();
+    if (!target) {
+      setQueryError("请先填写申请时的邮箱或站点名称");
+      setQueryResult(null);
+      return;
+    }
+    // 长得像邮箱就按邮箱查，否则当作站点名称
+    const byEmail = EMAIL_RE.test(target);
+    if (!byEmail && target.length > 50) {
+      setQueryError("站点名称过长");
       setQueryResult(null);
       return;
     }
@@ -340,17 +353,19 @@ export default function FlinkApply() {
     setQueryError("");
     try {
       const res = await fetch(
-        `${siteConfigs.backEndUrl}/flink/apply/status?email=${encodeURIComponent(target)}`,
+        `${siteConfigs.backEndUrl}/flink/apply/status?${byEmail ? "email" : "name"}=${encodeURIComponent(target)}`,
       );
       const data = await res.json().catch(() => null);
       if (res.ok) {
         setQueryResult(
           (data?.data ?? []).map((item: ApplyRecord) => ({
             ...item,
-            email: target,
+            // 只有邮箱查询时才带得上和服务端核对用的邮箱
+            email: byEmail ? target : undefined,
           })),
         );
-        setQueryEmail(target);
+        setQueryByEmail(byEmail);
+        setQueryInput(target);
       } else setQueryError("查询失败，请稍后再试");
     } catch {
       setQueryError("查询失败，请检查网络后重试");
@@ -412,7 +427,7 @@ export default function FlinkApply() {
 
   function startEdit(record: ApplyRecord) {
     setColorAuto(false); // 尊重已提交的配色
-    setEditing({ id: record.id, email: record.email || queryEmail });
+    setEditing({ id: record.id, email: record.email || queryInput });
     setMode(record.type === 1 ? 1 : 0);
     setForm({
       name: record.name || "",
@@ -420,7 +435,7 @@ export default function FlinkApply() {
       avatar: record.avatar || "",
       descr: record.descr || "",
       color: record.color || "#888888",
-      email: record.email || queryEmail,
+      email: record.email || queryInput,
     });
     if (record.type === 1) {
       const target = record.targetUrl || "";
@@ -444,14 +459,14 @@ export default function FlinkApply() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id: record.id,
-            email: record.email || queryEmail,
+            email: record.email || queryInput,
           }),
         },
       );
       const data = await res.json().catch(() => null);
       if (res.ok) {
         setMessage({ ok: true, text: "申请已撤销" });
-        await queryStatus(record.email || queryEmail);
+        await queryStatus(record.email || queryInput);
       } else {
         setMessage({
           ok: false,
@@ -792,10 +807,10 @@ export default function FlinkApply() {
         <h3>查询审核进度</h3>
         <div className="flink-apply-query-row">
           <input
-            type="email"
-            placeholder="填写申请时使用的邮箱"
-            value={queryEmail}
-            onChange={(e) => setQueryEmail(e.target.value)}
+            type="text"
+            placeholder="填写申请时使用的邮箱或站点名称"
+            value={queryInput}
+            onChange={(e) => setQueryInput(e.target.value)}
           />
           <button
             type="button"
@@ -860,35 +875,50 @@ export default function FlinkApply() {
                         <span>修改对象：{item.targetUrl}</span>
                       )}
                       <div className="flink-apply-record-actions">
-                        <button type="button" onClick={() => startEdit(item)}>
-                          <Icon icon="solar:pen-new-square-bold" />
-                          修改
-                        </button>
-                        {withdrawId === item.id ? (
+                        {/* 修改/撤销要和服务端核对申请时的邮箱，
+                            站名查询拿不到邮箱，只展示进度 */}
+                        {queryByEmail ? (
                           <>
                             <button
                               type="button"
-                              className="danger"
-                              onClick={() => doWithdraw(item)}
+                              onClick={() => startEdit(item)}
                             >
-                              确认撤销
+                              <Icon icon="solar:pen-new-square-bold" />
+                              修改
                             </button>
-                            <button
-                              type="button"
-                              onClick={() => setWithdrawId("")}
-                            >
-                              再想想
-                            </button>
+                            {withdrawId === item.id ? (
+                              <>
+                                <button
+                                  type="button"
+                                  className="danger"
+                                  onClick={() => doWithdraw(item)}
+                                >
+                                  确认撤销
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setWithdrawId("")}
+                                >
+                                  再想想
+                                </button>
+                              </>
+                            ) : (
+                              <button
+                                type="button"
+                                className="danger"
+                                onClick={() => setWithdrawId(item.id)}
+                              >
+                                <Icon icon="solar:trash-bin-trash-bold" />
+                                撤销申请
+                              </button>
+                            )}
                           </>
                         ) : (
-                          <button
-                            type="button"
-                            className="danger"
-                            onClick={() => setWithdrawId(item.id)}
-                          >
-                            <Icon icon="solar:trash-bin-trash-bold" />
-                            撤销申请
-                          </button>
+                          <span className="flink-apply-hint">
+                            {item.hasEmail === false
+                              ? "该申请提交时未填写邮箱，无法修改或撤销"
+                              : "如需修改或撤销，请用申请时的邮箱查询"}
+                          </span>
                         )}
                       </div>
                     </div>
@@ -903,7 +933,7 @@ export default function FlinkApply() {
               ))}
             </ul>
           ) : (
-            <div className="flink-apply-msg">该邮箱暂无申请记录</div>
+            <div className="flink-apply-msg">该邮箱或站点名暂无申请记录</div>
           ))}
       </div>
     </div>

@@ -161,7 +161,7 @@
 .flink-apply-field input[type="url"],
 .flink-apply-field input[type="email"],
 .flink-apply-field textarea,
-.flink-apply-query input[type="email"] {
+.flink-apply-query-row input {
   width: 100%;
   min-width: 0;
   /* box-sizing 已在顶部统一设置，避免 padding/border 撑出容器 */
@@ -739,7 +739,7 @@
   .flink-apply-field input[type="url"],
   .flink-apply-field input[type="email"],
   .flink-apply-field textarea,
-  .flink-apply-query input[type="email"],
+  .flink-apply-query-row input,
   .flink-apply-combo > input,
   .flink-apply-combo-list,
   .flink-apply-smart textarea {
