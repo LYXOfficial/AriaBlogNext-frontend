@@ -20,7 +20,9 @@ export default function Page() {
             <h1>哔哔</h1>
             <Speaks />
           </div>
-          <hr />
+          {/* 评论区必须紧跟 #post-maincontent：Pages.css 的宽度/虚线分隔靠相邻
+              兄弟选择器 (#post-maincontent.page + #post-comment-container) 生效，
+              中间插任何元素（比如 <hr>）都会让评论区变成全宽、和正文对不齐 */}
           <TwikooBaseComment />
         </div>
         <PageRightSide />
