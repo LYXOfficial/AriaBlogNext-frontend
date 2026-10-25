@@ -7,7 +7,9 @@ import "styles/HomeBanner.css";
 /** Distance kept between the navigation bar and the content top when snapped. */
 const CONTENT_GAP = 16;
 /** How long a snap animation takes, in milliseconds. */
-const SNAP_DURATION = 420;
+// 600ms：用户嫌 420ms 的上下翻太快（2026-10 调慢）；settle 纠偏的 340ms 是
+// 甩动绕过处理器时的一次性修正，保持不变
+const SNAP_DURATION = 600;
 const HOME_REGION_KEY = "aria:home-region";
 
 export default function HomeBanner({ children }: { children?: ReactNode }) {
