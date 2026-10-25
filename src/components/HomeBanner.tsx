@@ -258,7 +258,9 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
         // after it has stopped, even if that correction is interrupted.
         if (nativeBoundarySettled || position >= top - 1) return;
         nativeBoundarySettled = true;
-        animateTo(top, 340);
+        // 惯性一路带到顶部附近（Banner 已占视口 3/4 以上）时，顺势补齐到
+        // Banner 顶，不再"惩罚"反弹回正文顶；只有轻微越界的才拉回。
+        animateTo(position <= top * 0.25 ? 0 : top, 340);
         return;
       }
       // Legal stops: the banner top or anything inside the content.
@@ -272,8 +274,18 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       }
       // Follow the swipe direction: down enters the content, up returns to the
       // banner. A swipe never strands the page between the two blocks.
-      // 正文开始的同一轮滚轮惯性即使跨过边界，也只能补齐到正文顶。
-      animateTo(wheelFromContent ? top : scrollDirection < 0 ? 0 : top, 340);
+      // 正文开始的同一轮滚轮惯性即使跨过边界，也只能补齐到正文顶——
+      // 除非惯性已经把页面带到顶部附近（同上面的原生分支，不惩罚）。
+      animateTo(
+        position <= top * 0.25
+          ? 0
+          : wheelFromContent
+            ? top
+            : scrollDirection < 0
+              ? 0
+              : top,
+        340,
+      );
     };
 
     const onScroll = () => {
@@ -328,7 +340,10 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       const now = performance.now();
       const current = window.scrollY;
       // 以整轮输入而非吸附动画时长区分回程，不能把惯性尾段当成第二次操作。
-      if (now - lastWheelAt > 240 && !animating) {
+      // 轮次间隔 150ms：单次惯性（滚轮一格 / 触控板甩动）的事件间隔 <60ms，
+      // 人再操作的间隔通常 ≥200ms。原 240ms 会把落定后的下一次向上操作
+      // 误判进同一轮继续吞掉，表现为"滚到正文顶后卡手一下才能回 Banner"。
+      if (now - lastWheelAt > 150 && !animating) {
         wheelFromContent = current > top + 2;
       }
       lastWheelAt = now;
@@ -505,6 +520,26 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
         settle();
     };
 
+    // 底部小箭头：点击直接触发与下滚一致的吸附动画（滚轮处理器尾段的翻版）
+    const onHintClick = () => {
+      const top = contentTop();
+      if (top === null) return;
+      leaveManual();
+      cancelAnimation();
+      quietUntil = performance.now() + 320;
+      animateTo(top, SNAP_DURATION);
+    };
+    const scrollHint = banner.querySelector<HTMLElement>(".home-banner-scroll-hint");
+    scrollHint?.addEventListener("click", onHintClick);
+    // span 上 role=button 不会原生触发 click，键盘操作在这里补
+    const onHintKey = (event: KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onHintClick();
+      }
+    };
+    scrollHint?.addEventListener("keydown", onHintKey);
+
     document.addEventListener("scrollend", onScrollEnd);
     window.addEventListener("wheel", wheel, { passive: false, capture: true });
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -536,6 +571,8 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       root.style.scrollBehavior = previousScrollBehavior;
       root.removeAttribute("data-home-manual-scroll");
       document.removeEventListener("scrollend", onScrollEnd);
+      scrollHint?.removeEventListener("click", onHintClick);
+      scrollHint?.removeEventListener("keydown", onHintKey);
       window.removeEventListener("wheel", wheel, true);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointerdown", onPointerDown, true);
@@ -584,7 +621,17 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
         <div id="home-menu-buttons-slot" aria-hidden="true" />
       </div>
       <div className="home-banner-bottom">
-        <span className="home-banner-scroll-hint" aria-label="向下滚动查看文章">
+        {/* 点击直达正文：监听在组件 effect 里挂（.home-banner-scroll-hint）。
+            样式走 HomeBanner.css 原有的 .home-banner-scroll-hint 规则，只在
+            内联覆盖 pointer-events 让点击可命中——改 button/改样式文件都试过，
+            会把布局炸掉，别再动。 */}
+        <span
+          className="home-banner-scroll-hint"
+          aria-label="向下滚动查看文章"
+          role="button"
+          tabIndex={0}
+          style={{ pointerEvents: "auto", cursor: "pointer" }}
+        >
           <svg
             viewBox="0 0 24 24"
             width="24"

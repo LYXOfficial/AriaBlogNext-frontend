@@ -105,11 +105,6 @@
   outline: 2px solid var(--aria-theme);
   outline-offset: 2px;
 }
-@media screen and (max-width: 680px) {
-  #posts-categories-bar {
-    padding: 8px;
-  }
-}
 
 .post-categories-bar-icon-link > svg {
   margin: auto;

@@ -30,6 +30,7 @@ export default function MenuButtons({
     let frame = 0;
     let flight: Animation | null = null;
     let previousMode: boolean | null = null;
+    let prevScrollY = window.scrollY;
     let disposed = false;
     let bannerSlot: HTMLElement | null = null;
     let dock: HTMLElement | null = null;
@@ -68,11 +69,23 @@ export default function MenuButtons({
       }
       // 留一点回程余量，滚动边界附近不会反复起飞；不写入任何滚动位置。
       // 手机只切换位置，不飞行；不缓存会随导航移动的视口坐标。
+      // 上行用方向感知的快速阈值（视口高的 70%，随窗口高度自适应）：吸附动画
+      // 一开始 scrollY 就落入区间，按钮几乎与动画同时起飞；下行/停留用固定值
+      // （560/480 迟滞带，下行在下滑动画 ~23% 触发）。副作用：手动拖滚动条在
+      // 480~0.7*视口高 之间反复横跳时模式会跟着翻，但那段位置 HomeBanner 的
+      // 吸附本来就不允许停留，可接受。
+      const goingUp = window.scrollY < prevScrollY;
+      prevScrollY = window.scrollY;
       const inBanner =
         !!bannerRect &&
         (mobile
           ? bannerBottom - window.scrollY > dockRect!.bottom + 16
-          : window.scrollY < (previousMode === true ? 100 : 40));
+          : window.scrollY <
+            (previousMode === true
+              ? 560
+              : goingUp
+                ? bannerBottom * 0.7
+                : 480));
       const changed = previousMode !== inBanner;
       const before =
         changed && previousMode !== null && !mobile && !reduced.matches
@@ -111,7 +124,7 @@ export default function MenuButtons({
               },
               { transform: "translate(0, 0) scale(1, 1)" },
             ],
-            { duration: 420, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
+            { duration: 520, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
           );
         }
       }
