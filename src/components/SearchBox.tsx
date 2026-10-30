@@ -34,9 +34,17 @@ export default function SearchBox({
             new RegExp(escapeRegExp(query), "gi"),
             (q) => `<span class="search-box-result-highlight">${q}</span>`,
           );
+        const semanticCount = data.filter(
+          (post) => post.matchType === "semantic",
+        ).length;
         setResults(
           <div id="search-box-results">
             共找到{data.length}篇文章
+            {semanticCount > 0 && (
+              <div className="search-box-semantic-hint">
+                其中 {semanticCount} 篇由语义匹配召回（标题/摘要里不一定包含搜索词）
+              </div>
+            )}
             {data.map((post: SemanticHit) => {
               return (
                 <div className="search-box-result card-widget" key={post.slug}>
@@ -57,10 +65,24 @@ export default function SearchBox({
                       __html: highlight(post.context ?? ""),
                     }}
                   />
-                  <span className="search-box-result-time">
-                    <Icon icon="solar:calendar-bold" />
-                    {dayjs.unix(post.publishTime).format("YYYY-MM-DD")}
-                  </span>
+                  <div className="search-box-result-foot">
+                    {post.matchType !== "exact" && (
+                      <span
+                        className={`search-box-result-match ${post.matchType}`}
+                        title={
+                          post.matchType === "semantic"
+                            ? "由内容语义召回，标题/摘要里不一定包含搜索词"
+                            : "关键词的模糊/别名匹配"
+                        }
+                      >
+                        {post.matchType === "semantic" ? "语义" : "模糊"}
+                      </span>
+                    )}
+                    <span className="search-box-result-time">
+                      <Icon icon="solar:calendar-bold" />
+                      {dayjs.unix(post.publishTime).format("YYYY-MM-DD")}
+                    </span>
+                  </div>
                 </div>
               );
             })}
