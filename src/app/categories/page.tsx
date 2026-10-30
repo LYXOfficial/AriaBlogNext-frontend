@@ -3,17 +3,15 @@ import "styles/PostContent.css";
 import "styles/Archives.css";
 
 import { HomeRightSide } from "@/components/RightSide";
-import { siteConfigs } from "@/config";
+import { fetchCategories } from "@/utils/api";
 import { Category } from "@/interfaces/category";
 import CollectionHeader from "@/components/CollectionHeader";
 import TagIndex from "@/components/TagIndex";
 export default async function Page() {
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
+  const res = await fetchCategories();
   let data: Category[] = [];
   if (res.ok) {
-    data = (await res.json()).data ?? [];
+    data = res.data ?? [];
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
   }
   return (

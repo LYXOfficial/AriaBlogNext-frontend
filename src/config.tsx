@@ -34,7 +34,7 @@ export const siteConfigs: SiteConfig = {
   pageMaxPosts: 16,
   falldownAvatar: "https://img.0v0.my/2024/09/06/66dabf7f748c8.jpg",
   falldownImg: "https://img.0v0.my/2024/08/31/66d30329375a5.webp",
-  backEndUrl: "https://blognext-end.yaria.top",
+  backEndUrl: "https://neoend.yaria.top",
   fcircleUrl: "https://fcircle.yaria.top",
   socials: [
     {

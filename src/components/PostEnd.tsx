@@ -1,5 +1,6 @@
 import { Post } from "interfaces/post";
 import { siteConfigs } from "config";
+import { fetchPostNavigation } from "utils/api";
 import dayjs from "dayjs";
 import "styles/PostEnd.css";
 import ShareJs from "components/thirdpartyjs/ShareJs";
@@ -9,16 +10,15 @@ import ImageWithFalldown from "components/ImageWithFalldown";
 import React from "react";
 
 export default async function PostEnd({ postInfo }: { postInfo: Post }) {
-  const res = await fetch(
-    `${siteConfigs.backEndUrl}/get/post/postNavigation?slug=${postInfo.slug}`,
-    { next: { revalidate: 7200, tags: ["posts"] } },
-  );
-  let previousPost: Post = {},
-    nextPost: Post = {};
-  if (res.ok) {
-    const postNavigation = await res.json();
-    previousPost = postNavigation.previous;
-    nextPost = postNavigation.next;
+  const res = await fetchPostNavigation(postInfo.slug ?? "");
+  // 边界文章没有上一篇/下一篇，必须保持 null——写成 {} 会让下面的
+  // `previousPost ?` 恒为真，渲染出 /posts/undefined 和 Invalid Date。
+  let previousPost: Post | null = null,
+    nextPost: Post | null = null;
+  if (res.ok && res.data) {
+    // 新接口的 newer/older 语义正确（旧接口的 previous/next 名实相反）
+    previousPost = res.data.newer ?? null;
+    nextPost = res.data.older ?? null;
   }
   return (
     <>

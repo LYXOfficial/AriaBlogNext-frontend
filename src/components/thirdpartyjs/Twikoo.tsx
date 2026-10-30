@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // CSS import is no longer needed.
 import "styles/Twikoo.css";
 import { siteConfigs } from "config";
+import { fetchPostSlugs } from "utils/api";
 import { Icon } from "@iconify/react";
 import "styles/owoBig.css";
 
@@ -328,12 +329,10 @@ export function TwikooCountHome() {
           .catch((error: unknown) => console.warn("评论计数获取失败", error));
       });
 
-      const rest = await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`, {
-        next: { tags: ["posts"] },
-      });
+      const rest = await fetchPostSlugs();
       const pages = ["/messageboard", "/speaks", "/about", "/links"];
       if (rest.ok) {
-        const postSlugs = (await rest.json()).data as string[];
+        const postSlugs = rest.data ?? [];
         tk.getCommentsCount({
           envId: siteConfigs.twikooEnv,
           // 服务端会归一化尾斜杠，总数也只能对每个页面计数一次。

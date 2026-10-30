@@ -4,7 +4,7 @@ import "styles/Archives.css";
 
 import { HomeRightSide } from "@/components/RightSide";
 import { ReactElement } from "react";
-import { siteConfigs } from "@/config";
+import { fetchArchives, fetchPostsByMonth } from "@/utils/api";
 import { ArchiveListItem } from "@/interfaces/asidelistitem";
 import { Post } from "@/interfaces/post";
 import Link from "next/link";
@@ -13,20 +13,15 @@ import CollectionHeader from "@/components/CollectionHeader";
 export default async function Page() {
   const ArchiveContent: ReactElement[] = [];
   let total = 0;
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
+  const res = await fetchArchives();
   if (res.ok) {
     let Archives = new Map<number, Post[]>();
-    const data: ArchiveListItem[] = (await res.json()).data ?? [];
+    const data: ArchiveListItem[] = res.data ?? [];
     await Promise.all(
       data.map(async (item: ArchiveListItem) => {
-        const res = await fetch(
-          `${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,
-          { next: { revalidate: 7200, tags: ["posts"] } },
-        );
+        const res = await fetchPostsByMonth(item.year, item.month);
         if (res.ok) {
-          const posts: Post[] = (await res.json()).data ?? [];
+          const posts: Post[] = res.data ?? [];
           Archives.set(item.year, [
             ...(Archives.get(item.year) ?? []),
             ...posts,

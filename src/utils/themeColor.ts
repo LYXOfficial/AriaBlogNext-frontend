@@ -1,11 +1,11 @@
 /**
  * 友链头像主题色。
- * 提取在服务端完成（GET /get/flink/themeColor，分桶算法与权重和原来逐行
+ * 提取在服务端完成（GET /links/theme-color，分桶算法与权重和原来逐行
  * 一致，见后端 get/flink/main.py）：原先是纯前端 canvas 读像素，要求图床
  * 返回 CORS 头，QQ 头像（qlogo.cn）等国内常用源不带，浏览器里必然加载失败。
  * ensureCardColor 的对比度调节仍留在前端，逻辑不变。
  */
-import { siteConfigs } from "@/config";
+import { fetchThemeColor } from "@/utils/api";
 
 interface Hsl {
   h: number; // 0-360
@@ -62,24 +62,8 @@ export function toHex([r, g, b]: [number, number, number]): string {
 export async function extractThemeColorFromImage(url: string): Promise<string> {
   const trimmed = (url || "").trim();
   if (!/^https?:\/\//i.test(trimmed)) return "";
-  let res: Response;
-  try {
-    res = await fetch(
-      `${siteConfigs.backEndUrl}/get/flink/themeColor?url=${encodeURIComponent(trimmed)}`,
-    );
-  } catch {
-    // 网络层失败（断网/后端不可达）：浏览器给的是英文 TypeError，别透传
-    throw new Error("取色服务暂时不可用，请稍后再试");
-  }
-  const data = await res.json().catch(() => null);
-  if (!res.ok) {
-    // 后端 detail.error 是面向用户的中文（域名解析不了/不是图片/超时等）；
-    // 其余情况（网关 404、平台错误页）统一走兜底文案，不外泄内部信息
-    const detail = data?.detail;
-    const msg = typeof detail === "object" && detail !== null ? detail.error : "";
-    throw new Error(msg || "取色服务暂时不可用，请稍后再试");
-  }
-  return typeof data?.data === "string" ? data.data : "";
+  // 网络请求与错误文案统一收在 api 层，这里只管颜色算法
+  return fetchThemeColor(trimmed);
 }
 
 /* ---------- 卡片底色可读性 ---------- */

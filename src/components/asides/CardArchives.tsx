@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { ArchiveListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
+import { fetchArchives } from "utils/api";
 
 const monthToHanzi = [
   "",
@@ -22,10 +23,8 @@ const monthToHanzi = [
 ];
 export default async function ASideList() {
   let items: ArchiveListItem[] = [];
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
-  if (res.ok) items = (await res.json()).data.slice(0, 8);
+  const res = await fetchArchives();
+  if (res.ok) items = (res.data ?? []).slice(0, 8);
   return (
     <div className="card-widget card-aside card-archives">
       <div className="card-headline">

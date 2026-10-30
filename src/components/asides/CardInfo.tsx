@@ -3,33 +3,21 @@ import "styles/ASide/global.css";
 import "styles/ASide/Info.css";
 import { Social } from "interfaces/siteconfig";
 import { siteConfigs } from "config";
+import { fetchPostCount, fetchTagCount, fetchCategoryCount } from "utils/api";
 
 export default async function CardInfo() {
   let postCount: number = 0,
     tagCount: number = 0,
     categoryCount: number = 0;
-  const resp = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
-  if (resp.ok) {
-    const pi = await resp.json();
-    postCount = pi.count;
-  }
-  const rest = await fetch(`${siteConfigs.backEndUrl}/get/tag/tagCount`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
-  if (rest.ok) {
-    const ti = await rest.json();
-    tagCount = ti.count;
-  }
-  const resc = await fetch(
-    `${siteConfigs.backEndUrl}/get/category/categoryCount`,
-    { next: { revalidate: 7200, tags: ["posts"] } },
-  );
-  if (resc.ok) {
-    const ti = await resc.json();
-    categoryCount = ti.count;
-  }
+  // 三个 count 互不依赖，并发发出；串行会让侧栏多等 2 个 Atlas 往返
+  const [resp, rest, resc] = await Promise.all([
+    fetchPostCount(),
+    fetchTagCount(),
+    fetchCategoryCount(),
+  ]);
+  if (resp.ok) postCount = resp.data;
+  if (rest.ok) tagCount = rest.data;
+  if (resc.ok) categoryCount = resc.data;
   return (
     <div className="card-widget card-aside card-info">
       <div className="card-info-avatar">

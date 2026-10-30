@@ -5,14 +5,12 @@ import dayjs from "dayjs";
 import { Post } from "interfaces/post";
 import { ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
+import { fetchNewestPosts } from "utils/api";
 
 export default async function CardNewestPosts() {
   let posts: Post[] = [];
-  const resp = await fetch(
-    `${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${0}&endl=${6}`,
-    { next: { revalidate: 7200, tags: ["posts"] } },
-  );
-  if (resp.ok) posts = (await resp.json()).data;
+  const resp = await fetchNewestPosts(6);
+  if (resp.ok) posts = resp.data ?? [];
   return (
     <div className="card-widget card-aside card-latest-posts">
       <div className="card-headline">

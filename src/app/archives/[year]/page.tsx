@@ -1,10 +1,23 @@
+// 页面级 ISR：写操作由后端 Webhook 立即 revalidateTag，600s 只是兜底。
+export const revalidate = 600;
+
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import "styles/Archives.css";
 
 import { HomeRightSide } from "@/components/RightSide";
 import { ReactElement } from "react";
-import { siteConfigs } from "@/config";
+import { fetchArchives, fetchPostsByMonth } from "@/utils/api";
+
+export async function generateStaticParams() {
+  try {
+    const res = await fetchArchives();
+    if (!res.ok) return [];
+    return [...new Set(res.data.map((b) => b.year))].map((year) => ({ year: String(year) }));
+  } catch {
+    return [];
+  }
+}
 import { ArchiveListItem } from "@/interfaces/asidelistitem";
 import { Post } from "@/interfaces/post";
 import Link from "next/link";
@@ -18,22 +31,17 @@ export default async function Page({
   const { year } = await params;
   const yearNum = Number(year);
   const ArchiveContent: ReactElement[] = [];
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/archive/archives`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
+  const res = await fetchArchives();
   if (res.ok) {
     let Archives = new Map<number, Post[]>();
-    const data: ArchiveListItem[] = (await res.json()).data ?? [];
+    const data: ArchiveListItem[] = res.data ?? [];
     let cnt = 0;
     await Promise.all(
       data.map(async (item: ArchiveListItem) => {
         if (item.year === yearNum) {
-          const res = await fetch(
-            `${siteConfigs.backEndUrl}/get/archive/archiveInfo?year=${item.year}&month=${item.month}`,
-            { next: { revalidate: 7200, tags: ["posts"] } },
-          );
+          const res = await fetchPostsByMonth(item.year, item.month);
           if (res.ok) {
-            const posts: Post[] = (await res.json()).data ?? [];
+            const posts: Post[] = res.data ?? [];
             Archives.set(item.year, [
               ...(Archives.get(item.year) ?? []),
               ...posts,

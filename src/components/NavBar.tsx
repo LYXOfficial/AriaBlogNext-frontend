@@ -4,6 +4,7 @@ import "styles/NavBar.css";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { MenuItems, siteConfigs } from "config";
+import { fetchPostSlugs } from "utils/api";
 import { useRouter } from "nextjs-toploader/app";
 import throttle from "lodash/throttle";
 import { usePathname } from "next/navigation";
@@ -63,12 +64,13 @@ export default function NavBar() {
   }, 100);
   useEffect(() => {
     (window as any).toRandomPost = async () => {
-      const res = await fetch(`${siteConfigs.backEndUrl}/get/post/postSlugs`, {
-        next: { revalidate: 7200, tags: ["posts"] },
-      });
+      const res = await fetchPostSlugs();
       if (res.ok) {
-        const posts: string[] = (await res.json()).data;
-        const randomIndex: number = Math.round(Math.random() * posts.length);
+        const posts: string[] = res.data ?? [];
+        // Math.round(random * length) 会取到 length（越界）→ /posts/undefined；
+        // 空列表也直接跳过，别把随机跳转变成 404
+        if (posts.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * posts.length);
         router.push(`/posts/${posts[randomIndex]}`);
       }
     };

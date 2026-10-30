@@ -1,6 +1,6 @@
 import "styles/FriendLinks.css";
 import { FriendLinkGroup } from "interfaces/friendlink";
-import { siteConfigs } from "@/config";
+import { fetchFlinkGroups } from "@/utils/api";
 import React from "react";
 import { FriendLinkItem } from "./FriendLinkItem";
 
@@ -23,11 +23,9 @@ export function FriendLinkGroupItem({ group }: { group: FriendLinkGroup }) {
 
 export default async function FriendLinks() {
   let flinks: FriendLinkGroup[] = [];
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/flink/flinks`, {
-    next: { revalidate: 7200, tags: ["flinks"] },
-  });
+  const res = await fetchFlinkGroups();
   if (res.ok) {
-    flinks = (await res.json()).data;
+    flinks = res.data ?? [];
   }
   return (
     <>

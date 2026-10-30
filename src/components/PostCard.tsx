@@ -4,6 +4,7 @@ import "styles/PostCard.css";
 import Link from "next/link";
 import { Post } from "interfaces/post";
 import { siteConfigs } from "config";
+import { fetchPostCount, fetchPostsWindow, fetchCategories } from "utils/api";
 import { notFound } from "next/navigation";
 import { TwikooCountHome } from "components/thirdpartyjs/Twikoo";
 import PostCategoryBar from "components/PostCategoryBar";
@@ -14,39 +15,33 @@ import PostCardParallax from "./PostCardParallax";
 
 export default async function Posts({ page }: { page: number }) {
   if (page < 1) return notFound();
-  const resm = await fetch(`${siteConfigs.backEndUrl}/get/post/postCount`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
-  if (!resm.ok) return notFound();
-  const postTotal = (await resm.json()).count;
-  const maxPage =
-    Math.ceil(
-      Math.max(postTotal - siteConfigs.homeMaxPosts, 0) /
-        siteConfigs.pageMaxPosts,
-    ) + 1;
-  if (page > maxPage) return notFound();
   const offset = siteConfigs.homeMaxPosts - siteConfigs.pageMaxPosts;
   const startl =
     page === 1
       ? 0
       : Math.max((page - 1) * siteConfigs.pageMaxPosts + offset, 0);
   const endl = Math.max(page * siteConfigs.pageMaxPosts + offset, 0);
-  const resp = await fetch(
-    `${siteConfigs.backEndUrl}/get/post/postsInfo?startl=${startl}&endl=${endl}`,
-    { next: { revalidate: 7200, tags: ["posts"] } },
-  );
+
+  // 计数、窗口、分类互不依赖，一次并发发出。分类走默认缓存（tags: posts）：
+  // 分类来自文章，dashboard 任何文章写入都会 refreshCache/posts 立即作废它，
+  // 没必要每次渲染都打一次后端。
+  const [resm, resp, catRes] = await Promise.all([
+    fetchPostCount(),
+    fetchPostsWindow(startl, endl),
+    fetchCategories().catch(() => null),
+  ]);
+  if (!resm.ok) return notFound();
+  const postTotal = resm.data;
+  const maxPage =
+    Math.ceil(
+      Math.max(postTotal - siteConfigs.homeMaxPosts, 0) /
+        siteConfigs.pageMaxPosts,
+    ) + 1;
+  if (page > maxPage) return notFound();
   if (!resp.ok) return notFound();
-  const posts: Post[] = (await resp.json()).data ?? [];
+  const posts: Post[] = resp.data ?? [];
   // 分类栏只是装饰，接口失败时降级为空，避免整页崩溃
-  let data: Category[] = [];
-  try {
-    const res = await fetch(
-      `${siteConfigs.backEndUrl}/get/category/categories`,
-    );
-    if (res.ok) data = (await res.json()).data ?? [];
-  } catch {
-    data = [];
-  }
+  const data: Category[] = catRes?.ok ? catRes.data ?? [] : [];
   // 首尾页固定保留；较短的缺口直接补齐，避免出现只省略一页的跳跃。
   const visiblePages = new Set([1, maxPage, page - 1, page, page + 1]);
   if (page <= 3) [2, 3, 4].forEach((n) => visiblePages.add(n));

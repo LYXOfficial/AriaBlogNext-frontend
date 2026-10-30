@@ -5,14 +5,12 @@ import dayjs from "dayjs";
 import { Post } from "interfaces/post";
 import { ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
+import { fetchRelatedPosts } from "utils/api";
 
 export default async function CardRelatedPosts({ slug }: { slug: string }) {
   let posts: Post[] = [];
-  const res = await fetch(
-    `${siteConfigs.backEndUrl}/get/post/relatedPosts?slug=${slug}`,
-    { next: { revalidate: 7200, tags: ["posts"] } },
-  );
-  if (res.ok) posts = (await res.json()).data;
+  const res = await fetchRelatedPosts(slug);
+  if (res.ok) posts = res.data ?? [];
   if (posts.length == 0) return <></>;
   return (
     <div className="card-widget card-aside card-latest-posts">

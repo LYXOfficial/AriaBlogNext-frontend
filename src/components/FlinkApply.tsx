@@ -10,6 +10,11 @@ import {
 } from "@/utils/flinkForm";
 import { parseFlinkText } from "@/utils/flinkParse";
 import {
+  fetchFlinkGroups,
+  submitFlinkApplication,
+  queryApplicationStatus,
+} from "@/utils/api";
+import {
   ensureCardColor,
   extractThemeColorFromImage,
 } from "@/utils/themeColor";
@@ -118,11 +123,10 @@ export default function FlinkApply() {
     let alive = true;
     (async () => {
       try {
-        const res = await fetch(`${siteConfigs.backEndUrl}/get/flink/flinks`);
-        const data = await res.json().catch(() => null);
+        const res = await fetchFlinkGroups({ revalidate: 0 });
         if (!alive) return;
         const list: ExistingLink[] = [];
-        for (const group of data?.data ?? []) {
+        for (const group of (res.ok ? res.data : []) ?? []) {
           for (const link of group?.links ?? []) {
             if (!link?.url) continue;
             list.push({
@@ -266,17 +270,12 @@ export default function FlinkApply() {
         type: mode,
         targetUrl: mode === 1 ? targetUrl : "",
       };
-      const res = await fetch(`${siteConfigs.backEndUrl}/flink/apply`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json().catch(() => null);
+      const res = await submitFlinkApplication(payload);
       if (res.ok) {
         const emailUsed = form.email.trim();
         // 提交成功后保留已填内容，方便继续修改或再次提交
         const kind = mode === 1 ? "修改申请" : "申请";
-        const mailSent = data?.mailSent === true;
+        const mailSent = res.data?.mailSent === true;
         setMessage({
           ok: true,
           text: !emailUsed
@@ -289,12 +288,8 @@ export default function FlinkApply() {
           await queryStatus(emailUsed);
         }
       } else {
-        const detail = data?.detail;
-        const text =
-          (typeof detail === "object" && detail?.error) ||
-          (typeof detail === "string" && detail) ||
-          `提交失败（HTTP ${res.status}）`;
-        setMessage({ ok: false, text });
+        // API 层已经把信封里的中文错误信息取好了
+        setMessage({ ok: false, text: res.message });
       }
     } catch {
       setMessage({ ok: false, text: "提交失败，请检查网络后重试" });
@@ -320,12 +315,9 @@ export default function FlinkApply() {
     setQuerying(true);
     setQueryError("");
     try {
-      const res = await fetch(
-        `${siteConfigs.backEndUrl}/flink/apply/status?${byEmail ? "email" : "name"}=${encodeURIComponent(target)}`,
-      );
-      const data = await res.json().catch(() => null);
+      const res = await queryApplicationStatus<ApplyRecord>(byEmail ? { email: target } : { name: target });
       if (res.ok) {
-        setQueryResult(data?.data ?? []);
+        setQueryResult(res.data ?? []);
         setQueryInput(target);
       } else setQueryError("查询失败，请稍后再试");
     } catch {

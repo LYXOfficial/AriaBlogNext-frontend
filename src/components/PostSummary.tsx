@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { siteConfigs } from "@/config";
+import { fetchPostSummary } from "@/utils/api";
 import "styles/PostSummary.css";
 import pangu from "pangu";
 import { Icon } from "@iconify/react";
@@ -32,20 +32,15 @@ export default function PostSummary({ slug }: { slug: string }) {
 
   // 获取摘要（后端有缓存；首次访问时才真正生成）
   const fetchSummary = async () => {
-    const res = await fetch(
-      `${siteConfigs.backEndUrl}/get/post/postSummary?slug=${slug}`,
-    );
-
+    const res = await fetchPostSummary(slug);
     if (!res.ok) {
-      // 如果是 429 错误，继续使用当前摘要
+      // 限流时继续使用当前摘要，其它失败给提示文案
       if (res.status === 429) {
         return summary;
       }
       return "摘要加载失败了QwQ";
     }
-
-    const data = await res.json();
-    return pangu.spacing(data.data);
+    return pangu.spacing(res.data?.summary ?? "");
   };
 
   // 初始加载摘要

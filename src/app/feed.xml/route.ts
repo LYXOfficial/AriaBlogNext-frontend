@@ -2,6 +2,7 @@ export const revalidate = 3600;
 
 import RSS from "rss";
 import { siteConfigs } from "@/config";
+import { fetchAllPostsWithContent } from "@/utils/api";
 import { Post } from "interfaces/post";
 import { cache } from "react";
 
@@ -18,16 +19,13 @@ export async function GET() {
     site_url: siteConfigs.siteUrl,
     feed_url: `${siteConfigs.siteUrl}/feed.xml`,
     language: "zh-CN",
-    image_url: "https://img.0v0.my/2024/10/28/671f8bf00317e.jpg",
+    image_url: "https://img.0v0.my/2026/10/18/4f48898860046.webp",
     generator: "AriaBlogNext Next.js",
     copyright: "CC BY-NC-SA 4.0",
   });
-  const res = await fetch(
-    `${siteConfigs.backEndUrl}/get/post/postsInfo?type=full`,
-    { next: { revalidate: 3600, tags: ["posts"] } },
-  );
+  const res = await fetchAllPostsWithContent();
   if (res.ok) {
-    const data: Post[] = (await res.json()).data ?? [];
+    const data: Post[] = res.data ?? [];
     for (const post of data) {
       const renderedHTML = cache(renderer)(post.mdContent!);
       feed.item({

@@ -1,10 +1,23 @@
+// 页面级 ISR：写操作由后端 Webhook 立即 revalidateTag，600s 只是兜底。
+export const revalidate = 600;
+
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import "styles/Archives.css";
 
 import { HomeRightSide } from "@/components/RightSide";
 import { ReactElement } from "react";
-import { siteConfigs } from "@/config";
+import { fetchCategories, fetchPostsByCategory } from "@/utils/api";
+
+export async function generateStaticParams() {
+  try {
+    const res = await fetchCategories();
+    if (!res.ok) return [];
+    return res.data.map((c) => ({ category: c.name }));
+  } catch {
+    return [];
+  }
+}
 import { Category } from "@/interfaces/category";
 import { Post } from "@/interfaces/post";
 import Link from "next/link";
@@ -22,23 +35,18 @@ export default async function Page({
   const decodedCategory = decodeURI(category);
   let ArchiveContent: ReactElement[] = [],
     flag = false;
-  const res = await fetch(`${siteConfigs.backEndUrl}/get/category/categories`, {
-    next: { revalidate: 7200, tags: ["posts"] },
-  });
+  const res = await fetchCategories();
   let data: Category[] = [];
   if (res.ok) {
     const Archives = new Map<string, Post[]>();
-    data = (await res.json()).data ?? [];
+    data = res.data ?? [];
     data.sort((a, b) => a.name.localeCompare(b.name, "zh-cn"));
     await Promise.all(
       data.map(async (item: Category) => {
         if (decodedCategory == item.name) {
-          const res = await fetch(
-            `${siteConfigs.backEndUrl}/get/category/categoryInfo?category=${item.name}`,
-            { next: { revalidate: 7200, tags: ["posts"] } },
-          );
+          const res = await fetchPostsByCategory(item.name);
           if (res.ok) {
-            const posts: Post[] = (await res.json()).data ?? [];
+            const posts: Post[] = res.data ?? [];
             Archives.set(item.name, [
               ...(Archives.get(item.name) ?? []),
               ...posts,

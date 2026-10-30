@@ -1,6 +1,6 @@
 "use client";
 import { BB } from "interfaces/bb";
-import { siteConfigs } from "@/config";
+import { fetchSpeaks } from "@/utils/api";
 import relativeTime from "@/utils/reltime";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import "styles/BB.css";
@@ -41,12 +41,9 @@ export function Speaks() {
   useEffect(() => {
     (async () => {
       import("wc-waterfall");
-      const res = await fetch(
-        `${siteConfigs.backEndUrl}/get/speaks/speaks?endl=40`,
-        { next: { revalidate: 7200, tags: ["speaks"] } },
-      );
+      const res = await fetchSpeaks(40);
       if (res.ok) {
-        const speaksContent: BB[] = (await res.json()).data;
+        const speaksContent: BB[] = res.data ?? [];
         setSpeakContent(
           speaksContent.map((item, index) => {
             return (

@@ -2,11 +2,15 @@
 import { Icon } from "@iconify/react";
 import "styles/SearchBox.css";
 import { useState, useRef, ReactElement } from "react";
-import { siteConfigs } from "@/config";
-import { Post } from "@/interfaces/post";
+import { searchPosts, SemanticHit } from "@/utils/api";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
+
+/** 把用户输入当字面量匹配（高亮用），避免 c++ / .* 这类输入构造出非法正则 */
+function escapeRegExp(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 export default function SearchBox({
   show,
@@ -21,16 +25,19 @@ export default function SearchBox({
     const query = inputRef.current?.value.trim();
     if (query) {
       setResults(<div id="search-box-results">搜索中...</div>);
-      const res = await fetch(
-        `${siteConfigs.backEndUrl}/get/post/searchPosts?query=${query}`,
-        { next: { revalidate: 7200, tags: ["posts"] } },
-      );
+      const res = await searchPosts(query);
       if (res.ok) {
-        const data: Post[] = (await res.json()).data;
+        const data: SemanticHit[] = res.data ?? [];
+        // 搜索词是用户输入，可能含正则元字符（c++、.*），必须转义后再高亮
+        const highlight = (text: string) =>
+          text.replace(
+            new RegExp(escapeRegExp(query), "gi"),
+            (q) => `<span class="search-box-result-highlight">${q}</span>`,
+          );
         setResults(
           <div id="search-box-results">
             共找到{data.length}篇文章
-            {data.map((post: Post) => {
+            {data.map((post: SemanticHit) => {
               return (
                 <div className="search-box-result card-widget" key={post.slug}>
                   <Link
@@ -40,26 +47,19 @@ export default function SearchBox({
                       closeFunction();
                     }}
                     dangerouslySetInnerHTML={{
-                      __html: post.title!.replace(
-                        new RegExp(`${query}`, "gi"),
-                        (q) =>
-                          `<span class="search-box-result-highlight">${q}</span>`,
-                      ),
+                      __html: highlight(post.title ?? ""),
                     }}
                   />
                   <div
                     className="search-box-result-context"
                     dangerouslySetInnerHTML={{
-                      __html: post.context!.replace(
-                        new RegExp(`${query}`, "gi"),
-                        (q) =>
-                          `<span class="search-box-result-highlight">${q}</span>`,
-                      ),
+                      // 语义命中也可能没有片段（例如只命中标题），别对 null 调 replace
+                      __html: highlight(post.context ?? ""),
                     }}
                   />
                   <span className="search-box-result-time">
                     <Icon icon="solar:calendar-bold" />
-                    {dayjs.unix(post.publishTime!).format("YYYY-MM-DD")}
+                    {dayjs.unix(post.publishTime).format("YYYY-MM-DD")}
                   </span>
                 </div>
               );
@@ -67,7 +67,8 @@ export default function SearchBox({
           </div>,
         );
       } else {
-        setResults(<div id="search-box-results">搜索失败</div>);
+        // 后端 message 是面向用户的中文（关键词超长、限流等），比「搜索失败」有用
+        setResults(<div id="search-box-results">{res.message}</div>);
       }
     }
   };
