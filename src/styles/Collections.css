@@ -72,27 +72,8 @@
   border-color: var(--aria-theme);
   background: color-mix(in srgb, var(--aria-theme) 7%, transparent);
 }
-#post-maincontent .archive-year-title {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-sizing: border-box;
-  margin: 24px 5px 12px;
-  padding: 0;
-  font-weight: 500;
-  font-size: 25px;
-}
-#post-maincontent .archive-year-title::before {
-  content: none;
-}
-#post-maincontent .archive-year-title:hover {
-  transform: none;
-}
-.archive-year-count {
-  color: var(--aria-light-fontcolor);
-  font-size: 13px;
-  font-weight: 400;
-}
+/* 年份标题（含 .archive-year-count）的样式在 Archives.css：那里做成沉降水印，
+   归档 / 标签 / 分类详情页共用同一份，别再在这里写回普通小标题。 */
 #post-maincontent .flink-group-heading {
   display: flex;
   align-items: center;

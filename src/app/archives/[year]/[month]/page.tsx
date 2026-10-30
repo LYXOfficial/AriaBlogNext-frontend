@@ -66,8 +66,10 @@ export default async function Page({
       ArchiveContent.push(
         <div key={key} className="archive-year">
           <h2 className="archive-year-title">
-            <Link href={`/archives/${key}`}>{key}</Link> -{" "}
-            <Link href={`/archives/${key}/${month}`}>{month}</Link>
+            <Link href={`/archives/${key}`}>{key}</Link>
+            <span className="archive-year-month">
+              <Link href={`/archives/${key}/${month}`}>{month} 月</Link>
+            </span>
           </h2>
           {value.map((post) => (
             <ArchiveItem key={post.slug} post={post} type="archives" />

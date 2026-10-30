@@ -22,13 +22,190 @@
   }
 }
 
-.archive-year-title {
-  width: 100%;
+/* 时间轴：线画在容器上贯穿整页（每组各画一段会在组间断开），
+   每年一个节点，卡片挂在导轨右侧。 */
+#archives-container {
+  position: relative;
+}
+
+#archives-container:has(> .archive-year > .archive-year-title)::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  /* 从第一个节点中心起（实测标题中心在容器顶下方 20px），到最后一张卡片下方收尾 */
+  top: 20px;
+  bottom: 10px;
+  width: 1px;
+  background: color-mix(in srgb, var(--aria-fontcolor) 18%, transparent);
+  pointer-events: none;
+}
+
+/* 线的终点：一个小圆点收尾，不然线就是凭空断掉的 */
+#archives-container:has(> .archive-year > .archive-year-title)::after {
+  content: "";
+  position: absolute;
+  left: 12.5px;
+  bottom: 7px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--aria-fontcolor) 24%, transparent);
+  pointer-events: none;
 }
 
 .archive-year {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
+}
+
+/* 只有带年份标题的分组才缩进、留组间距；标签 / 分类详情页没有标题，保持原样 */
+.archive-year:has(> .archive-year-title) {
+  margin-top: 26px;
+  padding-left: 38px;
+}
+
+.archive-year:first-child:has(> .archive-year-title) {
+  margin-top: 14px;
+}
+
+#post-maincontent .archive-year-title {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 12px;
+  /* 卡片宽 50%-55px + 左右 5px 外边距，一行两块会剩 6px；
+     这里补上 6+5，篇数才和卡片右边缘真正对齐（改卡片宽度时要一起改） */
+  padding: 0 11px 0 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: color-mix(in srgb, var(--aria-fontcolor) 62%, transparent);
+}
+
+#post-maincontent .archive-year-title::before {
+  content: none;
+}
+
+#post-maincontent .archive-year-title:hover {
+  transform: none;
+}
+
+/* 年份节点：压在时间轴上 */
+#post-maincontent .archive-year-title::after {
+  content: "";
+  position: absolute;
+  /* 12.5px 是导轨中心（left:12px + 1px 的一半），减掉半径 3.5 */
+  left: -29px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--aria-theme);
+}
+
+#post-maincontent .archive-year-title a {
+  color: inherit;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+#post-maincontent .archive-year-title a:hover {
+  color: var(--aria-fontcolor);
+}
+
+/* 篇数：小字收在右侧，和卡片右边缘对齐 */
+.archive-year-count,
+.archive-year-month {
+  color: var(--aria-light-fontcolor);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.archive-year-month a {
+  color: inherit;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+/* 月份页：月份跟在年份后面一起读，不要缩成右边角落的小字 */
+#post-maincontent .archive-year-title:has(> .archive-year-month) {
+  justify-content: flex-start;
+}
+
+.archive-year-month {
+  font-size: 20px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--aria-fontcolor) 62%, transparent);
+}
+
+/* 年份页的月份入口 */
+.archive-months {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 8px 5px;
+}
+
+.archive-month {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 12px;
+  border: var(--aria-border);
+  border-radius: 999px;
+  color: var(--aria-fontcolor);
+  font-size: 13px;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.archive-month:hover {
+  border-color: var(--aria-theme);
+  background: color-mix(in srgb, var(--aria-theme) 12%, transparent);
+  color: var(--aria-theme);
+}
+
+.archive-month-count {
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+}
+
+@media screen and (max-width: 900px) {
+  #archives-container:has(> .archive-year > .archive-year-title)::before {
+    left: 7px;
+  }
+
+  .archive-year:has(> .archive-year-title) {
+    padding-left: 26px;
+  }
+
+  #post-maincontent .archive-year-title {
+    font-size: 20px;
+  }
+
+  #post-maincontent .archive-year-title::after {
+    left: -22px;
+  }
+
+  #archives-container:has(> .archive-year > .archive-year-title)::before {
+    top: 17px;
+  }
+
+  #archives-container:has(> .archive-year > .archive-year-title)::after {
+    left: 7.5px;
+  }
+}
+
+.archive-year-month a:hover {
+  color: var(--aria-fontcolor);
 }
 
 .archive-item svg {
