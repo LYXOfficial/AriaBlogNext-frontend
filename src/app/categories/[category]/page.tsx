@@ -26,6 +26,20 @@ import CollectionHeader from "@/components/CollectionHeader";
 import TagIndex from "@/components/TagIndex";
 import CollectionSwitcher from "@/components/CollectionSwitcher";
 import ArchiveItem from "@/components/Archives";
+import { siteConfigs } from "@/config";
+import type { Metadata } from "next";
+
+// 标题只取路由参数，不用为它再请求一次分类列表；解码方式和页面主体保持一致
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> {
+  const { category } = await params;
+  const decoded = decodeURI(category);
+  return { title: `分类：${decoded} | ${siteConfigs.title}` };
+}
+
 export default async function Page({
   params,
 }: {

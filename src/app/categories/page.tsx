@@ -7,6 +7,13 @@ import { fetchCategories } from "@/utils/api";
 import { Category } from "@/interfaces/category";
 import CollectionHeader from "@/components/CollectionHeader";
 import TagIndex from "@/components/TagIndex";
+import { siteConfigs } from "@/config";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `分类 | ${siteConfigs.title}`,
+};
+
 export default async function Page() {
   const res = await fetchCategories();
   let data: Category[] = [];

@@ -8,6 +8,19 @@ import { notFound } from "next/navigation";
 import PostPageStart from "@/components/PostPageStart";
 import { fetchPostCount } from "@/utils/api";
 import { siteConfigs } from "@/config";
+import type { Metadata } from "next";
+
+// 非法页码（/page/abc）不给标题，页面自己会走 404
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ no: string }>;
+}): Promise<Metadata> {
+  const { no } = await params;
+  const pageNo = Number(no);
+  if (!Number.isInteger(pageNo) || pageNo < 1) return {};
+  return { title: `第 ${pageNo} 页 | ${siteConfigs.title}` };
+}
 
 // 预渲染已有页码；新页码（文章变多后）仍由 dynamicParams 按需生成并缓存。
 export async function generateStaticParams() {

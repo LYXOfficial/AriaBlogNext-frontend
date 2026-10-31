@@ -13,7 +13,10 @@ export async function generateStaticParams() {
   try {
     const res = await fetchArchives();
     if (!res.ok) return [];
-    return res.data.map((b) => ({ year: String(b.year), month: String(b.month) }));
+    return res.data.map((b) => ({
+      year: String(b.year),
+      month: String(b.month),
+    }));
   } catch {
     return [];
   }
@@ -23,6 +26,24 @@ import { Post } from "@/interfaces/post";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArchiveItem from "@/components/Archives";
+import { siteConfigs } from "@/config";
+import type { Metadata } from "next";
+
+// 非法年月（/archives/abc/def）不给标题，页面自己会走 404
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ year: string; month: string }>;
+}): Promise<Metadata> {
+  const { year, month } = await params;
+  const yearNum = Number(year);
+  const monthNum = Number(month);
+  if (!Number.isInteger(yearNum) || !Number.isInteger(monthNum)) return {};
+  return {
+    title: `归档：${yearNum} 年 ${monthNum} 月 | ${siteConfigs.title}`,
+  };
+}
+
 export default async function Page({
   params,
 }: {

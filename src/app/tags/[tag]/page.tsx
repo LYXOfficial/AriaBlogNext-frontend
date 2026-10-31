@@ -29,6 +29,20 @@ import CollectionHeader from "@/components/CollectionHeader";
 import TagIndex from "@/components/TagIndex";
 import CollectionSwitcher from "@/components/CollectionSwitcher";
 import ArchiveItem from "@/components/Archives";
+import { siteConfigs } from "@/config";
+import type { Metadata } from "next";
+
+// 标题只取路由参数，不用为它再请求一次标签列表；解码方式和页面主体保持一致
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tag: string }>;
+}): Promise<Metadata> {
+  const { tag } = await params;
+  const decoded = decodeURI(tag);
+  return { title: `标签：${decoded} | ${siteConfigs.title}` };
+}
+
 export default async function Page({
   params,
 }: {

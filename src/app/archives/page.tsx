@@ -10,6 +10,13 @@ import { Post } from "@/interfaces/post";
 import Link from "next/link";
 import ArchiveItem from "@/components/Archives";
 import CollectionHeader from "@/components/CollectionHeader";
+import { siteConfigs } from "@/config";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `归档 | ${siteConfigs.title}`,
+};
+
 export default async function Page() {
   const ArchiveContent: ReactElement[] = [];
   let total = 0;
