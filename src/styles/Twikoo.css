@@ -271,9 +271,24 @@
   font-size: 13px;
 }
 
-/* 深色模式下前置标签不能留白底，跟评论气泡的深色取值保持一致 */
+/* 深色模式下前置标签不能留白底，跟评论气泡的深色取值保持一致；
+   聚焦态必须单独覆盖：上面那条 :focus-within 规则比这里的选择器更重，
+   只写基础态会被 #fff1f7 反压回去，变成「浅粉底 + 白字」的不可读组合 */
 @media (prefers-color-scheme: dark) {
   #twikoo .tk-meta-input .tk-input-group__prepend {
     background-color: #303030 !important;
+  }
+
+  #twikoo
+    .tk-meta-input
+    .tk-input--group:focus-within
+    .tk-input-group__prepend {
+    /* 兜底给不支持 color-mix 的浏览器，正常走下面这行同色系深粉 */
+    background-color: #3a2b31 !important;
+    background-color: color-mix(
+      in srgb,
+      var(--aria-theme) 30%,
+      #303030
+    ) !important;
   }
 }
