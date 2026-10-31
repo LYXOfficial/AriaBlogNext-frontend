@@ -8,6 +8,7 @@ import PostContent from "components/PostContent";
 import { siteConfigs } from "config";
 import { fetchPostDetail, fetchPostSlugs } from "utils/api";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { PostRightSide } from "components/RightSide";
 import React from "react";
 
@@ -29,6 +30,25 @@ async function getPostInfo(slug: string): Promise<Post> {
   if (!res.ok) throw new Error(res.message);
   return res.data;
 }
+
+// 标题必须走 generateMetadata，不能像以前那样在页面里渲染 <title>：
+// 根 layout 的 metadata 已经产出一个 <title>，页面再渲染一个就变成 head 里
+// 两个标题，浏览器只认第一个，标签页永远显示站名（2026-11-01 修复）。
+// 这里的 fetch 和页面里的那次 URL/缓存参数一致，Next 会自动去重，不会多打一次后端。
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const post = await getPostInfo(slug);
+    return { title: `${post.title} | ${siteConfigs.title}` };
+  } catch {
+    // 文章不存在/接口挂了交给页面走 404，标题退回根 layout 的站名
+    return {};
+  }
+}
 export default async function Page({
   params,
 }: {
@@ -43,7 +63,6 @@ export default async function Page({
   }
   return (
     <>
-      <title>{currentPost.title + " | " + siteConfigs.title}</title>
       <style>{`#navbar{position:fixed}`}</style>
       <PostHeader postInfo={currentPost} />
       <div id="main-container" className="post">
