@@ -218,29 +218,98 @@ video {
   margin-bottom: 20px;
 }
 
-th {
-  background-color: #acacacdd;
-  padding: 0 5px;
+/* 正文表格：
+   旧样式是「整块灰底 + 1px 四面框」，行一多像贴了张截图；宽表还会把正文
+   顶宽（body 是 overflow-x: clip，不会滚，直接被裁掉）。
+   现在改成「细网格 + 浅表头 + 整块居中」：外框和圆角交给 .post-table-wrap，
+   宽表由它自己横向滚，不参与整页的 overflow。深浅色令牌见 global.css。 */
+.post-table-wrap {
+  /* 表格按内容宽度收拢并居中，不再拉满整行；超过正文宽度时再由 max-width 兜住 */
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  border: 1px solid var(--aria-line);
+  border-radius: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--aria-scrollbar) transparent;
 }
 
-td:not(code td) {
-  background-color: var(--aria-gray);
-  padding: 0 5px;
-  color: var(--aria-blackfont);
+.post-table-wrap::-webkit-scrollbar {
+  height: 6px;
 }
 
-table:not(code table) {
-  border: var(--aria-border);
+.post-table-wrap::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  th {
-    background-color: #5e5e5edd;
+.post-table-wrap::-webkit-scrollbar-thumb {
+  background: var(--aria-scrollbar);
+  border-radius: 99px;
+}
+
+.post-table-wrap > table {
+  width: auto;
+  margin: 0;
+  border: none;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.65;
+  text-align: center;
+  /* 数字列（80KB → 15KB 这种）能上下对齐 */
+  font-variant-numeric: tabular-nums;
+}
+
+.post-table-wrap th,
+.post-table-wrap td {
+  padding: 9px 18px;
+  border: none;
+  border-bottom: 1px solid var(--aria-line);
+  background: none;
+  color: var(--aria-fontcolor);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 竖向列线：只画在格子之间，外圈交给容器的边框 */
+.post-table-wrap th:not(:last-child),
+.post-table-wrap td:not(:last-child) {
+  border-right: 1px solid var(--aria-line);
+}
+
+.post-table-wrap th {
+  background-color: var(--aria-surface);
+  font-weight: 600;
+  /* 表头折行会把列宽挤歪，值列可以随意换行 */
+  white-space: nowrap;
+}
+
+.post-table-wrap tbody tr {
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.post-table-wrap tbody tr:hover {
+  background-color: var(--aria-row-hover);
+}
+
+.post-table-wrap tbody tr:last-child > td {
+  border-bottom: none;
+}
+
+@media screen and (max-width: 768px) {
+  .post-table-wrap {
+    border-radius: 10px;
   }
 
-  td:not(code td) {
-    background-color: #3b3b3b;
-    color: var(--aria-whitefont);
+  .post-table-wrap > table {
+    font-size: 14px;
+  }
+
+  .post-table-wrap th,
+  .post-table-wrap td {
+    padding: 8px 12px;
   }
 }
 

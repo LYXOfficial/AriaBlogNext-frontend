@@ -1,5 +1,6 @@
 import HighLightCode from "./builtins/HighLightCode";
 import MarkdownImage from "./builtins/MarkdownImage";
+import MarkdownTable from "./builtins/MarkdownTable";
 import MarkdownLink from "./builtins/MarkdownLink";
 import LateXFilter from "./builtins/LaTeXFilter";
 import normalizeExtraTagLayout from "./builtins/ExtraTagLayout";
@@ -96,6 +97,10 @@ export default function MDToTSXWithPlugins({
             overrides: {
               a: (props: any) => (
                 <SafeComponent component={MarkdownLink} {...props} />
+              ),
+              // 表格套一层横向滚动容器，宽表才不会把正文顶宽（见 MarkdownTable.tsx）
+              table: (props: any) => (
+                <SafeComponent component={MarkdownTable} {...props} />
               ),
               Folding: (props: any) => (
                 <SafeComponent component={FoldingTag} {...props} />

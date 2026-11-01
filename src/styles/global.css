@@ -18,6 +18,11 @@
   --aria-border: 1px solid #c9c9c9;
   --aria-blue: #6cf;
   --aria-gray: #e2e2e2;
+  /* 正文表格用：细分隔线 / 表头浅面 / 行悬浮。
+     别拿 --aria-gray 当分隔线——深色模式下它还是亮的。 */
+  --aria-line: #ececec;
+  --aria-surface: #f6f7f9;
+  --aria-row-hover: #0000000a;
   --aria-theme: var(--aria-pink);
   --aria-light-grey: #f2f2f2;
   --aria-green: #34d0cc;
@@ -69,6 +74,9 @@
     --aria-border: 1px solid #414141;
     --aria-theme: var(--aria-darkpink);
     --aria-scrollbar: #514f4fdd;
+    --aria-line: #3a3636;
+    --aria-surface: #2a2525;
+    --aria-row-hover: #ffffff0f;
   }
 }
 
