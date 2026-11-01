@@ -221,13 +221,13 @@ video {
 /* 正文表格：
    旧样式是「整块灰底 + 1px 四面框」，行一多像贴了张截图；宽表还会把正文
    顶宽（body 是 overflow-x: clip，不会滚，直接被裁掉）。
-   现在改成「细网格 + 浅表头 + 整块居中」：外框和圆角交给 .post-table-wrap，
+   现在改成「细网格 + 浅表头 + 靠左收拢」：外框和圆角交给 .post-table-wrap，
    宽表由它自己横向滚，不参与整页的 overflow。深浅色令牌见 global.css。 */
 .post-table-wrap {
-  /* 表格按内容宽度收拢并居中，不再拉满整行；超过正文宽度时再由 max-width 兜住 */
+  /* 按内容宽度收拢并靠左，不拉满整行；超过正文宽度时再由 max-width 兜住 */
   width: fit-content;
   max-width: 100%;
-  margin: 0 auto 20px;
+  margin: 0 0 20px;
   border: 1px solid var(--aria-line);
   border-radius: 12px;
   overflow-x: auto;
