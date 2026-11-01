@@ -35,6 +35,7 @@ const RULES = [
   "建议填写正确的邮箱：用于接收申请回执与审核结果，也可以用来自助查询进度",
   "建议网站头像不要有防盗链，否则无法正常显示",
   "审核未通过时，若博主填写了理由会通过邮件告知，可修改后重新提交",
+  "你的友链请求将会通过 Github Actions 所运行的 LLM 进行初筛并告知我，最好保证可访问性，并且知悉该点",
 ];
 
 interface ExistingLink {
@@ -315,7 +316,9 @@ export default function FlinkApply() {
     setQuerying(true);
     setQueryError("");
     try {
-      const res = await queryApplicationStatus<ApplyRecord>(byEmail ? { email: target } : { name: target });
+      const res = await queryApplicationStatus<ApplyRecord>(
+        byEmail ? { email: target } : { name: target },
+      );
       if (res.ok) {
         setQueryResult(res.data ?? []);
         setQueryInput(target);
