@@ -76,3 +76,10 @@
 .bb-content img {
   max-width: 100%;
 }
+
+/* 灯箱链接：跟文章插图一致，悬停提示可点 */
+.bb-img-a {
+  display: inline-block;
+  max-width: 100%;
+  cursor: zoom-in;
+}

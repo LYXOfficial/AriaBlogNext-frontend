@@ -8,6 +8,21 @@ import { ReactElement, useEffect, useState } from "react";
 import throttle from "lodash/throttle";
 import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+/**
+ * 说说正文是后端直接吐的 HTML，里面的图片是裸 <img>（不像文章走 MarkdownImage）。
+ * 这里包一层灯箱链接，复用全站 fancybox（点图看大图、手势/键盘/关闭都跟文章一致）。
+ * 已经带 data-fancybox 的不动，避免重复包裹。
+ */
+function withSpeaksLightbox(html: string): string {
+  if (!html || html.includes("data-fancybox")) return html;
+  return html.replace(
+    /<img(\s[^>]*?)src=(["'])(.*?)\2([^>]*?)\/?>/g,
+    '<a href="$3" data-fancybox="speaks" class="bb-img-a" title="点击查看大图"><img$1src=$2$3$2$4/></a>',
+  );
+}
 
 const bbClickHandle = (event: React.MouseEvent) => {
   const str = (
@@ -53,7 +68,7 @@ export function Speaks() {
               >
                 <div
                   className="bb-content"
-                  dangerouslySetInnerHTML={{ __html: item.content }}
+                  dangerouslySetInnerHTML={{ __html: withSpeaksLightbox(item.content) }}
                 />
                 <div className="bb-bottombar">
                   <span className="bb-time">
@@ -83,6 +98,14 @@ export function Speaks() {
       }
     })();
   }, []);
+  // 说说列表是异步灌进来的，灯箱要在图片节点出现后绑定；切走时解绑避免重复
+  useEffect(() => {
+    if (speakContent.length === 0) return;
+    Fancybox.bind('#bb [data-fancybox="speaks"]');
+    return () => {
+      Fancybox.unbind('#bb [data-fancybox="speaks"]');
+    };
+  }, [speakContent]);
   return (
     <wc-waterfall id="bb" gap={20} cols={speakCols}>
       {speakContent}
