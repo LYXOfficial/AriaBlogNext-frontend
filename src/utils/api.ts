@@ -30,17 +30,17 @@ type GoapiOptions = Omit<RequestInit, "body"> & {
   body?: unknown;
   /** 服务端缓存标签（fetch next.tags），客户端调用不要传 */
   tags?: string[];
-  /** 服务端缓存时长，默认 600 秒 */
+  /** 服务端缓存时长，默认 7200 秒（2h） */
   revalidate?: number;
 };
 
 /**
  * 默认 TTL 只做兜底：正常写路径会由 Go 后端在写入成功后调用
  * /refreshCache/{posts,speaks,flinks,post/<slug>} 立即失效（见 backend-go
- * SiteService.Notify）。600s 是为了「Webhook 丢了/博客当时挂了」时，
- * 内容最多 10 分钟后自己恢复，而不是像以前那样只能等 dashboard 手动刷。
+ * SiteService.Notify）。7200s（2h）是为了「Webhook 丢了/博客当时挂了」时，
+ * 内容最多 2 小时后自己恢复，而不是像以前那样只能等 dashboard 手动刷。
  */
-const DEFAULT_REVALIDATE = 600;
+const DEFAULT_REVALIDATE = 7200;
 
 /** 服务端渲染时才启用 Next 的 fetch 缓存参数；浏览器里 fetch 不认识 `next` */
 const isServer = typeof window === "undefined";
