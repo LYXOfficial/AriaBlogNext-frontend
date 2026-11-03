@@ -1,0 +1,818 @@
+/* 全站悬浮音乐播放器。
+   材质是真亚克力：半透明底 + backdrop-filter 模糊页面本身，
+   不自绘封面/渐变当底（那样看起来是假玻璃，也不跟随页面主题）。 */
+
+.music-player-button {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 32%, transparent);
+  background-color: color-mix(in srgb, var(--aria-acrylic1) 72%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  color: var(--aria-theme);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.16),
+    0 0 0 transparent,
+    inset 0 1px rgba(255, 255, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.music-player-button-icon {
+  position: relative;
+  z-index: 0;
+}
+
+.music-player-button-cover {
+  position: absolute;
+  inset: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  z-index: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.music-player-progress-ring {
+  z-index: 2;
+}
+
+.music-player-button:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    0 0 8px var(--aria-theme),
+    inset 0 1px rgba(255, 255, 255, 0.32);
+}
+
+/* 播放进度圆环：起点在顶部，不拦截点击 */
+.music-player-progress-ring {
+  position: absolute;
+  /* 按钮有 1px 边框，绝对定位基准在 padding box，往外让 1px 才和外沿重合 */
+  top: -1px;
+  left: -1px;
+  width: 44px;
+  height: 44px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.music-player-progress-ring-circle {
+  stroke: var(--aria-theme);
+  opacity: 0.95;
+  /* 不用 transition：每帧都会写 offset，加过渡反而会拖尾 */
+  stroke-linecap: round;
+  stroke-dasharray: 128.81;
+}
+
+/* ---------------- 悬浮歌词（右侧窄栏，紧凑三行） ---------------- */
+
+.music-player-lyricbar {
+  position: fixed;
+  right: 20px;
+  top: 92px;
+  width: min(250px, 26vw);
+  box-sizing: border-box;
+  padding: 8px 14px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 30%, transparent);
+  background-color: var(--aria-acrylic2);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.14),
+    inset 0 1px rgba(255, 255, 255, 0.24);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  text-align: right;
+  z-index: 900;
+}
+
+/* 歌词窗固定三行高；轨道整体上移，当前行停在中间 */
+.music-player-lyricwindow {
+  /* 真实高度由 JS 按三行内容写入，这里只是兜底 */
+  height: 110px;
+  overflow: hidden;
+}
+
+.music-player-lyrictrack {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.42s var(--ease-in-out);
+  will-change: transform;
+}
+
+/* 每行固定 44px：原文一行 + 翻译一行，行高统一滚动才不跳 */
+.music-player-lyricrow {
+  padding: 4px 0;
+  overflow: hidden;
+  opacity: 0.45;
+}
+
+.music-player-lyricrow.is-passed {
+  opacity: 0.62;
+}
+
+.music-player-lyricrow.is-current {
+  opacity: 1;
+}
+
+/* 原文（多为日文）是滚动主体；太长就软换行，最多三行 */
+.music-player-lyric-main {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--aria-fontcolor);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: strict;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.music-player-lyricrow.is-current .music-player-lyric-main {
+  font-size: 14px;
+  font-weight: bold;
+  -webkit-line-clamp: 3;
+}
+
+/* 中文翻译在下面，小一号当注释；同样允许换行，最多两行 */
+.music-player-lyric-sub {
+  margin-top: 1px;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--aria-light-fontcolor);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: strict;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 逐词卡拉 OK：已唱部分用主题色填充 */
+.music-player-karaoke {
+  display: inline;
+}
+
+.music-player-karaoke > span {
+  display: inline;
+  background: linear-gradient(
+    to right,
+    var(--aria-theme) var(--progress, 0%),
+    color-mix(in srgb, var(--aria-fontcolor) 72%, transparent)
+      var(--progress, 0%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------- 播放器面板 ---------------- */
+
+.music-player-panel {
+  position: fixed;
+  left: 20px;
+  bottom: 76px;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100dvh - 100px);
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 30%, transparent);
+  background-color: var(--aria-acrylic2);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  backdrop-filter: blur(26px) saturate(180%);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.18),
+    0 0 0 transparent,
+    inset 0 1px rgba(255, 255, 255, 0.26);
+  overflow: hidden;
+  z-index: 1001;
+  /* 常驻元素，靠 is-open 类做进出动画；关闭时不可点、不可聚焦 */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.98);
+  transform-origin: bottom left;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    visibility 0s linear var(--dur-base);
+}
+
+.music-player-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.music-player-panel-inner {
+  max-height: calc(100dvh - 100px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-gutter: stable;
+}
+
+.music-player-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.music-player-cover {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 40%, transparent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  background-color: var(--aria-row-hover);
+  color: var(--aria-light-fontcolor);
+}
+
+.music-player-cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-player-meta {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.5;
+}
+
+.music-player-name {
+  font-weight: bold;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.music-player-name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player-artist {
+  font-size: 12px;
+  color: var(--aria-light-fontcolor);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 播放列表开关 */
+.music-player-listtoggle {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 8px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 26%, transparent);
+  background-color: color-mix(in srgb, var(--aria-white) 14%, transparent);
+  color: var(--aria-light-fontcolor);
+  font-size: 11px;
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.music-player-listtoggle:hover {
+  color: var(--aria-theme);
+  border-color: var(--aria-theme);
+}
+
+.music-player-listtoggle.is-open {
+  color: var(--aria-theme);
+  border-color: var(--aria-theme);
+  background-color: color-mix(in srgb, var(--aria-theme) 14%, transparent);
+}
+
+/* 播放中的三线小均衡器，纯 CSS */
+.music-player-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  flex: none;
+}
+
+.music-player-eq i {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--aria-theme);
+  animation: music-player-eq-bounce 0.9s var(--ease-in-out) infinite;
+}
+
+.music-player-eq i:nth-child(1) {
+  height: 60%;
+}
+
+.music-player-eq i:nth-child(2) {
+  height: 100%;
+  animation-delay: 0.2s;
+}
+
+.music-player-eq i:nth-child(3) {
+  height: 40%;
+  animation-delay: 0.4s;
+}
+
+@keyframes music-player-eq-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.music-player-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.music-player-progress input {
+  flex: 1;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.music-player-progress input::-webkit-slider-thumb,
+.music-player-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--aria-theme);
+  border: 2px solid var(--aria-white);
+  box-shadow: 0 0 4px var(--aria-shadow-color);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.music-player-progress:hover input::-webkit-slider-thumb,
+.music-player-volume:hover .music-player-volume-slider::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.music-player-progress input::-moz-range-thumb,
+.music-player-volume-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--aria-theme);
+  border: 2px solid var(--aria-white);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.music-player-progress:hover input::-moz-range-thumb,
+.music-player-volume:hover .music-player-volume-slider::-moz-range-thumb {
+  opacity: 1;
+}
+
+.music-player-time {
+  font-size: 12px;
+  min-width: 36px;
+  text-align: center;
+  color: var(--aria-light-fontcolor);
+  font-variant-numeric: tabular-nums;
+}
+
+.music-player-controls {
+  display: grid;
+  /* minmax(0, …) 才能让两侧收缩，否则音量条会把内容顶出内边距 */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+}
+
+.music-player-ctl-left {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.music-player-ctl-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.music-player-ctl-right {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.music-player-control {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--aria-fontcolor);
+  padding: 6px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.music-player-control.is-on {
+  color: var(--aria-theme);
+}
+
+.music-player-control:hover {
+  color: var(--aria-theme);
+  background-color: var(--aria-row-hover);
+  transform: scale(1.05);
+}
+
+/* 中间大播放键 */
+.music-player-play {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 60%, transparent);
+  background-color: color-mix(in srgb, var(--aria-theme) 80%, transparent);
+  color: var(--aria-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.music-player-play:hover {
+  transform: scale(1.08);
+  background-color: var(--aria-theme);
+}
+
+.music-player-volume {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--aria-light-fontcolor);
+}
+
+.music-player-volume-slider {
+  width: 40px;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 2px;
+  height: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ---------------- 歌单 ---------------- */
+
+.music-player-playlist {
+  /* 外层只负责折叠：max-height 从 0 展开，收起时也有动画 */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  /* 面板是 flex + gap，高度为 0 也会占掉一格间距，
+     用负 margin 抵消，收起时才不会在底部多出 10px 空白 */
+  margin-top: -10px;
+  transition:
+    max-height 300ms var(--ease-out),
+    opacity 200ms var(--ease-out),
+    margin-top 300ms var(--ease-out);
+}
+
+.music-player-playlist.is-open {
+  max-height: 340px;
+  opacity: 1;
+  margin-top: 0;
+}
+
+.music-player-playlist-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--aria-white) 22%, transparent);
+  padding-top: 10px;
+}
+
+.music-player-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 26%, transparent);
+  background-color: color-mix(in srgb, var(--aria-white) 16%, transparent);
+  color: var(--aria-light-fontcolor);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.music-player-search:focus-within {
+  border-color: var(--aria-theme);
+  color: var(--aria-theme);
+}
+
+.music-player-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--aria-fontcolor);
+  font-size: 12.5px;
+  font-family: inherit;
+}
+
+.music-player-search input::placeholder {
+  color: var(--aria-light-fontcolor);
+}
+
+.music-player-search-clear {
+  flex: none;
+  display: flex;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.music-player-list {
+  max-height: 216px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px;
+  padding-right: 4px;
+  /* 必须是块级流：flex 列布局会把虚拟滚动的上下占位块压缩掉，
+     导致滚动高度反复变化 → scroll 事件 → setState 死循环 */
+  display: block;
+  font-size: 13px;
+  scrollbar-gutter: stable;
+  /* 关掉滚动锚定，避免内容替换时浏览器再改写 scrollTop 触发额外 scroll */
+  overflow-anchor: none;
+}
+
+.music-player-track {
+  cursor: pointer;
+  padding: 5px 6px;
+  /* 虚拟滚动按固定行高算位置，这里必须锁死 44px */
+  height: 44px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.music-player-track-cover {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9px;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 34%, transparent);
+  /* 封面加载失败时露出垫底图标，不至于是一个刺眼的白洞 */
+  background-color: var(--aria-row-hover);
+  color: var(--aria-light-fontcolor);
+}
+
+.music-player-track-cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-player-track-meta {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.music-player-track-name {
+  font-size: 12.5px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player-track-artist {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--aria-light-fontcolor);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player-track:not(.active):hover {
+  background-color: var(--aria-row-hover);
+}
+
+.music-player-track:not(.active):hover .music-player-track-name {
+  color: var(--aria-theme);
+}
+
+.music-player-track.active {
+  background-color: color-mix(in srgb, var(--aria-theme) 14%, transparent);
+}
+
+.music-player-track.active .music-player-track-name {
+  color: var(--aria-theme);
+  font-weight: bold;
+}
+
+/* 正在播的那行右侧小均衡器 */
+.music-player-track-eq {
+  flex: none;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  margin-left: 2px;
+}
+
+.music-player-track-eq i {
+  width: 2.5px;
+  border-radius: 2px;
+  background: var(--aria-theme);
+  animation: music-player-eq-bounce 0.9s var(--ease-in-out) infinite;
+}
+
+.music-player-track-eq i:nth-child(1) {
+  height: 55%;
+}
+
+.music-player-track-eq i:nth-child(2) {
+  height: 100%;
+  animation-delay: 0.18s;
+}
+
+.music-player-track-eq i:nth-child(3) {
+  height: 38%;
+  animation-delay: 0.36s;
+}
+
+.music-player-empty {
+  text-align: center;
+  font-size: 12px;
+  color: var(--aria-light-fontcolor);
+  padding: 10px 0;
+}
+
+@media screen and (max-width: 640px) {
+  .music-player-button {
+    left: 12px;
+    bottom: 12px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .music-player-panel {
+    left: 12px;
+    right: 12px;
+    bottom: 64px;
+    width: auto;
+    max-width: none;
+    box-sizing: border-box;
+    max-height: calc(100dvh - 190px);
+  }
+
+  .music-player-panel-inner {
+    max-height: calc(100dvh - 190px);
+  }
+
+  .music-player-lyricbar {
+    right: 12px;
+    top: 64px;
+    width: min(190px, 48vw);
+    padding: 6px 12px;
+  }
+
+  .music-player-lyric-main {
+    font-size: 12px;
+  }
+
+  .music-player-lyricrow.is-current .music-player-lyric-main {
+    font-size: 13.5px;
+  }
+
+  .music-player-lyric-sub {
+    font-size: 10px;
+  }
+
+  /* 移动端也保留音量滑条：三栏是 minmax(0,1fr) 布局，能收缩不会顶出内边距 */
+  .music-player-volume-slider {
+    width: 34px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .music-player-panel {
+    background-color: color-mix(in srgb, var(--aria-acrylic1) 62%, transparent);
+  }
+
+  .music-player-lyricbar {
+    background-color: color-mix(in srgb, var(--aria-acrylic1) 68%, transparent);
+  }
+}
+
+/* 不支持 backdrop-filter 的老浏览器退成接近不透明的面板，别让文字糊在图上 */
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .music-player-panel,
+  .music-player-lyricbar,
+  .music-player-button {
+    background-color: color-mix(
+      in srgb,
+      var(--aria-acrylic1) 94%,
+      var(--aria-background)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-player-eq i,
+  .music-player-track-eq i {
+    animation: none;
+  }
+
+  .music-player-lyrictrack {
+    transition: none;
+  }
+}

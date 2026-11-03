@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // 左下角那个 Next.js 开发指示器会被悬浮播放器按钮压住，关掉
+  devIndicators: false,
   pageExtensions: ["js", "jsx", "ts", "tsx"],
   images: {
     remotePatterns: [

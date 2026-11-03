@@ -1,5 +1,6 @@
 import NavBar from "components/NavBar";
 import Footer from "components/Footer";
+import MusicPlayer from "components/MusicPlayer";
 import "styles/global.css";
 import { siteConfigs } from "@/config";
 import Welcome from "components/thirdpartyjs/Welcome";
@@ -41,6 +42,7 @@ export default function RootLayout({
         <NextTopLoader color="var(--aria-theme)" height={5} />
         {children}
         <Footer />
+        <MusicPlayer />
       </body>
     </html>
   );
