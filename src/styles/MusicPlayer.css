@@ -531,26 +531,31 @@
 /* ---------------- 歌单 ---------------- */
 
 .music-player-playlist {
-  /* 外层只负责折叠：max-height 从 0 展开，收起时也有动画 */
-  max-height: 0;
-  overflow: hidden;
+  /* 用 grid-template-rows 0fr→1fr 动画真实内容高度：
+     max-height 固定值会让“展开”比“收起”显得快（多出来的空白先被填满），
+     0fr/1fr 两个方向的速度就一致了。 */
+  display: grid;
+  grid-template-rows: 0fr;
   opacity: 0;
   /* 面板是 flex + gap，高度为 0 也会占掉一格间距，
      用负 margin 抵消，收起时才不会在底部多出 10px 空白 */
   margin-top: -10px;
   transition:
-    max-height 300ms var(--ease-out),
+    grid-template-rows 320ms var(--ease-out),
     opacity 200ms var(--ease-out),
-    margin-top 300ms var(--ease-out);
+    margin-top 320ms var(--ease-out);
 }
 
 .music-player-playlist.is-open {
-  max-height: 340px;
+  grid-template-rows: 1fr;
   opacity: 1;
   margin-top: 0;
 }
 
 .music-player-playlist-inner {
+  /* grid 折叠要求子项能收缩，内容靠 overflow 裁掉 */
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 8px;
