@@ -537,6 +537,9 @@
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
+  /* 收起时高度为 0，但内层的 10px padding-top 和 1px 分隔线会溢出来，
+     所以外层也要裁掉，否则底部又会多出一截 */
+  overflow: hidden;
   /* 面板是 flex + gap，高度为 0 也会占掉一格间距，
      用负 margin 抵消，收起时才不会在底部多出 10px 空白 */
   margin-top: -10px;
@@ -553,9 +556,12 @@
 }
 
 .music-player-playlist-inner {
-  /* grid 折叠要求子项能收缩，内容靠 overflow 裁掉 */
+  /* grid 项本身不能带 padding/border，否则 0fr 轨道也会被撑出 11px */
   min-height: 0;
   overflow: hidden;
+}
+
+.music-player-playlist-body {
   display: flex;
   flex-direction: column;
   gap: 8px;

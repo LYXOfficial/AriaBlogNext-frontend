@@ -1301,6 +1301,7 @@ export default function MusicPlayer() {
               inert={!listOpen}
             >
               <div className="music-player-playlist-inner">
+                <div className="music-player-playlist-body">
                 <div className="music-player-search">
                   <Icon icon="solar:magnifer-linear" width={15} height={15} />
                   <input
@@ -1386,6 +1387,7 @@ export default function MusicPlayer() {
                   {playlist.length > 0 && !totalRows && (
                     <div className="music-player-empty">没有找到这首歌喵</div>
                   )}
+                </div>
                 </div>
               </div>
             </div>
