@@ -81,11 +81,11 @@
    不吃上面的大图规则，也不会被 withSpeaksLightbox 套上灯箱 */
 .bb-content img.bb-emoji {
   display: inline-block;
-  width: 1.8em;
-  height: 1.8em;
+  width: 2.4em;
+  height: 2.4em;
   max-width: none;
   margin: 0 1px;
-  vertical-align: -0.35em;
+  vertical-align: -0.45em;
   object-fit: contain;
 }
 
