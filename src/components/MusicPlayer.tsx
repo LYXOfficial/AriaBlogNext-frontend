@@ -25,8 +25,10 @@ import { Icon } from "@iconify/react";
 // 和个人主页 config.ts 里 playlistIdWyy 保持一致，换歌单只改这一处。
 const PLAYLIST_ID = "7761179667";
 const METING_API = `https://api.qijieya.cn/meting/?type=playlist&id=${PLAYLIST_ID}`;
-// 逐词歌词用网易云官方接口，浏览器跨域所以套一层 CORS 代理（主页同款做法）。
-const YRC_API = "https://cors.emasop.cn/api/lyric?id=IDZFC";
+// 逐词歌词仍然是网易云官方接口，但改走站内代理 /api/lyric：
+// 原来的第三方 CORS 代理域名 cors.emasop.cn 已注销（DNS 都解析不到），
+// 换成自己的路由转发，不再受别人的域名生死影响。
+const YRC_API = "/api/lyric?id=IDZFC";
 // 音频地址优先级：meting 解析地址（服务端 302 到真实 mp3，VIP 能力恢复时直接受益）
 // → 网易云官方外链兜底。
 const metingUrlOf = (id: string) =>
@@ -183,7 +185,10 @@ async function parseYrc(datae: any): Promise<LrcLine[]> {
           const Duration = parseInt(ttt[2]) / 1000;
           const start = parseInt(ttt[1]) / 1000;
           const totalSecondsEnd = (parseInt(ttt[1]) + parseInt(ttt[2])) / 1000;
-          const texte = ttt[4].replace(" ", " ");
+          // segRegex 里只有「起始、时长」两个捕获组，正文是第 3 个；
+          // 这里原来取 ttt[4] 拿到 undefined，一解析就抛错被 catch 掉，
+          // 于是每次都退回普通 LRC，逐字歌词从来没生效过。
+          const texte = ttt[3].replace(" ", " ");
           eljson.push({ Duration, start, end: totalSecondsEnd, text: texte });
         }
         if (eljson.length && eljson[eljson.length - 1].text === "&nbsp;")
