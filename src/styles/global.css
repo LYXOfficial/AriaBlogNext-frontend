@@ -89,7 +89,8 @@
    覆盖清单：侧栏评论配图(aside-list-item-pic) / 文章卡片封面(post-banner-img) /
    恋爱卡片头像(loveu-avatar) / 作者头像(card-info-avatar-img) /
    文章头图(post-banner-bg) / 评论头像(tk-avatar-img) /
-   正文插图(fancybox-img) / 行内链接图标(etag-link-img)。
+   正文插图(fancybox-img) / 行内链接图标(etag-link-img) /
+   说说表情(bb-emoji，与评论表情 tk-owo-emotion 同源同处理)。
    img 上挂不了 ::after，brightness 压暗和半透明灰遮罩视觉等效，统一走 filter。 */
 @media (prefers-color-scheme: dark) {
   .aside-list-item-pic,
@@ -101,6 +102,7 @@
   .fancybox-img,
   .latest-comment-emoji,
   .tk-owo-emotion,
+  .bb-emoji,
   .etag-link-img {
     filter: brightness(0.7);
   }

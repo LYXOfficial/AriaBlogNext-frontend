@@ -77,6 +77,18 @@
   max-width: 100%;
 }
 
+/* owo 表情（后台说说编辑器插入，带 .bb-emoji）：跟文字排在一起的行内小图，
+   不吃上面的大图规则，也不会被 withSpeaksLightbox 套上灯箱 */
+.bb-content img.bb-emoji {
+  display: inline-block;
+  width: 1.8em;
+  height: 1.8em;
+  max-width: none;
+  margin: 0 1px;
+  vertical-align: -0.35em;
+  object-fit: contain;
+}
+
 /* 灯箱链接：只做图片容器。必须洗掉 global.css 里 .bb-content a 的文字
    链接样式（虚线边框/内边距/悬停粉底/外链图标），否则图片会被撑宽并带上链接效果。
    选择器特异度高于全局规则，原有图片宽度不受影响。 */

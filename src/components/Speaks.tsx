@@ -20,7 +20,15 @@ function withSpeaksLightbox(html: string): string {
   if (!html || html.includes("data-fancybox")) return html;
   return html.replace(
     /<img(\s[^>]*?)src=(["'])(.*?)\2([^>]*?)\/?>/g,
-    '<a href="$3" data-fancybox="speaks" class="bb-img-a" title="点击查看大图"><img$1src=$2$3$2$4/></a>',
+    (whole, before: string, quote: string, src: string, after: string) => {
+      // 后台插入的 owo 表情带 .bb-emoji，是跟文字排在一起的行内小图，
+      // 套上灯箱后会变成"点一下放大成大图"，和 twikoo 评论区里的表情行为也不一致
+      if (
+        /class=(["'])[^"']*\bbb-emoji\b[^"']*\1/.test(`${before}${after}`)
+      )
+        return whole;
+      return `<a href="${src}" data-fancybox="speaks" class="bb-img-a" title="点击查看大图"><img${before}src=${quote}${src}${quote}${after}/></a>`;
+    },
   );
 }
 
