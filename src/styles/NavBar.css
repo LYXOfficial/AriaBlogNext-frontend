@@ -92,6 +92,27 @@ html[data-home-manual-scroll] #navbar {
   box-shadow: 0 0 5px 1px var(--aria-theme);
 }
 
+/* 顶栏左侧的音乐播放器凹槽。
+   绝对定位：不参与 flex 排布，菜单仍然严格居中（flex 项会把它顶偏）。
+   宽度跟着视口走，左边界固定在 logo 右侧，窄屏时自动让位给菜单。 */
+#nav-music-slot {
+  position: absolute;
+  left: 132px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: clamp(180px, calc(50vw - 300px), 420px);
+  display: flex;
+  align-items: center;
+}
+
+/* 手机顶栏没有放播放器的位置，退回左下角悬浮圆钮（MusicPlayer 自己处理） */
+@media screen and (max-width: 940px) {
+  #nav-music-slot {
+    display: none;
+  }
+}
+
 #menu-buttons {
   margin-right: 20px;
 }

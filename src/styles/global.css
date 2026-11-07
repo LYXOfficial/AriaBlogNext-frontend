@@ -115,7 +115,9 @@
 
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--aria-theme);
+  /* 实心 2px 主题色在小胶囊/小按钮上像贴了一圈硬纸板，改成半透明软描边 */
+  outline: 2px solid color-mix(in srgb, var(--aria-theme) 58%, transparent);
+  outline-offset: 2px;
 }
 
 /* 页面不应出现横向滚动：个别文章内容或浮层越界时，宁可裁掉也不要把整页

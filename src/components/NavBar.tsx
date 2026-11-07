@@ -113,6 +113,9 @@ export default function NavBar() {
             alt=""
           />
         </Link>
+        {/* 顶栏左侧的凹槽位：音乐播放器挂在这里（MusicPlayer 用 portal 注入）。
+            绝对定位而不是 flex 项，这样强行插一块也不会把居中的菜单顶偏。 */}
+        <div id="nav-music-slot" />
         <div id="menu-center">
           <div
             id="menu-items"
