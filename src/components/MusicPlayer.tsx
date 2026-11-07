@@ -987,6 +987,16 @@ export default function MusicPlayer() {
     const top = currentIndex * TRACK_ROW_H - LIST_VIEW_H / 2 + TRACK_ROW_H / 2;
     const maxTop = Math.max(0, playlist.length * TRACK_ROW_H - LIST_VIEW_H);
     const target = Math.max(0, Math.min(top, maxTop));
+    // 短距离（同一屏附近）用平滑滚动，长跳直接定位：
+    // 全局 * { scroll-behavior: smooth } 下，长距离平滑会逐帧触发 scroll →
+    // 每帧 setState 重排虚拟列表，跳远处的歌时会炸成 Maximum update depth
+    const smooth = Math.abs(target - list.scrollTop) <= LIST_VIEW_H * 2;
+    if (smooth) {
+      const raf = requestAnimationFrame(() => {
+        list.scrollTo({ top: target, behavior: "smooth" });
+      });
+      return () => cancelAnimationFrame(raf);
+    }
     // 先把虚拟窗口拨过去，再滚：反过来的话浏览器会因为行高/占位块变化改写
     // scrollTop，触发一次额外 scroll，又回写 state
     const row = Math.floor(target / TRACK_ROW_H);
@@ -994,7 +1004,7 @@ export default function MusicPlayer() {
     setListScrollTop(row * TRACK_ROW_H);
     listJumping.current = true;
     const raf = requestAnimationFrame(() => {
-      list.scrollTo({ top: target, behavior: "auto" });
+      list.scrollTo({ top: target, behavior: "instant" });
       requestAnimationFrame(() => {
         listJumping.current = false;
       });
@@ -1010,7 +1020,18 @@ export default function MusicPlayer() {
   // 这就是“有时候不会跳到当前歌曲”的原因。
   useEffect(() => {
     if (!query) return;
-    listRef.current?.scrollTo({ top: 0 });
+    const list = listRef.current;
+    if (!list) return;
+    // 短距离平滑、长距离直接回到顶（同上的原因）
+    if (list.scrollTop <= LIST_VIEW_H * 2) {
+      list.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      listJumping.current = true;
+      list.scrollTo({ top: 0, behavior: "instant" });
+      requestAnimationFrame(() => {
+        listJumping.current = false;
+      });
+    }
     setListScrollTop(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
