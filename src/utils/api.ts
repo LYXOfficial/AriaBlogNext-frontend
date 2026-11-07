@@ -10,7 +10,7 @@
  * - 网络层异常（断网等）原样抛出，由调用方决定怎么兜底——和旧代码的失败语义一致；
  * - HTTP 非 2xx 或信封 ok:false 时返回 `{ok:false, message}`，
  *   message 是后端给的面向用户的中文（可展示），拿不到时给兜底文案；
- * - 只有服务端组件才带 `next.revalidate`（默认 7200 秒），可传 `tags` 打失效标签；
+ * - 只有服务端组件才带 `next.revalidate`（默认 43200 秒 = 12h），可传 `tags` 打失效标签；
  *   浏览器里 `next` 不是合法 RequestInit，传了也会被忽略，索性不带。
  */
 import { siteConfigs } from "config";
@@ -30,17 +30,17 @@ type GoapiOptions = Omit<RequestInit, "body"> & {
   body?: unknown;
   /** 服务端缓存标签（fetch next.tags），客户端调用不要传 */
   tags?: string[];
-  /** 服务端缓存时长，默认 7200 秒（2h） */
+  /** 服务端缓存时长，默认 43200 秒（12h） */
   revalidate?: number;
 };
 
 /**
  * 默认 TTL 只做兜底：正常写路径会由 Go 后端在写入成功后调用
  * /refreshCache/{posts,speaks,flinks,post/<slug>} 立即失效（见 backend-go
- * SiteService.Notify）。7200s（2h）是为了「Webhook 丢了/博客当时挂了」时，
- * 内容最多 2 小时后自己恢复，而不是像以前那样只能等 dashboard 手动刷。
+ * SiteService.Notify）。43200s（12h）是为了「Webhook 丢了/博客当时挂了」时，
+ * 内容最多 12 小时后自己恢复，而不是像以前那样只能等 dashboard 手动刷。
  */
-const DEFAULT_REVALIDATE = 7200;
+const DEFAULT_REVALIDATE = 43200;
 
 /** 服务端渲染时才启用 Next 的 fetch 缓存参数；浏览器里 fetch 不认识 `next` */
 const isServer = typeof window === "undefined";
@@ -131,7 +131,7 @@ async function goapiAllPosts(query: string, opts: GoapiOptions = {}): Promise<Ap
 
 /** RSS 全量：全部文章含 mdContent */
 export function fetchAllPostsWithContent(opts?: GoapiOptions) {
-  return goapiAllPosts("&withContent=true", { revalidate: 3600, tags: ["posts"], ...opts });
+  return goapiAllPosts("&withContent=true", { revalidate: 43200, tags: ["posts"], ...opts });
 }
 
 /** 最新 N 篇（侧栏「最新文章」） */
@@ -182,7 +182,7 @@ export interface SemanticHit {
  */
 export function searchPosts(query: string, opts?: GoapiOptions) {
   return goapi<SemanticHit[]>(`/posts/semantic?query=${encodeURIComponent(query)}`, {
-    // 搜索是实时行为，别进 7200s 的 fetch 缓存
+    // 搜索是实时行为，别进 43200s 的 fetch 缓存
     revalidate: 0,
     ...opts,
   });
@@ -284,7 +284,7 @@ export function fetchSiteInfo(opts?: GoapiOptions) {
 
 /** sitemap 是唯一不走信封的响应（XML 原样） */
 export async function fetchSitemapXml(opts?: GoapiOptions) {
-  const { tags, revalidate = 7200, body: _unusedBody, ...init } = opts ?? {};
+  const { tags, revalidate = 43200, body: _unusedBody, ...init } = opts ?? {};
   void _unusedBody;
   const res = await fetch(`${siteConfigs.backEndUrl}/sitemap`, {
     ...init,

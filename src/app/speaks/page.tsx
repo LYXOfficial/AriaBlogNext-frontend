@@ -1,4 +1,4 @@
-export const revalidate = 1800;
+export const revalidate = 43200;
 import "styles/Pages.css";
 import "styles/PostContent.css";
 import { TwikooBaseComment } from "components/thirdpartyjs/Twikoo";

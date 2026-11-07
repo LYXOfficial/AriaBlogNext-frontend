@@ -1155,9 +1155,6 @@
     top: auto;
     bottom: 76px;
     width: auto;
-    max-width: 350px;
-    margin-left: 0;
-    margin-right: auto;
     flex-direction: column;
     gap: 10px;
     padding: 14px;
@@ -1176,6 +1173,17 @@
     -ms-overflow-style: none;
     transform: translateY(10px) scale(0.99);
     transform-origin: bottom center;
+  }
+
+  /* 401~940px（平板/横屏）：抽屉不再跟屏宽拉满，350 贴左，底部收一点 */
+  @media screen and (min-width: 401px) {
+    .music-player-panel {
+      left: 16px;
+      max-width: 350px;
+      margin-left: 0;
+      margin-right: auto;
+      bottom: 64px;
+    }
   }
 
   /* PC 的歌词卡收缩开关在手机上让位给 tab，包壳恢复成一整块 */

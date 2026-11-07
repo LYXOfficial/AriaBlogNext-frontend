@@ -1,4 +1,4 @@
-export const revalidate = 3600;
+export const revalidate = 43200;
 
 import RSS from "rss";
 import { siteConfigs } from "@/config";

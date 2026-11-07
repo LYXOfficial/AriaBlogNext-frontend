@@ -1,5 +1,5 @@
-// 页面级 ISR：写操作由后端 Webhook 立即 revalidateTag，7200s（2h）只是兜底。
-export const revalidate = 7200;
+// 页面级 ISR：写操作由后端 Webhook 立即 revalidateTag，43200s（12h）只是兜底。
+export const revalidate = 43200;
 
 import "styles/Pages.css";
 import "styles/PostContent.css";
