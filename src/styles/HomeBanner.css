@@ -118,10 +118,114 @@
   display: block;
 }
 
+/* 首屏播放器展开面板时，标题和快捷按钮给播放器让位：
+   半透明卡片后面再透一层大字，会糊成一团灰。
+   data-music-stage 由 MusicPlayer 挂在 <html> 上，只在首页首屏 + 面板打开时存在。 */
+.home-banner-intro > .home-banner-headline,
+#home-menu-buttons-slot {
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.home-banner-intro > .home-banner-welcome {
+  /* 保留原来的颜色过渡，只补一个淡出 */
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    color var(--dur-slow) var(--ease-out);
+}
+
+/* 只在桌面生效：手机上面板是底部抽屉，标题不用让位 */
+@media screen and (min-width: 941px) {
+  html[data-music-stage] .home-banner-intro > :not(#home-player-slot) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* 快捷按钮 portal 在 body 上，Banner 里的那一组跟着让位 */
+  html[data-music-stage] .menu-actions[data-banner="true"] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 #home-menu-buttons-slot {
   width: min(340px, 100%);
   height: 48px;
   margin: 24px auto 0;
+}
+
+/* 首屏音乐播放器的落脚点：一条比顶栏凹槽多带几个功能块的玻璃胶囊。
+   尺寸和 --mp-hero-* 变量在这里定（Banner 才知道还能塞多大），
+   MusicPlayer.css 只负责把内容排进去。
+   高度固定：播放器在 Banner 和顶栏之间来回飞时，上面的大字不能跟着跳。 */
+#home-player-slot {
+  --mp-hero-disc: 52px;
+  --mp-hero-pad: 12px;
+  --mp-hero-name: 14px;
+  --mp-hero-main: 13.5px;
+  --mp-hero-sub: 10.5px;
+  width: min(500px, 100%);
+  height: 94px;
+  margin: 42px auto 0;
+}
+
+/* 桌面端矮窗口：先压播放器，再把整块内容往上提，别和底部说说条打架 */
+@media screen and (min-width: 941px) and (max-height: 860px) {
+  .home-banner-intro {
+    top: 42%;
+  }
+
+  #home-player-slot {
+    --mp-hero-disc: 48px;
+    --mp-hero-pad: 10px;
+    --mp-hero-name: 13.5px;
+    --mp-hero-main: 13px;
+    --mp-hero-sub: 10px;
+    height: 88px;
+    margin-top: 32px;
+  }
+}
+
+@media screen and (min-width: 941px) and (max-height: 780px) {
+  .home-banner-intro {
+    top: 40%;
+  }
+
+  #home-player-slot {
+    --mp-hero-disc: 44px;
+    --mp-hero-pad: 9px;
+    --mp-hero-name: 13px;
+    --mp-hero-main: 12.5px;
+    height: 82px;
+    margin-top: 24px;
+  }
+}
+
+/* 再矮就真的没地方了，播放器回顶栏凹槽（MusicPlayer 量到槽位 0 高会切回顶栏） */
+@media screen and (max-height: 660px) and (min-width: 941px) {
+  #home-player-slot {
+    display: none;
+  }
+}
+
+/* 手机：Banner 里也放一条迷你播放器，滚进正文后交给左下角悬浮钮 */
+@media screen and (max-width: 940px) {
+  #home-player-slot {
+    --mp-hero-disc: 52px;
+    --mp-hero-pad: 12px;
+    --mp-hero-name: 14px;
+    --mp-hero-main: 13px;
+    --mp-hero-sub: 10px;
+    width: 100%;
+    height: 88px;
+    margin: 18px auto 0;
+  }
+}
+
+@media screen and (max-height: 620px) {
+  #home-player-slot {
+    display: none;
+  }
 }
 
 .home-banner-scroll-hint {

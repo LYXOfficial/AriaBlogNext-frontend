@@ -311,12 +311,13 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
 
       // Leave menus, dialogs, inputs and independently scrolling panels alone.
+      // 音乐面板例外：它是 fixed 的，指针停在上面时如果也把滚轮吞掉，
+      // 用户会以为「滚下去要先顿一下」，所以允许它把滚动交给 Banner 吸附。
       const target = event.target instanceof Element ? event.target : null;
-      if (
-        target?.closest(
-          "input, textarea, select, [contenteditable], [role='dialog'], #navbar, #search-box, #homespeaks-container, #posts-categories-bar",
-        )
-      ) {
+      const ignored = target?.closest(
+        "input, textarea, select, [contenteditable], [role='dialog'], #navbar, #search-box, #homespeaks-container, #posts-categories-bar",
+      );
+      if (ignored && ignored.id !== "music-player-panel") {
         return;
       }
       for (let el = target; el && el !== document.body; el = el.parentElement) {
@@ -619,6 +620,9 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
           ))}
         </h1>
         <div id="home-menu-buttons-slot" aria-hidden="true" />
+        {/* 音乐播放器在首屏的落脚点（MusicPlayer 用 portal 注入大播放器）。
+            高度固定：播放器在 Banner 和顶栏之间来回飞，不能让上面的大字跟着跳。 */}
+        <div id="home-player-slot" />
       </div>
       <div className="home-banner-bottom">
         {/* 点击直达正文：监听在组件 effect 里挂（.home-banner-scroll-hint）。

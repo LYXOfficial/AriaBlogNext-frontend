@@ -1,4 +1,8 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
+/* 歌词页试用的衬线字体（Noto Serif SC）。fontsource 把中文字体切成上百个
+   unicode-range 分片，浏览器只下载歌词里真正出现的字所在的片，不用背全量字体。 */
+@import url("https://testingcf.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css");
+@import url("https://testingcf.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css");
 
 @font-face {
   font-family: "HYTMR";
@@ -378,4 +382,18 @@ body {
   --dur-slow: 520ms; /* 大范围位移（原本 >=0.4s 的动画保留原时长，不走此令牌） */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* 起步快、收尾缓 */
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* 往返/循环 */
+}
+
+/* ---------------- 播放器面板字体 ---------------- */
+/* 歌词区 + 卡片上的歌名/歌手统一用 Noto Serif SC 加粗；顶栏凹槽和歌单列表
+   仍用 HYTMR（凹槽是主题装饰，列表是索引性的小字，衬线反而拖慢扫读）。
+   挂在 .is-open 上：面板收起时字体规则不生效，首页不会一进来就去下字体分片。
+   想回退：删掉这一段和文件顶部的两条 fontsource @import。 */
+.music-player-panel.is-open .music-player-lyrics,
+.music-player-panel.is-open .music-player-name,
+.music-player-panel.is-open .music-player-artist {
+  font-family: "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC",
+    "HYTMR", serif;
+  /* 衬线小字在原字号下偏细，统一加粗到 700 才有分量 */
+  font-weight: 700;
 }

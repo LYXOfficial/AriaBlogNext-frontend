@@ -16,11 +16,11 @@
   border-radius: 23px;
   border: 1px solid color-mix(in srgb, var(--aria-fontcolor) 8%, transparent);
   /* 凹槽质感：底色比顶栏压深一点 + 顶部内阴影，看起来是「陷进去」的一条 */
-  background-color: color-mix(in srgb, var(--aria-black) 7%, transparent);
+  background-color: color-mix(in srgb, var(--aria-black) 4%, transparent);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   backdrop-filter: blur(14px) saturate(160%);
   box-shadow:
-    inset 0 3px 6px color-mix(in srgb, var(--aria-black) 12%, transparent),
+    inset 0 3px 6px color-mix(in srgb, var(--aria-black) 8%, transparent),
     inset 0 -1px 0 color-mix(in srgb, var(--aria-white) 46%, transparent);
   color: var(--aria-fontcolor);
   overflow: hidden;
@@ -304,6 +304,381 @@
   background-color: var(--aria-theme);
 }
 
+/* ---------------- 首页首屏的大播放器 ---------------- */
+
+/* 站在 Banner 里的一条玻璃胶囊：比顶栏凹槽多出歌名、上一首/下一首、
+   播放模式和进度。尺寸全部来自 #home-player-slot 上的 --mp-hero-* 变量
+   （Banner 那边决定能放多大），这里只负责排版和材质。
+   不加投影：压在封面图上深色投影会糊成一圈灰，只留一道内高光收边。 */
+.music-player-hero {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  width: 100%;
+  height: 100%;
+  padding: var(--mp-hero-pad, 12px) 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 24px;
+  background: rgba(20, 27, 39, 0.24);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.13);
+  color: var(--aria-white);
+  text-align: left;
+  text-shadow: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+  --mp-fill: var(--aria-theme);
+  --mp-track: color-mix(in srgb, var(--aria-white) 30%, transparent);
+  animation: music-player-hero-in var(--dur-slow) var(--ease-out);
+}
+
+@keyframes music-player-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.music-player-hero[data-open] {
+  border-color: color-mix(in srgb, var(--aria-theme) 55%, transparent);
+}
+
+/* 面板打开（舞台模式）时，大播放器本身也退场，别在卡片下面露出一条边。
+   淡出 + 轻微下沉，和面板的进出同一个节奏，不要「啪」地消失 */
+html[data-music-stage] .music-player-hero {
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+  pointer-events: none;
+}
+
+/* 整块可点：封面 + 歌名/歌手 + 两行歌词；右侧几个键单独接事件 */
+.music-player-hero-main {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.music-player-hero-disc {
+  position: relative;
+  flex: none;
+  width: var(--mp-hero-disc, 56px);
+  height: var(--mp-hero-disc, 56px);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color-mix(in srgb, var(--aria-theme) 18%, transparent);
+  color: var(--aria-theme);
+}
+
+.music-player-hero-disc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: music-player-disc-spin 9s linear infinite;
+}
+
+/* 唱片中心的小孔，和顶栏凹槽同一个装饰 */
+.music-player-hero-disc::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--aria-white) 82%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--aria-black) 20%, transparent);
+  pointer-events: none;
+}
+
+/* 歌名 / 歌手两行单独一栏，别和歌词挤在同一行被省略号吃掉 */
+.music-player-hero-meta {
+  flex: 0 1 42%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  transition: flex-grow var(--dur-base) var(--ease-out);
+}
+
+.music-player-hero-name {
+  display: block;
+  font-size: var(--mp-hero-name, 14px);
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player-hero-artist {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--aria-white) 60%, transparent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 歌词这一栏：没开始唱的时候整栏让给歌名/歌手，不留一块空地 */
+.music-player-hero-info {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+}
+
+.music-player-hero[data-lyric="false"] .music-player-hero-info {
+  display: none;
+}
+
+.music-player-hero[data-lyric="false"] .music-player-hero-meta {
+  flex-grow: 1;
+}
+
+.music-player-hero-line {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.music-player-hero-line.is-main {
+  margin-top: 1px;
+  font-size: var(--mp-hero-main, 13.5px);
+  line-height: 1.35;
+}
+
+.music-player-hero-line.is-sub {
+  font-size: var(--mp-hero-sub, 10.5px);
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--aria-white) 60%, transparent);
+}
+
+.music-player-hero-line.is-overflow {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 16px),
+    transparent
+  );
+  mask-image: linear-gradient(to right, #000 calc(100% - 16px), transparent);
+}
+
+.music-player-hero-line-text {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.music-player-hero-line-text.is-marquee {
+  animation: music-player-dock-marquee var(--mp-dur, 12s) var(--ease-in-out)
+    infinite alternate;
+}
+
+/* 白色底上的逐字高亮：唱过的一段是主题色，没唱的用半透明白 */
+.music-player-hero .music-player-karaoke > span {
+  background-image: linear-gradient(
+    to right,
+    var(--aria-theme) var(--progress, 0%),
+    color-mix(in srgb, var(--aria-white) 58%, transparent) var(--progress, 0%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.music-player-hero-actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 按钮跟着 Banner 里那组快捷按钮走：没有实心色块，只有一圈很淡的玻璃 */
+.music-player-hero-control {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: color-mix(in srgb, var(--aria-white) 78%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.music-player-hero-control:hover {
+  background-color: color-mix(in srgb, var(--aria-white) 14%, transparent);
+  color: var(--aria-white);
+}
+
+.music-player-hero-play {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--aria-white) 32%, transparent);
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--aria-white) 14%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--aria-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.music-player-hero-play:hover {
+  background-color: color-mix(in srgb, var(--aria-white) 24%, transparent);
+  transform: scale(1.03);
+}
+
+.music-player-hero-progress {
+  flex: 1 0 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 进度条保持一条细线：拇指只在悬停/聚焦时出现，静止时干干净净 */
+.music-player-hero-progress input {
+  flex: 1;
+  min-width: 0;
+  height: 3px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.music-player-hero-progress input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--aria-white);
+  box-shadow: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.music-player-hero-progress:hover input::-webkit-slider-thumb,
+.music-player-hero-progress input:focus-visible::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.music-player-hero-progress input::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--aria-white);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.music-player-hero-progress:hover input::-moz-range-thumb,
+.music-player-hero-progress input:focus-visible::-moz-range-thumb {
+  opacity: 1;
+}
+
+.music-player-hero-times {
+  flex: none;
+  font-size: 9.5px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--aria-white) 55%, transparent);
+  white-space: nowrap;
+}
+
+/* 键盘聚焦只在整块上加一圈软描边，别在玻璃里切出硬方框 */
+.music-player-hero:has(:focus-visible) {
+  outline: 2px solid color-mix(in srgb, var(--aria-theme) 58%, transparent);
+  outline-offset: 2px;
+}
+
+.music-player-hero :is(button, input):focus-visible {
+  outline: none;
+}
+
+@supports not selector(:has(*)) {
+  .music-player-hero :is(button, input):focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--aria-theme) 58%, transparent);
+    outline-offset: -2px;
+  }
+}
+
+/* 手机：Banner 里只留封面 + 歌名 + 一行歌词 + 播放键，别把首屏塞满 */
+@media screen and (max-width: 940px) {
+  .music-player-hero {
+    gap: 8px 12px;
+    padding: var(--mp-hero-pad, 12px) 14px;
+    border-radius: 22px;
+  }
+
+  .music-player-hero-main {
+    gap: 10px;
+  }
+
+  .music-player-hero-meta {
+    flex-basis: 46%;
+  }
+
+  .music-player-hero-line.is-sub,
+  .music-player-hero-control,
+  .music-player-hero-times {
+    display: none;
+  }
+
+  .music-player-hero-play {
+    width: 34px;
+    height: 34px;
+  }
+}
+
 /* ---------------- 手机悬浮圆钮 ---------------- */
 
 .music-player-button {
@@ -348,6 +723,8 @@
   border-radius: 50%;
   object-fit: cover;
   pointer-events: none;
+  /* 和凹槽唱片同速旋转；暂停切 play-state 是定格，不会回 0 度 */
+  animation: music-player-disc-spin 9s linear infinite;
 }
 
 .music-player-progress-ring {
@@ -409,11 +786,10 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px) scale(0.98);
-  transform-origin: top left;
+  /* 不动 transform：有 transform 动画时 Chromium 会在动画期间丢掉
+     backdrop-filter（卡片先是一块实色，动画结束才变模糊） */
   transition:
     opacity var(--dur-base) var(--ease-out),
-    transform var(--dur-base) var(--ease-out),
     visibility 0s linear var(--dur-base);
 }
 
@@ -421,10 +797,109 @@
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
-  transition:
-    opacity var(--dur-base) var(--ease-out),
-    transform var(--dur-base) var(--ease-out);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+/* 桌面端进出场：面板整体不透明（整体淡入会让 backdrop-filter 在动画期间失效），
+   改成「玻璃底色淡入 + 内容淡入」 */
+@media screen and (min-width: 941px) {
+  .music-player-panel {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      visibility 0s linear var(--dur-base);
+  }
+
+  /* 打开时不整体淡入（整体 opacity 动画会让 backdrop-filter 失效），
+     只让玻璃底色和内容淡入 */
+  .music-player-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: visibility 0s;
+  }
+
+  .music-player-card {
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+
+  /* 内容可以动：卡片本身不动（动了祖先会让 backdrop-filter 失效） */
+  .music-player-card > * {
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  /* 收起时先保持玻璃底色，等面板整体淡出结束再清空——
+     否则底色先透明了，会残留一块只有模糊、没有底的「花斑」 */
+  .music-player-panel:not(.is-open) .music-player-card {
+    background-color: transparent;
+    border-color: transparent;
+    transition:
+      background-color 0s linear var(--dur-base),
+      border-color 0s linear var(--dur-base);
+  }
+
+  .music-player-panel:not(.is-open) .music-player-card > *,
+  .music-player-panel:not(.is-open) .music-player-lyrics-slot {
+    opacity: 0;
+  }
+
+  .music-player-panel:not(.is-open) .music-player-card > * {
+    transform: translateY(10px);
+  }
+
+  .music-player-panel:not(.is-open) .music-player-lyrics-slot {
+    box-shadow: none;
+  }
+}
+
+/* 首屏大播放器上方的展开：从播放器往上长、左右居中，并盖住播放器本身。
+   材质沿用 Banner 里那几块玻璃（欢迎胶囊 / 快捷按钮 / 大播放器）：
+   深色、够透、白字、细白边，而不是把系统深色模式那套配色直接搬过来。 */
+@media screen and (min-width: 941px) {
+  .music-player-panel[data-hero="true"] {
+    color: var(--aria-white);
+    --aria-fontcolor: #fff;
+    --aria-light-fontcolor: color-mix(in srgb, #fff 68%, transparent);
+    --aria-acrylic1: rgba(20, 27, 39, 0.42);
+    --aria-acrylic2: rgba(20, 27, 39, 0.3);
+    --aria-row-hover: color-mix(in srgb, #fff 12%, transparent);
+  }
+
+  .music-player-panel[data-hero="true"] .music-player-card {
+    border: 1px solid color-mix(in srgb, #fff 24%, transparent);
+    box-shadow: 0 18px 38px -22px rgba(8, 12, 20, 0.55);
+  }
+
+  .music-player-panel[data-hero="true"] .music-player-lyrics-slot {
+    box-shadow: 0 18px 38px -22px rgba(8, 12, 20, 0.55);
+  }
+}
+
+/* PC 展开时歌词卡和歌单卡一样高：歌词区跟着变高，不再比左边短一截 */
+@media screen and (min-width: 941px) {
+  .music-player-panel {
+    align-items: stretch;
+  }
+
+  .music-player-lyrics-slot {
+    height: auto;
+  }
+
+  .music-player-card-lyrics {
+    height: 100%;
+  }
+
+  .music-player-lyrics {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
 }
 
 /* 封面模糊背景：PC 铺在歌词卡里，手机铺满整张播放器。
@@ -451,6 +926,29 @@
   background: var(--aria-acrylic2);
 }
 
+/* 封面分层：切歌时旧图留在下面，新图淡入，不会硬切一下 */
+.music-player-bg-img {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.music-player-bg-img.is-fading {
+  animation: music-player-bg-swap 720ms var(--ease-out);
+}
+
+@keyframes music-player-bg-swap {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .music-player-bg.is-sheet {
   display: none;
 }
@@ -461,6 +959,7 @@
   box-sizing: border-box;
   min-width: 0;
   overflow: hidden;
+  --mp-fill: var(--aria-theme);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -888,7 +1387,8 @@
 }
 
 .music-player-list {
-  max-height: 216px;
+  /* 固定高度：歌单没加载完 / 搜索没结果时也用同样的高度，卡片不会抽一下 */
+  height: 216px;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 2px;
@@ -1153,7 +1653,7 @@
     left: 12px;
     right: 12px;
     top: auto;
-    bottom: 76px;
+    bottom: 60px;
     width: auto;
     flex-direction: column;
     gap: 10px;
@@ -1182,7 +1682,6 @@
       max-width: 350px;
       margin-left: 0;
       margin-right: auto;
-      bottom: 64px;
     }
   }
 
@@ -1335,6 +1834,57 @@
       inset 0 3px 9px color-mix(in srgb, var(--aria-black) 55%, transparent),
       inset 0 -1px 0 color-mix(in srgb, var(--aria-white) 18%, transparent);
   }
+
+  /* 深色模式逐字高亮改成白色系：深粉在深底上糊成一团。
+     未唱部分不能再用「字色」（深色下本来就是白），否则两边一样亮、看不出唱到哪，
+     这里固定压到白色 42% */
+  .music-player-karaoke > span,
+  #navbar.trans .music-player-dock .music-player-karaoke > span {
+    background-image: linear-gradient(
+      to right,
+      var(--aria-white) var(--progress, 0%),
+      color-mix(in srgb, var(--aria-white) 42%, transparent) var(--progress, 0%)
+    );
+  }
+
+  /* 当前播放行 / 选中行的底改成白色系：深粉底在深色卡上糊成一团 */
+  .music-player-track.active {
+    background-color: color-mix(in srgb, var(--aria-white) 12%, transparent);
+  }
+
+  /* 深色模式主题色点缀换柔光白：两个小标题图标、进度/音量填充、当前播放歌名 */
+  .music-player-card {
+    --mp-fill: color-mix(in srgb, var(--aria-white) 72%, transparent);
+  }
+
+  .music-player-pane-head svg,
+  .music-player-track.active .music-player-track-name {
+    color: color-mix(in srgb, var(--aria-white) 72%, transparent);
+  }
+
+  /* 音量图标、进度条圆点换白：和上面同一批 */
+  .music-player-volume {
+    color: color-mix(in srgb, var(--aria-white) 72%, transparent);
+  }
+
+  /* 两个滑杆圆点都换实心白：半透明白会让底下的条子透出来，
+     边缘反差看起来就像多了一个框；描边和投影也一起去掉 */
+  .music-player-progress input::-webkit-slider-thumb,
+  .music-player-volume-slider::-webkit-slider-thumb {
+    background-color: var(--aria-white);
+    border: none;
+    box-shadow: none;
+  }
+
+  .music-player-progress input::-moz-range-thumb,
+  .music-player-volume-slider::-moz-range-thumb {
+    background-color: var(--aria-white);
+    border: none;
+  }
+
+  .music-player-lyric-line.is-current {
+    background-color: color-mix(in srgb, var(--aria-white) 8%, transparent);
+  }
 }
 
 @media (prefers-color-scheme: dark) and (max-width: 940px) {
@@ -1348,7 +1898,9 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* 深色卡片描边只留给桌面：这条排在手机规则后面，
+   不加 min-width 会把手机端 border:none 盖掉，冒出方形白框 */
+@media (prefers-color-scheme: dark) and (min-width: 941px) {
   .music-player-card {
     border: 1px solid color-mix(in srgb, var(--aria-white) 30%, transparent);
   }
@@ -1360,7 +1912,8 @@
 ) {
   .music-player-card,
   .music-player-button,
-  .music-player-dock {
+  .music-player-dock,
+  .music-player-hero {
     background-color: color-mix(
       in srgb,
       var(--aria-acrylic1) 94%,
@@ -1392,7 +1945,15 @@
   .music-player-eq i,
   .music-player-track-eq i,
   .music-player-dock-disc-img,
-  .music-player-dock-line-text.is-marquee {
+  .music-player-button-cover,
+  .music-player-hero-disc-img,
+  .music-player-dock-line-text.is-marquee,
+  .music-player-hero-line-text.is-marquee,
+  .music-player-bg-img.is-fading {
+    animation: none;
+  }
+
+  .music-player-hero {
     animation: none;
   }
 
@@ -1408,5 +1969,120 @@
     transition:
       opacity var(--dur-base) var(--ease-out),
       visibility 0s;
+  }
+}
+
+/* 深色模式下主题粉（--aria-darkpink）压在深玻璃上太暗：
+   首屏播放器的逐字高亮、进度和播放键统一换成白色系 */
+@media (prefers-color-scheme: dark) {
+  .music-player-hero {
+    --mp-fill: color-mix(in srgb, var(--aria-white) 82%, transparent);
+    --mp-track: color-mix(in srgb, var(--aria-white) 24%, transparent);
+  }
+
+  .music-player-hero-play {
+    border-color: color-mix(in srgb, var(--aria-white) 30%, transparent);
+    background-color: color-mix(in srgb, var(--aria-white) 16%, transparent);
+  }
+
+  .music-player-hero-play:hover {
+    background-color: color-mix(in srgb, var(--aria-white) 26%, transparent);
+  }
+
+  .music-player-hero[data-open] {
+    border-color: color-mix(in srgb, var(--aria-white) 36%, transparent);
+  }
+
+  /* 面板当前歌词下面那行中文翻译也别用深粉 */
+  .music-player-lyric-line.is-current .music-player-lyric-sub {
+    color: color-mix(in srgb, var(--aria-white) 64%, transparent);
+  }
+}
+
+/* 深色模式：主题粉（--aria-darkpink）在深底上太暗，
+   主按钮和高亮一律换成亮白（文字/图标/均衡器/进度/圆环） */
+@media (prefers-color-scheme: dark) {
+  .music-player-play {
+    background-color: var(--aria-white);
+    border-color: transparent;
+    color: #201414;
+  }
+
+  .music-player-play:hover {
+    background-color: color-mix(in srgb, var(--aria-white) 88%, transparent);
+  }
+
+  .music-player-lyricstoggle[data-on="true"] {
+    color: var(--aria-white);
+    background-color: color-mix(in srgb, var(--aria-white) 14%, transparent);
+  }
+
+  .music-player-volume {
+    color: var(--aria-white);
+  }
+
+  .music-player-eq i,
+  .music-player-track-eq i {
+    background-color: var(--aria-white);
+  }
+
+  .music-player-dock-play-circle {
+    background-color: color-mix(in srgb, var(--aria-white) 16%, transparent);
+    color: var(--aria-white);
+  }
+
+  .music-player-dock-play:hover .music-player-dock-play-circle {
+    background-color: color-mix(in srgb, var(--aria-white) 30%, transparent);
+    color: var(--aria-white);
+  }
+
+  .music-player-dock-progress i {
+    background-color: color-mix(in srgb, var(--aria-white) 82%, transparent);
+  }
+
+  .music-player-button {
+    color: var(--aria-white);
+  }
+
+  .music-player-progress-ring-circle {
+    stroke: var(--aria-white);
+  }
+
+  .music-player-card {
+    --mp-fill: var(--aria-white);
+  }
+
+  /* 首屏歌词那条规则的权重比通用深色规则高，这里单独再压一次 */
+  .music-player-close:hover,
+  .music-player-lyricstoggle:hover,
+  .music-player-control:hover,
+  .music-player-track:not(.active):hover .music-player-track-name {
+    color: var(--aria-white);
+  }
+
+  .music-player-search:focus-within {
+    border-color: color-mix(in srgb, var(--aria-white) 36%, transparent);
+    color: var(--aria-white);
+  }
+
+  .music-player-lyric-line:hover {
+    background-color: color-mix(in srgb, var(--aria-white) 8%, transparent);
+  }
+
+  .music-player-lyric-line.is-current:hover {
+    background-color: color-mix(in srgb, var(--aria-white) 12%, transparent);
+  }
+
+  .music-player-dock:hover,
+  .music-player-dock[data-open="true"] {
+    border-color: color-mix(in srgb, var(--aria-white) 30%, transparent);
+  }
+
+  .music-player-hero .music-player-karaoke > span {
+    background-image: linear-gradient(
+      to right,
+      var(--aria-white) var(--progress, 0%),
+      color-mix(in srgb, var(--aria-white) 42%, transparent) var(--progress, 0%)
+    );
   }
 }

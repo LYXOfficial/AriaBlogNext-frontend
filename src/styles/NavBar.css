@@ -101,7 +101,7 @@ html[data-home-manual-scroll] #navbar {
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  width: clamp(180px, calc(50vw - 300px), 420px);
+  width: clamp(180px, calc(50vw - 300px), 320px);
   display: flex;
   align-items: center;
 }
@@ -328,35 +328,59 @@ html[data-home-manual-scroll] #navbar {
     gap: 6px;
     align-items: center;
   }
+  /* 桌面入口沿用移动端抽屉的字号，别在顶栏做全站最大的一行字。 */
   #menu-items .menu-item {
-    font-size: 18px;
+    font-size: 15px;
   }
   #menu-items .site-page {
+    position: relative;
     margin: 0;
-    padding: 7px 12px;
+    padding: 7px 12px 10px;
     gap: 7px;
     align-items: center;
     border-radius: 999px;
     white-space: nowrap;
-    transition: background-color var(--dur-slow) var(--ease-in-out);
+    transition:
+      background-color var(--dur-fast) var(--ease-in-out),
+      color var(--dur-fast) var(--ease-in-out);
   }
   #menu-items .site-page > * {
     margin: 0;
   }
   #menu-items .site-page svg {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
   }
   #menu-items .menu-item:hover > .site-page,
   #menu-items .menu-item:has(:focus-visible) > .site-page {
-    background: rgba(130, 140, 160, 0.22);
+    background: color-mix(in srgb, var(--aria-theme) 7%, transparent);
     color: var(--aria-fontcolor);
     box-shadow: none;
   }
+  /* 当前分组用归档页 eyebrow 那条 18×2 粉线，不再整块胶囊；
+     aria-current 同时是样式钩子（文章/本站是不带 href 的 span）。 */
+  #menu-items .site-page[aria-current] {
+    font-weight: 700;
+  }
+  #menu-items .site-page[aria-current]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 18px;
+    height: 2px;
+    margin-left: -9px;
+    border-radius: 2px;
+    background: var(--aria-theme);
+  }
   #navbar.trans #menu-items .menu-item:hover > .site-page,
   #navbar.trans #menu-items .menu-item:has(:focus-visible) > .site-page {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.14);
     color: var(--aria-white);
+  }
+  #navbar.trans #menu-items .site-page[aria-current]::after {
+    background: var(--aria-white);
+    opacity: 0.8;
   }
 
   #menu-items .site-page-childs {

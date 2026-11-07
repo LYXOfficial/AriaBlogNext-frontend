@@ -19,6 +19,18 @@ export default function NavBar() {
   const [onTop, setOnTop] = useState(true);
   const [searchBoxShow, setSearchBoxShow] = useState(false);
   const pathName = usePathname();
+  // 顶栏只有三个分组入口，子路由要归到所属分组，导航里才看得出当前位置。
+  // 首页（含 /page/*）→ 首页；归档/标签/分类/说说/文章等 → 文章；其余站内页 → 本站。
+  const activeMenu =
+    pathName === "/" || pathName.startsWith("/page/")
+      ? "首页"
+      : /^\/(archives|tags|categories|speaks|license|examples|posts)(\/|$)/.test(
+            pathName,
+          )
+        ? "文章"
+        : /^\/(links|fcircle|about|messageboard)(\/|$)/.test(pathName)
+          ? "本站"
+          : "";
   const scrollHandler = throttle(() => {
     if (window.location.pathname === "/") {
       const banner = document.querySelector("[data-home-banner]");
@@ -155,12 +167,23 @@ export default function NavBar() {
                   }}
                 >
                   {item.link ? (
-                    <Link className="site-page" href={item.link}>
+                    <Link
+                      className="site-page"
+                      href={item.link}
+                      aria-current={
+                        activeMenu === item.name ? "true" : undefined
+                      }
+                    >
                       {item.icon}
                       <span>{" " + item.name}</span>
                     </Link>
                   ) : (
-                    <span className="site-page">
+                    <span
+                      className="site-page"
+                      aria-current={
+                        activeMenu === item.name ? "true" : undefined
+                      }
+                    >
                       {item.icon}
                       <span>{" " + item.name}</span>
                     </span>
