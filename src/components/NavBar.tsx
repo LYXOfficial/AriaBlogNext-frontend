@@ -19,16 +19,19 @@ export default function NavBar() {
   const [onTop, setOnTop] = useState(true);
   const [searchBoxShow, setSearchBoxShow] = useState(false);
   const pathName = usePathname();
-  // 顶栏只有三个分组入口，子路由要归到所属分组，导航里才看得出当前位置。
+  // 顶部导航只有三个分组入口，子路由要归到所属分组，导航里才看得出当前位置。
   // 首页（含 /page/*）→ 首页；归档/标签/分类/说说/文章等 → 文章；其余站内页 → 本站。
+  // 注意：首页静态预渲染时 usePathname() 可能为空（线上首次进首页踩过），
+  // 不归一成 "/" 的话首屏的当前分组下划线会不渲染。
+  const currentPath = pathName || "/";
   const activeMenu =
-    pathName === "/" || pathName.startsWith("/page/")
+    currentPath === "/" || currentPath.startsWith("/page/")
       ? "首页"
       : /^\/(archives|tags|categories|speaks|license|examples|posts)(\/|$)/.test(
-            pathName,
+            currentPath,
           )
         ? "文章"
-        : /^\/(links|fcircle|about|messageboard)(\/|$)/.test(pathName)
+        : /^\/(links|fcircle|about|messageboard)(\/|$)/.test(currentPath)
           ? "本站"
           : "";
   const scrollHandler = throttle(() => {

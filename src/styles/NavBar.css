@@ -381,6 +381,8 @@ html[data-home-manual-scroll] #navbar {
   #navbar.trans #menu-items .site-page[aria-current]::after {
     background: var(--aria-white);
     opacity: 0.8;
+    /* 首屏背景可能是浅色图，白线加一点暗阴影才不至于看不见 */
+    box-shadow: 0 0 3px rgb(0 0 0 / 25%);
   }
 
   #menu-items .site-page-childs {
