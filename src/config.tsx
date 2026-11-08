@@ -72,6 +72,8 @@ export const MenuItems: MenuItem[] = [
     link: "/",
     icon: <Icon icon="solar:home-smile-bold" />,
     childs: [],
+    // 分页仍属于首页；菜单里没有 /page 入口，只用来点亮顶栏。
+    activeMatch: ["/page"],
   },
   {
     name: "文章",
@@ -109,6 +111,8 @@ export const MenuItems: MenuItem[] = [
         icon: <Icon icon="solar:code-square-bold" />,
       },
     ],
+    // 文章详情页不在菜单里，但属于「文章」分组；/posts 下的路径都算。
+    activeMatch: ["/posts"],
   },
   {
     name: "本站",

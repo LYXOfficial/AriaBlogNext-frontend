@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "styles/NavBar.css";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -19,21 +19,94 @@ export default function NavBar() {
   const [onTop, setOnTop] = useState(true);
   const [searchBoxShow, setSearchBoxShow] = useState(false);
   const pathName = usePathname();
-  // 顶部导航只有三个分组入口，子路由要归到所属分组，导航里才看得出当前位置。
-  // 首页（含 /page/*）→ 首页；归档/标签/分类/说说/文章等 → 文章；其余站内页 → 本站。
+  // 当前分组由 MenuItems 推导：菜单项自身 + 子菜单里的站内链接，再加上 activeMatch
+  // 里补充的路径（/page 归首页、/posts 归文章）。外链不参与匹配，避免离开站点后
+  // 站内分组还亮着。新增页面只要进 config，顶栏高亮会自动跟上。
   // 注意：首页静态预渲染时 usePathname() 可能为空（线上首次进首页踩过），
   // 不归一成 "/" 的话首屏的当前分组下划线会不渲染。
   const currentPath = pathName || "/";
+  const isCurrentPath = (path: string) =>
+    path.startsWith("/") &&
+    (currentPath === path || currentPath.startsWith(`${path}/`));
   const activeMenu =
-    currentPath === "/" || currentPath.startsWith("/page/")
-      ? "首页"
-      : /^\/(archives|tags|categories|speaks|license|examples|posts)(\/|$)/.test(
-            currentPath,
-          )
-        ? "文章"
-        : /^\/(links|fcircle|about|messageboard)(\/|$)/.test(currentPath)
-          ? "本站"
-          : "";
+    MenuItems.find((item) =>
+      [
+        item.link,
+        ...item.childs.map((child) => child.link ?? ""),
+        ...(item.activeMatch ?? []),
+      ].some(isCurrentPath),
+    )?.name ?? "";
+
+  const menuItemsRef = useRef<HTMLDivElement>(null);
+  const currentLineRef = useRef<HTMLSpanElement>(null);
+  // 记录「下划线当前是为哪个分组摆的」。切分组时布局也会触发 ResizeObserver，
+  // 若让它先按新位置直接落位，就轮不到动画了，所以分组没落位前先跳过被动重排。
+  const activeMenuRef = useRef(activeMenu);
+  activeMenuRef.current = activeMenu;
+  const positionedMenuRef = useRef<string | null>(null);
+  // 横向位置走 transform（要平移），纵向位置走 top。分开存是为了：
+  // 切页时顶栏高度/边框变化只会改 y，别顺手把正在平移的 x 也重设成终点。
+  const lastXRef = useRef<number | null>(null);
+  const lastYRef = useRef<number | null>(null);
+  // 下划线做成独立元素，切分组时只平移 transform；不跟着 aria-current 换节点，
+  // 否则旧线瞬间消失、新线瞬间出现，没有过渡。
+  const positionCurrentLine = useCallback((animate: boolean) => {
+    const wrap = menuItemsRef.current;
+    const line = currentLineRef.current;
+    if (!wrap || !line) return;
+    const active = wrap.querySelector<HTMLElement>(".site-page[aria-current]");
+    if (!active) {
+      line.removeAttribute("data-visible");
+      return;
+    }
+    const wrapRect = wrap.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    // 18px 线宽，-9 让它中心对准入口中心；贴着入口底部 2px。
+    const x = activeRect.left - wrapRect.left + activeRect.width / 2 - 9;
+    const y = activeRect.bottom - wrapRect.top - 4;
+    const xChanged =
+      lastXRef.current === null || Math.abs(x - lastXRef.current) > 0.01;
+    const yChanged =
+      lastYRef.current === null || Math.abs(y - lastYRef.current) > 0.01;
+    if (!animate && !xChanged && !yChanged) return;
+    const shouldAnimate =
+      animate && xChanged && line.dataset.visible === "true";
+    // 首次落位、字体/图标重排直接跳过去，不走过渡；
+    // 先关掉 transition、写完 transform 再强制重排，避免过渡属性与位移同帧生效而不触发动画。
+    if (xChanged && !shouldAnimate) line.style.transition = "none";
+    if (xChanged) line.style.transform = `translate3d(${x}px, 0, 0)`;
+    line.style.top = `${y}px`;
+    if (xChanged && !shouldAnimate) {
+      void line.offsetWidth;
+      line.style.transition = "";
+    }
+    lastXRef.current = x;
+    lastYRef.current = y;
+    line.dataset.visible = "true";
+  }, []);
+
+  useEffect(() => {
+    positionCurrentLine(true);
+    positionedMenuRef.current = activeMenu;
+  }, [activeMenu, positionCurrentLine]);
+
+  useEffect(() => {
+    // 图标/字体/窗口尺寸变化会改入口宽度，跟随重排；这类被动变化不播动画。
+    const wrap = menuItemsRef.current;
+    if (!wrap) return;
+    const reposition = () => {
+      if (positionedMenuRef.current !== activeMenuRef.current) return;
+      positionCurrentLine(false);
+    };
+    const observer = new ResizeObserver(reposition);
+    // 入口宽度由图标和字体决定：图标是客户端补渲染的，只观察容器（宽度被 flex-grow
+    // 拉满，几乎不变）会漏掉图标落位后的偏移，所以三个入口也要观察。
+    wrap.querySelectorAll(".site-page").forEach((item) => observer.observe(item));
+    observer.observe(wrap);
+    document.fonts?.ready.then(reposition).catch(() => {});
+    return () => observer.disconnect();
+  }, [positionCurrentLine]);
+
   const scrollHandler = throttle(() => {
     if (window.location.pathname === "/") {
       const banner = document.querySelector("[data-home-banner]");
@@ -134,6 +207,7 @@ export default function NavBar() {
         <div id="menu-center">
           <div
             id="menu-items"
+            ref={menuItemsRef}
             className={
               mobileMenuOpen ? "mobile-menu-open" : "mobile-menu-close"
             }
@@ -229,6 +303,11 @@ export default function NavBar() {
                 </div>
               );
             })}
+            <span
+              id="nav-current-line"
+              ref={currentLineRef}
+              aria-hidden="true"
+            />
           </div>
         </div>
         <div id="menu-buttons">

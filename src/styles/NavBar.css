@@ -123,6 +123,11 @@ html[data-home-manual-scroll] #navbar {
   justify-content: center;
 }
 
+/* 当前分组下划线只在桌面端出现，移动端抽屉不用它。 */
+#nav-current-line {
+  display: none;
+}
+
 .menu-item {
   font-size: 18px;
   position: relative;
@@ -325,6 +330,7 @@ html[data-home-manual-scroll] #navbar {
     backdrop-filter: none;
   }
   #menu-items {
+    position: relative;
     gap: 6px;
     align-items: center;
   }
@@ -333,7 +339,6 @@ html[data-home-manual-scroll] #navbar {
     font-size: 15px;
   }
   #menu-items .site-page {
-    position: relative;
     margin: 0;
     padding: 7px 12px 10px;
     gap: 7px;
@@ -357,32 +362,46 @@ html[data-home-manual-scroll] #navbar {
     color: var(--aria-fontcolor);
     box-shadow: none;
   }
-  /* 当前分组用归档页 eyebrow 那条 18×2 粉线，不再整块胶囊；
-     aria-current 同时是样式钩子（文章/本站是不带 href 的 span）。 */
+  /* 当前分组用归档页 eyebrow 那条 18×2 粉线。线是 #menu-items 下的独立元素，
+     切分组时只平移 transform，不随 aria-current 换节点。 */
   #menu-items .site-page[aria-current] {
     font-weight: 700;
   }
-  #menu-items .site-page[aria-current]::after {
-    content: "";
+  #nav-current-line {
+    display: block;
     position: absolute;
-    left: 50%;
-    bottom: 2px;
+    left: 0;
+    top: 0;
     width: 18px;
     height: 2px;
-    margin-left: -9px;
     border-radius: 2px;
     background: var(--aria-theme);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      opacity var(--dur-fast) var(--ease-in-out);
+  }
+  #nav-current-line[data-visible="true"] {
+    opacity: 1;
   }
   #navbar.trans #menu-items .menu-item:hover > .site-page,
   #navbar.trans #menu-items .menu-item:has(:focus-visible) > .site-page {
     background: rgba(255, 255, 255, 0.14);
     color: var(--aria-white);
   }
-  #navbar.trans #menu-items .site-page[aria-current]::after {
+  #navbar.trans #nav-current-line {
     background: var(--aria-white);
-    opacity: 0.8;
     /* 首屏背景可能是浅色图，白线加一点暗阴影才不至于看不见 */
     box-shadow: 0 0 3px rgb(0 0 0 / 25%);
+  }
+  #navbar.trans #nav-current-line[data-visible="true"] {
+    opacity: 0.8;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #nav-current-line {
+      transition: none;
+    }
   }
 
   #menu-items .site-page-childs {
