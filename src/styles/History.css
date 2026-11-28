@@ -1,0 +1,830 @@
+/* 博客简史 /history：一条纵向时间线 + 顶部数据概览。
+   颜色、圆角、阴影都走 --aria-* 令牌，深色模式和移动端单独收一遍。 */
+
+/* ---------- 顶部引子 ---------- */
+
+#post-maincontent .history-lead {
+  margin: 0 0 30px;
+  padding: 18px 22px;
+  border-left: 3px solid var(--aria-theme);
+  border-radius: 0 14px 14px 0;
+  background: var(--aria-acrylic1);
+  color: var(--aria-blackfont);
+  font-size: 15px;
+  line-height: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+  #post-maincontent .history-lead {
+    color: var(--aria-whitefont);
+  }
+}
+
+.history-lead p {
+  margin: 0;
+}
+
+.history-lead p + p {
+  margin-top: 10px;
+}
+
+/* ---------- 数据概览 ---------- */
+
+.history-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 20px;
+}
+
+.history-stat {
+  padding: 18px 18px 16px;
+  border: var(--aria-border);
+  border-radius: 14px;
+  background: var(--aria-acrylic1);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.history-stat:hover {
+  border-color: var(--aria-theme);
+  transform: translateY(-2px);
+}
+
+.history-stat b {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--aria-theme);
+  font-variant-numeric: tabular-nums;
+}
+
+.history-stat span {
+  display: block;
+  margin-top: 6px;
+  color: var(--aria-light-fontcolor);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* 每年一篇的小柱子：只用来找「哪一年写得最多」，不做精确对比。 */
+.history-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  margin: 0 0 38px;
+  padding: 18px 22px 12px;
+  border: var(--aria-border);
+  border-radius: 14px;
+  background: var(--aria-acrylic1);
+}
+
+.history-chart-col {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.history-chart-bar {
+  width: 100%;
+  max-width: 46px;
+  border-radius: 6px 6px 2px 2px;
+  background: color-mix(in srgb, var(--aria-theme) 72%, transparent);
+  transform-origin: bottom;
+  transition: filter var(--dur-fast) var(--ease-out);
+}
+
+.history-chart-col:hover .history-chart-bar {
+  filter: brightness(1.12);
+}
+
+.history-chart-num {
+  color: var(--aria-fontcolor);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.history-chart-year {
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- 时间线 ---------- */
+
+.history-timeline {
+  position: relative;
+  margin: 8px 0 40px;
+}
+
+.history-timeline::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 7px;
+  width: 1px;
+  background: color-mix(in srgb, var(--aria-fontcolor) 16%, transparent);
+  pointer-events: none;
+}
+
+.history-year {
+  position: relative;
+  padding-left: 34px;
+  margin-top: 34px;
+}
+
+.history-year:first-child {
+  margin-top: 0;
+}
+
+/* 一年一个节点。用空心圆而不是实心点，和归档页的细线保持同一套手感。 */
+.history-year::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 0;
+  box-sizing: border-box;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--aria-theme);
+  border-radius: 50%;
+  background: var(--aria-background);
+}
+
+.history-year-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-bottom: 14px;
+}
+
+#post-maincontent .history-year-head h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--aria-fontcolor) 58%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+#post-maincontent .history-year-head h2::before {
+  content: none;
+}
+
+.history-year-sub {
+  color: var(--aria-light-fontcolor);
+  font-size: 13px;
+}
+
+.history-year-meta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+}
+
+.history-year-meta b {
+  color: var(--aria-theme);
+  font-weight: 500;
+}
+
+.history-events {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-event {
+  position: relative;
+  padding: 15px 18px 14px;
+  border: var(--aria-border);
+  border-radius: 14px;
+  background: var(--aria-acrylic1);
+}
+
+.history-event-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.history-event-date {
+  flex-shrink: 0;
+  color: var(--aria-theme);
+  font-family: "Monaco", monospace, "HYTMR";
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+#post-maincontent .history-event h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+#post-maincontent .history-event h3::before {
+  content: none;
+}
+
+#post-maincontent .history-event h3:hover {
+  transform: none;
+}
+
+.history-event p {
+  margin: 6px 0 0;
+  color: var(--aria-blackfont);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+@media (prefers-color-scheme: dark) {
+  .history-event p {
+    color: var(--aria-whitefont);
+  }
+}
+
+.history-event-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.history-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--aria-theme) 10%, transparent);
+  color: color-mix(in srgb, var(--aria-theme) 84%, var(--aria-fontcolor));
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.history-event-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--aria-theme);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.history-event-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- 被重做过的地方 ---------- */
+
+.history-features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.history-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px 18px 13px;
+  border: var(--aria-border);
+  border-radius: 14px;
+  background: var(--aria-acrylic1);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.history-feature:hover {
+  border-color: var(--aria-theme);
+  transform: translateY(-2px);
+}
+
+.history-feature-tag {
+  display: inline-flex;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--aria-theme) 10%, transparent);
+  color: color-mix(in srgb, var(--aria-theme) 84%, var(--aria-fontcolor));
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+#post-maincontent .history-feature h3 {
+  margin: 10px 0 3px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+#post-maincontent .history-feature h3::before {
+  content: none;
+}
+
+.history-feature p {
+  margin: 0;
+  color: var(--aria-blackfont);
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+
+@media (prefers-color-scheme: dark) {
+  .history-feature p {
+    color: var(--aria-whitefont);
+  }
+}
+
+/* ---------- 不同时期的样子 ---------- */
+
+.history-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.history-shot {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border: var(--aria-border);
+  border-radius: 14px;
+  background: var(--aria-acrylic1);
+  overflow: hidden;
+}
+
+.history-shot-link {
+  display: block;
+  line-height: 0;
+}
+
+.history-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--aria-line);
+  background: var(--aria-surface);
+}
+
+.history-shot figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px 14px;
+}
+
+.history-shot b {
+  color: var(--aria-fontcolor);
+  font-size: 14px;
+}
+
+.history-shot span {
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.history-gallery-note {
+  margin: 10px 2px 0;
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* ---------- 组件与功能清单 ---------- */
+
+.history-catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.history-group {
+  border: var(--aria-border);
+  border-radius: 14px;
+  background: var(--aria-acrylic1);
+  overflow: hidden;
+}
+
+.history-group summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.history-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.history-group summary::before {
+  content: "+";
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid color-mix(in srgb, var(--aria-theme) 50%, transparent);
+  border-radius: 50%;
+  color: var(--aria-theme);
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.history-group[open] summary::before {
+  content: "−";
+}
+
+.history-group-title {
+  color: var(--aria-fontcolor);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.history-group-note {
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+}
+
+.history-group-count {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+}
+
+.history-catalog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 2px 18px 16px;
+  list-style: none;
+}
+
+.history-catalog-list li {
+  display: grid;
+  grid-template-columns: 158px minmax(0, 1fr);
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--aria-line);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.history-catalog-list b {
+  color: var(--aria-fontcolor);
+  font-weight: 600;
+}
+
+.history-catalog-list span {
+  color: var(--aria-blackfont);
+  font-size: 13px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .history-catalog-list span {
+    color: var(--aria-whitefont);
+  }
+}
+
+/* ---------- 还欠着的 ---------- */
+
+.history-pending {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-pending li {
+  position: relative;
+  padding: 12px 16px 12px 38px;
+  border: var(--aria-border);
+  border-radius: 12px;
+  background: var(--aria-acrylic1);
+  color: var(--aria-blackfont);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.history-pending li::before {
+  content: "○";
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: var(--aria-theme);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+@media (prefers-color-scheme: dark) {
+  .history-pending li {
+    color: var(--aria-whitefont);
+  }
+}
+
+/* ---------- 技术换代 ---------- */
+
+.history-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 44px 0 16px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.history-section-title::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--aria-theme);
+}
+
+.history-section-title small {
+  margin-left: auto;
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.history-tech {
+  display: flex;
+  flex-direction: column;
+  border: var(--aria-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.history-tech-row {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr) 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  font-size: 14px;
+}
+
+.history-tech-row + .history-tech-row {
+  border-top: 1px solid var(--aria-line);
+}
+
+.history-tech-label {
+  color: var(--aria-light-fontcolor);
+  font-size: 13px;
+}
+
+.history-tech-old {
+  color: color-mix(in srgb, var(--aria-fontcolor) 52%, transparent);
+}
+
+.history-tech-arrow {
+  color: var(--aria-theme);
+  font-size: 15px;
+  text-align: center;
+}
+
+.history-tech-new {
+  color: var(--aria-fontcolor);
+  font-weight: 500;
+}
+
+/* ---------- 周年摘录 ---------- */
+
+.history-quotes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.history-quote {
+  position: relative;
+  margin: 0;
+  padding: 20px 20px 18px;
+  border: var(--aria-border);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--aria-theme) 7%, transparent),
+      transparent 60%
+    ),
+    var(--aria-acrylic1);
+}
+
+.history-quote::before {
+  content: "“";
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  color: color-mix(in srgb, var(--aria-theme) 42%, transparent);
+  font-family: Georgia, serif;
+  font-size: 38px;
+  line-height: 1;
+}
+
+/* PostContent 给 blockquote 铺了浅底色，深色模式下会变成一块发亮的白板；
+   这里明确清掉，只留左侧留白给引号。 */
+#post-maincontent .history-quote blockquote {
+  margin: 0;
+  padding: 0 0 0 20px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--aria-fontcolor);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.history-quote figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--aria-fontcolor) 18%, transparent);
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+}
+
+.history-quote figcaption a {
+  color: var(--aria-theme);
+  text-decoration: none;
+}
+
+.history-quote figcaption a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- 相关文章 ---------- */
+
+.history-related {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.history-related a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: var(--aria-border);
+  border-radius: 12px;
+  background: var(--aria-acrylic1);
+  color: var(--aria-fontcolor);
+  font-size: 14px;
+  text-decoration: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.history-related a:hover {
+  border-color: var(--aria-theme);
+  transform: translateX(3px);
+}
+
+.history-related a span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-related a svg {
+  flex-shrink: 0;
+  color: var(--aria-theme);
+}
+
+/* 数据来源：小字，放在最后，不抢正文。 */
+.history-source {
+  margin: 34px 0 4px;
+  padding-top: 16px;
+  border-top: 1px dashed color-mix(in srgb, var(--aria-fontcolor) 18%, transparent);
+  color: var(--aria-light-fontcolor);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* ---------- 窄屏 ---------- */
+
+@media screen and (max-width: 900px) {
+  .history-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .history-quotes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #post-maincontent .history-lead {
+    padding: 15px 16px;
+    font-size: 14px;
+  }
+
+  .history-chart {
+    gap: 10px;
+    padding: 14px 12px 10px;
+  }
+
+  .history-year {
+    padding-left: 26px;
+  }
+
+  .history-timeline::before {
+    left: 6px;
+  }
+
+  .history-year::before {
+    top: 7px;
+    width: 13px;
+    height: 13px;
+  }
+
+  #post-maincontent .history-year-head h2 {
+    font-size: 30px;
+  }
+
+  .history-year-meta {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .history-event {
+    padding: 13px 14px 12px;
+  }
+
+  .history-tech-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    padding: 12px 14px;
+  }
+
+  .history-tech-label {
+    font-size: 12px;
+  }
+
+  .history-tech-arrow {
+    display: none;
+  }
+
+  .history-tech-old::before {
+    content: "旧 · ";
+    color: var(--aria-light-fontcolor);
+  }
+
+  .history-tech-new::before {
+    content: "新 · ";
+    color: var(--aria-theme);
+  }
+
+  .history-related {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .history-features {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .history-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .history-catalog-list li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .history-group-note {
+    display: none;
+  }
+}

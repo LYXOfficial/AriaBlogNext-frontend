@@ -140,6 +140,11 @@ export const MenuItems: MenuItem[] = [
         icon: <Icon icon="solar:info-circle-bold" />,
       },
       {
+        name: "简史",
+        link: "/history",
+        icon: <Icon icon="solar:clock-circle-bold" />,
+      },
+      {
         name: "日志",
         link: "https://github.com/LYXOfficial/AriaBlogNext-frontend/commits/main/",
         icon: <Icon icon="solar:calendar-bold" />,
@@ -206,7 +211,7 @@ export const FooterBadges: FooterBadge[] = [
 ];
 
 export const LoveUContent: LoveU = {
-  enable: true,
+  enable: false,
   myName: "Aria",
   yourName: "Android",
   myAvatar: "https://img.0v0.my/2026/10/18/35baaf5713991.webp",
