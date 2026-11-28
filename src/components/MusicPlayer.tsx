@@ -290,6 +290,22 @@ function readSaved() {
 export default function MusicPlayer() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [panelMounted, setPanelMounted] = useState(false);
+  useEffect(() => {
+    if (!isOpen) return;
+    setPanelMounted(true);
+    const urls = [
+      "https://testingcf.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css",
+      "https://testingcf.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css",
+    ];
+    urls.forEach((href) => {
+      if (document.querySelector(`link[rel="stylesheet"][href="${href}"]`)) return;
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      document.head.appendChild(link);
+    });
+  }, [isOpen]);
   // 手机端面板只放得下一个内容区，歌单/歌词用分段按钮切换
   const [pane, setPane] = useState<"list" | "lyrics">("list");
   // PC 端右侧歌词卡片显隐（默认显示，选择记在本地）
@@ -578,7 +594,7 @@ export default function MusicPlayer() {
     const schedule = () => {
       if (!raf && !disposed) raf = requestAnimationFrame(evaluate);
     };
-    evaluate();
+    schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     window.visualViewport?.addEventListener("resize", schedule);
@@ -1170,36 +1186,43 @@ export default function MusicPlayer() {
       [heroSubBoxRef.current, heroSubTextRef.current],
     ] as const;
     let raf = 0;
-    const applyOne = (box: HTMLElement, inner: HTMLElement) => {
-      const over = inner.scrollWidth - box.clientWidth;
-      const overflowing = over > 12;
-      box.classList.toggle("is-overflow", overflowing);
-      inner.classList.remove("is-marquee");
-      if (!overflowing) return;
-      inner.style.setProperty("--mp-shift", `${-over}px`);
-      inner.style.setProperty(
-        "--mp-dur",
-        `${Math.min(26, Math.max(7, over / 26))}s`,
-      );
-      // 文本换了要从头开始滚：先摘类再强制回流，动画才会重新计时
-      void inner.offsetWidth;
-      inner.classList.add("is-marquee");
-    };
+    let marqueeRaf = 0;
     const apply = () => {
       raf = 0;
+      const toRestart: HTMLElement[] = [];
       for (const [box, inner] of pairs) {
-        if (box && inner) applyOne(box, inner);
+        if (!box || !inner) continue;
+        const over = inner.scrollWidth - box.clientWidth;
+        const overflowing = over > 12;
+        box.classList.toggle("is-overflow", overflowing);
+        inner.classList.remove("is-marquee");
+        if (!overflowing) continue;
+        inner.style.setProperty("--mp-shift", `${-over}px`);
+        inner.style.setProperty(
+          "--mp-dur",
+          `${Math.min(26, Math.max(7, over / 26))}s`,
+        );
+        toRestart.push(inner);
+      }
+      if (toRestart.length) {
+        if (marqueeRaf) cancelAnimationFrame(marqueeRaf);
+        // 下一帧再挂回 is-marquee 重置动画，避免同步读 offsetWidth 触发强制重排
+        marqueeRaf = requestAnimationFrame(() => {
+          marqueeRaf = 0;
+          for (const inner of toRestart) inner.classList.add("is-marquee");
+        });
       }
     };
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(apply);
     };
-    apply();
+    schedule();
     const observer = new ResizeObserver(schedule);
     for (const [box] of pairs) if (box) observer.observe(box);
     return () => {
       observer.disconnect();
       if (raf) cancelAnimationFrame(raf);
+      if (marqueeRaf) cancelAnimationFrame(marqueeRaf);
     };
   }, [dockMainText, dockSubText, heroMode]);
 
@@ -1214,16 +1237,17 @@ export default function MusicPlayer() {
   }, [isOpen]);
 
   // 初始化：拉歌单 → 恢复上次状态。只跑一次。
+  // 延迟到首屏空闲后再拉取，避免 974 首大歌单抢占首屏带宽和主线程。
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    const initPlayer = async () => {
       let songs: Song[] = [];
       try {
         const cached = localStorage.getItem(CACHE_KEY);
         if (cached) {
           const data = JSON.parse(cached);
           if (Date.now() - data.timestamp < CACHE_TTL && data.songs?.length) {
-            songs = data.songs.map((s: Song) => ({ ...s }));
+            songs = data.songs;
           }
         }
       } catch {
@@ -1287,7 +1311,18 @@ export default function MusicPlayer() {
       restored.current = true;
       if (saved.wantPlaying) await tryPlay();
       syncPlaybackDom();
-    })();
+    };
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let timer = 0;
+    let idle = 0;
+    if (typeof w.requestIdleCallback === "function") {
+      idle = w.requestIdleCallback(() => void initPlayer(), { timeout: 1500 });
+    } else {
+      timer = window.setTimeout(() => void initPlayer(), 400);
+    }
 
     const onSpace = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -1348,6 +1383,8 @@ export default function MusicPlayer() {
     }
     return () => {
       cancelled = true;
+      if (idle && typeof w.cancelIdleCallback === "function") w.cancelIdleCallback(idle);
+      if (timer) window.clearTimeout(timer);
       document.removeEventListener("keydown", onSpace);
       document.removeEventListener("visibilitychange", flush);
       window.removeEventListener("pagehide", flush);
@@ -1451,17 +1488,16 @@ export default function MusicPlayer() {
   };
 
   const needle = query.trim().toLowerCase();
-  const visibleTracks = useMemo(
-    () =>
-      playlist
-        .map((song, index) => ({ song, index }))
-        .filter(({ song }) =>
-          needle
-            ? `${song.name} ${song.artist}`.toLowerCase().includes(needle)
-            : true,
-        ),
-    [playlist, needle],
-  );
+  const visibleTracks = useMemo(() => {
+    if (!panelMounted) return [];
+    return playlist
+      .map((song, index) => ({ song, index }))
+      .filter(({ song }) =>
+        needle
+          ? `${song.name} ${song.artist}`.toLowerCase().includes(needle)
+          : true,
+      );
+  }, [panelMounted, playlist, needle]);
 
   // 虚拟滚动：只渲染视口附近的行
   const totalRows = visibleTracks.length;
@@ -1800,6 +1836,8 @@ export default function MusicPlayer() {
         aria-hidden={!isOpen}
         inert={!isOpen}
       >
+        {panelMounted && (
+          <>
         {/* 手机端整张播放器的模糊封面底（PC 隐藏，PC 用的是歌词卡那一层） */}
         <div className="music-player-bg is-sheet" aria-hidden="true">
           {coverBgLayers}
@@ -2024,7 +2062,7 @@ export default function MusicPlayer() {
             <div
               className="music-player-list"
               ref={listRef}
-              role="listbox"
+              role={totalRows > 0 ? "listbox" : undefined}
               aria-label="播放列表"
               onScroll={onListScroll}
               onWheel={markUserScroll}
@@ -2153,6 +2191,8 @@ export default function MusicPlayer() {
             </div>
           </div>
         </div>
+          </>
+        )}
       </div>
 
       {/* 手机端的悬浮圆钮：Banner 里有大播放器时让位，滚进正文后才浮出来 */}

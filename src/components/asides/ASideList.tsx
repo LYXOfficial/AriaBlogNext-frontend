@@ -1,5 +1,5 @@
 import "styles/ASide/List.css";
-import Link from "next/link";
+import Link from "components/SmartLink";
 import { ASideListItem } from "interfaces/asidelistitem";
 import ImageWithFalldown from "components/ImageWithFalldown";
 
@@ -18,6 +18,7 @@ export default function ASideList({
             className="aside-list-item"
             title={item.title.substring(0, 50)}
             href={item.link}
+            prefetch={false}
             key={item.link}
           >
             {item.pic == "" ? (

@@ -578,13 +578,16 @@ html[data-music-stage] .music-player-hero {
   gap: 8px;
 }
 
-/* 进度条保持一条细线：拇指只在悬停/聚焦时出现，静止时干干净净 */
+/* 进度条保持一条 3px 细线，同时将热区扩展到 24px 高以满足触摸目标规范；
+   向上只占 8px（不与上方按钮重叠），其余向下伸入卡片底部内边距。 */
 .music-player-hero-progress input {
   flex: 1;
   min-width: 0;
-  height: 3px;
-  margin: 0;
-  padding: 0;
+  height: 24px;
+  margin: -8px 0 -13px;
+  padding: 8px 0 13px;
+  box-sizing: border-box;
+  background-clip: content-box !important;
   border: none;
   border-radius: 2px;
   -webkit-appearance: none;

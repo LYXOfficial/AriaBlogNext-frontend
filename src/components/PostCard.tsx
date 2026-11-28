@@ -1,12 +1,12 @@
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import "styles/PostCard.css";
-import Link from "next/link";
+import Link from "components/SmartLink";
 import { Post } from "interfaces/post";
 import { siteConfigs } from "config";
 import { fetchPostCount, fetchPostsWindow, fetchCategories } from "utils/api";
 import { notFound } from "next/navigation";
-import { TwikooCountHome } from "components/thirdpartyjs/Twikoo";
+import TwikooCountHome from "components/thirdpartyjs/TwikooCountHome";
 import PostCategoryBar from "components/PostCategoryBar";
 import ImageWithFalldown from "./ImageWithFalldown";
 import { Category } from "@/interfaces/category";
@@ -81,6 +81,7 @@ export default async function Posts({ page }: { page: number }) {
               <Link
                 className="post-banner-link"
                 href={"/posts/" + post.slug}
+                prefetch={false}
                 title={post.title}
               >
                 <ImageWithFalldown
@@ -91,6 +92,7 @@ export default async function Posts({ page }: { page: number }) {
                   }
                   alt={post.title!}
                   falldownImg={siteConfigs.falldownImg}
+                  fetchPriority="low"
                 />
               </Link>
             </div>
@@ -98,6 +100,7 @@ export default async function Posts({ page }: { page: number }) {
               <Link
                 className="post-title"
                 href={"/posts/" + post.slug}
+                prefetch={false}
                 title={post.title}
               >
                 {post.title}
@@ -109,6 +112,7 @@ export default async function Posts({ page }: { page: number }) {
                 <Link
                   className="post-category"
                   href={"/categories/" + post.category}
+                  prefetch={false}
                   title={post.category}
                 >
                   {post.category}
@@ -135,6 +139,7 @@ export default async function Posts({ page }: { page: number }) {
                         <Link
                           key={tag}
                           href={"/tags/" + encodeURIComponent(tag)}
+                          prefetch={false}
                         >
                           {tag}
                         </Link>
@@ -160,6 +165,7 @@ export default async function Posts({ page }: { page: number }) {
             <Link
               className="post-card-pgbtn post-card-pgstep"
               href={pageHref(page - 1)}
+              prefetch={false}
               rel="prev"
               aria-label="上一页"
             >
@@ -180,6 +186,7 @@ export default async function Posts({ page }: { page: number }) {
           ) : (
             <span
               className="post-card-pgbtn post-card-pgstep disabled"
+              role="link"
               aria-disabled="true"
               aria-label="上一页"
             >
@@ -204,7 +211,7 @@ export default async function Posts({ page }: { page: number }) {
                 <span
                   className="post-card-pgellipsis"
                   key={n}
-                  aria-label="省略的页码"
+                  aria-hidden="true"
                 >
                   …
                 </span>
@@ -213,7 +220,6 @@ export default async function Posts({ page }: { page: number }) {
                   className="post-card-pgbtn current"
                   key={n}
                   aria-current="page"
-                  aria-label={`第 ${n} 页，当前页`}
                 >
                   {n}
                 </span>
@@ -222,6 +228,7 @@ export default async function Posts({ page }: { page: number }) {
                   className="post-card-pgbtn"
                   key={n}
                   href={pageHref(n)}
+                  prefetch={false}
                   aria-label={`第 ${n} 页`}
                 >
                   {n}
@@ -233,6 +240,7 @@ export default async function Posts({ page }: { page: number }) {
             <Link
               className="post-card-pgbtn post-card-pgstep"
               href={pageHref(page + 1)}
+              prefetch={false}
               rel="next"
               aria-label="下一页"
             >
@@ -253,6 +261,7 @@ export default async function Posts({ page }: { page: number }) {
           ) : (
             <span
               className="post-card-pgbtn post-card-pgstep disabled"
+              role="link"
               aria-disabled="true"
               aria-label="下一页"
             >

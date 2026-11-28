@@ -2,7 +2,7 @@
 export const revalidate = 43200;
 
 import Posts from "components/PostCard";
-import { HomeASides } from "components/ASides";
+import HomeASides from "components/HomeASides";
 import { HomeRightSide } from "components/RightSide";
 import { notFound } from "next/navigation";
 import PostPageStart from "@/components/PostPageStart";

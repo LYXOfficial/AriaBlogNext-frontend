@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "components/SmartLink";
 import "styles/ASide/global.css";
 import "styles/ASide/Info.css";
 import { Social } from "interfaces/siteconfig";
@@ -24,20 +24,22 @@ export default async function CardInfo() {
         <img
           alt="avatar"
           src={siteConfigs.avatar}
+          loading="lazy"
+          decoding="async"
           className="card-info-avatar-img"
         />
       </div>
       <span className="card-info-name">{siteConfigs.author}</span>
       <div className="card-info-datas">
-        <Link className="card-info-data" href="/archives">
+        <Link className="card-info-data" href="/archives" prefetch={false}>
           <span className="card-info-data-title">文章</span>
           <span className="card-info-data-count">{postCount}</span>
         </Link>
-        <Link className="card-info-data" href="/tags">
+        <Link className="card-info-data" href="/tags" prefetch={false}>
           <span className="card-info-data-title">标签</span>
           <span className="card-info-data-count">{tagCount}</span>
         </Link>
-        <Link className="card-info-data" href="/categories">
+        <Link className="card-info-data" href="/categories" prefetch={false}>
           <span className="card-info-data-title">分类</span>
           <span className="card-info-data-count">{categoryCount}</span>
         </Link>
@@ -50,6 +52,7 @@ export default async function CardInfo() {
               className="card-info-Social"
               href={link.url}
               title={link.name}
+              aria-label={link.name}
             >
               {link.icon}
             </a>

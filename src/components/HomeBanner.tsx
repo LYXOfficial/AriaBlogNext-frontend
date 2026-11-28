@@ -12,22 +12,21 @@ const CONTENT_GAP = 16;
 const SNAP_DURATION = 600;
 const HOME_REGION_KEY = "aria:home-region";
 
-export default function HomeBanner({ children }: { children?: ReactNode }) {
+export default function HomeBanner({
+  children,
+  initialImage = null,
+}: {
+  children?: ReactNode;
+  initialImage?: string | null;
+}) {
   const bannerRef = useRef<HTMLDivElement>(null);
-  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
-
-  useEffect(() => {
+  const [backgroundImage] = useState<string | null>(() => {
+    if (initialImage) return initialImage;
     const images = siteConfigs.homeBanner.images
       .map((image) => image.trim())
       .filter(Boolean);
-    // 挂载后再随机，避免服务端与客户端选到不同图片造成水合不一致，
-    // 也避免先请求列表首图、再请求随机图而浪费流量。
-    setBackgroundImage(
-      images.length
-        ? images[Math.floor(Math.random() * images.length)]
-        : siteConfigs.falldownImg.trim() || null,
-    );
-  }, []);
+    return images[0] || siteConfigs.falldownImg.trim() || null;
+  });
 
   useEffect(() => {
     const banner = bannerRef.current;
@@ -49,34 +48,46 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       banner.style.setProperty("--banner-y", "0px");
     };
     let lastPointerX = -1;
+    let parallaxFrame = 0;
+    let lastPointerEvent: PointerEvent | null = null;
     const parallax = (event: PointerEvent) => {
       lastPointerX = event.clientX;
       if (!motion.matches || event.pointerType !== "mouse") return;
       if (event.buttons !== 0) {
+        cancelAnimationFrame(parallaxFrame);
+        parallaxFrame = 0;
         resetParallax();
         return;
       }
-      const bounds = banner.getBoundingClientRect();
-      if (
-        event.clientX < bounds.left ||
-        event.clientX > bounds.right ||
-        event.clientY < bounds.top ||
-        event.clientY > bounds.bottom
-      ) {
-        resetParallax();
-        return;
-      }
-      // Keep movement inside the background's overscan, including on wide screens.
-      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * -2;
-      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -2;
-      banner.style.setProperty(
-        "--banner-x",
-        `${x * Math.min(18, bounds.width * 0.02)}px`,
-      );
-      banner.style.setProperty(
-        "--banner-y",
-        `${y * Math.min(18, bounds.height * 0.02)}px`,
-      );
+      lastPointerEvent = event;
+      if (parallaxFrame) return;
+      parallaxFrame = requestAnimationFrame(() => {
+        parallaxFrame = 0;
+        const ev = lastPointerEvent;
+        if (!ev) return;
+        const bounds = banner.getBoundingClientRect();
+        if (
+          bounds.bottom <= 0 ||
+          ev.clientX < bounds.left ||
+          ev.clientX > bounds.right ||
+          ev.clientY < bounds.top ||
+          ev.clientY > bounds.bottom
+        ) {
+          resetParallax();
+          return;
+        }
+        // Keep movement inside the background's overscan, including on wide screens.
+        const x = ((ev.clientX - bounds.left) / bounds.width - 0.5) * -2;
+        const y = ((ev.clientY - bounds.top) / bounds.height - 0.5) * -2;
+        banner.style.setProperty(
+          "--banner-x",
+          `${x * Math.min(18, bounds.width * 0.02)}px`,
+        );
+        banner.style.setProperty(
+          "--banner-y",
+          `${y * Math.min(18, bounds.height * 0.02)}px`,
+        );
+      });
     };
 
     /* ---------------- whole-block snap scrolling ---------------- */
@@ -168,7 +179,15 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
     if (!restoring) {
       banner.closest<HTMLElement>("[data-home-restoring]")?.style.removeProperty("visibility");
     }
-    window.addEventListener("scroll", rememberRegion, { passive: true });
+    let rememberFrame = 0;
+    const scheduleRememberRegion = () => {
+      if (rememberFrame) return;
+      rememberFrame = requestAnimationFrame(() => {
+        rememberFrame = 0;
+        rememberRegion();
+      });
+    };
+    window.addEventListener("scroll", scheduleRememberRegion, { passive: true });
     // 在站内导航改变布局前读取位置，避免卸载时把文章页的坐标记成首页坐标。
     const rememberBeforeNavigation = (event: MouseEvent) => {
       const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]");
@@ -563,7 +582,9 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
 
     return () => {
       cancelAnimationFrame(restoreFrame);
-      window.removeEventListener("scroll", rememberRegion);
+      cancelAnimationFrame(rememberFrame);
+      cancelAnimationFrame(parallaxFrame);
+      window.removeEventListener("scroll", scheduleRememberRegion);
       document.removeEventListener("click", rememberBeforeNavigation, true);
       window.removeEventListener("pagehide", rememberRegion);
       cancelAnimation();
@@ -598,15 +619,17 @@ export default function HomeBanner({ children }: { children?: ReactNode }) {
       data-home-banner
       aria-label="首页欢迎"
     >
-      <div
-        className="home-banner-background"
-        style={{
-          backgroundImage: backgroundImage
-            ? `url(${JSON.stringify(backgroundImage)})`
-            : undefined,
-        }}
-        aria-hidden="true"
-      />
+      {backgroundImage && (
+        <img
+          className="home-banner-background"
+          src={backgroundImage}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+        />
+      )}
       <div className="home-banner-intro">
         <a
           className="home-banner-welcome"

@@ -88,6 +88,8 @@
 
 #footer {
   margin-top: auto;
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 76px;
 }
 
 @media (prefers-color-scheme: dark) {

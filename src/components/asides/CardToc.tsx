@@ -25,7 +25,7 @@ export default function CardToc({ mdContent }: { mdContent: string }) {
       <div className="card-headline">
         <Icon icon="solar:list-bold" />
         <span className="card-title">目录</span>
-        <span className="toc-counter" aria-label="阅读进度">
+        <span className="toc-counter" title="阅读进度">
           已读 <span className="toc-counter-value">0</span><span>%</span>
         </span>
       </div>

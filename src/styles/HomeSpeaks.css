@@ -49,8 +49,19 @@
   flex-grow: 1;
   text-align: center;
   width: 0;
+  height: 30px;
+  overflow: hidden;
+  touch-action: pan-x;
+  user-select: none;
+  -webkit-user-select: none;
   margin-left: 5px !important;
   margin-right: 5px !important;
+}
+
+.homespeaks-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
 }
 
 .homespeaks-item {

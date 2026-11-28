@@ -1,4 +1,4 @@
-import { LazyImageWithFalldown } from "@/components/ImageWithFalldown";
+import { LazyImageWithFalldown } from "@/components/LazyImageWithFalldown";
 
 export default function MarkdownImage({
   src,

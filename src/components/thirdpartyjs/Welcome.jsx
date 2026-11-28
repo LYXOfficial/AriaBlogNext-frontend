@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import Snackbar from "node-snackbar";
 import "node-snackbar/src/sass/snackbar.sass";
 import { useRouter } from "next/navigation";
-import calendar from "js-calendar-converter";
 
 const today = new Date();
 const year = today.getFullYear(),
@@ -53,7 +51,15 @@ export default function Welcome() {
         ></style>,
       );
     }
-    (async () => {
+    let cancelled = false;
+    const run = async () => {
+      const [snackbarMod, calendarMod] = await Promise.all([
+        import("node-snackbar"),
+        import("js-calendar-converter"),
+      ]);
+      const Snackbar = snackbarMod.default ?? snackbarMod;
+      const calendar = calendarMod.default ?? calendarMod;
+      if (cancelled) return;
       if (localStorage.getItem("showedWelcome") != "1") {
         const referrer = document.referrer;
         Snackbar.show({
@@ -87,7 +93,12 @@ export default function Welcome() {
           pos: "top-left",
           showAction: false,
         });
-    })();
+    };
+    const timer = window.setTimeout(() => void run(), 400);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
   }, [router]);
   return <>{gray}</>;
 }

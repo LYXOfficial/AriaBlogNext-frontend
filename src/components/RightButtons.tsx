@@ -66,6 +66,7 @@ export function RightButtonsPosts({
       <button
         className="rightbutton rightbutton-toTop"
         title="回到顶部"
+        aria-label="回到顶部"
         onClick={scrollToTop}
       >
         <Icon icon="fa6-solid:arrow-up" />
@@ -120,6 +121,7 @@ export function RightButtonsPages({
       <button
         className="rightbutton rightbutton-toTop"
         title="回到顶部"
+        aria-label="回到顶部"
         onClick={scrollToTop}
       >
         <Icon icon="fa6-solid:arrow-up" />
@@ -166,6 +168,7 @@ export function RightButtonsHome() {
       <button
         className="rightbutton rightbutton-toTop"
         title="回到顶部"
+        aria-label="回到顶部"
         onClick={scrollToTop}
       >
         <Icon icon="fa6-solid:arrow-up" />

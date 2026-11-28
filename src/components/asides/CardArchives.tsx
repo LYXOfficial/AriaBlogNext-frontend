@@ -1,7 +1,7 @@
 import "styles/ASide/Archive.css";
 import "styles/ASide/global.css";
 import { Icon } from "@iconify/react";
-import Link from "next/link";
+import Link from "components/SmartLink";
 import { ArchiveListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
 import { fetchArchives } from "utils/api";
@@ -30,7 +30,7 @@ export default async function ASideList() {
       <div className="card-headline">
         <Icon icon="solar:archive-bold" />
         <span className="card-title">归档</span>
-        <Link className="card-viewmore" title="查看更多" href="/archives">
+        <Link className="card-viewmore" title="查看更多" aria-label="查看更多归档" href="/archives" prefetch={false}>
           <Icon icon="fa6-solid:angle-right" />
         </Link>
       </div>
@@ -41,6 +41,7 @@ export default async function ASideList() {
               <Link
                 className="archives-list-item"
                 href={`/archives/${item.year}/${item.month}`}
+                prefetch={false}
                 key={`${item.year}-${item.month}`}
               >
                 <span className="archives-list-item-content-date">{`${item.year}年 ${monthToHanzi[item.month]} `}</span>

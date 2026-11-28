@@ -12,9 +12,13 @@
 .home-banner-background {
   position: absolute;
   inset: -3%;
-  background-position: center 42%;
-  background-size: cover;
-  background-repeat: no-repeat;
+  width: 106%;
+  height: 106%;
+  object-fit: cover;
+  object-position: center 42%;
+  display: block;
+  pointer-events: none;
+  user-select: none;
   transform: translate3d(var(--banner-x, 0px), var(--banner-y, 0px), 0);
   transition: transform 0.45s ease-out;
 }

@@ -43,6 +43,8 @@
 
 .posts-categories-bar-item {
   padding: 3px 7px;
+  min-height: 28px;
+  box-sizing: border-box;
   align-items: center;
   gap: 5px;
   margin-right: 5px;
@@ -88,6 +90,10 @@
 .post-categories-bar-icon-link {
   display: flex;
   align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  min-height: 28px;
+  box-sizing: border-box;
   gap: 7px;
   flex-shrink: 0;
   padding: 5px 8px;

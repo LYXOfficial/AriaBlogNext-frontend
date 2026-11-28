@@ -18,6 +18,8 @@
   margin-bottom: 18px;
   gap: 26px;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 224px;
   border-radius: 22px;
   background:
     linear-gradient(
@@ -185,10 +187,17 @@
 #recent-posts .post-tags .post-meta-content {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px 8px;
+  gap: 4px 8px;
 }
 
 #recent-posts .post-tags a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 1px 4px;
+  box-sizing: border-box;
   color: inherit;
   text-decoration: none;
   transition: color var(--dur-base) var(--ease-out);
@@ -372,6 +381,7 @@
   #recent-posts .post-card {
     flex-direction: column;
     min-height: 0;
+    contain-intrinsic-block-size: auto 360px;
     padding: 10px;
     gap: 0;
   }

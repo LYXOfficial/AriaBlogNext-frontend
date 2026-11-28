@@ -1,5 +1,5 @@
 "use client";
-import { LazyImageWithFalldown } from "../../ImageWithFalldown";
+import { LazyImageWithFalldown } from "../../LazyImageWithFalldown";
 
 export default function MarkdownImage({
   src,

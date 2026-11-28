@@ -364,7 +364,8 @@ html[data-home-manual-scroll] #navbar {
   }
   /* 当前分组用归档页 eyebrow 那条 18×2 粉线。线是 #menu-items 下的独立元素，
      切分组时只平移 transform，不随 aria-current 换节点。 */
-  #menu-items .site-page[aria-current] {
+  #menu-items .site-page[aria-current],
+  #menu-items .site-page[data-current] {
     font-weight: 700;
   }
   #nav-current-line {

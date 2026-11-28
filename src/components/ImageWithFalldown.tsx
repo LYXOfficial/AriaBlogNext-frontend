@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const TRANSPARENT_IMAGE =
   "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
-function useFallbackImage(src?: string | null, falldownImg?: string | null) {
+export function useFallbackImage(src?: string | null, falldownImg?: string | null) {
   const primary = src?.trim() || "";
   const fallback = falldownImg?.trim() || TRANSPARENT_IMAGE;
   const [failure, setFailure] = useState({ primary, fallback, stage: 0 });
@@ -43,6 +42,7 @@ export default function ImageWithFalldown({
   sizes = "100vw",
   quality,
   optimize = false,
+  fetchPriority,
 }: {
   className?: string;
   dataSrc?: string;
@@ -54,6 +54,7 @@ export default function ImageWithFalldown({
   quality?: number;
   /** 只有小图才设为 true：走 Next 图片优化；大图保持直接引用原图 */
   optimize?: boolean;
+  fetchPriority?: "high" | "low" | "auto";
 }) {
   const { srcNow, onError } = useFallbackImage(src, falldownImg);
   return (
@@ -66,6 +67,8 @@ export default function ImageWithFalldown({
       quality={quality}
       unoptimized={!optimize}
       alt={alt}
+      fetchPriority={fetchPriority}
+      decoding="async"
       onError={onError}
       style={{
         objectPosition: objectPosition,
@@ -75,39 +78,6 @@ export default function ImageWithFalldown({
   );
 }
 
-export function LazyImageWithFalldown({
-  className,
-  src,
-  alt,
-  falldownImg,
-  dataSrc,
-  objectPosition = "center",
-  style,
-}: {
-  className?: string;
-  dataSrc?: string;
-  src?: string | null;
-  alt: string;
-  falldownImg?: string;
-  objectPosition?: string;
-  style?: React.CSSProperties;
-}) {
-  const { srcNow, onError } = useFallbackImage(src, falldownImg);
-  return (
-    <LazyLoadImage
-      className={className}
-      src={srcNow}
-      data-src={dataSrc}
-      alt={alt}
-      onError={onError}
-      effect="blur"
-      wrapperProps={{
-        style: { transitionDelay: "1s" },
-      }}
-      style={{ ...style, objectPosition: objectPosition }}
-    />
-  );
-}
 export function ImgWithFalldown({
   className,
   src,

@@ -2,7 +2,7 @@
 import "styles/ASide/global.css";
 import { Icon } from "@iconify/react";
 import "styles/ASide/Announcement.css";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 export default function CardAnnouncement({
   content,
@@ -12,8 +12,12 @@ export default function CardAnnouncement({
   const [annoContent, setAnnoContent] = useState<ReactElement | string>(
     content,
   );
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const el = cardRef.current;
+    // 移动端（<=900px）侧栏公告处于 display:none，无需在首屏发起无意义请求
+    if (!el || getComputedStyle(el).display === "none") return;
     let alive = true;
     (async () => {
       try {
@@ -33,7 +37,7 @@ export default function CardAnnouncement({
   }, []);
 
   return (
-    <div className="card-widget card-aside card-announcement">
+    <div ref={cardRef} className="card-widget card-aside card-announcement">
       <div className="card-headline">
         <Icon icon="solar:notification-unread-lines-bold" />
         <span className="card-title">公告</span>

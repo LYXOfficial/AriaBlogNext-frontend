@@ -6,6 +6,8 @@
 
 .card-aside {
   padding: 20px 24px;
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 220px;
 }
 
 .card-headline {

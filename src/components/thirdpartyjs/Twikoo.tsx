@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import "styles/Twikoo.css";
 import { siteConfigs } from "config";
 import { fetchPostSlugs } from "utils/api";
+import { getTwikooCommentsCount } from "utils/twikooApi";
 import { Icon } from "@iconify/react";
 import "styles/owoBig.css";
 
@@ -282,13 +283,12 @@ export function TwikooBaseComment() {
 
 export function TwikooCountPost() {
   useEffect(() => {
-    const tk = require("twikoo");
-    tk.getCommentsCount({
+    getTwikooCommentsCount({
       envId: siteConfigs.twikooEnv,
       urls: [document.location.pathname],
       includeReply: true,
     })
-      .then((res: { count: number }[] | undefined) => {
+      .then((res) => {
         if (!Array.isArray(res)) return;
         const commentCountElement = document.querySelector(
           ".post-commentcount>.post-meta-content",
@@ -305,8 +305,10 @@ export function TwikooCountPost() {
 
 export function TwikooCountHome() {
   useEffect(() => {
-    (async () => {
-      const tk = require("twikoo");
+    let cancelled = false;
+    const run = async () => {
+      const tk = (await import("twikoo")).default ?? (await import("twikoo"));
+      if (cancelled) return;
       document.querySelectorAll(".post-info").forEach((el) => {
         const postTitle = el.querySelector(".post-title") as HTMLAnchorElement;
         const hr = "/" + postTitle.href.split("/").slice(3).join("/");
@@ -330,6 +332,7 @@ export function TwikooCountHome() {
       });
 
       const rest = await fetchPostSlugs();
+      if (cancelled) return;
       const pages = ["/messageboard", "/speaks", "/about", "/links"];
       if (rest.ok) {
         const postSlugs = rest.data ?? [];
@@ -355,7 +358,27 @@ export function TwikooCountHome() {
           })
           .catch((error: unknown) => console.warn("评论总数获取失败", error));
       }
-    })().catch((error: unknown) => console.warn("评论计数加载失败", error));
+    };
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let timer = 0;
+    let idle = 0;
+    if (typeof w.requestIdleCallback === "function") {
+      idle = w.requestIdleCallback(() => {
+        run().catch((error: unknown) => console.warn("评论计数加载失败", error));
+      }, { timeout: 1500 });
+    } else {
+      timer = window.setTimeout(() => {
+        run().catch((error: unknown) => console.warn("评论计数加载失败", error));
+      }, 300);
+    }
+    return () => {
+      cancelled = true;
+      if (idle && typeof w.cancelIdleCallback === "function") w.cancelIdleCallback(idle);
+      if (timer) window.clearTimeout(timer);
+    };
   }, []);
 
   return null;

@@ -6,7 +6,6 @@ import { siteConfigs } from "@/config";
 import Welcome from "components/thirdpartyjs/Welcome";
 import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from "nextjs-toploader";
-import InitialLoader from "components/InitialLoader";
 
 process.env.TZ = "Asia/Shanghai";
 
@@ -17,7 +16,7 @@ export const metadata = {
       "application/rss+xml": [{ url: "feed.xml", title: "RSS 订阅" }],
     },
   },
-  describe: "Ariasakaの小窝QwQ",
+  description: "Ariasakaの小窝QwQ",
 };
 export default function RootLayout({
   children,
@@ -27,20 +26,24 @@ export default function RootLayout({
   return (
     <html lang="zh-cn">
       <head>
+        <link rel="preconnect" href="https://img.0v0.my" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://img.0v0.my" />
+        <link rel="preconnect" href="https://npm.elemecdn.com" crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
             __html: `if(!!window.ActiveXObject||"ActiveXObject" in window)window.location.href="./noie.html";//IE不欢迎你`,
           }}
         />
-        <script src="/js/piratesHaveNoMother.js" />
+        <script src="/js/piratesHaveNoMother.js" defer />
       </head>
       <body>
-        <InitialLoader />
         <Welcome />
         <LicenseTips />
         <NavBar />
         <NextTopLoader color="var(--aria-theme)" height={5} />
-        {children}
+        <main id="main-content" style={{ display: "contents" }}>
+          {children}
+        </main>
         <Footer />
         <MusicPlayer />
       </body>

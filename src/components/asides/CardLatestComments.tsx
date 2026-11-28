@@ -5,7 +5,8 @@ import ASideList from "components/asides/ASideList";
 import { TwikooCommentItem, ASideListItem } from "interfaces/asidelistitem";
 import { siteConfigs } from "config";
 import relativeTime from "@/utils/reltime";
-import { useEffect, useState } from "react";
+import { getTwikooRecentComments } from "utils/twikooApi";
+import { useEffect, useRef, useState } from "react";
 
 // 只提取文本与图片地址，再交给 React 输出；不注入访客的 HTML 或事件属性。
 function commentPreview(item: TwikooCommentItem) {
@@ -47,15 +48,17 @@ export default function CardLatestComments() {
   const [status, setStatus] = useState<"loading" | "success" | "error">(
     "loading",
   );
+  const cardRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    let started = false;
+    const load = async () => {
+      if (started || cancelled) return;
+      started = true;
       try {
-        const twikoo = require("twikoo");
         // 网络失败会异步拒绝，不能用只处理 then 的 Promise 包装，否则一直停在加载中。
-        const res = await twikoo.getRecentComments({
+        const res = await getTwikooRecentComments<TwikooCommentItem>({
           envId: siteConfigs.twikooEnv,
-          region: "",
           pageSize: 5,
           includeReply: true,
         });
@@ -68,13 +71,33 @@ export default function CardLatestComments() {
         console.warn("最新评论获取失败", error);
         if (!cancelled) setStatus("error");
       }
-    })();
+    };
+    const el = cardRef.current;
+    // 仅在卡片进入视口（桌面可见 / 移动端展开最新评论抽屉）时才拉取评论与头像，
+    // 避免移动端首屏后台拉取 5 张头像并触发重渲染。
+    if (el && typeof IntersectionObserver !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            void load();
+          }
+        },
+        { rootMargin: "200px" },
+      );
+      observer.observe(el);
+      return () => {
+        cancelled = true;
+        observer.disconnect();
+      };
+    }
+    void load();
     return () => {
       cancelled = true;
     };
   }, []);
   return (
-    <div className="card-widget card-aside card-latest-comments">
+    <div ref={cardRef} className="card-widget card-aside card-latest-comments">
       <div className="card-headline">
         <Icon icon="solar:chat-round-dots-bold" />
         <span className="card-title">最新评论</span>

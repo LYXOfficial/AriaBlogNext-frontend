@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import { ReactElement } from "react";
 import { FriendLink } from "interfaces/friendlink";
 import { siteConfigs } from "@/config";
-import { LazyImageWithFalldown } from "./ImageWithFalldown";
+import { LazyImageWithFalldown } from "./LazyImageWithFalldown";
 
 export function FriendLinkItem({ link }: { link: FriendLink }) {
   const cardColor = link.color ?? "#888888";

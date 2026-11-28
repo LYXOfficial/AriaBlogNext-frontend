@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef } from "react";
 import { Category } from "interfaces/category";
 import "styles/PostCategoryBar.css";
-import Link from "next/link";
+import Link from "components/SmartLink";
 
 export default function PostCategoryBar({
   data,
@@ -46,6 +46,7 @@ export default function PostCategoryBar({
       <Link
         className="post-categories-bar-icon-link"
         href="/page/1"
+        prefetch={false}
         aria-label="全部文章"
       >
         <Icon
@@ -67,6 +68,7 @@ export default function PostCategoryBar({
               className={`posts-categories-bar-item${item.name == current ? " current" : ""}`}
               key={item.name}
               href={`/${type}/${encodeURIComponent(item.name)}`}
+              prefetch={false}
               aria-current={item.name === current ? "page" : undefined}
               ref={item.name == current ? currentRef : null}
             >

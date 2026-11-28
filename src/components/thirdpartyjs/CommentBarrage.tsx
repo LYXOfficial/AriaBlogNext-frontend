@@ -8,7 +8,29 @@ import "swiper/css/mousewheel";
 import "styles/CommentBarrage.css";
 import Link from "next/link";
 import { siteConfigs } from "@/config";
-import throttle from "lodash/throttle";
+
+function throttle(fn: () => void, wait: number) {
+  let last = 0;
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  return () => {
+    const now = Date.now();
+    const remaining = wait - (now - last);
+    if (remaining <= 0) {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      last = now;
+      fn();
+    } else if (!timer) {
+      timer = setTimeout(() => {
+        last = Date.now();
+        timer = null;
+        fn();
+      }, remaining);
+    }
+  };
+}
 
 interface BarrageData {
   id: string;
@@ -21,7 +43,13 @@ interface BarrageData {
   replies?: BarrageData[];
 }
 
-const CommentBarrage = ({ toggleBarrage }: { toggleBarrage: () => void }) => {
+const CommentBarrage = ({
+  show = true,
+  toggleBarrage,
+}: {
+  show?: boolean;
+  toggleBarrage: () => void;
+}) => {
   const [currentSwiper, setCurrentSwiper] = useState<ReactElement>(<></>);
   useEffect(() => {
     const fetchData = async () => {
@@ -97,7 +125,11 @@ const CommentBarrage = ({ toggleBarrage }: { toggleBarrage: () => void }) => {
     return [];
   };
 
-  return <div id="barrage-container">{currentSwiper}</div>;
+  return (
+    <div id="barrage-container" className={show ? "show" : "hide"}>
+      {currentSwiper}
+    </div>
+  );
 };
 
 interface BarrageSwiperProps {

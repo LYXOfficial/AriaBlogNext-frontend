@@ -101,7 +101,13 @@ export default function SearchBox({
     <>
       <div id="search-box" className={`card-widget${show ? " show" : " hide"}`}>
         <div id="search-box-header">
-          <button id="search-box-searchbtn" onClick={processResults}>
+          <button
+            type="button"
+            id="search-box-searchbtn"
+            aria-label="搜索"
+            title="搜索"
+            onClick={processResults}
+          >
             <Icon icon="solar:magnifer-linear" width="20" height="20" />
           </button>
           <input
@@ -109,11 +115,15 @@ export default function SearchBox({
             ref={inputRef}
             type="text"
             placeholder="搜索博文..."
+            aria-label="搜索博文"
             id="search-box-input"
             onKeyDown={searchEnter}
           />
           <button
+            type="button"
             id="search-box-close"
+            aria-label="关闭搜索框"
+            title="关闭搜索框"
             onClick={() => {
               closeFunction(!show);
             }}

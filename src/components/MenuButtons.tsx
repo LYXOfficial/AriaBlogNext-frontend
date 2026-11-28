@@ -131,12 +131,20 @@ export default function MenuButtons({
       previousMode = inBanner;
       // 手机切回桌面会重新播放顶栏的 0.8s 入场动画；transform 不触发
       // ResizeObserver，必须跟到最后一帧，否则 portal 按钮会停在中途坐标。
+      // 仅当按钮实际停靠在顶栏（!inBanner）时才需要逐帧跟踪顶栏动画，
+      // 避免首页首屏期间空跑数十帧 getBoundingClientRect 强制重排。
       if (
         !disposed &&
-        (navTransitions.size || nav?.getAnimations().some((animation) =>
-          animation.playState === "running" || animation.pending,
-        ))
-      ) schedule();
+        !inBanner &&
+        (navTransitions.size ||
+          nav
+            ?.getAnimations()
+            .some(
+              (animation) =>
+                animation.playState === "running" || animation.pending,
+            ))
+      )
+        schedule();
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(position);
@@ -184,9 +192,22 @@ export default function MenuButtons({
     window.visualViewport?.addEventListener("scroll", viewportChanged);
     mobileQuery.addEventListener("change", viewportChanged);
     const nav = document.getElementById("navbar");
-    // 只跟踪导航本身，避免菜单子元素的 hover 动画启动持续测量。
+    // 只跟踪导航本身影响几何位置的属性，颜色/阴影过渡不改变停靠点坐标。
+    const GEOMETRY_PROPS = new Set([
+      "transform",
+      "height",
+      "width",
+      "top",
+      "left",
+      "right",
+      "margin",
+      "margin-left",
+      "margin-right",
+      "padding",
+    ]);
     const trackTransition = (event: TransitionEvent) => {
-      if (event.target !== nav) return;
+      if (event.target !== nav || !GEOMETRY_PROPS.has(event.propertyName))
+        return;
       if (event.type === "transitionrun")
         navTransitions.add(event.propertyName);
       else navTransitions.delete(event.propertyName);
@@ -233,6 +254,7 @@ export default function MenuButtons({
       ref={groupRef}
       className="menu-actions"
       data-transparent={transparent}
+      role="group"
       aria-label="快捷操作"
       hidden={hidden}
     >

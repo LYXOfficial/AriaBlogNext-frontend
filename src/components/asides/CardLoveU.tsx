@@ -13,6 +13,8 @@ export default function CardLoveU() {
             src={LoveUContent.myAvatar}
             title={LoveUContent.myName}
             alt={LoveUContent.myName}
+            loading="lazy"
+            decoding="async"
             className="loveu-avatar"
           />
           <Icon
@@ -25,6 +27,8 @@ export default function CardLoveU() {
             src={LoveUContent.yourAvatar}
             title={LoveUContent.yourName}
             alt={LoveUContent.yourName}
+            loading="lazy"
+            decoding="async"
             className="loveu-avatar"
           />
         </div>

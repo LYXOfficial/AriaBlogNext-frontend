@@ -2,22 +2,47 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import "styles/NavBar.css";
 import { Icon } from "@iconify/react";
-import Link from "next/link";
+import Link from "components/SmartLink";
 import { MenuItems, siteConfigs } from "config";
 import { fetchPostSlugs } from "utils/api";
 import { useRouter } from "nextjs-toploader/app";
-import throttle from "lodash/throttle";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import SearchBox from "components/SearchBox";
 import MenuButtons from "components/MenuButtons";
 import { MenuItem, MenuItemChild } from "@/interfaces/menuitem";
 import React from "react";
+
+const SearchBox = dynamic(() => import("components/SearchBox"), { ssr: false });
+
+function throttle(fn: () => void, wait: number) {
+  let last = 0;
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  return () => {
+    const now = Date.now();
+    const remaining = wait - (now - last);
+    if (remaining <= 0) {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      last = now;
+      fn();
+    } else if (!timer) {
+      timer = setTimeout(() => {
+        last = Date.now();
+        timer = null;
+        fn();
+      }, remaining);
+    }
+  };
+}
 
 export default function NavBar() {
   const router = useRouter();
   const [trans, setTrans] = useState(false);
   const [onTop, setOnTop] = useState(true);
   const [searchBoxShow, setSearchBoxShow] = useState(false);
+  const [searchBoxMounted, setSearchBoxMounted] = useState(false);
   const pathName = usePathname();
   // 当前分组由 MenuItems 推导：菜单项自身 + 子菜单里的站内链接，再加上 activeMatch
   // 里补充的路径（/page 归首页、/posts 归文章）。外链不参与匹配，避免离开站点后
@@ -54,8 +79,10 @@ export default function NavBar() {
     const wrap = menuItemsRef.current;
     const line = currentLineRef.current;
     if (!wrap || !line) return;
-    const active = wrap.querySelector<HTMLElement>(".site-page[aria-current]");
-    if (!active) {
+    const active = wrap.querySelector<HTMLElement>(
+      ".site-page[aria-current], .site-page[data-current]",
+    );
+    if (!active || window.innerWidth <= 768) {
       line.removeAttribute("data-visible");
       return;
     }
@@ -77,8 +104,9 @@ export default function NavBar() {
     if (xChanged) line.style.transform = `translate3d(${x}px, 0, 0)`;
     line.style.top = `${y}px`;
     if (xChanged && !shouldAnimate) {
-      void line.offsetWidth;
-      line.style.transition = "";
+      requestAnimationFrame(() => {
+        line.style.transition = "";
+      });
     }
     lastXRef.current = x;
     lastYRef.current = y;
@@ -193,11 +221,12 @@ export default function NavBar() {
         data-home={pathName === "/" ? "true" : undefined}
         className={trans ? "trans" : onTop ? "ontop" : ""}
       >
-        <Link id="site-name" href="/">
+        <Link id="site-name" href="/" prefetch={false} aria-label={siteConfigs.title}>
           <img
             id="site-name-icon"
             src={siteConfigs.titleIcon}
             title={siteConfigs.title}
+            decoding="async"
             alt=""
           />
         </Link>
@@ -247,6 +276,7 @@ export default function NavBar() {
                     <Link
                       className="site-page"
                       href={item.link}
+                      prefetch={false}
                       aria-current={
                         activeMenu === item.name ? "true" : undefined
                       }
@@ -257,7 +287,7 @@ export default function NavBar() {
                   ) : (
                     <span
                       className="site-page"
-                      aria-current={
+                      data-current={
                         activeMenu === item.name ? "true" : undefined
                       }
                     >
@@ -277,6 +307,7 @@ export default function NavBar() {
                           return (
                             <Link
                               href={child.link}
+                              prefetch={false}
                               key={child.name}
                               className="site-page-child"
                             >
@@ -315,6 +346,7 @@ export default function NavBar() {
           <button
             className="menu-button menu-button-mobmenu"
             title={mobileMenuOpen ? "收起菜单" : "展开菜单"}
+            aria-label={mobileMenuOpen ? "收起菜单" : "展开菜单"}
             aria-expanded={mobileMenuOpen}
             aria-controls="menu-items"
             onClick={() => {
@@ -337,15 +369,18 @@ export default function NavBar() {
         transparent={trans}
         hidden={false}
         onSearch={() => {
+          setSearchBoxMounted(true);
           setSearchBoxShow(true);
           setTimeout(
             () => document.getElementById("search-box-input")?.focus(),
-            10,
+            50,
           );
         }}
         onRandom={() => (window as any).toRandomPost()}
       />
-      <SearchBox show={searchBoxShow} closeFunction={setSearchBoxShow} />
+      {searchBoxMounted && (
+        <SearchBox show={searchBoxShow} closeFunction={setSearchBoxShow} />
+      )}
     </>
   );
 }
