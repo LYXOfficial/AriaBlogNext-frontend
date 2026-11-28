@@ -10,8 +10,12 @@
   transition:
     opacity var(--dur-slow) var(--ease-out),
     visibility var(--dur-slow);
-  /* 即使脚本未执行或水合失败，也不能一直遮住正文。 */
-  animation: initial-loader-failsafe 0s 4s forwards;
+  /* 仅当脚本完全未执行或水合失败时才触发兜底淡出；正常水合后由 JS 接管时机。 */
+  animation: initial-loader-failsafe 0.5s 6s forwards;
+}
+
+.initial-loader-hydrated {
+  animation: none;
 }
 
 .initial-loader-content {

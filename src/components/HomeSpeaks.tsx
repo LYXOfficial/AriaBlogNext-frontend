@@ -221,10 +221,10 @@ export default function HomeSpeaks({
                 >
                   <Link
                     href="/speaks"
-                    prefetch={false}
                     className="homespeaks-item"
                     draggable={false}
                     tabIndex={!isClone && isActive ? 0 : -1}
+                    suppressHydrationWarning
                   >
                     {relativeTime(item.time) + ": " + item.plainContent}
                   </Link>

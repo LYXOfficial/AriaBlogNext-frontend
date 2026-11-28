@@ -6,6 +6,7 @@ import { siteConfigs } from "@/config";
 import Welcome from "components/thirdpartyjs/Welcome";
 import LicenseTips from "components/thirdpartyjs/LicenseTips";
 import NextTopLoader from "nextjs-toploader";
+import InitialLoader from "components/InitialLoader";
 
 process.env.TZ = "Asia/Shanghai";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         <script src="/js/piratesHaveNoMother.js" defer />
       </head>
       <body>
+        <InitialLoader />
         <Welcome />
         <LicenseTips />
         <NavBar />

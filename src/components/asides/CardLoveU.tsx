@@ -39,13 +39,13 @@ export default function CardLoveU() {
               {LoveUContent.yourName}
             </b>
           </span>
-          <span className="loveu-text-line">
+          <span className="loveu-text-line" suppressHydrationWarning>
             {LoveUContent.startDate.join("-")} ~{" "}
             {new Date().toLocaleDateString("zh-CN").replace(/\//g, "-")}
           </span>
           <span className="loveu-text-line">
             QwQ{" "}
-            <b>
+            <b suppressHydrationWarning>
               {Math.floor(
                 (new Date().getTime() -
                   new Date(LoveUContent.startDate.join("-")).getTime()) /
